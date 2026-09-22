@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Taxas e Lucro Real para E-commerce | Simulador 2026</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Descubra o lucro líquido real dos seus produtos descontando taxas de plataformas (Nuvemshop, Shopify, Yampi) e gateways (Mercado Pago, Appmax, Asaas). Ferramenta 100% gratuita.">
+  <meta name="keywords" content="calculadora taxa mercado pago, simulador margem ecommerce, taxa nuvemshop, taxa shopify, calcular lucro dropshipping, taxas de antecipacao cartao, markup ecommerce">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://calculadora.drophub.com.br/">
+
+  <!-- Open Graph / Redes Sociais / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://calculadora.drophub.com.br/">
+  <meta property="og:title" content="Calculadora de Taxas e Lucro Líquido Real para E-commerce">
+  <meta property="og:description" content="Você sabe quanto realmente sobra no seu bolso por venda? Simule taxas ocultas, antecipação e descubra sua margem real agora.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=630&q=80">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calculadora de Taxas & Lucro Real para Lojas Virtuais">
+  <meta name="twitter:description" content="Simule taxas de gateways, antecipação de cartão e margem líquida com precisão em segundos.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Schema.org Markup para Google Rich Snippets e FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Simulador de Lucro Líquido & Taxas de E-commerce",
+        "operatingSystem": "All",
+        "applicationCategory": "BusinessApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "BRL"
+        },
+        "description": "Calculadora gratuita de margem líquida, taxas de gateways de pagamento e antecipação para lojas virtuais e dropshipping."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Como calcular a margem de lucro líquida de um produto?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A margem líquida é calculada subtraindo do preço de venda todos os custos operacionais (custo da mercadoria, frete pago pela loja, impostos, taxa da plataforma e taxa de processamento/antecipação do cartão), dividindo esse lucro pelo preço de venda e multiplicando por 100."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "O que é taxa de antecipação de cartão e por que ela reduz o lucro?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Quando você vende parcelado em 3x, 6x ou 12x, o dinheiro normalmente cairia mês a mês. Para receber em 1 ou 2 dias, os gateways cobram uma taxa de antecipação que pode consumir de 2% a 15% do valor total da venda, diminuindo drasticamente a margem de quem não repassa esse custo."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Qual a diferença entre margem de lucro e markup?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A margem de lucro representa a porcentagem do preço final de venda que fica como lucro líquido. O markup é o multiplicador ou porcentagem aplicada sobre o custo do produto para atingir o preço de venda desejado."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar">
+    <div class="container announcement-content">
+      <span class="badge-pulse"></span>
+      <span><strong>Atualizado 2026:</strong> Inclui taxas atualizadas de Mercado Pago, Nuvemshop, Shopify, Yampi e Asaas.</span>
+      <a href="#auditor-section" class="announcement-link">Conhecer Monitoramento 24h &rarr;</a>
+    </div>
+  </aside>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container header-content">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">DropHub <span class="highlight">Tools</span></span>
+          <span class="brand-sub">Inteligência para E-commerce</span>
+        </div>
+      </div>
+
+      <nav class="header-nav">
+        <a href="#faq" class="nav-link">Dúvidas Frequentes</a>
+        <a href="#auditor-section" class="btn btn-secondary-sm">Auditor Silencioso</a>
+        <button id="btn-config-webhook" class="btn-icon" title="Configurar Webhook do n8n" aria-label="Configurações">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-tag">
+          <span class="tag-icon">⚡</span>
+          <span>Simulador Financeiro de Precisão</span>
+        </div>
+        <h1 class="hero-title">
+          Descubra o <span class="gradient-text">Lucro Líquido Real</span> e as Taxas Ocultas da sua Loja
+        </h1>
+        <p class="hero-description">
+          Mais de 68% dos lojistas perdem dinheiro sem perceber em juros de antecipação e tarifas invisíveis. 
+          Simule agora com as regras reais das maiores plataformas e gateways do Brasil.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Calculator App Section -->
+    <section class="calculator-section" id="simulador">
+      <div class="container app-grid">
+
+        <!-- Form Column (Left) -->
+        <div class="card form-card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+              Parâmetros da Venda
+            </h2>
+            <button id="btn-reset-form" class="btn-ghost-sm" title="Restaurar padrão">Redefinir</button>
+          </div>
+
+          <form id="calc-form" onsubmit="return false;">
+            
+            <!-- Grupo 1: Valores do Produto -->
+            <div class="form-group-section">
+              <span class="group-title">1. Valores & Custos do Produto</span>
+              
+              <div class="input-grid-2">
+                <div class="input-field">
+                  <label for="price">Preço de Venda ao Cliente</label>
+                  <div class="input-prefix-wrapper">
+                    <span class="prefix">R$</span>
+                    <input type="number" id="price" value="129.90" step="0.01" min="1" required>
+                  </div>
+                </div>
+
+                <div class="input-field">
+                  <label for="cost">Custo da Mercadoria (CMV)</label>
+                  <div class="input-prefix-wrapper">
+                    <span class="prefix">R$</span>
+                    <input type="number" id="cost" value="45.00" step="0.01" min="0" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-grid-2">
+                <div class="input-field">
+                  <label for="shipping">Frete pago pela Loja</label>
+                  <div class="input-prefix-wrapper">
+                    <span class="prefix">R$</span>
+                    <input type="number" id="shipping" value="0.00" step="0.01" min="0">
+                  </div>
+                  <small class="field-hint">Se você oferece frete grátis, coloque o custo aqui</small>
+                </div>
+
+                <div class="input-field">
+                  <label for="taxRate">Imposto / DAS Estimado</label>
+                  <div class="input-suffix-wrapper">
+                    <input type="number" id="taxRate" value="6.0" step="0.1" min="0" max="40">
+                    <span class="suffix">%</span>
+                  </div>
+                  <small class="field-hint">MEI = 0% a 1% | Simples = 4% a 9%</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grupo 2: Plataforma & Gateway -->
+            <div class="form-group-section">
+              <span class="group-title">2. Plataforma de E-commerce & Gateway</span>
+
+              <div class="input-grid-2">
+                <div class="input-field">
+                  <label for="platform">Plataforma da Loja</label>
+                  <select id="platform">
+                    <option value="nuvemshop_nuvempago" selected>Nuvemshop (com Nuvem Pago - 0%)</option>
+                    <option value="nuvemshop_outros">Nuvemshop (outro gateway - 2.0%)</option>
+                    <option value="shopify_basic">Shopify Basic (2.0% taxa ext.)</option>
+                    <option value="shopify_plan">Shopify Padrão (1.0% taxa ext.)</option>
+                    <option value="yampi">Yampi (2.5% no plano básico)</option>
+                    <option value="woocommerce">WooCommerce / Loja Própria (0.0%)</option>
+                    <option value="cartpanda">CartPanda (2.0%)</option>
+                  </select>
+                </div>
+
+                <div class="input-field">
+                  <label for="gateway">Gateway de Pagamento</label>
+                  <select id="gateway">
+                    <option value="mercadopago" selected>Mercado Pago</option>
+                    <option value="appmax">Appmax</option>
+                    <option value="asaas">Asaas</option>
+                    <option value="pagarme">Pagar.me / Stone</option>
+                    <option value="pagbank">PagBank (PagSeguro)</option>
+                    <option value="stripe">Stripe Brasil</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grupo 3: Meio de Pagamento e Parcelas -->
+            <div class="form-group-section">
+              <span class="group-title">3. Forma de Pagamento da Venda</span>
+
+              <div class="payment-method-selector">
+                <label class="radio-card active" data-method="credit">
+                  <input type="radio" name="paymentMethod" value="credit" checked>
+                  <span class="radio-label">Cartão de Crédito</span>
+                </label>
+                <label class="radio-card" data-method="pix">
+                  <input type="radio" name="paymentMethod" value="pix">
+                  <span class="radio-label">PIX</span>
+                </label>
+                <label class="radio-card" data-method="boleto">
+                  <input type="radio" name="paymentMethod" value="boleto">
+                  <span class="radio-label">Boleto</span>
+                </label>
+              </div>
+
+              <!-- Opções específicas de Cartão -->
+              <div id="credit-options-container" class="conditional-options">
+                <div class="input-grid-2">
+                  <div class="input-field">
+                    <label for="installments">Número de Parcelas</label>
+                    <select id="installments">
+                      <option value="1">1x (À vista no cartão)</option>
+                      <option value="2">2x</option>
+                      <option value="3">3x</option>
+                      <option value="4">4x</option>
+                      <option value="5">5x</option>
+                      <option value="6" selected>6x (Mais comum)</option>
+                      <option value="10">10x</option>
+                      <option value="12">12x</option>
+                    </select>
+                  </div>
+
+                  <div class="input-field">
+                    <label for="anticipation">Prazo de Recebimento</label>
+                    <select id="anticipation">
+                      <option value="instant" selected>Antecipado (Na hora / D+1 / D+2)</option>
+                      <option value="flow">No Fluxo (Receber mês a mês D+30)</option>
+                    </select>
+                    <small class="field-hint">Antecipação na hora adiciona juros por parcela</small>
+                  </div>
+                </div>
+
+                <div class="toggle-field">
+                  <label class="switch">
+                    <input type="checkbox" id="passFees">
+                    <span class="slider round"></span>
+                  </label>
+                  <div class="toggle-text">
+                    <span class="toggle-title">Repassar juros do parcelamento ao cliente?</span>
+                    <span class="toggle-sub">Se ativado, o cliente paga os acréscimos das parcelas</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Result Column (Right) -->
+        <div class="result-column">
+          
+          <!-- Card de Lucro Principal -->
+          <div class="card result-card" id="result-box">
+            <div class="result-header">
+              <span class="result-label">Lucro Líquido no seu Bolso</span>
+              <span class="badge-status badge-healthy" id="badge-status">Margem Saudável</span>
+            </div>
+
+            <div class="result-highlight">
+              <div class="big-profit" id="val-net-profit">R$ 0,00</div>
+              <div class="profit-submetrics">
+                <div class="submetric">
+                  <span class="sub-label">Margem Líquida</span>
+                  <span class="sub-value" id="val-net-margin">0.0%</span>
+                </div>
+                <div class="submetric-divider"></div>
+                <div class="submetric">
+                  <span class="sub-label">Markup Efetivo</span>
+                  <span class="sub-value" id="val-markup">0.0x</span>
+                </div>
+                <div class="submetric-divider"></div>
+                <div class="submetric">
+                  <span class="sub-label">Total de Deduções</span>
+                  <span class="sub-value text-danger" id="val-total-fees">R$ 0,00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Visual Breakdown Bar -->
+            <div class="breakdown-wrapper">
+              <div class="breakdown-labels">
+                <span>Composição do Faturamento</span>
+                <span id="breakdown-total-label">100%</span>
+              </div>
+              <div class="breakdown-bar">
+                <div class="bar-segment seg-cost" id="bar-cost" style="width: 35%;" title="Custo do Produto"></div>
+                <div class="bar-segment seg-gateway" id="bar-gateway" style="width: 15%;" title="Taxas Gateway e Antecipação"></div>
+                <div class="bar-segment seg-platform" id="bar-platform" style="width: 5%;" title="Taxa Plataforma"></div>
+                <div class="bar-segment seg-tax" id="bar-tax" style="width: 6%;" title="Imposto e Frete"></div>
+                <div class="bar-segment seg-profit" id="bar-profit" style="width: 39%;" title="Lucro Líquido"></div>
+              </div>
+              <div class="breakdown-legend">
+                <span class="legend-item"><i class="dot dot-cost"></i> Custo (CMV)</span>
+                <span class="legend-item"><i class="dot dot-gateway"></i> Gateway</span>
+                <span class="legend-item"><i class="dot dot-platform"></i> Plataforma</span>
+                <span class="legend-item"><i class="dot dot-tax"></i> Imposto/Frete</span>
+                <span class="legend-item"><i class="dot dot-profit"></i> Lucro Líquido</span>
+              </div>
+            </div>
+
+            <!-- DRE Detalhado do Pedido -->
+            <div class="dre-table-container">
+              <span class="dre-title">Demonstrativo Detalhado por Venda</span>
+              <table class="dre-table">
+                <tbody>
+                  <tr>
+                    <td>(+) Preço de Venda Bruto</td>
+                    <td class="text-right" id="dre-price">R$ 0,00</td>
+                  </tr>
+                  <tr>
+                    <td>(-) Custo da Mercadoria (CMV)</td>
+                    <td class="text-right text-muted" id="dre-cost">- R$ 0,00</td>
+                  </tr>
+                  <tr id="dre-row-shipping">
+                    <td>(-) Frete Pago pela Loja</td>
+                    <td class="text-right text-muted" id="dre-shipping">- R$ 0,00</td>
+                  </tr>
+                  <tr>
+                    <td>(-) Imposto / DAS Estimado</td>
+                    <td class="text-right text-muted" id="dre-tax">- R$ 0,00</td>
+                  </tr>
+                  <tr>
+                    <td>(-) Taxa da Plataforma</td>
+                    <td class="text-right text-muted" id="dre-platform">- R$ 0,00</td>
+                  </tr>
+                  <tr>
+                    <td>(-) Taxa do Gateway (Processamento)</td>
+                    <td class="text-right text-muted" id="dre-gateway-mdr">- R$ 0,00</td>
+                  </tr>
+                  <tr id="dre-row-anticipation">
+                    <td>(-) Taxa de Antecipação de Parcelas</td>
+                    <td class="text-right text-warning" id="dre-anticipation">- R$ 0,00</td>
+                  </tr>
+                  <tr class="dre-row-total">
+                    <td><strong>(=) Lucro Líquido em Caixa</strong></td>
+                    <td class="text-right text-success" id="dre-final-profit"><strong>R$ 0,00</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Alerta & Diagnóstico com IA/Algoritmo -->
+            <div class="diagnostic-box" id="diagnostic-box">
+              <div class="diag-icon" id="diag-icon">💡</div>
+              <div class="diag-text">
+                <strong id="diag-title">Diagnóstico Financeiro</strong>
+                <p id="diag-desc">Carregando análise...</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Card de Conversão & Envio do Relatório no WhatsApp (Ponte para o n8n) -->
+          <div class="card lead-card">
+            <div class="lead-header">
+              <div class="lead-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+              </div>
+              <div>
+                <h3 class="lead-title">Receber Diagnóstico Completo em PDF</h3>
+                <p class="lead-subtitle">Enviamos a simulação detalhada com dicas de redução de taxas direto no seu WhatsApp.</p>
+              </div>
+            </div>
+
+            <form id="lead-form" class="lead-form">
+              <div class="lead-inputs">
+                <input type="text" id="lead-name" placeholder="Seu Nome ou Loja" required>
+                <input type="tel" id="lead-whatsapp" placeholder="WhatsApp: (XX) 99999-9999" required>
+              </div>
+              <button type="submit" class="btn btn-primary" id="btn-submit-lead">
+                <span>Receber Análise no WhatsApp</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </form>
+            <div id="lead-feedback" class="lead-feedback hidden"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Seção de Transição: Apresentação do Auditor Silencioso (Ideia 3) -->
+    <section class="auditor-section" id="auditor-section">
+      <div class="container">
+        <div class="auditor-card">
+          <div class="auditor-glow"></div>
+          <div class="auditor-content">
+            <div class="auditor-badge">
+              <span class="badge-dot"></span>
+              <span>Proteção Ativa 24/7 para sua Loja</span>
+            </div>
+            <h2 class="auditor-title">
+              Quantas vendas sua loja <span class="gradient-text">perdeu hoje</span> sem você perceber?
+            </h2>
+            <p class="auditor-text">
+              Fazer cálculos pontuais é ótimo, mas quem vigia sua loja enquanto você dorme ou atende clientes? 
+              O <strong>Auditor Silencioso</strong> conecta ao seu checkout e monitora anomalias em tempo real via WhatsApp:
+            </p>
+
+            <div class="auditor-features-grid">
+              <div class="auditor-feature">
+                <div class="feat-icon">⚡</div>
+                <div class="feat-text">
+                  <strong>Pico de Recusa de Cartão</strong>
+                  <span>Avisa no WhatsApp se a taxa de recusa ultrapassar 25% para evitar que você queime tráfego.</span>
+                </div>
+              </div>
+
+              <div class="auditor-feature">
+                <div class="feat-icon">🛑</div>
+                <div class="feat-text">
+                  <strong>Checkout Travado / Queda Súbita</strong>
+                  <span>Detecta quando a loja fica horas sem gerar vendas em horários de pico habituais.</span>
+                </div>
+              </div>
+
+              <div class="auditor-feature">
+                <div class="feat-icon">📉</div>
+                <div class="feat-text">
+                  <strong>Margem Negativa / Preço Errado</strong>
+                  <span>Alerta se algum cupom ou desconto promocional deixar seu lucro líquido no vermelho.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="auditor-cta-box">
+              <a href="https://wa.me/?text=Olá!%20Gostaria%20de%20ativar%20o%20teste%20grátis%20de%207%20dias%20do%20Auditor%20Silencioso." target="_blank" class="btn btn-glow">
+                <span>Ativar Auditor Silencioso - 7 Dias Grátis</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+              <span class="auditor-note">Sem necessidade de cartão de crédito. Instalação em 2 minutos.</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section (SEO Otimizado) -->
+    <section class="faq-section" id="faq">
+      <div class="container faq-container">
+        <div class="section-badge">Perguntas Frequentes</div>
+        <h2 class="section-title">Tire suas dúvidas sobre taxas e margens</h2>
+
+        <div class="accordion">
+          
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>Como calcular a margem líquida real de um produto no e-commerce?</span>
+              <span class="acc-icon">+</span>
+            </button>
+            <div class="accordion-body">
+              <p>A margem líquida real é calculada pegando o <strong>Preço de Venda</strong> e subtraindo <strong>todos os custos operacionais diretos</strong>: CMV (custo da mercadoria), frete subsidiado, alíquota de impostos (DAS/Simples), taxa da plataforma (ex: 2% da Nuvemshop ou Shopify) e todas as taxas do gateway (tarifa fixa + taxa MDR + taxa de antecipação do parcelamento). Divida o resultado pelo preço de venda e multiplique por 100 para ter a porcentagem exata.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>Por que a taxa de antecipação de cartão é o maior vilão do lucro?</span>
+              <span class="acc-icon">+</span>
+            </button>
+            <div class="accordion-body">
+              <p>Ao vender em 6x ou 12x com recebimento imediato (D+1 ou D+2), a maioria dos gateways aplica juros que variam de 2% a 15% sobre o valor total. Se você trabalha com margem bruta de 25% e o gateway consome 12% em taxas e antecipação, praticamente <strong>metade do seu lucro real desaparece</strong> na taxa financeira.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>Qual a diferença prática entre Margem de Lucro e Markup?</span>
+              <span class="acc-icon">+</span>
+            </button>
+            <div class="accordion-body">
+              <p><strong>Margem</strong> é a fatia do preço final que sobra para você (nunca pode passar de 100%). Já o <strong>Markup</strong> é o multiplicador aplicado sobre o custo para formar o preço de venda. Exemplo: um produto que custa R$ 50 vendido por R$ 100 tem um markup de 100% (2.0x), mas uma margem bruta de 50%.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>Vale a pena dar 5% ou 10% de desconto no PIX?</span>
+              <span class="acc-icon">+</span>
+            </button>
+            <div class="accordion-body">
+              <p>Sim! Como a taxa do PIX na maioria dos gateways é fixa (cerca de R$ 0,99 a 0,99%) e você não paga taxa de antecipação, muitas vezes dar 5% de desconto no PIX dá <strong>mais lucro líquido no bolso</strong> do que vender parcelado em 6x sem juros no cartão.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <span class="brand-title">DropHub <span class="highlight">Tools</span></span>
+        <p class="footer-desc">Ferramentas de alta precisão para gestores de e-commerce e dropshipping.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#simulador">Calculadora</a>
+        <a href="#auditor-section">Auditor Silencioso</a>
+        <a href="#faq">Dúvidas Frequentes</a>
+      </div>
+      <div class="footer-copy">
+        <p>© 2026 DropHub Tools. Todos os direitos reservados. Feito para alta performance no Easypanel.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal de Configuração do Webhook do n8n -->
+  <div class="modal-overlay" id="modal-config">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Configuração do Webhook do n8n</h3>
+        <button class="btn-close-modal" id="btn-close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-tip">Insira a URL do Webhook do seu n8n. Quando um lojista solicitar o relatório no WhatsApp, os dados do lead e da simulação serão enviados diretamente para essa URL.</p>
+        <div class="input-field">
+          <label for="webhook-url-input">URL do Webhook do n8n (POST)</label>
+          <input type="url" id="webhook-url-input" placeholder="https://drophub-n8n.seu-host/webhook/lead-calculadora">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary-sm" id="btn-cancel-modal">Cancelar</button>
+        <button class="btn btn-primary-sm" id="btn-save-webhook">Salvar Configuração</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
