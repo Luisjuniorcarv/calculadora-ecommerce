@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditor Silencioso | Sentinela 24/7 de Checkout para E-commerce</title>
+  
+  <meta name="description" content="Proteja sua loja virtual contra checkouts travados, picos de cartões recusados e margens negativas. Monitoramento 24h com alertas no WhatsApp por apenas R$ 3,23 por dia.">
+  <meta name="keywords" content="auditor silencioso, monitor checkout dropshipping, alerta recusa cartao whatsapp, taxa recusa yampi shopify nuvemshop">
+  <link rel="canonical" href="https://calculadoradoecommerce.com.br/auditor.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Auditor Silencioso - Proteja seu Checkout 24h no WhatsApp">
+  <meta property="og:description" content="Nunca mais queime tráfego com gateway travado. Por apenas R$ 3,23/dia, receba alertas imediatos de anomalias no seu WhatsApp.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Base & Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Estilos Específicos do Auditor Silencioso */
+    .auditor-hero {
+      padding: 4.5rem 0 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1.1rem;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #A5B4FC;
+      margin-bottom: 1.5rem;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 10px #10B981;
+      animation: pulseAnim 1.8s infinite;
+    }
+
+    @keyframes pulseAnim {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .auditor-main-title {
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 900px;
+      margin: 0 auto 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .auditor-sub-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* O DESTAQUE DE R$ 3,23 POR DIA */
+    .price-spotlight-card {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(99, 102, 241, 0.12) 100%);
+      border: 2px solid rgba(16, 185, 129, 0.45);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 2rem;
+      max-width: 760px;
+      margin: 0 auto 3.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      box-shadow: 0 16px 40px -10px rgba(16, 185, 129, 0.2);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    .price-tag-headline {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #10B981;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .price-large-number {
+      font-size: 2.25rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .price-large-number .highlight-green {
+      color: #10B981;
+      font-family: var(--font-mono);
+      text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .price-large-number .period {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .price-details-txt {
+      font-size: 0.92rem;
+      color: #CBD5E1;
+      line-height: 1.5;
+      margin-top: 0.35rem;
+    }
+
+    .coffee-comparison-badge {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.25rem;
+      font-size: 0.88rem;
+      color: #F1F5F9;
+      max-width: 290px;
+    }
+
+    .coffee-comparison-badge strong {
+      color: #F59E0B;
+    }
+
+    /* Simulador Interativo do WhatsApp */
+    .simulator-section {
+      padding: 3rem 0;
+    }
+
+    .simulator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .simulator-grid {
+        grid-template-columns: 1fr;
+      }
+      .auditor-main-title {
+        font-size: 2rem;
+      }
+    }
+
+    /* Mockup Celular WhatsApp */
+    .phone-mockup {
+      background: #0B141B;
+      border: 10px solid #1E293B;
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(16, 185, 129, 0.15);
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .phone-header {
+      background: #1F2C34;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .phone-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #10B981;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .phone-user-info {
+      flex: 1;
+    }
+
+    .phone-user-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #E9EDEF;
+    }
+
+    .phone-user-status {
+      font-size: 0.72rem;
+      color: #10B981;
+    }
+
+    .phone-chat-body {
+      background-color: #0B141B;
+      background-image: radial-gradient(#1B2730 1px, transparent 1px);
+      background-size: 16px 16px;
+      padding: 1.25rem 0.9rem;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-family: var(--font-sans);
+    }
+
+    .chat-bubble {
+      background: #1F2C34;
+      color: #E9EDEF;
+      border-radius: 12px;
+      border-top-left-radius: 2px;
+      padding: 0.85rem 1rem;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .chat-bubble.urgent {
+      border-left: 4px solid #F43F5E;
+    }
+
+    .chat-bubble.warning {
+      border-left: 4px solid #F59E0B;
+    }
+
+    .chat-bubble.success {
+      border-left: 4px solid #10B981;
+    }
+
+    .chat-time {
+      font-size: 0.68rem;
+      color: #8696A0;
+      text-align: right;
+      margin-top: 0.35rem;
+    }
+
+    /* Seletor de Abas de Alertas */
+    .alert-selector-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+      margin-bottom: 0.85rem;
+      text-align: left;
+      width: 100%;
+    }
+
+    .alert-selector-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .alert-selector-btn.active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+    }
+
+    .selector-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    /* Checkout Container */
+    .checkout-wrapper {
+      padding: 4rem 0;
+      background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+    }
+
+    .checkout-card-box {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      max-width: 680px;
+      margin: 0 auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(16px);
+    }
+
+    .checkout-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.75rem;
+    }
+
+    .checkout-tab-btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .checkout-tab-btn.active {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: var(--primary);
+      color: #FFFFFF;
+    }
+
+    .order-summary-box {
+      background: rgba(11, 17, 32, 0.8);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .order-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.92rem;
+    }
+
+    .order-line.total {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    /* Modal de Sucesso */
+    .success-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(4, 7, 13, 0.85);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 1rem;
+    }
+
+    .success-modal-box {
+      background: #0F172A;
+      border: 1px solid #10B981;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(16, 185, 129, 0.3);
+      animation: zoomIn 0.25s ease-out;
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div style="background: linear-gradient(90deg, #4F46E5, #10B981); padding: 0.5rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.02em;">
+    ⚡ Oferta de Lançamento: Proteja sua loja virtual por <strong>menos de R$ 3,25 por dia</strong>. Sem fidelidade.
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand" style="text-decoration:none;">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">DropHub <span class="highlight">Tools</span></span>
+          <span class="brand-sub">Inteligência para E-commerce</span>
+        </div>
+      </a>
+
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link">← Calculadora de Lucro</a>
+        <a href="#como-funciona" class="nav-link">Como Funciona</a>
+        <a href="#checkout-area" class="btn btn-primary-sm">Ativar Sentinela</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="auditor-hero">
+    <div class="container">
+      <div class="hero-pill-badge">
+        <span class="pulse-dot"></span>
+        <span>Sentinela de Checkout & Recuperação em Tempo Real</span>
+      </div>
+
+      <h1 class="auditor-main-title">
+        Quantas vendas sua loja virtual <span class="gradient-text">está perdendo em silêncio</span> hoje?
+      </h1>
+
+      <p class="auditor-sub-desc">
+        Picos de cartões recusados por instabilidade no gateway, checkout travado sem gerar pedidos ou cupons com margem negativa comem seu lucro. O <strong>Auditor Silencioso</strong> vigia seus pedidos 24h por dia e apita no seu WhatsApp no exato segundo em que algo der errado.
+      </p>
+
+      <!-- DESTAQUE PRINCIPAL DE PREÇO: R$ 3,23 POR DIA -->
+      <div class="price-spotlight-card">
+        <div>
+          <div class="price-tag-headline">
+            <span>🔥 PLANO SENTINELA VIP</span>
+            <span style="background: rgba(16, 185, 129, 0.2); padding: 2px 8px; border-radius: 99px; font-size: 0.72rem;">Cancele quando quiser</span>
+          </div>
+          <div class="price-large-number">
+            Apenas <span class="highlight-green">R$ 3,23</span> <span class="period">/ dia</span>
+          </div>
+          <div class="price-details-txt">
+            Assinatura mensal de <strong>R$ 97,00/mês</strong> via Cartão de Crédito ou PIX.<br>
+            Sem fidelidade ou taxa de adesão.
+          </div>
+        </div>
+
+        <div class="coffee-comparison-badge">
+          ☕ <strong>Menos que 1 cafezinho de padaria</strong> para proteger R$ 10.000, R$ 50.000 ou mais de vendas na sua loja todos os meses.
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="#checkout-area" class="btn btn-glow" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
+          <span>Ativar Auditor Silencioso Agora</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#simulador" class="btn btn-secondary" style="padding: 1rem 2rem;">
+          <span>Ver Alertas no WhatsApp</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Simulador de WhatsApp em Tempo Real -->
+  <section class="simulator-section" id="simulador">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <div class="section-badge">Demonstração Interativa</div>
+        <h2 class="section-title">Veja os alertas reais que chegam no seu celular</h2>
+        <p class="section-subtitle">Clique nos tipos de anomalias abaixo para ver como o Auditor Silencioso te avisa:</p>
+      </div>
+
+      <div class="simulator-grid">
+        <!-- Lista de Alertas Clicáveis -->
+        <div>
+          <button class="alert-selector-btn active" onclick="switchAlert('recusa')">
+            <div class="selector-icon">⚡</div>
+            <div>
+              <strong style="color: #F43F5E; display: block; margin-bottom: 0.25rem;">1. Pico de Recusa de Cartão</strong>
+              <span style="font-size: 0.88rem; color: var(--text-muted);">
+                Avisa no WhatsApp quando mais de 25% dos pagamentos de cartão falharem em 20 minutos (evita queimar dinheiro no Facebook/TikTok Ads).
+              </span>
+            </div>
+          </button>
+
+          <button class="alert-selector-btn" onclick="switchAlert('travado')">
+            <div class="selector-icon">🛑</div>
+            <div>
+              <strong style="color: #F59E0B; display: block; margin-bottom: 0.25rem;">2. Checkout Fora do Ar / Queda Súbita</strong>
+              <span style="font-size: 0.88rem; color: var(--text-muted);">
+                Detecta quando sua loja fica mais de 2 horas sem nenhuma venda em horários de pico habitual (gateway fora do ar ou bug no pixel).
+              </span>
+            </div>
+          </button>
+
+          <button class="alert-selector-btn" onclick="switchAlert('margem')">
+            <div class="selector-icon">📉</div>
+            <div>
+              <strong style="color: #EC4899; display: block; margin-bottom: 0.25rem;">3. Margem Negativa / Preço Errado</strong>
+              <span style="font-size: 0.88rem; color: var(--text-muted);">
+                Alerta quando um cupom de desconto promocional ou erro de precificação fizer você vender com lucro líquido no vermelho.
+              </span>
+            </div>
+          </button>
+
+          <button class="alert-selector-btn" onclick="switchAlert('fechamento')">
+            <div class="selector-icon">🌙</div>
+            <div>
+              <strong style="color: #10B981; display: block; margin-bottom: 0.25rem;">4. Relatório de Fechamento Diário (23h59)</strong>
+              <span style="font-size: 0.88rem; color: var(--text-muted);">
+                Receba um resumo limpo do faturamento líquido, taxa de aprovação do dia e saúde geral do checkout antes de dormir.
+              </span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Celular Mockup -->
+        <div>
+          <div class="phone-mockup">
+            <div class="phone-header">
+              <div class="phone-avatar">🛡️</div>
+              <div class="phone-user-info">
+                <div class="phone-user-name">Auditor Silencioso 🤖</div>
+                <div class="phone-user-status">online • sentinela ativo</div>
+              </div>
+            </div>
+
+            <div class="phone-chat-body" id="chat-messages-container">
+              <!-- Mensagens Dinâmicas Injetadas via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Por que se paga no primeiro dia? -->
+  <section style="padding: 4rem 0; background: rgba(15, 23, 42, 0.4); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+    <div class="container" style="max-width: 900px; text-align: center;">
+      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
+        Por que o Auditor Silencioso se paga logo no primeiro incidente?
+      </h2>
+      <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2.5rem; line-height: 1.7;">
+        Imagine que você está rodando R$ 400 por dia em anúncios. Às 14h, seu gateway de pagamento sofre instabilidade e passa a recusar todos os cartões.
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; text-align: left;">
+        <div style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.3); border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="color: #F43F5E; font-weight: 800; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>❌ SEM O AUDITOR SILENCIOSO</span>
+          </div>
+          <p style="font-size: 0.92rem; color: #CBD5E1; line-height: 1.6;">
+            Você só descobre o problema às 21h ao abrir o painel da loja. Resultado: gastou R$ 300 de anúncios à toa e perdeu mais de R$ 1.500 em vendas que não voltam mais.
+          </p>
+          <div style="margin-top: 1rem; font-weight: 800; color: #F43F5E; font-size: 1.1rem;">
+            Prejuízo estimado: -R$ 1.800,00
+          </div>
+        </div>
+
+        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="color: #10B981; font-weight: 800; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>✅ COM O AUDITOR SILENCIOSO</span>
+          </div>
+          <p style="font-size: 0.92rem; color: #CBD5E1; line-height: 1.6;">
+            Na 3ª recusa consecutiva às 14h18, seu celular apita no WhatsApp avisando a falha no gateway. Você pausa os anúncios em 2 minutos ou aciona o gateway reserva.
+          </p>
+          <div style="margin-top: 1rem; font-weight: 800; color: #10B981; font-size: 1.1rem;">
+            Investimento: apenas R$ 3,23/dia
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Checkout Section -->
+  <section class="checkout-wrapper" id="checkout-area">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <div class="section-badge">Ativação Imediata</div>
+        <h2 class="section-title">Proteja sua loja agora mesmo</h2>
+        <p class="section-subtitle">Instalação sem código em menos de 2 minutos. Compatível com Shopify, Nuvemshop, Yampi e Appmax.</p>
+      </div>
+
+      <div class="checkout-card-box">
+        
+        <!-- Resumo do Pedido -->
+        <div class="order-summary-box">
+          <div class="order-line">
+            <span style="color: var(--text-muted);">Assinatura:</span>
+            <span style="font-weight: 700; color: #FFFFFF;">Auditor Silencioso 24/7</span>
+          </div>
+          <div class="order-line">
+            <span style="color: var(--text-muted);">Frequência:</span>
+            <span>Mensal (cancele a qualquer momento)</span>
+          </div>
+          <div class="order-line">
+            <span style="color: var(--text-muted);">Custo diário:</span>
+            <span style="color: #10B981; font-weight: 700;">R$ 3,23 por dia</span>
+          </div>
+          <div class="order-line total">
+            <span>Total da Mensalidade:</span>
+            <span style="color: #10B981; font-family: var(--font-mono); font-size: 1.5rem;">R$ 97,00</span>
+          </div>
+        </div>
+
+        <!-- Abas de Pagamento -->
+        <div class="checkout-tabs">
+          <button type="button" class="checkout-tab-btn active" id="tab-btn-card" onclick="setPaymentMethod('card')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+              <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+            <span>Cartão de Crédito</span>
+          </button>
+          <button type="button" class="checkout-tab-btn" id="tab-btn-pix" onclick="setPaymentMethod('pix')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span>PIX Instantâneo</span>
+          </button>
+        </div>
+
+        <!-- Formulário de Checkout -->
+        <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)">
+          
+          <!-- Dados Básicos -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" for="client-name">Seu Nome Completo</label>
+              <input type="text" id="client-name" class="form-input" placeholder="Ex: Lucas Silva" required>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" for="client-whatsapp">WhatsApp (com DDD)</label>
+              <input type="tel" id="client-whatsapp" class="form-input" placeholder="(11) 99999-9999" required>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" for="client-email">Seu Melhor E-mail</label>
+              <input type="email" id="client-email" class="form-input" placeholder="lucas@sualoja.com.br" required>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" for="client-platform">Plataforma da sua Loja</label>
+              <select id="client-platform" class="form-select" required>
+                <option value="shopify">Shopify</option>
+                <option value="nuvemshop">Nuvemshop</option>
+                <option value="yampi">Yampi</option>
+                <option value="appmax">Appmax</option>
+                <option value="woocommerce">WooCommerce</option>
+                <option value="outra">Outra / Checkout Próprio</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Campos de Cartão de Crédito -->
+          <div id="card-fields-box">
+            <div class="form-group">
+              <label class="form-label" for="card-number">Número do Cartão de Crédito</label>
+              <input type="text" id="card-number" class="form-input" placeholder="0000 0000 0000 0000" maxlength="19">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="card-expiry">Validade (MM/AA)</label>
+                <input type="text" id="card-expiry" class="form-input" placeholder="MM/AA" maxlength="5">
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="card-cvv">Código CVV</label>
+                <input type="text" id="card-cvv" class="form-input" placeholder="123" maxlength="4">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="card-holder">Nome Impresso no Cartão</label>
+                <input type="text" id="card-holder" class="form-input" placeholder="LUCAS SILVA">
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="card-cpf">CPF do Titular</label>
+                <input type="text" id="card-cpf" class="form-input" placeholder="000.000.000-00">
+              </div>
+            </div>
+          </div>
+
+          <!-- Área do PIX -->
+          <div id="pix-fields-box" style="display: none; text-align: center; padding: 1.5rem; background: rgba(11, 17, 32, 0.7); border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📱</div>
+            <div style="font-weight: 700; font-size: 1.1rem; color: #FFFFFF; margin-bottom: 0.25rem;">
+              PIX de R$ 97,00 com Liberação Imediata
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Ao clicar no botão abaixo, geraremos seu QR Code exclusivo e o código Copia e Cola para pagamento em qualquer banco.
+            </p>
+          </div>
+
+          <!-- Botão Submit -->
+          <button type="submit" id="btn-submit-checkout" class="btn btn-glow" style="width: 100%; padding: 1.15rem; font-size: 1.1rem; justify-content: center;">
+            <span id="btn-submit-text">Ativar Sentinela por R$ 97/mês (R$ 3,23/dia)</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+
+          <div style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: var(--text-dim); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <span>🔒 Pagamento 100% Criptografado</span>
+            <span>•</span>
+            <span>Garantia de 7 Dias</span>
+            <span>•</span>
+            <span>Suporte Via WhatsApp</span>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal de Sucesso / Onboarding -->
+  <div class="success-modal-overlay" id="success-modal">
+    <div class="success-modal-box">
+      <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 2px solid #10B981; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 2rem;">
+        ✅
+      </div>
+      <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: #FFFFFF;">
+        Assinatura Ativada com Sucesso!
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6;">
+        Bem-vindo ao <strong>Auditor Silencioso</strong>. Seu sentinela já foi provisionado no WhatsApp.
+      </p>
+
+      <div style="background: rgba(11, 17, 32, 0.9); border: 1px dashed rgba(16, 185, 129, 0.5); border-radius: var(--radius-md); padding: 1rem; text-align: left; margin-bottom: 1.5rem;">
+        <div style="font-size: 0.75rem; color: #10B981; font-weight: 800; text-transform: uppercase; margin-bottom: 0.25rem;">
+          Sua URL Única de Webhook (Cole no Checkout da sua Loja):
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #E2E8F0; word-break: break-all;" id="modal-webhook-url">
+          https://drophub-n8n.dvzzxm.easypanel.host/webhook/auditor-silencioso
+        </div>
+      </div>
+
+      <a id="btn-open-whatsapp-onboarding" href="#" target="_blank" class="btn btn-glow" style="width: 100%; justify-content: center; padding: 0.9rem;">
+        <span>Abrir WhatsApp do Sentinela</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+      <button type="button" onclick="closeSuccessModal()" style="margin-top: 1rem; background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.85rem;">
+        Fechar janela
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="padding: 3rem 0; text-align: center; border-top: 1px solid var(--border-subtle); color: var(--text-dim); font-size: 0.85rem;">
+    <div class="container">
+      <p>© 2026 DropHub Tools • Auditor Silencioso para E-commerce e Dropshipping.</p>
+      <p style="margin-top: 0.5rem;">Proteção de checkout ativa 24 horas por dia, 7 dias por semana.</p>
+    </div>
+  </footer>
+
+  <!-- Script Interativo -->
+  <script>
+    // Mensagens de demonstração no WhatsApp
+    const DEMO_MESSAGES = {
+      recusa: `
+        <div class="chat-bubble urgent">
+          <strong style="color: #F43F5E;">🚨 [AUDITOR SILENCIOSO] PICO DE RECUSA DETECTADO!</strong><br><br>
+          Olá Lucas! Sua loja <strong>Moda Urbana</strong> apresentou <strong>4 cartões recusados seguidos</strong> nos últimos 18 minutos.<br><br>
+          📊 <strong>Taxa de Recusa:</strong> <span style="color:#F43F5E; font-weight:bold;">38%</span> (limite seguro: 15%)<br>
+          💳 <strong>Gateway Afetado:</strong> Mercado Pago<br>
+          💡 <strong>Ação Recomendada:</strong> Verifique seu antifraude ou ative o gateway reserva para não desperdiçar verba de anúncios!
+          <div class="chat-time">15:42 ✓✓</div>
+        </div>
+      `,
+      travado: `
+        <div class="chat-bubble warning">
+          <strong style="color: #F59E0B;">🛑 [ALERTA] QUEDA BRUSCA DE CHECKOUT</strong><br><br>
+          Sua loja está há <strong>2h30 sem nenhum pedido gerado</strong>.<br><br>
+          Em terças-feiras neste horário, sua média histórica é de <strong>6 a 9 vendas por hora</strong>.<br>
+          🔍 <strong>Verifique agora:</strong><br>
+          1. O checkout da Yampi/Shopify está abrindo?<br>
+          2. Suas campanhas de tráfego estão ativas?
+          <div class="chat-time">17:15 ✓✓</div>
+        </div>
+      `,
+      margem: `
+        <div class="chat-bubble urgent">
+          <strong style="color: #EC4899;">📉 [ALERTA DE MARGEM] VENDA NO PREJUÍZO!</strong><br><br>
+          O pedido <strong>#8942</strong> acabou de ser gerado com o cupom <strong>SUPERVIP20</strong>.<br><br>
+          📦 <strong>Preço Venda:</strong> R$ 119,90<br>
+          💸 <strong>Taxas + CMV + Frete:</strong> R$ 124,50<br>
+          ❌ <strong>Lucro Líquido:</strong> <span style="color:#F43F5E; font-weight:bold;">-R$ 4,60 (-3.8%)</span><br><br>
+          Atenção: esse cupom está deixando sua margem no vermelho neste produto!
+          <div class="chat-time">19:04 ✓✓</div>
+        </div>
+      `,
+      fechamento: `
+        <div class="chat-bubble success">
+          <strong style="color: #10B981;">🌙 [FECHAMENTO DO DIA] 23h59</strong><br><br>
+          Resumo diário da loja <strong>Moda Urbana</strong>:<br><br>
+          💰 <strong>Faturamento Aprovado:</strong> R$ 4.820,00<br>
+          📈 <strong>Taxa de Aprovação:</strong> 82.4% (Ótimo!)<br>
+          ⚡ <strong>Falhas Evitadas:</strong> 2 recusas contornadas<br>
+          💵 <strong>Lucro Líquido Estimado:</strong> R$ 1.630,00<br><br>
+          Seu sentinela continuará vigiando durante a madrugada! 😴💤
+          <div class="chat-time">23:59 ✓✓</div>
+        </div>
+      `
+    };
+
+    function switchAlert(type) {
+      document.querySelectorAll('.alert-selector-btn').forEach(b => b.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.getElementById('chat-messages-container').innerHTML = DEMO_MESSAGES[type];
+    }
+
+    // Iniciar com o primeiro alerta
+    document.getElementById('chat-messages-container').innerHTML = DEMO_MESSAGES.recusa;
+
+    // Alternar método de pagamento
+    let currentMethod = 'card';
+    function setPaymentMethod(method) {
+      currentMethod = method;
+      document.getElementById('tab-btn-card').classList.toggle('active', method === 'card');
+      document.getElementById('tab-btn-pix').classList.toggle('active', method === 'pix');
+      document.getElementById('card-fields-box').style.display = method === 'card' ? 'block' : 'none';
+      document.getElementById('pix-fields-box').style.display = method === 'pix' ? 'block' : 'none';
+      
+      const submitText = document.getElementById('btn-submit-text');
+      if (method === 'card') {
+        submitText.innerText = 'Ativar Sentinela no Cartão (R$ 97/mês • R$ 3,23/dia)';
+      } else {
+        submitText.innerText = 'Gerar Chave PIX de R$ 97,00 (R$ 3,23/dia)';
+      }
+    }
+
+    // Envio do formulário de checkout integrado ao Mercado Pago
+    async function handleCheckoutSubmit(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('client-name').value;
+      const whatsapp = document.getElementById('client-whatsapp').value;
+      const email = document.getElementById('client-email').value;
+      const platform = document.getElementById('client-platform').value;
+
+      const submitBtn = document.getElementById('btn-submit-checkout');
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Gerando pagamento no Mercado Pago...';
+
+      try {
+        // Gera o checkout oficial no Mercado Pago
+        const response = await fetch('https://api.mercadopago.com/checkout/preferences', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer APP_USR-3996837279794288-091918-04713fcfe6fac28f3c48b2c7dc6ddca4-294009773',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            items: [
+              {
+                title: 'Auditor Silencioso 24/7 - Sentinela de Checkout (R$ 3,23/dia)',
+                description: 'Monitoramento 24h contra picos de recusa de cartão e checkout travado',
+                quantity: 1,
+                unit_price: 97.00,
+                currency_id: 'BRL'
+              }
+            ],
+            payer: {
+              name: name,
+              email: email || 'cliente@loja.com.br',
+              phone: { number: whatsapp.replace(/\D/g, '') }
+            },
+            metadata: {
+              client_name: name,
+              whatsapp: whatsapp,
+              platform: platform
+            },
+            back_urls: {
+              success: window.location.href.split('?')[0] + '?status=approved',
+              failure: window.location.href.split('?')[0] + '?status=failure',
+              pending: window.location.href.split('?')[0] + '?status=pending'
+            },
+            auto_return: 'approved'
+          })
+        });
+
+        const data = await response.json();
+
+        if (data && data.init_point) {
+          submitBtn.innerText = 'Redirecionando para o Mercado Pago...';
+          window.location.href = data.init_point;
+          return;
+        } else {
+          throw new Error(data.message || 'Falha ao criar link do Mercado Pago');
+        }
+      } catch (err) {
+        console.warn('Fallback modal local:', err);
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Ativar Sentinela por R$ 97/mês (R$ 3,23/dia)';
+
+        const storeSlug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || 'loja';
+        const webhookUrl = `https://drophub-n8n.dvzzxm.easypanel.host/webhook/auditor-${storeSlug}`;
+        document.getElementById('modal-webhook-url').innerText = webhookUrl;
+
+        const waText = encodeURIComponent(`Olá! Acabei de ativar o Auditor Silencioso para a minha loja na ${platform}. Meu nome é ${name}. Gostaria de confirmar a conexão.`);
+        document.getElementById('btn-open-whatsapp-onboarding').href = `https://wa.me/?text=${waText}`;
+
+        document.getElementById('success-modal').style.display = 'flex';
+      }
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('success-modal').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

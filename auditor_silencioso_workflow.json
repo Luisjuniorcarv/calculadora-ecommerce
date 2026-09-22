@@ -1,0 +1,480 @@
+{
+  "name": "Auditor Silencioso 24/7 - Mercado Pago & Alertas WhatsApp",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mercadopago-auditor",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "name": "Webhook Mercado Pago",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        240
+      ],
+      "id": "node-webhook-mp"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Trata o evento recebido do Mercado Pago (Webhooks v1 e v2 / IPN)\nconst body = $json.body || {};\nconst query = $json.query || {};\n\nconst paymentId = (body.data && body.data.id) || body.id || query.id || query[\"data.id\"] || null;\nconst topic = body.type || body.topic || query.topic || \"payment\";\n\nreturn [{\n  json: {\n    paymentId,\n    topic,\n    isPayment: topic === \"payment\"\n  }\n}];"
+      },
+      "name": "Filtrar Evento MP",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        240
+      ],
+      "id": "node-filtro-mp"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.isPayment }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "É Pagamento?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        680,
+        240
+      ],
+      "id": "node-if-is-payment"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.mercadopago.com/v1/payments/{{ $json.paymentId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer APP_USR-3996837279794288-091918-04713fcfe6fac28f3c48b2c7dc6ddca4-294009773"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Consultar Pagamento no MP",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        900,
+        220
+      ],
+      "id": "node-get-mp-payment"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.status }}",
+              "operation": "equals",
+              "value2": "approved"
+            }
+          ]
+        }
+      },
+      "name": "Aprovado?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        220
+      ],
+      "id": "node-if-aprovado"
+    },
+    {
+      "parameters": {
+        "jsCode": "const payment = $json;\nconst payer = payment.payer || {};\nconst additionalInfo = payment.additional_info || {};\nconst payerInfo = additionalInfo.payer || {};\n\nconst nome = (payer.first_name ? payer.first_name + \" \" + (payer.last_name || \"\") : payerInfo.first_name) || \"Lojista VIP\";\nconst rawPhone = (payer.phone && payer.phone.number) || (payerInfo.phone && payerInfo.phone.number) || \"5511999999999\";\nconst cleanPhone = String(rawPhone).replace(/\\D/g, \"\");\nconst whatsapp = cleanPhone.startsWith(\"55\") ? cleanPhone : \"55\" + cleanPhone;\nconst valor = Number(payment.transaction_amount || 97.00);\n\nconst slugLoja = String(nome).toLowerCase().replace(/[^a-z0-9]/g, \"-\");\nconst webhookUrlCliente = \"https://drophub-n8n.dvzzxm.easypanel.host/webhook/auditor-checkout?loja=\" + slugLoja + \"&wa=\" + whatsapp;\n\nconst mensagemBoasVindas = \"*BEM-VINDO AO AUDITOR SILENCIOSO!*\\n\\n\" +\n  \"Olá *\" + nome.trim() + \"*! Seu pagamento de *R$ \" + valor.toFixed(2) + \"* foi confirmado via Mercado Pago.\\n\\n\" +\n  \"🛡️ Seu sentinela de checkout 24/7 já está ativo por apenas *R$ 3,23 por dia*!\\n\\n\" +\n  \"👉 *Como ativar na sua loja (Nuvemshop, Shopify, Yampi, Appmax):*\\n\" +\n  \"1. No painel da sua loja, vá em Configurações > Webhooks.\\n\" +\n  \"2. Adicione esta URL para eventos de pedidos:\\n\" +\n  webhookUrlCliente + \"\\n\\n\" +\n  \"A partir de agora, se houver qualquer pico de recusa de cartões ou checkout travado, eu te aviso aqui no mesmo segundo! 🚀\";\n\nreturn [{ json: { nome, whatsapp, valor, webhookUrlCliente, mensagemBoasVindas } }];"
+      },
+      "name": "Preparar Mensagem Boas-Vindas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1340,
+        200
+      ],
+      "id": "node-prep-msg-boasvindas"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://drophub-evolution-wa.dvzzxm.easypanel.host/message/sendText/auditor",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "429683C4C977415CAAFCCE10F7D57E11"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "number",
+              "value": "={{ $json.whatsapp }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.mensagemBoasVindas }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Evolution API: Enviar WhatsApp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1560,
+        200
+      ],
+      "id": "node-send-welcome-wa"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "auditor-checkout",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "name": "Webhook Checkout Lojista",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        560
+      ],
+      "id": "node-webhook-checkout-loja"
+    },
+    {
+      "parameters": {
+        "jsCode": "const query = $json.query || {};\nconst body = $json.body || {};\n\nconst lojaId = query.loja || body.store_id || \"loja-padrao\";\nconst whatsappDestino = query.wa || \"5511999999999\";\n\nlet status = String(body.status || body.event || \"\").toLowerCase();\nlet isRecusa = status.includes(\"refused\") || status.includes(\"recusad\") || status.includes(\"failed\") || status.includes(\"denied\");\nlet isAprovado = status.includes(\"paid\") || status.includes(\"pago\") || status.includes(\"approved\") || status.includes(\"sucesso\");\nlet formaPagamento = body.payment_method || (body.payment && body.payment.method) || \"Cartão\";\nlet valorVenda = Number(body.total || body.amount || (body.order && body.order.total) || 0);\n\nconst staticData = $getWorkflowStaticData(\"global\");\nstaticData.historicoLojas = staticData.historicoLojas || {};\nstaticData.historicoLojas[lojaId] = staticData.historicoLojas[lojaId] || { pedidos: [], ultimoAlerta: 0, ultimaVendaTimestamp: Date.now() };\n\nconst dadosLoja = staticData.historicoLojas[lojaId];\nconst agora = Date.now();\nif (isAprovado) dadosLoja.ultimaVendaTimestamp = agora;\n\ndadosLoja.pedidos.unshift({ timestamp: agora, status: isRecusa ? \"recusado\" : (isAprovado ? \"aprovado\" : \"outro\"), formaPagamento, valor: valorVenda });\ndadosLoja.pedidos = dadosLoja.pedidos.filter(p => agora - p.timestamp <= 2 * 60 * 60 * 1000).slice(0, 20);\n\nconst pedidosCartao = dadosLoja.pedidos.filter(p => String(p.formaPagamento).toLowerCase().includes(\"cart\") || String(p.formaPagamento).toLowerCase().includes(\"credit\"));\nconst recusasCartao = pedidosCartao.filter(p => p.status === \"recusado\").length;\nconst taxaRecusa = pedidosCartao.length >= 4 ? (recusasCartao / pedidosCartao.length) * 100 : 0;\n\nlet temAlerta = false;\nlet tipoAlerta = \"\";\nlet mensagemAlerta = \"\";\n\nconst tempoDesdeUltimoAlerta = agora - dadosLoja.ultimoAlerta;\nif (taxaRecusa >= 25 && recusasCartao >= 3 && tempoDesdeUltimoAlerta > 25 * 60 * 1000) {\n  temAlerta = true;\n  tipoAlerta = \"PICO_RECUSA\";\n  dadosLoja.ultimoAlerta = agora;\n  mensagemAlerta = \"🚨 *[AUDITOR SILENCIOSO] PICO DE RECUSA DETECTADO!*\\n\\n\" +\n    \"Atenção! Sua loja *\" + lojaId + \"* teve *\" + recusasCartao + \" cartões recusados* nos últimos minutos.\\n\\n\" +\n    \"📊 *Taxa de Recusa:* \" + taxaRecusa.toFixed(1) + \"% (limite de segurança: 15%)\\n\" +\n    \"💳 *Forma de Pagamento:* Cartão de Crédito\\n\\n\" +\n    \"💡 *Ação Rápida:* Verifique a conexão do seu gateway ou antifraude agora para não queimar verba de anúncios!\";\n}\n\nreturn [{ json: { lojaId, whatsappDestino, isRecusa, isAprovado, taxaRecusa, temAlerta, tipoAlerta, mensagemAlerta } }];"
+      },
+      "name": "Motor Sentinela de Análise",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        560
+      ],
+      "id": "node-code-sentinela"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.temAlerta }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "Disparar Alerta WhatsApp?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        720,
+        560
+      ],
+      "id": "node-if-alerta"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://drophub-evolution-wa.dvzzxm.easypanel.host/message/sendText/auditor",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "429683C4C977415CAAFCCE10F7D57E11"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "number",
+              "value": "={{ $json.whatsappDestino }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.mensagemAlerta }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Evolution API: Enviar Alerta Crítico",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        960,
+        540
+      ],
+      "id": "node-send-alerta-wa"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "59 23 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Agendador Fechamento 23h59",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        820
+      ],
+      "id": "node-cron-noturno"
+    },
+    {
+      "parameters": {
+        "jsCode": "const staticData = $getWorkflowStaticData(\"global\");\nconst lojas = staticData.historicoLojas || {};\nconst resultados = [];\n\nfor (const [lojaId, dados] of Object.entries(lojas)) {\n  const pedidosHoje = dados.pedidos || [];\n  const aprovados = pedidosHoje.filter(p => p.status === \"aprovado\");\n  const recusados = pedidosHoje.filter(p => p.status === \"recusado\");\n  const totalFaturado = aprovados.reduce((acc, cur) => acc + (cur.valor || 0), 0);\n  const taxaAprovacao = pedidosHoje.length > 0 ? ((aprovados.length / pedidosHoje.length) * 100).toFixed(1) : 100;\n\n  const msgFechamento = \"🌙 *[AUDITOR SILENCIOSO] FECHAMENTO DO DIA*\\n\\n\" +\n    \"Resumo da loja *\" + lojaId + \"*:\\n\\n\" +\n    \"💰 *Faturamento Registrado:* R$ \" + totalFaturado.toFixed(2) + \"\\n\" +\n    \"📈 *Taxa de Aprovação:* \" + taxaAprovacao + \"%\\n\" +\n    \"🛒 *Pedidos no Período:* \" + pedidosHoje.length + \" (\" + aprovados.length + \" pagos / \" + recusados.length + \" recusados)\\n\\n\" +\n    \"Seu sentinela continuará em alerta durante a madrugada! Tenha uma excelente noite.\";\n\n  resultados.push({ json: { lojaId, totalFaturado, taxaAprovacao, mensagem: msgFechamento } });\n}\n\nreturn resultados.length > 0 ? resultados : [{ json: { mensagem: \"Sem lojas ativas no momento\" } }];"
+      },
+      "name": "Calcular Fechamento Diário",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        820
+      ],
+      "id": "node-code-fechamento"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-calculadora",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "name": "Webhook Lead Calculadora",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        1080
+      ],
+      "id": "node-webhook-lead"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body || {};\nconst lead = body.lead || {};\nconst sim = body.simulation || {};\n\nconst name = lead.name || \"Lojista\";\nconst rawPhone = String(lead.whatsapp || \"5511999999999\").replace(/\\D/g, \"\");\nconst fullPhone = rawPhone.startsWith(\"55\") ? rawPhone : \"55\" + rawPhone;\n\nconst price = Number(sim.price || 0).toFixed(2);\nconst profit = Number(sim.netProfit || 0).toFixed(2);\nconst margin = Number(sim.netMargin || 0).toFixed(1);\nconst gateway = sim.gatewayName || \"Mercado Pago\";\nconst platform = sim.platformName || \"E-commerce\";\n\nconst reportMsg = \"*[DROPHUB TOOLS] SEU RELATÓRIO DE LUCRO REAL*\\n\\n\" +\n  \"Olá *\" + name + \"*! Aqui está o resumo da sua simulação na Calculadora:\\n\\n\" +\n  \"🏷️ *Preço de Venda:* R$ \" + price + \"\\n\" +\n  \"💳 *Gateway:* \" + gateway + \" | *Plataforma:* \" + platform + \"\\n\" +\n  \"💰 *LUCRO LÍQUIDO REAL:* R$ \" + profit + \" (\" + margin + \"% de margem)\\n\\n\" +\n  \"💡 *Diagnóstico de Otimização:*\\n\" +\n  \"Você sabia que checkouts travados e recusas de cartão comem até 30% do faturamento da sua loja em silêncio?\\n\\n\" +\n  \"🛡️ *Conheça o Auditor Silencioso por apenas R$ 3,23 por dia (R$ 97/mês):*\\n\" +\n  \"https://calculadoradoecommerce.com.br/auditor.html\";\n\nreturn [{ json: { fullPhone, reportMsg } }];"
+      },
+      "name": "Formatar Relatório Lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        1080
+      ],
+      "id": "node-format-lead"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://drophub-evolution-wa.dvzzxm.easypanel.host/message/sendText/auditor",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "429683C4C977415CAAFCCE10F7D57E11"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "number",
+              "value": "={{ $json.fullPhone }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.reportMsg }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Evolution API: Enviar Relatório Lead",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        720,
+        1080
+      ],
+      "id": "node-send-lead-wa"
+    }
+  ],
+  "connections": {
+    "Webhook Mercado Pago": {
+      "main": [
+        [
+          {
+            "node": "Filtrar Evento MP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrar Evento MP": {
+      "main": [
+        [
+          {
+            "node": "É Pagamento?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "É Pagamento?": {
+      "main": [
+        [
+          {
+            "node": "Consultar Pagamento no MP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar Pagamento no MP": {
+      "main": [
+        [
+          {
+            "node": "Aprovado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aprovado?": {
+      "main": [
+        [
+          {
+            "node": "Preparar Mensagem Boas-Vindas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Mensagem Boas-Vindas": {
+      "main": [
+        [
+          {
+            "node": "Evolution API: Enviar WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Checkout Lojista": {
+      "main": [
+        [
+          {
+            "node": "Motor Sentinela de Análise",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Motor Sentinela de Análise": {
+      "main": [
+        [
+          {
+            "node": "Disparar Alerta WhatsApp?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Disparar Alerta WhatsApp?": {
+      "main": [
+        [
+          {
+            "node": "Evolution API: Enviar Alerta Crítico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agendador Fechamento 23h59": {
+      "main": [
+        [
+          {
+            "node": "Calcular Fechamento Diário",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Lead Calculadora": {
+      "main": [
+        [
+          {
+            "node": "Formatar Relatório Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatar Relatório Lead": {
+      "main": [
+        [
+          {
+            "node": "Evolution API: Enviar Relatório Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

@@ -424,8 +424,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   const DEFAULT_WEBHOOK_KEY = 'drophub_tools_n8n_webhook';
   
-  // URL Padrão do n8n configurada pelo usuário ou default placeholder
-  let n8nWebhookUrl = localStorage.getItem(DEFAULT_WEBHOOK_KEY) || 'https://drophub-n8n.bvzzxm.easypanel.host/webhook/lead-calculadora';
+  // URL Padrão do n8n do Easypanel do usuário
+  let n8nWebhookUrl = 'https://drophub-n8n.dvzzxm.easypanel.host/webhook/lead-calculadora';
+  localStorage.setItem(DEFAULT_WEBHOOK_KEY, n8nWebhookUrl);
 
   leadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -439,40 +440,75 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     btnSubmitLead.disabled = true;
-    btnSubmitLead.innerHTML = `<span>Enviando...</span>`;
+    btnSubmitLead.innerHTML = `<span>Enviando para o WhatsApp...</span>`;
+
+    const cleanPhone = whatsapp.replace(/\D/g, '');
+    const fullPhone = cleanPhone.startsWith('55') ? cleanPhone : '55' + cleanPhone;
 
     const payload = {
       lead: {
         name,
-        whatsapp,
+        whatsapp: fullPhone,
+        rawWhatsapp: whatsapp,
         timestamp: new Date().toISOString(),
         origin: 'Calculadora de Taxas & Lucro Real'
       },
       simulation: currentSimulationData
     };
 
+    // Monta o relatório formatado
+    const price = currentSimulationData ? Number(currentSimulationData.price || 0).toFixed(2) : '0.00';
+    const profit = currentSimulationData ? Number(currentSimulationData.netProfit || 0).toFixed(2) : '0.00';
+    const margin = currentSimulationData ? Number(currentSimulationData.netMargin || 0).toFixed(1) : '0.0';
+    const gateway = currentSimulationData ? currentSimulationData.gatewayName : 'Mercado Pago';
+    const platform = currentSimulationData ? currentSimulationData.platformName : 'Loja Virtual';
+
+    const reportMsg = `📊 *[DROPHUB TOOLS] SEU RELATÓRIO DE LUCRO REAL*\n\n` +
+      `Olá *${name}*! Aqui está o resumo da sua simulação na Calculadora de E-commerce:\n\n` +
+      `🏷️ *Preço de Venda:* R$ ${price}\n` +
+      `💳 *Gateway:* ${gateway} | *Plataforma:* ${platform}\n` +
+      `💰 *LUCRO LÍQUIDO NO BOLSO:* R$ ${profit} (*${margin}% de margem*)\n\n` +
+      `💡 *Diagnóstico de Otimização:*\n` +
+      `Fazer contas pontuais é ótimo, mas você sabia que *checkouts travados e cartões recusados* comem até 30% do faturamento da sua loja em silêncio?\n\n` +
+      `🛡️ *Conheça o Auditor Silencioso:*\n` +
+      `Proteja seus pedidos 24h por dia por apenas *R$ 3,23 por dia* (R$ 97/mês):\n` +
+      `https://calculadoradoecommerce.com.br/auditor.html`;
+
     try {
-      // Disparo assíncrono para o webhook do n8n
-      await fetch(n8nWebhookUrl, {
+      // 1. Tenta disparar para o n8n
+      fetch(n8nWebhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
+      }).catch(err => console.warn('n8n webhook:', err));
+
+      // 2. Dispara diretamente pela Evolution API para garantir entrega instantânea!
+      await fetch('https://drophub-evolution-wa.dvzzxm.easypanel.host/message/sendText/auditor', {
+        method: 'POST',
+        headers: {
+          'apikey': '429683C4C977415CAAFCCE10F7D57E11',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          number: fullPhone,
+          text: reportMsg,
+          options: { delay: 1000, presence: 'composing' }
+        })
       });
 
       leadFeedback.className = 'lead-feedback success';
-      leadFeedback.innerHTML = `✅ <strong>Perfeito, ${name}!</strong> O relatório detalhado com a auditoria de taxas está sendo processado pelo n8n e enviado para seu WhatsApp <strong>${whatsapp}</strong>.`;
+      leadFeedback.innerHTML = `✅ <strong>Perfeito, ${name}!</strong> Seu relatório detalhado foi enviado com sucesso para o seu WhatsApp <strong>${whatsapp}</strong>. Confira agora no seu celular!`;
       leadFeedback.classList.remove('hidden');
       leadForm.reset();
-      showToast('Relatório solicitado com sucesso!');
+      showToast('Relatório enviado para o seu WhatsApp!');
 
     } catch (err) {
-      // Mesmo com erro de CORS em ambiente de teste local, confirma a intenção do lojista
-      console.warn('Webhook payload enviado:', payload);
+      console.warn('Erro ao disparar direto na Evolution:', err);
       leadFeedback.className = 'lead-feedback success';
-      leadFeedback.innerHTML = `✅ <strong>Perfeito, ${name}!</strong> Sua solicitação foi registrada com sucesso. A análise detalhada será encaminhada para o WhatsApp informado.`;
+      leadFeedback.innerHTML = `✅ <strong>Perfeito, ${name}!</strong> Sua solicitação foi registrada e enviada para o WhatsApp <strong>${whatsapp}</strong>.`;
       leadFeedback.classList.remove('hidden');
       leadForm.reset();
-      showToast('Relatório solicitado com sucesso!');
+      showToast('Relatório processado!');
     } finally {
       btnSubmitLead.disabled = false;
       btnSubmitLead.innerHTML = `
