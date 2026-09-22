@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estúdio de Vídeo Promocional | Auditor Silencioso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: #0f141c;
+      --border: #1e2638;
+      --primary: #10b981;
+      --primary-glow: rgba(16, 185, 129, 0.35);
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #151d2f 0%, var(--bg) 75%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+      max-width: 800px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 999px;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #10b981, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .main-container {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      max-width: 1100px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Video Canvas Frame */
+    .video-wrapper {
+      position: relative;
+      width: 360px;
+      height: 640px;
+      background: #000;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px var(--primary-glow);
+      border: 3px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    canvas#videoCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .timeline-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      width: 100%;
+    }
+
+    .timeline-progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #10b981, #38bdf8);
+      transition: width 0.05s linear;
+    }
+
+    /* Side Panel Controls */
+    .controls-panel {
+      flex: 1;
+      min-width: 320px;
+      max-width: 480px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .panel-title {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .time-indicator {
+      font-family: monospace;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: #38bdf8;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    }
+
+    .btn-record {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    }
+    .btn-record:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+    }
+
+    .btn-record.recording {
+      animation: pulseRecord 1s infinite alternate;
+      background: #b91c1c;
+    }
+
+    @keyframes pulseRecord {
+      0% { opacity: 0.8; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1.02); }
+    }
+
+    .btn-secondary {
+      background: #1e2638;
+      color: var(--text);
+    }
+    .btn-secondary:hover {
+      background: #28334b;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-row .btn {
+      flex: 1;
+    }
+
+    .info-box {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+
+    .info-box strong {
+      color: var(--primary);
+    }
+
+    .scenes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .scene-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      font-size: 13px;
+      border-left: 3px solid transparent;
+      cursor: pointer;
+    }
+
+    .scene-item.active {
+      border-left-color: var(--primary);
+      background: rgba(16, 185, 129, 0.1);
+      font-weight: 700;
+    }
+
+    .scene-item span.sec {
+      font-family: monospace;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .status-toast {
+      padding: 10px 14px;
+      background: #1e293b;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #38bdf8;
+      text-align: center;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">🛡️ Marketing & Conversão</div>
+    <h1>Estúdio de Vídeo Promocional <span>Auditor Silencioso</span></h1>
+    <p class="subtitle">Gere vídeos verticais (9:16) com alta taxa de conversão para WhatsApp Status, Reels e TikTok.</p>
+  </header>
+
+  <div class="main-container">
+    <!-- Video Player Preview -->
+    <div class="video-wrapper">
+      <canvas id="videoCanvas" width="720" height="1280"></canvas>
+      <div class="timeline-bar">
+        <div class="timeline-progress" id="progressBar"></div>
+      </div>
+    </div>
+
+    <!-- Controls & Actions -->
+    <div class="controls-panel">
+      <div class="panel-title">
+        <span>Controles do Vídeo</span>
+        <span class="time-indicator" id="timeDisplay">00:00 / 00:18</span>
+      </div>
+
+      <div class="status-toast" id="statusToast">Preparando gravação...</div>
+
+      <div class="btn-group">
+        <div class="btn-row">
+          <button class="btn btn-primary" id="btnPlayPause">▶️ Assistir Prévia</button>
+          <button class="btn btn-secondary" id="btnRestart">🔄 Início</button>
+        </div>
+
+        <button class="btn btn-record" id="btnRecord">
+          🎥 Gravar e Baixar Vídeo (.webm)
+        </button>
+
+        <a class="btn btn-secondary" href="story-sentinela.jpg" download="story-sentinela.jpg">
+          🖼️ Baixar Banner Estático (9:16 HD)
+        </a>
+
+        <a class="btn btn-secondary" href="auditor.html" target="_blank">
+          🌐 Abrir Landing Page do Auditor
+        </a>
+      </div>
+
+      <div class="info-box">
+        <strong>💡 Como usar este vídeo:</strong>
+        <ul style="margin-left: 18px; margin-top: 6px;">
+          <li>Clique em <strong>"Gravar e Baixar Vídeo"</strong> para salvar o arquivo pronto para envio.</li>
+          <li>Compartilhe no <strong>WhatsApp Status</strong> ou envie direto aos clientes de dropshipping/lojas.</li>
+          <li>Adicione sua chave ou link da calculadora na legenda: <em>"Apenas R$ 3,23 por dia. Teste grátis por 7 dias!"</em></li>
+        </ul>
+      </div>
+
+      <div class="scenes-list">
+        <div class="panel-title" style="font-size: 14px; margin-bottom: 4px;">Cenas do Roteiro (18s):</div>
+        <div class="scene-item" id="sceneItem1" onclick="jumpTo(0)">
+          <span>1. O Gancho (Alerta de Vendas Perdidas)</span>
+          <span class="sec">0s - 3.5s</span>
+        </div>
+        <div class="scene-item" id="sceneItem2" onclick="jumpTo(3.5)">
+          <span>2. A Dor (Tráfego caro e recusa oculta)</span>
+          <span class="sec">3.5s - 7.5s</span>
+        </div>
+        <div class="scene-item" id="sceneItem3" onclick="jumpTo(7.5)">
+          <span>3. A Solução (Sentinela + Alerta WhatsApp)</span>
+          <span class="sec">7.5s - 11.5s</span>
+        </div>
+        <div class="scene-item" id="sceneItem4" onclick="jumpTo(11.5)">
+          <span>4. A Oferta (Apenas R$ 3,23/dia)</span>
+          <span class="sec">11.5s - 15.0s</span>
+        </div>
+        <div class="scene-item" id="sceneItem5" onclick="jumpTo(15)">
+          <span>5. O Chamado (Teste 7 Dias Grátis)</span>
+          <span class="sec">15s - 18s</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('videoCanvas');
+    const ctx = canvas.getContext('2d');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const progressBar = document.getElementById('progressBar');
+    const btnPlayPause = document.getElementById('btnPlayPause');
+    const btnRestart = document.getElementById('btnRestart');
+    const btnRecord = document.getElementById('btnRecord');
+    const statusToast = document.getElementById('statusToast');
+
+    const TOTAL_DURATION = 18.0; // Seconds
+    let currentTime = 0;
+    let isPlaying = false;
+    let isRecording = false;
+    let lastTimestamp = 0;
+    let animationFrameId = null;
+
+    // Web Audio Synthesizer for clean audio without external files
+    let audioCtx = null;
+    let audioDest = null;
+    let mediaRecorder = null;
+    let recordedChunks = [];
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        audioDest = audioCtx.createMediaStreamDestination();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    // Play subtle synthesized sound effects at key milestones
+    let playedSounds = {};
+    function playBeep(freq, type = 'sine', duration = 0.15, gainVal = 0.2) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        if (audioDest) gain.connect(audioDest);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        console.warn('Audio error', e);
+      }
+    }
+
+    function playWhatsAppChime() {
+      // Classic incoming notification bell chords
+      playBeep(880, 'sine', 0.25, 0.3); // A5
+      setTimeout(() => playBeep(1174, 'sine', 0.35, 0.35), 90); // D6
+      setTimeout(() => playBeep(1760, 'sine', 0.45, 0.3), 180); // A6
+    }
+
+    function playAlertWhoosh() {
+      playBeep(220, 'sawtooth', 0.3, 0.2);
+    }
+
+    function playSuccessChime() {
+      playBeep(523.25, 'triangle', 0.2, 0.25); // C5
+      setTimeout(() => playBeep(659.25, 'triangle', 0.2, 0.25), 100); // E5
+      setTimeout(() => playBeep(783.99, 'triangle', 0.35, 0.3), 200); // G5
+      setTimeout(() => playBeep(1046.50, 'sine', 0.5, 0.35), 300); // C6
+    }
+
+    function checkSoundTriggers(t) {
+      if (t >= 0.1 && !playedSounds['s1']) {
+        playedSounds['s1'] = true;
+        playAlertWhoosh();
+      }
+      if (t >= 7.8 && !playedSounds['s3']) {
+        playedSounds['s3'] = true;
+        playWhatsAppChime();
+      }
+      if (t >= 15.1 && !playedSounds['s5']) {
+        playedSounds['s5'] = true;
+        playSuccessChime();
+      }
+    }
+
+    // --- DRAWING FUNCTIONS (Canvas 720 x 1280) ---
+
+    function drawBackground(t) {
+      // Deep tech dark background with cyber grid & subtle particle movement
+      ctx.fillStyle = '#080b11';
+      ctx.fillRect(0, 0, 720, 1280);
+
+      // Radial glowing ambient light
+      const grad = ctx.createRadialGradient(360, 640, 50, 360, 640, 650);
+      if (t < 3.5) {
+        grad.addColorStop(0, 'rgba(239, 68, 68, 0.18)'); // Red alert
+      } else if (t < 7.5) {
+        grad.addColorStop(0, 'rgba(245, 158, 11, 0.14)'); // Warning orange
+      } else {
+        grad.addColorStop(0, 'rgba(16, 185, 129, 0.18)'); // Emerald green
+      }
+      grad.addColorStop(1, 'rgba(8, 11, 17, 0.95)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 720, 1280);
+
+      // Cyber Grid lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+      ctx.lineWidth = 1;
+      const offset = (t * 20) % 60;
+      for (let y = offset; y < 1280; y += 60) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(720, y);
+        ctx.stroke();
+      }
+      for (let x = 0; x < 720; x += 60) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 1280);
+        ctx.stroke();
+      }
+    }
+
+    // Scene 1: 0s to 3.5s - The Hook
+    function drawScene1(t) {
+      const progress = t / 3.5;
+      
+      // Urgent top badge
+      const pulse = 1 + Math.sin(t * 8) * 0.05;
+      ctx.save();
+      ctx.translate(360, 220);
+      ctx.scale(pulse, pulse);
+      
+      ctx.fillStyle = 'rgba(239, 68, 68, 0.2)';
+      ctx.strokeStyle = '#ef4444';
+      ctx.lineWidth = 2;
+      roundRect(ctx, -160, -25, 320, 50, 25, true, true);
+
+      ctx.fillStyle = '#fca5a5';
+      ctx.font = '700 20px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('⚠️ ATENÇÃO E-COMMERCE', 0, 0);
+      ctx.restore();
+
+      // Big Warning Icon
+      ctx.save();
+      ctx.font = '100px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const iconPulse = 1 + Math.sin(t * 6) * 0.08;
+      ctx.translate(360, 430);
+      ctx.scale(iconPulse, iconPulse);
+      ctx.fillText('💳❌', 0, 0);
+      ctx.restore();
+
+      // Headline
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 44px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.fillText('SEU CHECKOUT PODE', 360, 620);
+      
+      ctx.fillStyle = '#ef4444';
+      ctx.font = '900 48px "Plus Jakarta Sans"';
+      ctx.fillText('ESTAR RECUSANDO', 360, 680);
+      ctx.fillText('VENDAS AGORA!', 360, 740);
+
+      // Subtitle
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '500 24px "Inter"';
+      ctx.fillText('E você nem fica sabendo...', 360, 830);
+    }
+
+    // Scene 2: 3.5s to 7.5s - The Problem
+    function drawScene2(t) {
+      const sceneT = t - 3.5;
+      
+      // Top badge
+      ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 2;
+      roundRect(ctx, 200, 180, 320, 46, 23, true, true);
+      ctx.fillStyle = '#fcd34d';
+      ctx.font = '700 18px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.fillText('O PROBLEMA SILENCIOSO', 360, 209);
+
+      // Card 1: Ads Investment
+      const card1Y = 320 + Math.min(sceneT * 60, 20);
+      ctx.fillStyle = '#0f172a';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.lineWidth = 1.5;
+      roundRect(ctx, 80, card1Y, 560, 130, 20, true, true);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '600 20px "Plus Jakarta Sans"';
+      ctx.textAlign = 'left';
+      ctx.fillText('📢 Você gasta rios em Tráfego Pago:', 110, card1Y + 45);
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '800 36px "Plus Jakarta Sans"';
+      ctx.fillText('R$ 5.480,00', 110, card1Y + 95);
+
+      // Card 2: Rejection Spike
+      const card2Y = card1Y + 160;
+      ctx.fillStyle = 'rgba(239, 68, 68, 0.1)';
+      ctx.strokeStyle = '#ef4444';
+      ctx.lineWidth = 2;
+      roundRect(ctx, 80, card2Y, 560, 170, 20, true, true);
+
+      ctx.fillStyle = '#fca5a5';
+      ctx.font = '700 22px "Plus Jakarta Sans"';
+      ctx.fillText('⚠️ Mas o Gateway entra em instabilidade...', 110, card2Y + 45);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '600 20px "Inter"';
+      ctx.fillText('Taxa de recusa oculta no cartão:', 110, card2Y + 90);
+
+      ctx.fillStyle = '#ef4444';
+      ctx.font = '900 42px "Plus Jakarta Sans"';
+      ctx.fillText('42% DOS PAGAMENTOS BARRADOS', 110, card2Y + 140);
+
+      // Bottom Callout
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = '600 26px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.fillText('O cliente desiste e vai pro concorrente.', 360, 840);
+    }
+
+    // Scene 3: 7.5s to 11.5s - The Solution (Sentinela)
+    function drawScene3(t) {
+      const sceneT = t - 7.5;
+      
+      // Badge Sentinela
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
+      ctx.strokeStyle = '#10b981';
+      ctx.lineWidth = 2;
+      roundRect(ctx, 220, 160, 280, 46, 23, true, true);
+      ctx.fillStyle = '#34d399';
+      ctx.font = '800 18px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.fillText('🛡️ A SOLUÇÃO DEFINITIVA', 360, 189);
+
+      // Title
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 42px "Plus Jakarta Sans"';
+      ctx.fillText('AUDITOR SILENCIOSO', 360, 270);
+      
+      ctx.fillStyle = '#10b981';
+      ctx.font = '700 22px "Plus Jakarta Sans"';
+      ctx.fillText('Monitoramento 24h em Tempo Real', 360, 310);
+
+      // Realistic Phone Mockup / WhatsApp Notification Card
+      const notifY = 400;
+      const slide = Math.min(sceneT * 5, 1); // smooth slide-in
+      ctx.save();
+      ctx.translate(0, (1 - slide) * 80);
+      ctx.globalAlpha = slide;
+
+      // WhatsApp Bubble Card
+      ctx.fillStyle = '#111b21';
+      ctx.strokeStyle = '#25d366';
+      ctx.lineWidth = 2.5;
+      roundRect(ctx, 60, notifY, 600, 260, 24, true, true);
+
+      // Notification Header
+      ctx.fillStyle = '#25d366';
+      ctx.font = '800 20px "Plus Jakarta Sans"';
+      ctx.textAlign = 'left';
+      ctx.fillText('💬 WhatsApp • Sentinela 24h', 95, notifY + 45);
+
+      ctx.fillStyle = '#8696a0';
+      ctx.font = '500 16px "Inter"';
+      ctx.textAlign = 'right';
+      ctx.fillText('Agora mesmo', 630, notifY + 45);
+
+      // Alert Title Inside WA
+      ctx.fillStyle = '#ef4444';
+      ctx.font = '800 22px "Plus Jakarta Sans"';
+      ctx.textAlign = 'left';
+      ctx.fillText('🚨 [ALERTA SENTINELA] Taxa de Recusa!', 95, notifY + 95);
+
+      // Message Body
+      ctx.fillStyle = '#e9edef';
+      ctx.font = '500 18px "Inter"';
+      ctx.fillText('Atenção: 4 tentativas seguidas de cartão', 95, notifY + 135);
+      ctx.fillText('foram recusadas nos últimos 10 minutos.', 95, notifY + 165);
+
+      ctx.fillStyle = '#00a884';
+      ctx.font = '700 18px "Plus Jakarta Sans"';
+      ctx.fillText('👉 Verifique sua adquirente antes de perder mais vendas!', 95, notifY + 215);
+
+      ctx.restore();
+
+      // Features below
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '600 22px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.fillText('⚡ Você é avisado no WhatsApp antes de ter prejuízo!', 360, 780);
+    }
+
+    // Scene 4: 11.5s to 15.0s - The Price (R$ 3,23/dia)
+    function drawScene4(t) {
+      const sceneT = t - 11.5;
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '700 24px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.fillText('Quanto custa essa paz de espírito?', 360, 220);
+
+      // Huge Price Box
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.12)';
+      ctx.strokeStyle = '#10b981';
+      ctx.lineWidth = 3;
+      roundRect(ctx, 80, 290, 560, 280, 28, true, true);
+
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '700 22px "Plus Jakarta Sans"';
+      ctx.fillText('MENOS QUE UM CAFÉ POR DIA', 360, 350);
+
+      // Glowing Price
+      ctx.fillStyle = '#34d399';
+      ctx.font = '900 68px "Plus Jakarta Sans"';
+      ctx.fillText('R$ 3,23', 360, 440);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '700 26px "Plus Jakarta Sans"';
+      ctx.fillText('POR DIA (R$ 97/mês)', 360, 510);
+
+      // Bullet points
+      const bullets = [
+        '🛡️ Sentinela de Recusa no WhatsApp',
+        '📊 Resumo Diário Automático às 23:59',
+        '💳 Pagamento seguro no Pix ou Cartão',
+        '🚫 Sem fidelidade — cancele quando quiser'
+      ];
+
+      ctx.textAlign = 'left';
+      ctx.font = '600 22px "Inter"';
+      ctx.fillStyle = '#f1f5f9';
+      bullets.forEach((b, i) => {
+        ctx.fillText(b, 110, 660 + (i * 48));
+      });
+    }
+
+    // Scene 5: 15.0s to 18.0s - Call to Action
+    function drawScene5(t) {
+      const sceneT = t - 15.0;
+      const pulse = 1 + Math.sin(sceneT * 6) * 0.04;
+
+      // Top Icon
+      ctx.font = '80px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('🛡️✨', 360, 240);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 46px "Plus Jakarta Sans"';
+      ctx.fillText('TESTE 7 DIAS GRÁTIS', 360, 350);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '600 22px "Inter"';
+      ctx.fillText('Proteja seu faturamento a partir de hoje!', 360, 410);
+
+      // Pulsing CTA Button
+      ctx.save();
+      ctx.translate(360, 560);
+      ctx.scale(pulse, pulse);
+
+      const btnGrad = ctx.createLinearGradient(-260, 0, 260, 0);
+      btnGrad.addColorStop(0, '#10b981');
+      btnGrad.addColorStop(1, '#059669');
+      ctx.fillStyle = btnGrad;
+      roundRect(ctx, -260, -45, 520, 90, 45, true, false);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 28px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('👉 TOQUE NO LINK ABAIXO', 0, 0);
+      ctx.restore();
+
+      // Footer prompt
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '700 22px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.fillText('Ou responda este status para ativar!', 360, 740);
+
+      ctx.fillStyle = '#64748b';
+      ctx.font = '500 18px "Inter"';
+      ctx.fillText('auditorsilencioso.com.br', 360, 810);
+    }
+
+    // Utility: Rounded Rect
+    function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      if (fill) ctx.fill();
+      if (stroke) ctx.stroke();
+    }
+
+    // Render Master Frame
+    function renderFrame(t) {
+      drawBackground(t);
+
+      if (t < 3.5) {
+        drawScene1(t);
+        setActiveScene(1);
+      } else if (t < 7.5) {
+        drawScene2(t);
+        setActiveScene(2);
+      } else if (t < 11.5) {
+        drawScene3(t);
+        setActiveScene(3);
+      } else if (t < 15.0) {
+        drawScene4(t);
+        setActiveScene(4);
+      } else {
+        drawScene5(t);
+        setActiveScene(5);
+      }
+
+      checkSoundTriggers(t);
+
+      // Update UI Progress
+      const pct = Math.min((t / TOTAL_DURATION) * 100, 100);
+      progressBar.style.width = pct + '%';
+      const secStr = Math.floor(t).toString().padStart(2, '0');
+      timeDisplay.textContent = `00:${secStr} / 00:18`;
+    }
+
+    function setActiveScene(n) {
+      for (let i = 1; i <= 5; i++) {
+        const el = document.getElementById('sceneItem' + i);
+        if (el) {
+          if (i === n) el.classList.add('active');
+          else el.classList.remove('active');
+        }
+      }
+    }
+
+    function jumpTo(sec) {
+      currentTime = sec;
+      renderFrame(currentTime);
+    }
+
+    // Animation Loop
+    function loop(timestamp) {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const delta = (timestamp - lastTimestamp) / 1000;
+      lastTimestamp = timestamp;
+
+      if (isPlaying) {
+        currentTime += delta;
+        if (currentTime >= TOTAL_DURATION) {
+          currentTime = 0;
+          playedSounds = {};
+          if (isRecording) {
+            stopRecording();
+          }
+        }
+        renderFrame(currentTime);
+        animationFrameId = requestAnimationFrame(loop);
+      }
+    }
+
+    function startPlayback() {
+      initAudio();
+      isPlaying = true;
+      lastTimestamp = 0;
+      btnPlayPause.textContent = '⏸️ Pausar';
+      animationFrameId = requestAnimationFrame(loop);
+    }
+
+    function pausePlayback() {
+      isPlaying = false;
+      btnPlayPause.textContent = '▶️ Assistir Prévia';
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    }
+
+    btnPlayPause.addEventListener('click', () => {
+      if (isPlaying) pausePlayback();
+      else startPlayback();
+    });
+
+    btnRestart.addEventListener('click', () => {
+      pausePlayback();
+      currentTime = 0;
+      playedSounds = {};
+      renderFrame(0);
+    });
+
+    // --- RECORDING & EXPORT ENGINE (Canvas + Audio -> WebM Video) ---
+    async function startRecording() {
+      initAudio();
+      pausePlayback();
+      currentTime = 0;
+      playedSounds = {};
+      renderFrame(0);
+
+      statusToast.style.display = 'block';
+      statusToast.textContent = '🎥 Gravando vídeo em alta qualidade... Aguarde os 18 segundos.';
+      btnRecord.classList.add('recording');
+      btnRecord.textContent = '⏺️ Gravando... (Aguarde)';
+      btnRecord.disabled = true;
+
+      // Capture Canvas 30 FPS Stream
+      const canvasStream = canvas.captureStream(30);
+
+      // Combine with audio track from Web Audio
+      if (audioDest && audioDest.stream.getAudioTracks().length > 0) {
+        const audioTrack = audioDest.stream.getAudioTracks()[0];
+        canvasStream.addTrack(audioTrack);
+      }
+
+      // Check supported MIME type
+      let mimeType = 'video/webm;codecs=vp9';
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
+        mimeType = 'video/webm;codecs=vp8';
+        if (!MediaRecorder.isTypeSupported(mimeType)) {
+          mimeType = 'video/webm';
+        }
+      }
+
+      recordedChunks = [];
+      try {
+        mediaRecorder = new MediaRecorder(canvasStream, {
+          mimeType: mimeType,
+          videoBitsPerSecond: 4000000 // 4 Mbps high clarity
+        });
+
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data && e.data.size > 0) {
+            recordedChunks.push(e.data);
+          }
+        };
+
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'video/webm' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+          a.download = 'video-promocional-auditor-silencioso.webm';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+          }, 100);
+
+          statusToast.textContent = '✅ Vídeo gerado com sucesso! Download iniciado.';
+          btnRecord.classList.remove('recording');
+          btnRecord.textContent = '🎥 Gravar e Baixar Vídeo (.webm)';
+          btnRecord.disabled = false;
+          isRecording = false;
+        };
+
+        isRecording = true;
+        mediaRecorder.start();
+        startPlayback();
+
+      } catch (err) {
+        console.error('Recording error:', err);
+        statusToast.textContent = 'Erro ao iniciar gravação: ' + err.message;
+        btnRecord.classList.remove('recording');
+        btnRecord.textContent = '🎥 Gravar e Baixar Vídeo (.webm)';
+        btnRecord.disabled = false;
+        isRecording = false;
+      }
+    }
+
+    function stopRecording() {
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+      }
+      pausePlayback();
+    }
+
+    btnRecord.addEventListener('click', () => {
+      startRecording();
+    });
+
+    // Initial render
+    renderFrame(0);
+  </script>
+</body>
+</html>
