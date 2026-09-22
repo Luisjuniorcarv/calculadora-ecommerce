@@ -482,7 +482,26 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(payload)
       }).catch(err => console.warn('n8n webhook:', err));
 
-      // 2. Dispara diretamente pela Evolution API para garantir entrega instantânea!
+      // 2. Resolução inteligente de número no WhatsApp (ajusta 8 ou 9 dígitos no Brasil)
+      let targetNumber = fullPhone;
+      try {
+        const checkRes = await fetch('https://drophub-evolution-wa.dvzzxm.easypanel.host/chat/whatsappNumbers/auditor', {
+          method: 'POST',
+          headers: {
+            'apikey': '429683C4C977415CAAFCCE10F7D57E11',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ numbers: [fullPhone] })
+        });
+        const checkData = await checkRes.json();
+        if (Array.isArray(checkData) && checkData.length > 0 && checkData[0].exists) {
+          targetNumber = checkData[0].number || checkData[0].jid || fullPhone;
+        }
+      } catch (checkErr) {
+        console.warn('Check number fallback:', checkErr);
+      }
+
+      // 3. Dispara diretamente pela Evolution API para garantir entrega instantânea!
       await fetch('https://drophub-evolution-wa.dvzzxm.easypanel.host/message/sendText/auditor', {
         method: 'POST',
         headers: {
@@ -490,14 +509,14 @@ document.addEventListener('DOMContentLoaded', () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          number: fullPhone,
+          number: targetNumber,
           text: reportMsg,
           options: { delay: 1000, presence: 'composing' }
         })
       });
 
       leadFeedback.className = 'lead-feedback success';
-      leadFeedback.innerHTML = `✅ <strong>Perfeito, ${name}!</strong> Seu relatório detalhado foi enviado com sucesso para o seu WhatsApp <strong>${whatsapp}</strong>. Confira agora no seu celular!`;
+      leadFeedback.innerHTML = `✅ <strong>Perfeito, ${name}!</strong> Seu relatório detalhado foi enviado com sucesso para o WhatsApp <strong>${whatsapp}</strong>. Confira agora no seu celular!`;
       leadFeedback.classList.remove('hidden');
       leadForm.reset();
       showToast('Relatório enviado para o seu WhatsApp!');
