@@ -69,6 +69,30 @@ class Storage {
       this.seedInitialDemoData();
       this.saveToDisk();
     }
+
+    // 3. Tenant DropHub (Leads Instagram)
+    if (!this.tenants.has('drophub')) {
+      const dropHubTenant = createTenantConfig({
+        id: 'drophub',
+        name: 'DropHub (Leads Instagram)',
+        slug: 'drophub',
+        operationMode: OPERATION_MODES.LEADS,
+        segment: 'DropHub Store & Instagram Ads',
+        whatsappDestination: '5511999999999',
+        notifyWhatsapp: true,
+        leadsSettings: {
+          maxCpl: 25.00,
+          maxFirstResponseMinutes: 15,
+          maxStageStagnationHours: 24,
+          minQualificationRate: 30,
+          minScheduleRate: 40,
+          minShowRate: 75
+        }
+      });
+      this.saveTenant(dropHubTenant);
+      this.seedDropHubData();
+      this.saveToDisk();
+    }
   }
 
   // Gera dados simulados realistas para os tenants padrão
@@ -232,6 +256,140 @@ class Storage {
       historicalQualificationRate: 48.0,
       historicalScheduleRate: 52.0,
       historicalShowRate: 82.0
+    });
+  }
+
+  // Gera dados simulados realistas para o DropHub (Leads Instagram)
+  seedDropHubData() {
+    const tenantId = 'drophub';
+    const now = Date.now();
+    const oneHour = 60 * 60 * 1000;
+
+    // Leads do Instagram em diferentes etapas do funil
+    const igLeads = [
+      {
+        id: 'ig_lead_01',
+        tenantId,
+        name: 'Juliana Paes (Instagram Reels)',
+        phone: '11987654321',
+        email: 'juliana.paes@gmail.com',
+        source: 'instagram',
+        campaignId: 'camp-ig-reels-lucro',
+        campaignName: 'Instagram Reels - Calculadora & Ferramentas',
+        currentStage: 'contacted',
+        status: 'active',
+        createdAt: now - 45 * 60 * 1000,
+        firstContactAt: now - 35 * 60 * 1000,
+        stageUpdatedAt: now - 35 * 60 * 1000
+      },
+      {
+        id: 'ig_lead_02',
+        tenantId,
+        name: 'Rafael Silveira (Instagram Direct)',
+        phone: '11991234567',
+        email: 'rafael.silveira@outlook.com',
+        source: 'instagram',
+        campaignId: 'camp-ig-stories-bio',
+        campaignName: 'Stories Instagram - Link Bio',
+        currentStage: 'qualified',
+        status: 'active',
+        createdAt: now - 2 * oneHour,
+        firstContactAt: now - 110 * 60 * 1000,
+        qualifiedAt: now - 90 * 60 * 1000,
+        stageUpdatedAt: now - 90 * 60 * 1000
+      },
+      {
+        id: 'ig_lead_03',
+        tenantId,
+        name: 'Lucas Martins (Instagram Lead Ads)',
+        phone: '21981112233',
+        email: 'lucas.martins@empresa.com.br',
+        source: 'instagram',
+        campaignId: 'camp-ig-leadform',
+        campaignName: 'Formulário Nativo Instagram Ads',
+        currentStage: 'scheduled',
+        status: 'active',
+        createdAt: now - 4 * oneHour,
+        firstContactAt: now - 230 * 60 * 1000,
+        qualifiedAt: now - 200 * 60 * 1000,
+        scheduledAt: now - 180 * 60 * 1000,
+        stageUpdatedAt: now - 180 * 60 * 1000
+      },
+      {
+        id: 'ig_lead_04',
+        tenantId,
+        name: 'Beatriz Vasconcelos',
+        phone: '31976543210',
+        email: 'beatriz.vasc@hotmail.com',
+        source: 'instagram',
+        campaignId: 'camp-ig-reels-lucro',
+        campaignName: 'Instagram Reels - Calculadora & Ferramentas',
+        currentStage: 'won',
+        status: 'won',
+        dealValue: 997.00,
+        createdAt: now - 6 * oneHour,
+        firstContactAt: now - 350 * 60 * 1000,
+        qualifiedAt: now - 300 * 60 * 1000,
+        scheduledAt: now - 260 * 60 * 1000,
+        attendedAt: now - 200 * 60 * 1000,
+        wonAt: now - 120 * 60 * 1000,
+        stageUpdatedAt: now - 120 * 60 * 1000
+      }
+    ];
+
+    for (let i = 5; i <= 18; i++) {
+      igLeads.push({
+        id: 'ig_lead_' + i,
+        tenantId,
+        name: 'Seguidor Instagram ' + i,
+        phone: '119822233' + (i < 10 ? '0' + i : i),
+        source: 'instagram',
+        campaignId: 'camp-ig-reels-lucro',
+        campaignName: 'Instagram Reels - Calculadora & Ferramentas',
+        currentStage: i % 4 === 0 ? 'won' : (i % 2 === 0 ? 'qualified' : 'contacted'),
+        status: i % 4 === 0 ? 'won' : 'active',
+        dealValue: i % 4 === 0 ? 997.00 : 0,
+        createdAt: now - (i * 3 * oneHour),
+        firstContactAt: now - (i * 3 * oneHour) + 7 * 60 * 1000,
+        stageUpdatedAt: now - (i * 3 * oneHour)
+      });
+    }
+
+    this.leads.set(tenantId, igLeads);
+
+    // Tráfego Instagram
+    this.traffic.set(tenantId, [
+      {
+        id: 'trf_ig_1',
+        tenantId,
+        source: 'instagram',
+        campaignId: 'camp-ig-reels-lucro',
+        campaignName: 'Instagram Reels - Calculadora & Ferramentas',
+        spend: 260.00,
+        clicks: 340,
+        sessions: 310,
+        timestamp: now
+      },
+      {
+        id: 'trf_ig_2',
+        tenantId,
+        source: 'instagram',
+        campaignId: 'camp-ig-stories-bio',
+        campaignName: 'Stories Instagram - Link Bio',
+        spend: 110.00,
+        clicks: 145,
+        sessions: 135,
+        timestamp: now
+      }
+    ]);
+
+    // Baseline DropHub
+    this.baselines.set(tenantId, {
+      historicalCpl: 15.20,
+      historicalDailyLeads: 18,
+      historicalQualificationRate: 40.0,
+      historicalScheduleRate: 45.0,
+      historicalShowRate: 80.0
     });
   }
 

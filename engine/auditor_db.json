@@ -8,7 +8,7 @@
         "slug": "loja-demo",
         "operationMode": "ECOMMERCE",
         "segment": "Moda e Acessórios / Dropshipping",
-        "webhookToken": "sec_g42uy7z3q3g",
+        "webhookToken": "sec_e5gfku4hlyp",
         "whatsappDestination": "5511999999999",
         "notifyWhatsapp": true,
         "notifyWebhook": null,
@@ -82,8 +82,8 @@
           "minStockDaysThreshold": 3,
           "maxRefundRatePercent": 5
         },
-        "createdAt": 1790195923999,
-        "updatedAt": 1790195923999
+        "createdAt": 1790197198427,
+        "updatedAt": 1790197198427
       }
     ],
     [
@@ -94,7 +94,7 @@
         "slug": "clinica-demo",
         "operationMode": "LEADS",
         "segment": "Clínica Odontológica / Estética",
-        "webhookToken": "sec_vddiue8ddf9",
+        "webhookToken": "sec_wiff0fwv5ap",
         "whatsappDestination": "5511988888888",
         "notifyWhatsapp": true,
         "notifyWebhook": null,
@@ -168,19 +168,105 @@
           "minStockDaysThreshold": 3,
           "maxRefundRatePercent": 5
         },
-        "createdAt": 1790195924001,
-        "updatedAt": 1790195924001
+        "createdAt": 1790197198428,
+        "updatedAt": 1790197198428
       }
     ],
     [
-      "tenant-a",
+      "drophub",
       {
-        "id": "tenant-a",
+        "id": "drophub",
+        "name": "DropHub (Leads Instagram)",
+        "slug": "drophub",
+        "operationMode": "LEADS",
+        "segment": "DropHub Store & Instagram Ads",
+        "webhookToken": "sec_keeqirtf83",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 25,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790197198431,
+        "updatedAt": 1790197198431
+      }
+    ],
+    [
+      "tenant-iso-a-1790197385252",
+      {
+        "id": "tenant-iso-a-1790197385252",
         "name": "Empresa A",
         "slug": "minha-operacao",
         "operationMode": "ECOMMERCE",
         "segment": "Dropshipping / Varejo",
-        "webhookToken": "sec_vl3p5m4x4yn",
+        "webhookToken": "sec_h7vcfjb0zom",
         "whatsappDestination": "5511999999999",
         "notifyWhatsapp": true,
         "notifyWebhook": null,
@@ -254,19 +340,19 @@
           "minStockDaysThreshold": 3,
           "maxRefundRatePercent": 5
         },
-        "createdAt": 1790195963345,
-        "updatedAt": 1790195963346
+        "createdAt": 1790197385252,
+        "updatedAt": 1790197385253
       }
     ],
     [
-      "tenant-b",
+      "tenant-iso-b-1790197385252",
       {
-        "id": "tenant-b",
+        "id": "tenant-iso-b-1790197385252",
         "name": "Empresa B",
         "slug": "minha-operacao",
         "operationMode": "LEADS",
         "segment": "Clínica / Serviços",
-        "webhookToken": "sec_oc8zz0dd9ma",
+        "webhookToken": "sec_4o8elkrcjr",
         "whatsappDestination": "5511999999999",
         "notifyWhatsapp": true,
         "notifyWebhook": null,
@@ -340,19 +426,19 @@
           "minStockDaysThreshold": 3,
           "maxRefundRatePercent": 5
         },
-        "createdAt": 1790195963346,
-        "updatedAt": 1790195963347
+        "createdAt": 1790197385253,
+        "updatedAt": 1790197385262
       }
     ],
     [
-      "tenant-cooldown",
+      "tenant-cool-1790197385275",
       {
-        "id": "tenant-cooldown",
+        "id": "tenant-cool-1790197385275",
         "name": "Loja Cooldown Teste",
         "slug": "minha-operacao",
         "operationMode": "ECOMMERCE",
         "segment": "Dropshipping / Varejo",
-        "webhookToken": "sec_m0mlyxiva3",
+        "webhookToken": "sec_usx9n9ai96r",
         "whatsappDestination": "5511999999999",
         "notifyWhatsapp": true,
         "notifyWebhook": null,
@@ -426,277 +512,19 @@
           "minStockDaysThreshold": 3,
           "maxRefundRatePercent": 5
         },
-        "createdAt": 1790195963362,
-        "updatedAt": 1790195963362
+        "createdAt": 1790197385275,
+        "updatedAt": 1790197385275
       }
     ],
     [
-      "tenant-iso-a-1790195999376",
+      "tenant-heal-1790197386302",
       {
-        "id": "tenant-iso-a-1790195999376",
-        "name": "Empresa A",
-        "slug": "minha-operacao",
-        "operationMode": "ECOMMERCE",
-        "segment": "Dropshipping / Varejo",
-        "webhookToken": "sec_kwrwcelq46p",
-        "whatsappDestination": "5511999999999",
-        "notifyWhatsapp": true,
-        "notifyWebhook": null,
-        "allowedSeverities": [
-          "CRITICAL",
-          "WARNING"
-        ],
-        "leadsSettings": {
-          "funnelStages": [
-            {
-              "id": "traffic",
-              "label": "Tráfego (Cliques)",
-              "isTraffic": true
-            },
-            {
-              "id": "visit",
-              "label": "Visitas na Página",
-              "isTraffic": true
-            },
-            {
-              "id": "lead",
-              "label": "Lead Criado",
-              "isLead": true
-            },
-            {
-              "id": "contacted",
-              "label": "Lead Contactado",
-              "isLead": true
-            },
-            {
-              "id": "qualified",
-              "label": "Lead Qualificado",
-              "isLead": true
-            },
-            {
-              "id": "scheduled",
-              "label": "Agendamento Realizado",
-              "isLead": true
-            },
-            {
-              "id": "attended",
-              "label": "Comparecimento / Reunião",
-              "isLead": true
-            },
-            {
-              "id": "opportunity",
-              "label": "Proposta / Oportunidade",
-              "isLead": true
-            },
-            {
-              "id": "won",
-              "label": "Venda / Contratação Fechada",
-              "isLead": true
-            }
-          ],
-          "maxCpl": 35,
-          "maxFirstResponseMinutes": 15,
-          "maxStageStagnationHours": 24,
-          "minQualificationRate": 30,
-          "minScheduleRate": 40,
-          "minShowRate": 75,
-          "dailyBudget": 300,
-          "minLeadVolumeForAlert": 5
-        },
-        "ecommerceSettings": {
-          "maxRefusalRatePercent": 25,
-          "minRefusalsCount": 3,
-          "maxNoSaleMinutesBusinessHours": 120,
-          "maxAbandonmentRatePercent": 75,
-          "minCartVolumeForAlert": 8,
-          "minStockDaysThreshold": 3,
-          "maxRefundRatePercent": 5
-        },
-        "createdAt": 1790195999376,
-        "updatedAt": 1790195999376
-      }
-    ],
-    [
-      "tenant-iso-b-1790195999376",
-      {
-        "id": "tenant-iso-b-1790195999376",
-        "name": "Empresa B",
-        "slug": "minha-operacao",
-        "operationMode": "LEADS",
-        "segment": "Clínica / Serviços",
-        "webhookToken": "sec_689xvs0cbpr",
-        "whatsappDestination": "5511999999999",
-        "notifyWhatsapp": true,
-        "notifyWebhook": null,
-        "allowedSeverities": [
-          "CRITICAL",
-          "WARNING"
-        ],
-        "leadsSettings": {
-          "funnelStages": [
-            {
-              "id": "traffic",
-              "label": "Tráfego (Cliques)",
-              "isTraffic": true
-            },
-            {
-              "id": "visit",
-              "label": "Visitas na Página",
-              "isTraffic": true
-            },
-            {
-              "id": "lead",
-              "label": "Lead Criado",
-              "isLead": true
-            },
-            {
-              "id": "contacted",
-              "label": "Lead Contactado",
-              "isLead": true
-            },
-            {
-              "id": "qualified",
-              "label": "Lead Qualificado",
-              "isLead": true
-            },
-            {
-              "id": "scheduled",
-              "label": "Agendamento Realizado",
-              "isLead": true
-            },
-            {
-              "id": "attended",
-              "label": "Comparecimento / Reunião",
-              "isLead": true
-            },
-            {
-              "id": "opportunity",
-              "label": "Proposta / Oportunidade",
-              "isLead": true
-            },
-            {
-              "id": "won",
-              "label": "Venda / Contratação Fechada",
-              "isLead": true
-            }
-          ],
-          "maxCpl": 35,
-          "maxFirstResponseMinutes": 15,
-          "maxStageStagnationHours": 24,
-          "minQualificationRate": 30,
-          "minScheduleRate": 40,
-          "minShowRate": 75,
-          "dailyBudget": 300,
-          "minLeadVolumeForAlert": 5
-        },
-        "ecommerceSettings": {
-          "maxRefusalRatePercent": 25,
-          "minRefusalsCount": 3,
-          "maxNoSaleMinutesBusinessHours": 120,
-          "maxAbandonmentRatePercent": 75,
-          "minCartVolumeForAlert": 8,
-          "minStockDaysThreshold": 3,
-          "maxRefundRatePercent": 5
-        },
-        "createdAt": 1790195999376,
-        "updatedAt": 1790195999378
-      }
-    ],
-    [
-      "tenant-cool-1790195999384",
-      {
-        "id": "tenant-cool-1790195999384",
-        "name": "Loja Cooldown Teste",
-        "slug": "minha-operacao",
-        "operationMode": "ECOMMERCE",
-        "segment": "Dropshipping / Varejo",
-        "webhookToken": "sec_6xi90om78ji",
-        "whatsappDestination": "5511999999999",
-        "notifyWhatsapp": true,
-        "notifyWebhook": null,
-        "allowedSeverities": [
-          "CRITICAL",
-          "WARNING"
-        ],
-        "leadsSettings": {
-          "funnelStages": [
-            {
-              "id": "traffic",
-              "label": "Tráfego (Cliques)",
-              "isTraffic": true
-            },
-            {
-              "id": "visit",
-              "label": "Visitas na Página",
-              "isTraffic": true
-            },
-            {
-              "id": "lead",
-              "label": "Lead Criado",
-              "isLead": true
-            },
-            {
-              "id": "contacted",
-              "label": "Lead Contactado",
-              "isLead": true
-            },
-            {
-              "id": "qualified",
-              "label": "Lead Qualificado",
-              "isLead": true
-            },
-            {
-              "id": "scheduled",
-              "label": "Agendamento Realizado",
-              "isLead": true
-            },
-            {
-              "id": "attended",
-              "label": "Comparecimento / Reunião",
-              "isLead": true
-            },
-            {
-              "id": "opportunity",
-              "label": "Proposta / Oportunidade",
-              "isLead": true
-            },
-            {
-              "id": "won",
-              "label": "Venda / Contratação Fechada",
-              "isLead": true
-            }
-          ],
-          "maxCpl": 35,
-          "maxFirstResponseMinutes": 15,
-          "maxStageStagnationHours": 24,
-          "minQualificationRate": 30,
-          "minScheduleRate": 40,
-          "minShowRate": 75,
-          "dailyBudget": 300,
-          "minLeadVolumeForAlert": 5
-        },
-        "ecommerceSettings": {
-          "maxRefusalRatePercent": 25,
-          "minRefusalsCount": 3,
-          "maxNoSaleMinutesBusinessHours": 120,
-          "maxAbandonmentRatePercent": 75,
-          "minCartVolumeForAlert": 8,
-          "minStockDaysThreshold": 3,
-          "maxRefundRatePercent": 5
-        },
-        "createdAt": 1790195999384,
-        "updatedAt": 1790195999384
-      }
-    ],
-    [
-      "tenant-heal-1790196000291",
-      {
-        "id": "tenant-heal-1790196000291",
+        "id": "tenant-heal-1790197386302",
         "name": "Loja Auto-Cura Teste",
         "slug": "minha-operacao",
         "operationMode": "ECOMMERCE",
         "segment": "Dropshipping / Varejo",
-        "webhookToken": "sec_44va2ndl49j",
+        "webhookToken": "sec_piljgjlumb7",
         "whatsappDestination": "5511999999999",
         "notifyWhatsapp": true,
         "notifyWebhook": null,
@@ -770,352 +598,8 @@
           "minStockDaysThreshold": 3,
           "maxRefundRatePercent": 5
         },
-        "createdAt": 1790196000291,
-        "updatedAt": 1790196000291
-      }
-    ],
-    [
-      "tenant-iso-a-1790196712816",
-      {
-        "id": "tenant-iso-a-1790196712816",
-        "name": "Empresa A",
-        "slug": "minha-operacao",
-        "operationMode": "ECOMMERCE",
-        "segment": "Dropshipping / Varejo",
-        "webhookToken": "sec_69vedyoi5yt",
-        "whatsappDestination": "5511999999999",
-        "notifyWhatsapp": true,
-        "notifyWebhook": null,
-        "allowedSeverities": [
-          "CRITICAL",
-          "WARNING"
-        ],
-        "leadsSettings": {
-          "funnelStages": [
-            {
-              "id": "traffic",
-              "label": "Tráfego (Cliques)",
-              "isTraffic": true
-            },
-            {
-              "id": "visit",
-              "label": "Visitas na Página",
-              "isTraffic": true
-            },
-            {
-              "id": "lead",
-              "label": "Lead Criado",
-              "isLead": true
-            },
-            {
-              "id": "contacted",
-              "label": "Lead Contactado",
-              "isLead": true
-            },
-            {
-              "id": "qualified",
-              "label": "Lead Qualificado",
-              "isLead": true
-            },
-            {
-              "id": "scheduled",
-              "label": "Agendamento Realizado",
-              "isLead": true
-            },
-            {
-              "id": "attended",
-              "label": "Comparecimento / Reunião",
-              "isLead": true
-            },
-            {
-              "id": "opportunity",
-              "label": "Proposta / Oportunidade",
-              "isLead": true
-            },
-            {
-              "id": "won",
-              "label": "Venda / Contratação Fechada",
-              "isLead": true
-            }
-          ],
-          "maxCpl": 35,
-          "maxFirstResponseMinutes": 15,
-          "maxStageStagnationHours": 24,
-          "minQualificationRate": 30,
-          "minScheduleRate": 40,
-          "minShowRate": 75,
-          "dailyBudget": 300,
-          "minLeadVolumeForAlert": 5
-        },
-        "ecommerceSettings": {
-          "maxRefusalRatePercent": 25,
-          "minRefusalsCount": 3,
-          "maxNoSaleMinutesBusinessHours": 120,
-          "maxAbandonmentRatePercent": 75,
-          "minCartVolumeForAlert": 8,
-          "minStockDaysThreshold": 3,
-          "maxRefundRatePercent": 5
-        },
-        "createdAt": 1790196712816,
-        "updatedAt": 1790196712816
-      }
-    ],
-    [
-      "tenant-iso-b-1790196712816",
-      {
-        "id": "tenant-iso-b-1790196712816",
-        "name": "Empresa B",
-        "slug": "minha-operacao",
-        "operationMode": "LEADS",
-        "segment": "Clínica / Serviços",
-        "webhookToken": "sec_jt6ifwzi3j",
-        "whatsappDestination": "5511999999999",
-        "notifyWhatsapp": true,
-        "notifyWebhook": null,
-        "allowedSeverities": [
-          "CRITICAL",
-          "WARNING"
-        ],
-        "leadsSettings": {
-          "funnelStages": [
-            {
-              "id": "traffic",
-              "label": "Tráfego (Cliques)",
-              "isTraffic": true
-            },
-            {
-              "id": "visit",
-              "label": "Visitas na Página",
-              "isTraffic": true
-            },
-            {
-              "id": "lead",
-              "label": "Lead Criado",
-              "isLead": true
-            },
-            {
-              "id": "contacted",
-              "label": "Lead Contactado",
-              "isLead": true
-            },
-            {
-              "id": "qualified",
-              "label": "Lead Qualificado",
-              "isLead": true
-            },
-            {
-              "id": "scheduled",
-              "label": "Agendamento Realizado",
-              "isLead": true
-            },
-            {
-              "id": "attended",
-              "label": "Comparecimento / Reunião",
-              "isLead": true
-            },
-            {
-              "id": "opportunity",
-              "label": "Proposta / Oportunidade",
-              "isLead": true
-            },
-            {
-              "id": "won",
-              "label": "Venda / Contratação Fechada",
-              "isLead": true
-            }
-          ],
-          "maxCpl": 35,
-          "maxFirstResponseMinutes": 15,
-          "maxStageStagnationHours": 24,
-          "minQualificationRate": 30,
-          "minScheduleRate": 40,
-          "minShowRate": 75,
-          "dailyBudget": 300,
-          "minLeadVolumeForAlert": 5
-        },
-        "ecommerceSettings": {
-          "maxRefusalRatePercent": 25,
-          "minRefusalsCount": 3,
-          "maxNoSaleMinutesBusinessHours": 120,
-          "maxAbandonmentRatePercent": 75,
-          "minCartVolumeForAlert": 8,
-          "minStockDaysThreshold": 3,
-          "maxRefundRatePercent": 5
-        },
-        "createdAt": 1790196712816,
-        "updatedAt": 1790196712821
-      }
-    ],
-    [
-      "tenant-cool-1790196712835",
-      {
-        "id": "tenant-cool-1790196712835",
-        "name": "Loja Cooldown Teste",
-        "slug": "minha-operacao",
-        "operationMode": "ECOMMERCE",
-        "segment": "Dropshipping / Varejo",
-        "webhookToken": "sec_1j1j6v1jjpg",
-        "whatsappDestination": "5511999999999",
-        "notifyWhatsapp": true,
-        "notifyWebhook": null,
-        "allowedSeverities": [
-          "CRITICAL",
-          "WARNING"
-        ],
-        "leadsSettings": {
-          "funnelStages": [
-            {
-              "id": "traffic",
-              "label": "Tráfego (Cliques)",
-              "isTraffic": true
-            },
-            {
-              "id": "visit",
-              "label": "Visitas na Página",
-              "isTraffic": true
-            },
-            {
-              "id": "lead",
-              "label": "Lead Criado",
-              "isLead": true
-            },
-            {
-              "id": "contacted",
-              "label": "Lead Contactado",
-              "isLead": true
-            },
-            {
-              "id": "qualified",
-              "label": "Lead Qualificado",
-              "isLead": true
-            },
-            {
-              "id": "scheduled",
-              "label": "Agendamento Realizado",
-              "isLead": true
-            },
-            {
-              "id": "attended",
-              "label": "Comparecimento / Reunião",
-              "isLead": true
-            },
-            {
-              "id": "opportunity",
-              "label": "Proposta / Oportunidade",
-              "isLead": true
-            },
-            {
-              "id": "won",
-              "label": "Venda / Contratação Fechada",
-              "isLead": true
-            }
-          ],
-          "maxCpl": 35,
-          "maxFirstResponseMinutes": 15,
-          "maxStageStagnationHours": 24,
-          "minQualificationRate": 30,
-          "minScheduleRate": 40,
-          "minShowRate": 75,
-          "dailyBudget": 300,
-          "minLeadVolumeForAlert": 5
-        },
-        "ecommerceSettings": {
-          "maxRefusalRatePercent": 25,
-          "minRefusalsCount": 3,
-          "maxNoSaleMinutesBusinessHours": 120,
-          "maxAbandonmentRatePercent": 75,
-          "minCartVolumeForAlert": 8,
-          "minStockDaysThreshold": 3,
-          "maxRefundRatePercent": 5
-        },
-        "createdAt": 1790196712835,
-        "updatedAt": 1790196712835
-      }
-    ],
-    [
-      "tenant-heal-1790196713596",
-      {
-        "id": "tenant-heal-1790196713596",
-        "name": "Loja Auto-Cura Teste",
-        "slug": "minha-operacao",
-        "operationMode": "ECOMMERCE",
-        "segment": "Dropshipping / Varejo",
-        "webhookToken": "sec_zcky5xdverc",
-        "whatsappDestination": "5511999999999",
-        "notifyWhatsapp": true,
-        "notifyWebhook": null,
-        "allowedSeverities": [
-          "CRITICAL",
-          "WARNING"
-        ],
-        "leadsSettings": {
-          "funnelStages": [
-            {
-              "id": "traffic",
-              "label": "Tráfego (Cliques)",
-              "isTraffic": true
-            },
-            {
-              "id": "visit",
-              "label": "Visitas na Página",
-              "isTraffic": true
-            },
-            {
-              "id": "lead",
-              "label": "Lead Criado",
-              "isLead": true
-            },
-            {
-              "id": "contacted",
-              "label": "Lead Contactado",
-              "isLead": true
-            },
-            {
-              "id": "qualified",
-              "label": "Lead Qualificado",
-              "isLead": true
-            },
-            {
-              "id": "scheduled",
-              "label": "Agendamento Realizado",
-              "isLead": true
-            },
-            {
-              "id": "attended",
-              "label": "Comparecimento / Reunião",
-              "isLead": true
-            },
-            {
-              "id": "opportunity",
-              "label": "Proposta / Oportunidade",
-              "isLead": true
-            },
-            {
-              "id": "won",
-              "label": "Venda / Contratação Fechada",
-              "isLead": true
-            }
-          ],
-          "maxCpl": 35,
-          "maxFirstResponseMinutes": 15,
-          "maxStageStagnationHours": 24,
-          "minQualificationRate": 30,
-          "minScheduleRate": 40,
-          "minShowRate": 75,
-          "dailyBudget": 300,
-          "minLeadVolumeForAlert": 5
-        },
-        "ecommerceSettings": {
-          "maxRefusalRatePercent": 25,
-          "minRefusalsCount": 3,
-          "maxNoSaleMinutesBusinessHours": 120,
-          "maxAbandonmentRatePercent": 75,
-          "minCartVolumeForAlert": 8,
-          "minStockDaysThreshold": 3,
-          "maxRefundRatePercent": 5
-        },
-        "createdAt": 1790196713596,
-        "updatedAt": 1790196713596
+        "createdAt": 1790197386302,
+        "updatedAt": 1790197386302
       }
     ]
   ],
@@ -1123,15 +607,6 @@
     [
       "clinica-demo",
       [
-        {
-          "id": "sim_lead_single",
-          "tenantId": "clinica-demo",
-          "name": "Lead Caro",
-          "source": "meta_ads",
-          "campaignId": "camp-cpl-explodiu",
-          "currentStage": "lead",
-          "createdAt": 1790196366281
-        },
         {
           "id": "lead_1",
           "tenantId": "clinica-demo",
@@ -1142,9 +617,9 @@
           "campaignName": "Implantes & Facetas SP",
           "currentStage": "contacted",
           "status": "active",
-          "createdAt": 1790193824002,
-          "firstContactAt": 1790195444002,
-          "stageUpdatedAt": 1790195444002
+          "createdAt": 1790195098430,
+          "firstContactAt": 1790196718430,
+          "stageUpdatedAt": 1790196718430
         },
         {
           "id": "lead_2",
@@ -1156,9 +631,9 @@
           "campaignName": "Implantes & Facetas SP",
           "currentStage": "lead",
           "status": "active",
-          "createdAt": 1790194604002,
+          "createdAt": 1790195878430,
           "firstContactAt": null,
-          "stageUpdatedAt": 1790194604002
+          "stageUpdatedAt": 1790195878430
         },
         {
           "id": "lead_3",
@@ -1170,10 +645,10 @@
           "campaignName": "Clareamento Dental",
           "currentStage": "qualified",
           "status": "active",
-          "createdAt": 1790087924002,
-          "firstContactAt": 1790091524002,
-          "qualifiedAt": 1790095124002,
-          "stageUpdatedAt": 1790095124002
+          "createdAt": 1790089198430,
+          "firstContactAt": 1790092798430,
+          "qualifiedAt": 1790096398430,
+          "stageUpdatedAt": 1790096398430
         },
         {
           "id": "lead_4",
@@ -1186,13 +661,13 @@
           "currentStage": "qualified",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790167124002,
-          "firstContactAt": 1790167604002,
-          "qualifiedAt": 1790168924002,
-          "scheduledAt": 1790170724002,
-          "attendedAt": 1790174324002,
+          "createdAt": 1790168398430,
+          "firstContactAt": 1790168878430,
+          "qualifiedAt": 1790170198430,
+          "scheduledAt": 1790171998430,
+          "attendedAt": 1790175598430,
           "wonAt": null,
-          "stageUpdatedAt": 1790167124002
+          "stageUpdatedAt": 1790168398430
         },
         {
           "id": "lead_5",
@@ -1205,13 +680,13 @@
           "currentStage": "attended",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790159924002,
-          "firstContactAt": 1790160404002,
-          "qualifiedAt": 1790161724002,
-          "scheduledAt": 1790163524002,
-          "attendedAt": 1790167124002,
+          "createdAt": 1790161198430,
+          "firstContactAt": 1790161678430,
+          "qualifiedAt": 1790162998430,
+          "scheduledAt": 1790164798430,
+          "attendedAt": 1790168398430,
           "wonAt": null,
-          "stageUpdatedAt": 1790159924002
+          "stageUpdatedAt": 1790161198430
         },
         {
           "id": "lead_6",
@@ -1224,13 +699,13 @@
           "currentStage": "won",
           "status": "won",
           "dealValue": 3200,
-          "createdAt": 1790152724002,
-          "firstContactAt": 1790153204002,
-          "qualifiedAt": 1790154524002,
-          "scheduledAt": 1790156324002,
-          "attendedAt": 1790159924002,
-          "wonAt": 1790163524002,
-          "stageUpdatedAt": 1790152724002
+          "createdAt": 1790153998430,
+          "firstContactAt": 1790154478430,
+          "qualifiedAt": 1790155798430,
+          "scheduledAt": 1790157598430,
+          "attendedAt": 1790161198430,
+          "wonAt": 1790164798430,
+          "stageUpdatedAt": 1790153998430
         },
         {
           "id": "lead_7",
@@ -1243,13 +718,13 @@
           "currentStage": "attended",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790145524002,
-          "firstContactAt": 1790146004002,
-          "qualifiedAt": 1790147324002,
-          "scheduledAt": 1790149124002,
-          "attendedAt": 1790152724002,
+          "createdAt": 1790146798430,
+          "firstContactAt": 1790147278430,
+          "qualifiedAt": 1790148598430,
+          "scheduledAt": 1790150398430,
+          "attendedAt": 1790153998430,
           "wonAt": null,
-          "stageUpdatedAt": 1790145524002
+          "stageUpdatedAt": 1790146798430
         },
         {
           "id": "lead_8",
@@ -1262,13 +737,13 @@
           "currentStage": "qualified",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790138324002,
-          "firstContactAt": 1790138804002,
-          "qualifiedAt": 1790140124002,
-          "scheduledAt": 1790141924002,
-          "attendedAt": 1790145524002,
+          "createdAt": 1790139598430,
+          "firstContactAt": 1790140078430,
+          "qualifiedAt": 1790141398430,
+          "scheduledAt": 1790143198430,
+          "attendedAt": 1790146798430,
           "wonAt": null,
-          "stageUpdatedAt": 1790138324002
+          "stageUpdatedAt": 1790139598430
         },
         {
           "id": "lead_9",
@@ -1281,13 +756,13 @@
           "currentStage": "won",
           "status": "won",
           "dealValue": 3200,
-          "createdAt": 1790131124002,
-          "firstContactAt": 1790131604002,
-          "qualifiedAt": 1790132924002,
-          "scheduledAt": 1790134724002,
-          "attendedAt": 1790138324002,
-          "wonAt": 1790141924002,
-          "stageUpdatedAt": 1790131124002
+          "createdAt": 1790132398430,
+          "firstContactAt": 1790132878430,
+          "qualifiedAt": 1790134198430,
+          "scheduledAt": 1790135998430,
+          "attendedAt": 1790139598430,
+          "wonAt": 1790143198430,
+          "stageUpdatedAt": 1790132398430
         },
         {
           "id": "lead_10",
@@ -1300,13 +775,13 @@
           "currentStage": "qualified",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790123924002,
-          "firstContactAt": 1790124404002,
-          "qualifiedAt": 1790125724002,
-          "scheduledAt": 1790127524002,
-          "attendedAt": 1790131124002,
+          "createdAt": 1790125198430,
+          "firstContactAt": 1790125678430,
+          "qualifiedAt": 1790126998430,
+          "scheduledAt": 1790128798430,
+          "attendedAt": 1790132398430,
           "wonAt": null,
-          "stageUpdatedAt": 1790123924002
+          "stageUpdatedAt": 1790125198430
         },
         {
           "id": "lead_11",
@@ -1319,13 +794,13 @@
           "currentStage": "attended",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790116724002,
-          "firstContactAt": 1790117204002,
-          "qualifiedAt": 1790118524002,
-          "scheduledAt": 1790120324002,
-          "attendedAt": 1790123924002,
+          "createdAt": 1790117998430,
+          "firstContactAt": 1790118478430,
+          "qualifiedAt": 1790119798430,
+          "scheduledAt": 1790121598430,
+          "attendedAt": 1790125198430,
           "wonAt": null,
-          "stageUpdatedAt": 1790116724002
+          "stageUpdatedAt": 1790117998430
         },
         {
           "id": "lead_12",
@@ -1338,13 +813,13 @@
           "currentStage": "won",
           "status": "won",
           "dealValue": 3200,
-          "createdAt": 1790109524002,
-          "firstContactAt": 1790110004002,
-          "qualifiedAt": 1790111324002,
-          "scheduledAt": 1790113124002,
-          "attendedAt": 1790116724002,
-          "wonAt": 1790120324002,
-          "stageUpdatedAt": 1790109524002
+          "createdAt": 1790110798430,
+          "firstContactAt": 1790111278430,
+          "qualifiedAt": 1790112598430,
+          "scheduledAt": 1790114398430,
+          "attendedAt": 1790117998430,
+          "wonAt": 1790121598430,
+          "stageUpdatedAt": 1790110798430
         },
         {
           "id": "lead_13",
@@ -1357,13 +832,13 @@
           "currentStage": "attended",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790102324002,
-          "firstContactAt": 1790102804002,
-          "qualifiedAt": 1790104124002,
-          "scheduledAt": 1790105924002,
-          "attendedAt": 1790109524002,
+          "createdAt": 1790103598430,
+          "firstContactAt": 1790104078430,
+          "qualifiedAt": 1790105398430,
+          "scheduledAt": 1790107198430,
+          "attendedAt": 1790110798430,
           "wonAt": null,
-          "stageUpdatedAt": 1790102324002
+          "stageUpdatedAt": 1790103598430
         },
         {
           "id": "lead_14",
@@ -1376,13 +851,13 @@
           "currentStage": "qualified",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790095124002,
-          "firstContactAt": 1790095604002,
-          "qualifiedAt": 1790096924002,
-          "scheduledAt": 1790098724002,
-          "attendedAt": 1790102324002,
+          "createdAt": 1790096398430,
+          "firstContactAt": 1790096878430,
+          "qualifiedAt": 1790098198430,
+          "scheduledAt": 1790099998430,
+          "attendedAt": 1790103598430,
           "wonAt": null,
-          "stageUpdatedAt": 1790095124002
+          "stageUpdatedAt": 1790096398430
         },
         {
           "id": "lead_15",
@@ -1395,13 +870,13 @@
           "currentStage": "won",
           "status": "won",
           "dealValue": 3200,
-          "createdAt": 1790087924002,
-          "firstContactAt": 1790088404002,
-          "qualifiedAt": 1790089724002,
-          "scheduledAt": 1790091524002,
-          "attendedAt": 1790095124002,
-          "wonAt": 1790098724002,
-          "stageUpdatedAt": 1790087924002
+          "createdAt": 1790089198430,
+          "firstContactAt": 1790089678430,
+          "qualifiedAt": 1790090998430,
+          "scheduledAt": 1790092798430,
+          "attendedAt": 1790096398430,
+          "wonAt": 1790099998430,
+          "stageUpdatedAt": 1790089198430
         },
         {
           "id": "lead_16",
@@ -1414,13 +889,13 @@
           "currentStage": "qualified",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790080724002,
-          "firstContactAt": 1790081204002,
-          "qualifiedAt": 1790082524002,
-          "scheduledAt": 1790084324002,
-          "attendedAt": 1790087924002,
+          "createdAt": 1790081998430,
+          "firstContactAt": 1790082478430,
+          "qualifiedAt": 1790083798430,
+          "scheduledAt": 1790085598430,
+          "attendedAt": 1790089198430,
           "wonAt": null,
-          "stageUpdatedAt": 1790080724002
+          "stageUpdatedAt": 1790081998430
         },
         {
           "id": "lead_17",
@@ -1433,13 +908,13 @@
           "currentStage": "attended",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790073524002,
-          "firstContactAt": 1790074004002,
-          "qualifiedAt": 1790075324002,
-          "scheduledAt": 1790077124002,
-          "attendedAt": 1790080724002,
+          "createdAt": 1790074798430,
+          "firstContactAt": 1790075278430,
+          "qualifiedAt": 1790076598430,
+          "scheduledAt": 1790078398430,
+          "attendedAt": 1790081998430,
           "wonAt": null,
-          "stageUpdatedAt": 1790073524002
+          "stageUpdatedAt": 1790074798430
         },
         {
           "id": "lead_18",
@@ -1452,13 +927,13 @@
           "currentStage": "won",
           "status": "won",
           "dealValue": 3200,
-          "createdAt": 1790066324002,
-          "firstContactAt": 1790066804002,
-          "qualifiedAt": 1790068124002,
-          "scheduledAt": 1790069924002,
-          "attendedAt": 1790073524002,
-          "wonAt": 1790077124002,
-          "stageUpdatedAt": 1790066324002
+          "createdAt": 1790067598430,
+          "firstContactAt": 1790068078430,
+          "qualifiedAt": 1790069398430,
+          "scheduledAt": 1790071198430,
+          "attendedAt": 1790074798430,
+          "wonAt": 1790078398430,
+          "stageUpdatedAt": 1790067598430
         },
         {
           "id": "lead_19",
@@ -1471,13 +946,13 @@
           "currentStage": "attended",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790059124002,
-          "firstContactAt": 1790059604002,
-          "qualifiedAt": 1790060924002,
-          "scheduledAt": 1790062724002,
-          "attendedAt": 1790066324002,
+          "createdAt": 1790060398430,
+          "firstContactAt": 1790060878430,
+          "qualifiedAt": 1790062198430,
+          "scheduledAt": 1790063998430,
+          "attendedAt": 1790067598430,
           "wonAt": null,
-          "stageUpdatedAt": 1790059124002
+          "stageUpdatedAt": 1790060398430
         },
         {
           "id": "lead_20",
@@ -1490,50 +965,381 @@
           "currentStage": "qualified",
           "status": "active",
           "dealValue": 0,
-          "createdAt": 1790051924002,
-          "firstContactAt": 1790052404002,
-          "qualifiedAt": 1790053724002,
-          "scheduledAt": 1790055524002,
-          "attendedAt": 1790059124002,
+          "createdAt": 1790053198430,
+          "firstContactAt": 1790053678430,
+          "qualifiedAt": 1790054998430,
+          "scheduledAt": 1790056798430,
+          "attendedAt": 1790060398430,
           "wonAt": null,
-          "stageUpdatedAt": 1790051924002
+          "stageUpdatedAt": 1790053198430
         }
       ]
     ],
     [
-      "tenant-b",
+      "drophub",
       [
         {
-          "id": "lead_b",
-          "tenantId": "tenant-b",
-          "name": "Lead B",
-          "currentStage": "lead"
+          "id": "sim_ig_urgente_1790197317677",
+          "tenantId": "drophub",
+          "name": "Camila Fernandes (Direct Instagram)",
+          "phone": "11988887766",
+          "email": "camila.fernandes@gmail.com",
+          "source": "instagram",
+          "campaignId": "camp-ig-stories-bio",
+          "campaignName": "Stories Instagram - Link Bio",
+          "currentStage": "lead",
+          "status": "active",
+          "firstContactAt": null,
+          "createdAt": 1790195757677
         },
         {
-          "id": "lead_b",
-          "tenantId": "tenant-b",
-          "name": "Lead B",
-          "currentStage": "lead"
+          "id": "lead_qydn36q",
+          "tenantId": "drophub",
+          "name": "Gabriel Henrique",
+          "phone": "5511995544332",
+          "email": "gabriel.dropship@gmail.com",
+          "source": "instagram",
+          "campaignId": "campanha-geral",
+          "campaignName": "Instagram Stories Promo Ferramentas",
+          "adsetId": null,
+          "adId": null,
+          "currentStage": "lead",
+          "status": "active",
+          "assignedTo": null,
+          "dealValue": 0,
+          "createdAt": 1790197309735,
+          "firstContactAt": null,
+          "qualifiedAt": null,
+          "scheduledAt": null,
+          "attendedAt": null,
+          "wonAt": null,
+          "lostAt": null,
+          "stageUpdatedAt": 1790197309735,
+          "history": [
+            {
+              "stage": "lead",
+              "timestamp": 1790197309735,
+              "note": "Lead capturado"
+            }
+          ]
+        },
+        {
+          "id": "lead_fy6bllr",
+          "tenantId": "drophub",
+          "name": "Lead sem nome",
+          "phone": "",
+          "email": "",
+          "source": "instagram",
+          "campaignId": "campanha-geral",
+          "campaignName": "Campanha Principal",
+          "adsetId": null,
+          "adId": null,
+          "currentStage": "lead",
+          "status": "active",
+          "assignedTo": null,
+          "dealValue": 0,
+          "createdAt": 1790197273411,
+          "firstContactAt": null,
+          "qualifiedAt": null,
+          "scheduledAt": null,
+          "attendedAt": null,
+          "wonAt": null,
+          "lostAt": null,
+          "stageUpdatedAt": 1790197273412,
+          "history": [
+            {
+              "stage": "lead",
+              "timestamp": 1790197273411,
+              "note": "Lead capturado"
+            }
+          ]
+        },
+        {
+          "id": "ig_lead_01",
+          "tenantId": "drophub",
+          "name": "Juliana Paes (Instagram Reels)",
+          "phone": "11987654321",
+          "email": "juliana.paes@gmail.com",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "contacted",
+          "status": "active",
+          "createdAt": 1790194498438,
+          "firstContactAt": 1790195098438,
+          "stageUpdatedAt": 1790195098438
+        },
+        {
+          "id": "ig_lead_02",
+          "tenantId": "drophub",
+          "name": "Rafael Silveira (Instagram Direct)",
+          "phone": "11991234567",
+          "email": "rafael.silveira@outlook.com",
+          "source": "instagram",
+          "campaignId": "camp-ig-stories-bio",
+          "campaignName": "Stories Instagram - Link Bio",
+          "currentStage": "qualified",
+          "status": "active",
+          "createdAt": 1790189998438,
+          "firstContactAt": 1790190598438,
+          "qualifiedAt": 1790191798438,
+          "stageUpdatedAt": 1790191798438
+        },
+        {
+          "id": "ig_lead_03",
+          "tenantId": "drophub",
+          "name": "Lucas Martins (Instagram Lead Ads)",
+          "phone": "21981112233",
+          "email": "lucas.martins@empresa.com.br",
+          "source": "instagram",
+          "campaignId": "camp-ig-leadform",
+          "campaignName": "Formulário Nativo Instagram Ads",
+          "currentStage": "scheduled",
+          "status": "active",
+          "createdAt": 1790182798438,
+          "firstContactAt": 1790183398438,
+          "qualifiedAt": 1790185198438,
+          "scheduledAt": 1790186398438,
+          "stageUpdatedAt": 1790186398438
+        },
+        {
+          "id": "ig_lead_04",
+          "tenantId": "drophub",
+          "name": "Beatriz Vasconcelos",
+          "phone": "31976543210",
+          "email": "beatriz.vasc@hotmail.com",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "won",
+          "status": "won",
+          "dealValue": 997,
+          "createdAt": 1790175598438,
+          "firstContactAt": 1790176198438,
+          "qualifiedAt": 1790179198438,
+          "scheduledAt": 1790181598438,
+          "attendedAt": 1790185198438,
+          "wonAt": 1790189998438,
+          "stageUpdatedAt": 1790189998438
+        },
+        {
+          "id": "ig_lead_5",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 5",
+          "phone": "11982223305",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "contacted",
+          "status": "active",
+          "dealValue": 0,
+          "createdAt": 1790143198438,
+          "firstContactAt": 1790143618438,
+          "stageUpdatedAt": 1790143198438
+        },
+        {
+          "id": "ig_lead_6",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 6",
+          "phone": "11982223306",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "qualified",
+          "status": "active",
+          "dealValue": 0,
+          "createdAt": 1790132398438,
+          "firstContactAt": 1790132818438,
+          "stageUpdatedAt": 1790132398438
+        },
+        {
+          "id": "ig_lead_7",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 7",
+          "phone": "11982223307",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "contacted",
+          "status": "active",
+          "dealValue": 0,
+          "createdAt": 1790121598438,
+          "firstContactAt": 1790122018438,
+          "stageUpdatedAt": 1790121598438
+        },
+        {
+          "id": "ig_lead_8",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 8",
+          "phone": "11982223308",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "won",
+          "status": "won",
+          "dealValue": 997,
+          "createdAt": 1790110798438,
+          "firstContactAt": 1790111218438,
+          "stageUpdatedAt": 1790110798438
+        },
+        {
+          "id": "ig_lead_9",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 9",
+          "phone": "11982223309",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "contacted",
+          "status": "active",
+          "dealValue": 0,
+          "createdAt": 1790099998438,
+          "firstContactAt": 1790100418438,
+          "stageUpdatedAt": 1790099998438
+        },
+        {
+          "id": "ig_lead_10",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 10",
+          "phone": "11982223310",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "qualified",
+          "status": "active",
+          "dealValue": 0,
+          "createdAt": 1790089198438,
+          "firstContactAt": 1790089618438,
+          "stageUpdatedAt": 1790089198438
+        },
+        {
+          "id": "ig_lead_11",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 11",
+          "phone": "11982223311",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "contacted",
+          "status": "active",
+          "dealValue": 0,
+          "createdAt": 1790078398438,
+          "firstContactAt": 1790078818438,
+          "stageUpdatedAt": 1790078398438
+        },
+        {
+          "id": "ig_lead_12",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 12",
+          "phone": "11982223312",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "won",
+          "status": "won",
+          "dealValue": 997,
+          "createdAt": 1790067598438,
+          "firstContactAt": 1790068018438,
+          "stageUpdatedAt": 1790067598438
+        },
+        {
+          "id": "ig_lead_13",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 13",
+          "phone": "11982223313",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "contacted",
+          "status": "active",
+          "dealValue": 0,
+          "createdAt": 1790056798438,
+          "firstContactAt": 1790057218438,
+          "stageUpdatedAt": 1790056798438
+        },
+        {
+          "id": "ig_lead_14",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 14",
+          "phone": "11982223314",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "qualified",
+          "status": "active",
+          "dealValue": 0,
+          "createdAt": 1790045998438,
+          "firstContactAt": 1790046418438,
+          "stageUpdatedAt": 1790045998438
+        },
+        {
+          "id": "ig_lead_15",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 15",
+          "phone": "11982223315",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "contacted",
+          "status": "active",
+          "dealValue": 0,
+          "createdAt": 1790035198438,
+          "firstContactAt": 1790035618438,
+          "stageUpdatedAt": 1790035198438
+        },
+        {
+          "id": "ig_lead_16",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 16",
+          "phone": "11982223316",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "won",
+          "status": "won",
+          "dealValue": 997,
+          "createdAt": 1790024398438,
+          "firstContactAt": 1790024818438,
+          "stageUpdatedAt": 1790024398438
+        },
+        {
+          "id": "ig_lead_17",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 17",
+          "phone": "11982223317",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "contacted",
+          "status": "active",
+          "dealValue": 0,
+          "createdAt": 1790013598438,
+          "firstContactAt": 1790014018438,
+          "stageUpdatedAt": 1790013598438
+        },
+        {
+          "id": "ig_lead_18",
+          "tenantId": "drophub",
+          "name": "Seguidor Instagram 18",
+          "phone": "11982223318",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "currentStage": "qualified",
+          "status": "active",
+          "dealValue": 0,
+          "createdAt": 1790002798438,
+          "firstContactAt": 1790003218438,
+          "stageUpdatedAt": 1790002798438
         }
       ]
     ],
     [
-      "tenant-iso-b-1790195999376",
+      "tenant-iso-b-1790197385252",
       [
         {
           "id": "lead_b",
-          "tenantId": "tenant-iso-b-1790195999376",
-          "name": "Lead B",
-          "currentStage": "lead"
-        }
-      ]
-    ],
-    [
-      "tenant-iso-b-1790196712816",
-      [
-        {
-          "id": "lead_b",
-          "tenantId": "tenant-iso-b-1790196712816",
+          "tenantId": "tenant-iso-b-1790197385252",
           "name": "Lead B",
           "currentStage": "lead"
         }
@@ -1552,7 +1358,7 @@
           "paymentMethod": "pix",
           "gateway": "mercadopago",
           "status": "refused",
-          "timestamp": 1790195924002
+          "timestamp": 1790197198430
         },
         {
           "id": "tx_seed_1",
@@ -1562,7 +1368,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790194724002
+          "timestamp": 1790195998430
         },
         {
           "id": "tx_seed_2",
@@ -1572,7 +1378,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "refused",
-          "timestamp": 1790193524002
+          "timestamp": 1790194798430
         },
         {
           "id": "tx_seed_3",
@@ -1582,7 +1388,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790192324002
+          "timestamp": 1790193598430
         },
         {
           "id": "tx_seed_4",
@@ -1592,7 +1398,7 @@
           "paymentMethod": "pix",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790191124002
+          "timestamp": 1790192398430
         },
         {
           "id": "tx_seed_5",
@@ -1602,7 +1408,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790189924002
+          "timestamp": 1790191198430
         },
         {
           "id": "tx_seed_6",
@@ -1612,7 +1418,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790188724002
+          "timestamp": 1790189998430
         },
         {
           "id": "tx_seed_7",
@@ -1622,7 +1428,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790187524002
+          "timestamp": 1790188798430
         },
         {
           "id": "tx_seed_8",
@@ -1632,7 +1438,7 @@
           "paymentMethod": "pix",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790186324002
+          "timestamp": 1790187598430
         },
         {
           "id": "tx_seed_9",
@@ -1642,7 +1448,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790185124002
+          "timestamp": 1790186398430
         },
         {
           "id": "tx_seed_10",
@@ -1652,7 +1458,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790183924002
+          "timestamp": 1790185198430
         },
         {
           "id": "tx_seed_11",
@@ -1662,7 +1468,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790182724002
+          "timestamp": 1790183998430
         },
         {
           "id": "tx_seed_12",
@@ -1672,7 +1478,7 @@
           "paymentMethod": "pix",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790181524002
+          "timestamp": 1790182798430
         },
         {
           "id": "tx_seed_13",
@@ -1682,7 +1488,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790180324002
+          "timestamp": 1790181598430
         },
         {
           "id": "tx_seed_14",
@@ -1692,7 +1498,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790179124002
+          "timestamp": 1790180398430
         },
         {
           "id": "tx_seed_15",
@@ -1702,7 +1508,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790177924002
+          "timestamp": 1790179198430
         },
         {
           "id": "tx_seed_16",
@@ -1712,7 +1518,7 @@
           "paymentMethod": "pix",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790176724002
+          "timestamp": 1790177998430
         },
         {
           "id": "tx_seed_17",
@@ -1722,7 +1528,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790175524002
+          "timestamp": 1790176798430
         },
         {
           "id": "tx_seed_18",
@@ -1732,7 +1538,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790174324002
+          "timestamp": 1790175598430
         },
         {
           "id": "tx_seed_19",
@@ -1742,7 +1548,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790173124002
+          "timestamp": 1790174398430
         },
         {
           "id": "tx_seed_20",
@@ -1752,7 +1558,7 @@
           "paymentMethod": "pix",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790171924002
+          "timestamp": 1790173198430
         },
         {
           "id": "tx_seed_21",
@@ -1762,7 +1568,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790170724002
+          "timestamp": 1790171998430
         },
         {
           "id": "tx_seed_22",
@@ -1772,7 +1578,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790169524002
+          "timestamp": 1790170798430
         },
         {
           "id": "tx_seed_23",
@@ -1782,7 +1588,7 @@
           "paymentMethod": "credit_card",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790168324002
+          "timestamp": 1790169598430
         },
         {
           "id": "tx_seed_24",
@@ -1792,799 +1598,224 @@
           "paymentMethod": "pix",
           "gateway": "mercadopago",
           "status": "approved",
-          "timestamp": 1790167124002
+          "timestamp": 1790168398430
         }
       ]
     ],
     [
-      "tenant-a",
+      "tenant-iso-a-1790197385252",
       [
         {
           "id": "tx_a",
-          "tenantId": "tenant-a",
-          "amount": 100,
-          "status": "approved"
-        },
-        {
-          "id": "tx_a",
-          "tenantId": "tenant-a",
+          "tenantId": "tenant-iso-a-1790197385252",
           "amount": 100,
           "status": "approved"
         }
       ]
     ],
     [
-      "tenant-cooldown",
+      "tenant-cool-1790197385275",
       [
         {
-          "id": "tx_heal_19",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195962455
-        },
-        {
-          "id": "tx_heal_18",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195962555
-        },
-        {
-          "id": "tx_heal_17",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195962655
-        },
-        {
-          "id": "tx_heal_16",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195962755
-        },
-        {
-          "id": "tx_heal_15",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195962855
-        },
-        {
-          "id": "tx_heal_14",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195962955
-        },
-        {
-          "id": "tx_heal_13",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195963055
-        },
-        {
-          "id": "tx_heal_12",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195963155
-        },
-        {
-          "id": "tx_heal_11",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195963255
-        },
-        {
-          "id": "tx_heal_10",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195963355
-        },
-        {
-          "id": "tx_heal_9",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195963455
-        },
-        {
-          "id": "tx_heal_8",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195963555
-        },
-        {
-          "id": "tx_heal_7",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195963655
-        },
-        {
-          "id": "tx_heal_6",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195963755
-        },
-        {
-          "id": "tx_heal_5",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195963855
-        },
-        {
-          "id": "tx_heal_4",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195963955
-        },
-        {
-          "id": "tx_heal_3",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195964055
-        },
-        {
-          "id": "tx_heal_2",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195964155
-        },
-        {
-          "id": "tx_heal_1",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195964255
-        },
-        {
-          "id": "tx_heal_0",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195964355
-        },
-        {
           "id": "tx_cool_3",
-          "tenantId": "tenant-cooldown",
+          "tenantId": "tenant-cool-1790197385275",
           "status": "refused",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195962364
+          "timestamp": 1790197384277
         },
         {
           "id": "tx_cool_2",
-          "tenantId": "tenant-cooldown",
+          "tenantId": "tenant-cool-1790197385275",
           "status": "refused",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195962364
+          "timestamp": 1790197384277
         },
         {
           "id": "tx_cool_1",
-          "tenantId": "tenant-cooldown",
+          "tenantId": "tenant-cool-1790197385275",
           "status": "refused",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195962364
+          "timestamp": 1790197384277
         },
         {
           "id": "tx_cool_0",
-          "tenantId": "tenant-cooldown",
+          "tenantId": "tenant-cool-1790197385275",
           "status": "refused",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195962364
-        },
-        {
-          "id": "tx_heal_19",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923107
-        },
-        {
-          "id": "tx_heal_18",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923207
-        },
-        {
-          "id": "tx_heal_17",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923307
-        },
-        {
-          "id": "tx_heal_16",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923407
-        },
-        {
-          "id": "tx_heal_15",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923507
-        },
-        {
-          "id": "tx_heal_14",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923607
-        },
-        {
-          "id": "tx_heal_13",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923707
-        },
-        {
-          "id": "tx_heal_12",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923807
-        },
-        {
-          "id": "tx_heal_11",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923907
-        },
-        {
-          "id": "tx_heal_10",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195924007
-        },
-        {
-          "id": "tx_heal_9",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195924107
-        },
-        {
-          "id": "tx_heal_8",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195924207
-        },
-        {
-          "id": "tx_heal_7",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195924307
-        },
-        {
-          "id": "tx_heal_6",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195924407
-        },
-        {
-          "id": "tx_heal_5",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195924507
-        },
-        {
-          "id": "tx_heal_4",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195924607
-        },
-        {
-          "id": "tx_heal_3",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195924707
-        },
-        {
-          "id": "tx_heal_2",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195924807
-        },
-        {
-          "id": "tx_heal_1",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195924907
-        },
-        {
-          "id": "tx_heal_0",
-          "tenantId": "tenant-cooldown",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195925007
-        },
-        {
-          "id": "tx_cool_3",
-          "tenantId": "tenant-cooldown",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923075
-        },
-        {
-          "id": "tx_cool_2",
-          "tenantId": "tenant-cooldown",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923075
-        },
-        {
-          "id": "tx_cool_1",
-          "tenantId": "tenant-cooldown",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923075
-        },
-        {
-          "id": "tx_cool_0",
-          "tenantId": "tenant-cooldown",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195923075
+          "timestamp": 1790197384277
         }
       ]
     ],
     [
-      "tenant-iso-a-1790195999376",
-      [
-        {
-          "id": "tx_a",
-          "tenantId": "tenant-iso-a-1790195999376",
-          "amount": 100,
-          "status": "approved"
-        }
-      ]
-    ],
-    [
-      "tenant-cool-1790195999384",
-      [
-        {
-          "id": "tx_cool_3",
-          "tenantId": "tenant-cool-1790195999384",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195998386
-        },
-        {
-          "id": "tx_cool_2",
-          "tenantId": "tenant-cool-1790195999384",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195998386
-        },
-        {
-          "id": "tx_cool_1",
-          "tenantId": "tenant-cool-1790195999384",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195998386
-        },
-        {
-          "id": "tx_cool_0",
-          "tenantId": "tenant-cool-1790195999384",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790195998386
-        }
-      ]
-    ],
-    [
-      "tenant-heal-1790196000291",
+      "tenant-heal-1790197386302",
       [
         {
           "id": "tx_heal_19",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195998393
+          "timestamp": 1790197384407
         },
         {
           "id": "tx_heal_18",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195998493
+          "timestamp": 1790197384507
         },
         {
           "id": "tx_heal_17",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195998593
+          "timestamp": 1790197384607
         },
         {
           "id": "tx_heal_16",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195998693
+          "timestamp": 1790197384707
         },
         {
           "id": "tx_heal_15",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195998793
+          "timestamp": 1790197384807
         },
         {
           "id": "tx_heal_14",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195998893
+          "timestamp": 1790197384907
         },
         {
           "id": "tx_heal_13",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195998993
+          "timestamp": 1790197385007
         },
         {
           "id": "tx_heal_12",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999093
+          "timestamp": 1790197385107
         },
         {
           "id": "tx_heal_11",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999193
+          "timestamp": 1790197385207
         },
         {
           "id": "tx_heal_10",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999293
+          "timestamp": 1790197385307
         },
         {
           "id": "tx_heal_9",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999393
+          "timestamp": 1790197385407
         },
         {
           "id": "tx_heal_8",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999493
+          "timestamp": 1790197385507
         },
         {
           "id": "tx_heal_7",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999593
+          "timestamp": 1790197385607
         },
         {
           "id": "tx_heal_6",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999693
+          "timestamp": 1790197385707
         },
         {
           "id": "tx_heal_5",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999793
+          "timestamp": 1790197385807
         },
         {
           "id": "tx_heal_4",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999893
+          "timestamp": 1790197385907
         },
         {
           "id": "tx_heal_3",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999993
+          "timestamp": 1790197386007
         },
         {
           "id": "tx_heal_2",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790196000093
+          "timestamp": 1790197386107
         },
         {
           "id": "tx_heal_1",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790196000193
+          "timestamp": 1790197386207
         },
         {
           "id": "tx_heal_0",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "approved",
           "paymentMethod": "credit_card",
-          "timestamp": 1790196000293
+          "timestamp": 1790197386307
         },
         {
           "id": "tx_sick_3",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "refused",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999293
+          "timestamp": 1790197385307
         },
         {
           "id": "tx_sick_2",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "refused",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999293
+          "timestamp": 1790197385307
         },
         {
           "id": "tx_sick_1",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "refused",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999293
+          "timestamp": 1790197385307
         },
         {
           "id": "tx_sick_0",
-          "tenantId": "tenant-heal-1790196000291",
+          "tenantId": "tenant-heal-1790197386302",
           "status": "refused",
           "paymentMethod": "credit_card",
-          "timestamp": 1790195999293
-        }
-      ]
-    ],
-    [
-      "tenant-iso-a-1790196712816",
-      [
-        {
-          "id": "tx_a",
-          "tenantId": "tenant-iso-a-1790196712816",
-          "amount": 100,
-          "status": "approved"
-        }
-      ]
-    ],
-    [
-      "tenant-cool-1790196712835",
-      [
-        {
-          "id": "tx_cool_3",
-          "tenantId": "tenant-cool-1790196712835",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196711837
-        },
-        {
-          "id": "tx_cool_2",
-          "tenantId": "tenant-cool-1790196712835",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196711837
-        },
-        {
-          "id": "tx_cool_1",
-          "tenantId": "tenant-cool-1790196712835",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196711837
-        },
-        {
-          "id": "tx_cool_0",
-          "tenantId": "tenant-cool-1790196712835",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196711837
-        }
-      ]
-    ],
-    [
-      "tenant-heal-1790196713596",
-      [
-        {
-          "id": "tx_heal_19",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196711701
-        },
-        {
-          "id": "tx_heal_18",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196711801
-        },
-        {
-          "id": "tx_heal_17",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196711901
-        },
-        {
-          "id": "tx_heal_16",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712001
-        },
-        {
-          "id": "tx_heal_15",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712101
-        },
-        {
-          "id": "tx_heal_14",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712201
-        },
-        {
-          "id": "tx_heal_13",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712301
-        },
-        {
-          "id": "tx_heal_12",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712401
-        },
-        {
-          "id": "tx_heal_11",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712501
-        },
-        {
-          "id": "tx_heal_10",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712601
-        },
-        {
-          "id": "tx_heal_9",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712701
-        },
-        {
-          "id": "tx_heal_8",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712801
-        },
-        {
-          "id": "tx_heal_7",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712901
-        },
-        {
-          "id": "tx_heal_6",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196713001
-        },
-        {
-          "id": "tx_heal_5",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196713101
-        },
-        {
-          "id": "tx_heal_4",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196713201
-        },
-        {
-          "id": "tx_heal_3",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196713301
-        },
-        {
-          "id": "tx_heal_2",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196713401
-        },
-        {
-          "id": "tx_heal_1",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196713501
-        },
-        {
-          "id": "tx_heal_0",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "approved",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196713601
-        },
-        {
-          "id": "tx_sick_3",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712601
-        },
-        {
-          "id": "tx_sick_2",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712601
-        },
-        {
-          "id": "tx_sick_1",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712601
-        },
-        {
-          "id": "tx_sick_0",
-          "tenantId": "tenant-heal-1790196713596",
-          "status": "refused",
-          "paymentMethod": "credit_card",
-          "timestamp": 1790196712601
+          "timestamp": 1790197385307
         }
       ]
     ]
@@ -2603,7 +1834,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790195924002
+          "timestamp": 1790197198430
         },
         {
           "id": "cart_1",
@@ -2615,7 +1846,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790193224002
+          "timestamp": 1790194498430
         },
         {
           "id": "cart_2",
@@ -2627,7 +1858,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790190524002
+          "timestamp": 1790191798430
         },
         {
           "id": "cart_3",
@@ -2639,7 +1870,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790187824002
+          "timestamp": 1790189098430
         },
         {
           "id": "cart_4",
@@ -2651,7 +1882,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790185124002
+          "timestamp": 1790186398430
         },
         {
           "id": "cart_5",
@@ -2663,7 +1894,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790182424002
+          "timestamp": 1790183698430
         },
         {
           "id": "cart_6",
@@ -2675,7 +1906,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790179724002
+          "timestamp": 1790180998430
         },
         {
           "id": "cart_7",
@@ -2687,7 +1918,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790177024002
+          "timestamp": 1790178298430
         },
         {
           "id": "cart_8",
@@ -2699,7 +1930,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790174324002
+          "timestamp": 1790175598430
         },
         {
           "id": "cart_9",
@@ -2711,7 +1942,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790171624002
+          "timestamp": 1790172898430
         },
         {
           "id": "cart_10",
@@ -2723,7 +1954,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790168924002
+          "timestamp": 1790170198430
         },
         {
           "id": "cart_11",
@@ -2735,7 +1966,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790166224002
+          "timestamp": 1790167498430
         },
         {
           "id": "cart_12",
@@ -2747,7 +1978,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790163524002
+          "timestamp": 1790164798430
         },
         {
           "id": "cart_13",
@@ -2759,7 +1990,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790160824002
+          "timestamp": 1790162098430
         },
         {
           "id": "cart_14",
@@ -2771,7 +2002,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790158124002
+          "timestamp": 1790159398430
         },
         {
           "id": "cart_15",
@@ -2783,7 +2014,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790155424002
+          "timestamp": 1790156698430
         },
         {
           "id": "cart_16",
@@ -2795,7 +2026,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790152724002
+          "timestamp": 1790153998430
         },
         {
           "id": "cart_17",
@@ -2807,7 +2038,7 @@
           ],
           "total": 149.9,
           "abandoned": true,
-          "timestamp": 1790150024002
+          "timestamp": 1790151298430
         },
         {
           "id": "cart_18",
@@ -2819,7 +2050,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790147324002
+          "timestamp": 1790148598430
         },
         {
           "id": "cart_19",
@@ -2831,7 +2062,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790144624002
+          "timestamp": 1790145898430
         },
         {
           "id": "cart_20",
@@ -2843,7 +2074,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790141924002
+          "timestamp": 1790143198430
         },
         {
           "id": "cart_21",
@@ -2855,7 +2086,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790139224002
+          "timestamp": 1790140498430
         },
         {
           "id": "cart_22",
@@ -2867,7 +2098,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790136524002
+          "timestamp": 1790137798430
         },
         {
           "id": "cart_23",
@@ -2879,7 +2110,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790133824002
+          "timestamp": 1790135098430
         },
         {
           "id": "cart_24",
@@ -2891,7 +2122,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790131124002
+          "timestamp": 1790132398430
         },
         {
           "id": "cart_25",
@@ -2903,7 +2134,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790128424002
+          "timestamp": 1790129698430
         },
         {
           "id": "cart_26",
@@ -2915,7 +2146,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790125724002
+          "timestamp": 1790126998430
         },
         {
           "id": "cart_27",
@@ -2927,7 +2158,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790123024002
+          "timestamp": 1790124298430
         },
         {
           "id": "cart_28",
@@ -2939,7 +2170,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790120324002
+          "timestamp": 1790121598430
         },
         {
           "id": "cart_29",
@@ -2951,7 +2182,7 @@
           ],
           "total": 149.9,
           "abandoned": false,
-          "timestamp": 1790117624002
+          "timestamp": 1790118898430
         }
       ]
     ]
@@ -2989,17 +2220,6 @@
       "clinica-demo",
       [
         {
-          "id": "sim_trf_cpl",
-          "tenantId": "clinica-demo",
-          "source": "meta_ads",
-          "campaignId": "camp-cpl-explodiu",
-          "campaignName": "Campanha CPL Alto",
-          "spend": 380,
-          "clicks": 120,
-          "sessions": 110,
-          "timestamp": 1790196366281
-        },
-        {
           "id": "trf_1",
           "tenantId": "clinica-demo",
           "source": "meta_ads",
@@ -3008,7 +2228,7 @@
           "spend": 420,
           "clicks": 210,
           "sessions": 198,
-          "timestamp": 1790195924002
+          "timestamp": 1790197198430
         },
         {
           "id": "trf_2",
@@ -3019,226 +2239,147 @@
           "spend": 180,
           "clicks": 85,
           "sessions": 80,
-          "timestamp": 1790195924002
+          "timestamp": 1790197198430
+        }
+      ]
+    ],
+    [
+      "drophub",
+      [
+        {
+          "id": "trf_ig_1",
+          "tenantId": "drophub",
+          "source": "instagram",
+          "campaignId": "camp-ig-reels-lucro",
+          "campaignName": "Instagram Reels - Calculadora & Ferramentas",
+          "spend": 260,
+          "clicks": 340,
+          "sessions": 310,
+          "timestamp": 1790197198438
+        },
+        {
+          "id": "trf_ig_2",
+          "tenantId": "drophub",
+          "source": "instagram",
+          "campaignId": "camp-ig-stories-bio",
+          "campaignName": "Stories Instagram - Link Bio",
+          "spend": 110,
+          "clicks": 145,
+          "sessions": 135,
+          "timestamp": 1790197198438
         }
       ]
     ]
   ],
   "activeAlerts": [
     [
-      "tenant-cooldown",
-      []
-    ],
-    [
-      "tenant-cool-1790195999384",
-      [
-        [
-          "PICO_RECUSA_CARTAO_credit_card",
-          {
-            "id": "alt_q800ei61",
-            "tenantId": "tenant-cool-1790195999384",
-            "tenantName": "Loja Cooldown Teste",
-            "operationMode": "ECOMMERCE",
-            "alertKey": "PICO_RECUSA_CARTAO",
-            "title": "Pico de Recusa de Cartão Detectado",
-            "severity": "CRITICAL",
-            "status": "OPEN",
-            "currentValue": 100,
-            "expectedValue": 10,
-            "metricUnit": "%",
-            "anomalyDetails": {
-              "totalTentativas": 4,
-              "recusas": 4,
-              "limiteSeguranca": 25
-            },
-            "entityType": "payment_method",
-            "entityId": "credit_card",
-            "entityName": "Cartão de Crédito",
-            "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
-            "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
-            "firstTriggeredAt": 1790195999393,
-            "lastTriggeredAt": 1790195999393,
-            "resolvedAt": null,
-            "cooldownUntil": 1790197799393
-          }
-        ]
-      ]
-    ],
-    [
-      "tenant-heal-1790196000291",
-      []
-    ],
-    [
-      "clinica-demo",
+      "drophub",
       [
         [
           "CPL_ANORMAL_general_cpl",
           {
-            "id": "alt_1p5s4qqz",
-            "tenantId": "clinica-demo",
-            "tenantName": "Clínica Odonto & Estética Sorriso",
+            "id": "alt_bm0z67hh",
+            "tenantId": "drophub",
+            "tenantName": "DropHub (Leads Instagram)",
             "operationMode": "LEADS",
             "alertKey": "CPL_ANORMAL",
             "title": "Custo por Lead (CPL) Acima do Padrão",
             "severity": "CRITICAL",
             "status": "OPEN",
-            "currentValue": 89.09,
-            "expectedValue": 18.5,
+            "currentValue": 37,
+            "expectedValue": 15.2,
             "metricUnit": "R$",
             "anomalyDetails": {
-              "gastoTotal": 980,
-              "leadsRecebidos": 11,
-              "cplAtual": 89.0909090909091,
-              "cplNormal": 18.5,
-              "limiteAlerta": 30
+              "gastoTotal": 370,
+              "leadsRecebidos": 7,
+              "cplAtual": 52.857142857142854,
+              "cplNormal": 15.2,
+              "limiteAlerta": 25
             },
             "entityType": "campaign",
             "entityId": "general_cpl",
             "entityName": "CPL Geral das Campanhas",
-            "whatsappMessage": "⚠️ *[AUDITOR SILENCIOSO] CUSTO POR LEAD (CPL) ELEVADO!*\n\nO custo por lead está fora do padrão na empresa *Clínica Odonto & Estética Sorriso*:\n\n💰 *CPL Atual:* R$ 89.09 por lead\n🎯 *CPL Normal:* R$ 18.50 (Meta Limite: R$ 30.00)\n💸 *Gasto:* R$ 980.00 para 11 leads\n\n👉 *Ação Recomendada:* Verifique seus criativos no Meta/Google e a taxa de conversão da página de captura!",
+            "whatsappMessage": "⚠️ *[AUDITOR SILENCIOSO] CUSTO POR LEAD (CPL) ELEVADO!*\n\nO custo por lead está fora do padrão na empresa *DropHub (Leads Instagram)*:\n\n💰 *CPL Atual:* R$ 52.86 por lead\n🎯 *CPL Normal:* R$ 15.20 (Meta Limite: R$ 25.00)\n💸 *Gasto:* R$ 370.00 para 7 leads\n\n👉 *Ação Recomendada:* Verifique seus criativos no Meta/Google e a taxa de conversão da página de captura!",
             "recommendedAction": "Pause anúncios com CTR baixo ou revise o público-alvo para evitar queima acelerada de verba.",
-            "firstTriggeredAt": 1790196377945,
-            "lastTriggeredAt": 1790196377945,
+            "firstTriggeredAt": 1790197252656,
+            "lastTriggeredAt": 1790197252656,
             "resolvedAt": null,
-            "cooldownUntil": 1790198177945
+            "cooldownUntil": 1790199052656
           }
         ],
         [
-          "CAMPANHA_SEM_LEADS_google-clareamento",
+          "LEADS_PARADOS_FUNIL_contacted",
           {
-            "id": "alt_92yucwnk",
-            "tenantId": "clinica-demo",
-            "tenantName": "Clínica Odonto & Estética Sorriso",
-            "operationMode": "LEADS",
-            "alertKey": "CAMPANHA_SEM_LEADS",
-            "title": "Campanha Consumindo Orçamento sem Leads: Clareamento Dental",
-            "severity": "CRITICAL",
-            "status": "OPEN",
-            "currentValue": 180,
-            "expectedValue": 0,
-            "metricUnit": "R$",
-            "anomalyDetails": {
-              "campaignId": "google-clareamento",
-              "campaignName": "Clareamento Dental",
-              "gastoSemLeads": 180,
-              "cliques": 85
-            },
-            "entityType": "campaign",
-            "entityId": "google-clareamento",
-            "entityName": "Clareamento Dental",
-            "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] CAMPANHA GASTANDO SEM GERAR LEADS!*\n\nA campanha *Clareamento Dental* já consumiu verba relevante sem nenhum resultado:\n\n💸 *Gasto Acumulado:* R$ 180.00\n👥 *Cliques:* 85\n❌ *Leads Gerados:* 0 leads\n\n👉 *Ação Recomendada:* Pause ou ajuste o link da campanha \"Clareamento Dental\" agora mesmo!",
-            "recommendedAction": "Pause a campanha \"Clareamento Dental\" temporariamente para estancar o gasto sem resultado.",
-            "firstTriggeredAt": 1790196377945,
-            "lastTriggeredAt": 1790196377945,
-            "resolvedAt": null,
-            "cooldownUntil": 1790198177945
-          }
-        ],
-        [
-          "LEAD_SEM_ATENDIMENTO_lead_2",
-          {
-            "id": "alt_wzrhpu32",
-            "tenantId": "clinica-demo",
-            "tenantName": "Clínica Odonto & Estética Sorriso",
-            "operationMode": "LEADS",
-            "alertKey": "LEAD_SEM_ATENDIMENTO",
-            "title": "Lead Aguardando Atendimento há 29 minutos",
-            "severity": "CRITICAL",
-            "status": "OPEN",
-            "currentValue": 29,
-            "expectedValue": 10,
-            "metricUnit": "min",
-            "anomalyDetails": {
-              "leadId": "lead_2",
-              "leadName": "Roberto Silveira",
-              "leadPhone": "11977772222",
-              "campanha": "Implantes & Facetas SP",
-              "tempoEsperaMin": 29,
-              "metaEsperaMin": 10
-            },
-            "entityType": "lead",
-            "entityId": "lead_2",
-            "entityName": "Roberto Silveira",
-            "whatsappMessage": "⏱️ *[AUDITOR SILENCIOSO] LEAD AGUARDANDO ATENDIMENTO!*\n\nO lead *Roberto Silveira* está aguardando contato na empresa *Clínica Odonto & Estética Sorriso*:\n\n⏳ *Tempo de Espera:* 29 minutos (Meta: até 10 min)\n📱 *WhatsApp do Lead:* 11977772222\n📢 *Origem:* Implantes & Facetas SP\n\n👉 *Ação Recomendada:* Chame o cliente no WhatsApp imediatamente para não perder a oportunidade quente!",
-            "recommendedAction": "Chame o lead Roberto Silveira (11977772222) no WhatsApp agora. Cada minuto de atraso reduz em 50% a chance de conversão.",
-            "firstTriggeredAt": 1790196377945,
-            "lastTriggeredAt": 1790196377945,
-            "resolvedAt": null,
-            "cooldownUntil": 1790198177945
-          }
-        ],
-        [
-          "LEADS_PARADOS_FUNIL_qualified",
-          {
-            "id": "alt_npintb07",
-            "tenantId": "clinica-demo",
-            "tenantName": "Clínica Odonto & Estética Sorriso",
+            "id": "alt_oe6r19s2",
+            "tenantId": "drophub",
+            "tenantName": "DropHub (Leads Instagram)",
             "operationMode": "LEADS",
             "alertKey": "LEADS_PARADOS_FUNIL",
-            "title": "4 Leads Estagnados na Etapa: qualified",
+            "title": "5 Leads Estagnados na Etapa: contacted",
             "severity": "WARNING",
             "status": "OPEN",
-            "currentValue": 4,
+            "currentValue": 5,
             "expectedValue": 0,
             "metricUnit": "leads",
             "anomalyDetails": {
-              "etapa": "qualified",
-              "quantidadeParados": 4,
+              "etapa": "contacted",
+              "quantidadeParados": 5,
               "horasEstagnados": 24
             },
             "entityType": "funnel_stage",
-            "entityId": "qualified",
-            "entityName": "Etapa: qualified",
-            "whatsappMessage": "⚠️ *[AUDITOR SILENCIOSO] LEADS PARADOS NO FUNIL*\n\nExistem *4 leads estagnados* na etapa *\"qualified\"* há mais de 24h na empresa *Clínica Odonto & Estética Sorriso*.\n\n📋 *Etapa:* qualified\n👥 *Leads Afetados:* Marcos Vinicius, Paciente 14, Paciente 16 e outros\n\n👉 *Ação Recomendada:* Faça um disparo de follow-up para reengajar esses clientes antes que esfriem totalmente!",
-            "recommendedAction": "Realize uma rodada de follow-up com os 4 leads parados na etapa \"qualified\".",
-            "firstTriggeredAt": 1790196377945,
-            "lastTriggeredAt": 1790196377945,
+            "entityId": "contacted",
+            "entityName": "Etapa: contacted",
+            "whatsappMessage": "⚠️ *[AUDITOR SILENCIOSO] LEADS PARADOS NO FUNIL*\n\nExistem *5 leads estagnados* na etapa *\"contacted\"* há mais de 24h na empresa *DropHub (Leads Instagram)*.\n\n📋 *Etapa:* contacted\n👥 *Leads Afetados:* Seguidor Instagram 9, Seguidor Instagram 11, Seguidor Instagram 13 e outros\n\n👉 *Ação Recomendada:* Faça um disparo de follow-up para reengajar esses clientes antes que esfriem totalmente!",
+            "recommendedAction": "Realize uma rodada de follow-up com os 5 leads parados na etapa \"contacted\".",
+            "firstTriggeredAt": 1790197252656,
+            "lastTriggeredAt": 1790197252656,
             "resolvedAt": null,
-            "cooldownUntil": 1790198177945
+            "cooldownUntil": 1790199052656
           }
         ],
         [
-          "CAMPANHA_ALTO_GASTO_BAIXO_RETORNO_camp-cpl-explodiu",
+          "LEAD_SEM_ATENDIMENTO_sim_ig_urgente_1790197317677",
           {
-            "id": "alt_aolrzuia",
-            "tenantId": "clinica-demo",
-            "tenantName": "Clínica Odonto & Estética Sorriso",
+            "id": "alt_w5mwjfxv",
+            "tenantId": "drophub",
+            "tenantName": "DropHub (Leads Instagram)",
             "operationMode": "LEADS",
-            "alertKey": "CAMPANHA_ALTO_GASTO_BAIXO_RETORNO",
-            "title": "Campanha Deficitária: Campanha CPL Alto",
-            "severity": "CRITICAL",
+            "alertKey": "LEAD_SEM_ATENDIMENTO",
+            "title": "Lead Aguardando Atendimento há 26 minutos",
+            "severity": "WARNING",
             "status": "OPEN",
-            "currentValue": 0,
-            "expectedValue": 950,
-            "metricUnit": "R$",
+            "currentValue": 26,
+            "expectedValue": 15,
+            "metricUnit": "min",
             "anomalyDetails": {
-              "campaignId": "camp-cpl-explodiu",
-              "campaignName": "Campanha CPL Alto",
-              "investimento": 380,
-              "retornoGerado": 0,
-              "prejuizo": 380
+              "leadId": "sim_ig_urgente_1790197317677",
+              "leadName": "Camila Fernandes (Direct Instagram)",
+              "leadPhone": "11988887766",
+              "campanha": "Stories Instagram - Link Bio",
+              "tempoEsperaMin": 26,
+              "metaEsperaMin": 15
             },
-            "entityType": "campaign",
-            "entityId": "camp-cpl-explodiu",
-            "entityName": "Campanha CPL Alto",
-            "whatsappMessage": "💸 *[AUDITOR SILENCIOSO] CAMPANHA COM ALTO GASTO E BAIXO RETORNO!*\n\nA campanha *\"Campanha CPL Alto\"* está consumindo verba com resultado deficitário na empresa *Clínica Odonto & Estética Sorriso*:\n\n📉 *Investimento Total:* R$ 380.00\n💰 *Retorno em Vendas:* R$ 0.00\n🛑 *Resultado:* Prejuízo de -R$ 380.00\n\n👉 *Ação Recomendada:* Realoque o orçamento desta campanha para os públicos que trazem faturamento real!",
-            "recommendedAction": "Reduza o orçamento ou pause a campanha \"Campanha CPL Alto\" para estancar o prejuízo operacional.",
-            "firstTriggeredAt": 1790196377945,
-            "lastTriggeredAt": 1790196377945,
+            "entityType": "lead",
+            "entityId": "sim_ig_urgente_1790197317677",
+            "entityName": "Camila Fernandes (Direct Instagram)",
+            "whatsappMessage": "⏱️ *[AUDITOR SILENCIOSO] LEAD AGUARDANDO ATENDIMENTO!*\n\nO lead *Camila Fernandes (Direct Instagram)* está aguardando contato na empresa *DropHub (Leads Instagram)*:\n\n⏳ *Tempo de Espera:* 26 minutos (Meta: até 15 min)\n📱 *WhatsApp do Lead:* 11988887766\n📢 *Origem:* Stories Instagram - Link Bio\n\n👉 *Ação Recomendada:* Chame o cliente no WhatsApp imediatamente para não perder a oportunidade quente!",
+            "recommendedAction": "Chame o lead Camila Fernandes (Direct Instagram) (11988887766) no WhatsApp agora. Cada minuto de atraso reduz em 50% a chance de conversão.",
+            "firstTriggeredAt": 1790197317680,
+            "lastTriggeredAt": 1790197317680,
             "resolvedAt": null,
-            "cooldownUntil": 1790198177945
+            "cooldownUntil": 1790199117680
           }
         ]
       ]
     ],
     [
-      "tenant-cool-1790196712835",
+      "tenant-cool-1790197385275",
       [
         [
           "PICO_RECUSA_CARTAO_credit_card",
           {
-            "id": "alt_dlgkmz6a",
-            "tenantId": "tenant-cool-1790196712835",
+            "id": "alt_4mhz5bij",
+            "tenantId": "tenant-cool-1790197385275",
             "tenantName": "Loja Cooldown Teste",
             "operationMode": "ECOMMERCE",
             "alertKey": "PICO_RECUSA_CARTAO",
@@ -3258,87 +2399,145 @@
             "entityName": "Cartão de Crédito",
             "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
             "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
-            "firstTriggeredAt": 1790196712854,
-            "lastTriggeredAt": 1790196712854,
+            "firstTriggeredAt": 1790197385297,
+            "lastTriggeredAt": 1790197385297,
             "resolvedAt": null,
-            "cooldownUntil": 1790198512854
+            "cooldownUntil": 1790199185297
           }
         ]
       ]
     ],
     [
-      "tenant-heal-1790196713596",
+      "tenant-heal-1790197386302",
       []
     ]
   ],
   "alertHistory": [
     [
-      "tenant-cooldown",
+      "drophub",
       [
         {
-          "id": "alt_szs5q4ni",
-          "tenantId": "tenant-cooldown",
-          "tenantName": "Loja Cooldown Teste",
-          "operationMode": "ECOMMERCE",
-          "alertKey": "PICO_RECUSA_CARTAO",
-          "title": "Pico de Recusa de Cartão Detectado",
-          "severity": "CRITICAL",
-          "status": "RESOLVED",
-          "currentValue": 28.6,
-          "expectedValue": 10,
-          "metricUnit": "%",
+          "id": "alt_w5mwjfxv",
+          "tenantId": "drophub",
+          "tenantName": "DropHub (Leads Instagram)",
+          "operationMode": "LEADS",
+          "alertKey": "LEAD_SEM_ATENDIMENTO",
+          "title": "Lead Aguardando Atendimento há 26 minutos",
+          "severity": "WARNING",
+          "status": "OPEN",
+          "currentValue": 26,
+          "expectedValue": 15,
+          "metricUnit": "min",
           "anomalyDetails": {
-            "totalTentativas": 28,
-            "recusas": 8,
-            "limiteSeguranca": 25
+            "leadId": "sim_ig_urgente_1790197317677",
+            "leadName": "Camila Fernandes (Direct Instagram)",
+            "leadPhone": "11988887766",
+            "campanha": "Stories Instagram - Link Bio",
+            "tempoEsperaMin": 26,
+            "metaEsperaMin": 15
           },
-          "entityType": "payment_method",
-          "entityId": "credit_card",
-          "entityName": "Cartão de Crédito",
-          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *8 de 28 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 28.6% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
-          "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
-          "firstTriggeredAt": 1790195963374,
-          "lastTriggeredAt": 1790195963374,
-          "resolvedAt": 1790195964396,
-          "cooldownUntil": 1790197763374,
-          "resolutionNote": "Problema normalizado automaticamente pelo sistema"
+          "entityType": "lead",
+          "entityId": "sim_ig_urgente_1790197317677",
+          "entityName": "Camila Fernandes (Direct Instagram)",
+          "whatsappMessage": "⏱️ *[AUDITOR SILENCIOSO] LEAD AGUARDANDO ATENDIMENTO!*\n\nO lead *Camila Fernandes (Direct Instagram)* está aguardando contato na empresa *DropHub (Leads Instagram)*:\n\n⏳ *Tempo de Espera:* 26 minutos (Meta: até 15 min)\n📱 *WhatsApp do Lead:* 11988887766\n📢 *Origem:* Stories Instagram - Link Bio\n\n👉 *Ação Recomendada:* Chame o cliente no WhatsApp imediatamente para não perder a oportunidade quente!",
+          "recommendedAction": "Chame o lead Camila Fernandes (Direct Instagram) (11988887766) no WhatsApp agora. Cada minuto de atraso reduz em 50% a chance de conversão.",
+          "firstTriggeredAt": 1790197317680,
+          "lastTriggeredAt": 1790197317680,
+          "resolvedAt": null,
+          "cooldownUntil": 1790199117680
         },
         {
-          "id": "alt_7rekwcf9",
-          "tenantId": "tenant-cooldown",
-          "tenantName": "Loja Cooldown Teste",
-          "operationMode": "ECOMMERCE",
-          "alertKey": "PICO_RECUSA_CARTAO",
-          "title": "Pico de Recusa de Cartão Detectado",
+          "id": "alt_oe6r19s2",
+          "tenantId": "drophub",
+          "tenantName": "DropHub (Leads Instagram)",
+          "operationMode": "LEADS",
+          "alertKey": "LEADS_PARADOS_FUNIL",
+          "title": "5 Leads Estagnados na Etapa: contacted",
+          "severity": "WARNING",
+          "status": "OPEN",
+          "currentValue": 5,
+          "expectedValue": 0,
+          "metricUnit": "leads",
+          "anomalyDetails": {
+            "etapa": "contacted",
+            "quantidadeParados": 5,
+            "horasEstagnados": 24
+          },
+          "entityType": "funnel_stage",
+          "entityId": "contacted",
+          "entityName": "Etapa: contacted",
+          "whatsappMessage": "⚠️ *[AUDITOR SILENCIOSO] LEADS PARADOS NO FUNIL*\n\nExistem *5 leads estagnados* na etapa *\"contacted\"* há mais de 24h na empresa *DropHub (Leads Instagram)*.\n\n📋 *Etapa:* contacted\n👥 *Leads Afetados:* Seguidor Instagram 9, Seguidor Instagram 11, Seguidor Instagram 13 e outros\n\n👉 *Ação Recomendada:* Faça um disparo de follow-up para reengajar esses clientes antes que esfriem totalmente!",
+          "recommendedAction": "Realize uma rodada de follow-up com os 5 leads parados na etapa \"contacted\".",
+          "firstTriggeredAt": 1790197252656,
+          "lastTriggeredAt": 1790197252656,
+          "resolvedAt": null,
+          "cooldownUntil": 1790199052656
+        },
+        {
+          "id": "alt_bm0z67hh",
+          "tenantId": "drophub",
+          "tenantName": "DropHub (Leads Instagram)",
+          "operationMode": "LEADS",
+          "alertKey": "CPL_ANORMAL",
+          "title": "Custo por Lead (CPL) Acima do Padrão",
+          "severity": "CRITICAL",
+          "status": "OPEN",
+          "currentValue": 37,
+          "expectedValue": 15.2,
+          "metricUnit": "R$",
+          "anomalyDetails": {
+            "gastoTotal": 370,
+            "leadsRecebidos": 7,
+            "cplAtual": 52.857142857142854,
+            "cplNormal": 15.2,
+            "limiteAlerta": 25
+          },
+          "entityType": "campaign",
+          "entityId": "general_cpl",
+          "entityName": "CPL Geral das Campanhas",
+          "whatsappMessage": "⚠️ *[AUDITOR SILENCIOSO] CUSTO POR LEAD (CPL) ELEVADO!*\n\nO custo por lead está fora do padrão na empresa *DropHub (Leads Instagram)*:\n\n💰 *CPL Atual:* R$ 52.86 por lead\n🎯 *CPL Normal:* R$ 15.20 (Meta Limite: R$ 25.00)\n💸 *Gasto:* R$ 370.00 para 7 leads\n\n👉 *Ação Recomendada:* Verifique seus criativos no Meta/Google e a taxa de conversão da página de captura!",
+          "recommendedAction": "Pause anúncios com CTR baixo ou revise o público-alvo para evitar queima acelerada de verba.",
+          "firstTriggeredAt": 1790197252656,
+          "lastTriggeredAt": 1790197252656,
+          "resolvedAt": null,
+          "cooldownUntil": 1790199052656
+        },
+        {
+          "id": "alt_6ixxjovf",
+          "tenantId": "drophub",
+          "tenantName": "DropHub (Leads Instagram)",
+          "operationMode": "LEADS",
+          "alertKey": "QUEDA_LEADS",
+          "title": "Queda Anormal na Geração de Leads",
           "severity": "CRITICAL",
           "status": "RESOLVED",
-          "currentValue": 100,
-          "expectedValue": 10,
-          "metricUnit": "%",
+          "currentValue": 9,
+          "expectedValue": 18,
+          "metricUnit": "leads/dia",
           "anomalyDetails": {
-            "totalTentativas": 4,
-            "recusas": 4,
-            "limiteSeguranca": 25
+            "leadsHoje": 7,
+            "mediaNormal": 18,
+            "quedaPercentual": 61
           },
-          "entityType": "payment_method",
-          "entityId": "credit_card",
-          "entityName": "Cartão de Crédito",
-          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
-          "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
-          "firstTriggeredAt": 1790195924090,
-          "lastTriggeredAt": 1790195924090,
-          "resolvedAt": 1790195925043,
-          "cooldownUntil": 1790197724090,
+          "entityType": "funnel",
+          "entityId": "leads_volume",
+          "entityName": "Volume Geral de Leads",
+          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: QUEDA DE LEADS!*\n\nQueda acentuada na entrada de leads na empresa *DropHub (Leads Instagram)*:\n\n📉 *Hoje:* 7 leads (Média Normal: ~18 leads/dia)\n📊 *Variação:* -61%\n\n👉 *Ação Recomendada:* Verifique se suas campanhas de anúncios estão ativas e se a página de captura está funcionando!",
+          "recommendedAction": "Verifique se os anúncios no Meta/Google foram pausados, se o saldo da conta acabou ou se a Landing Page está fora do ar.",
+          "firstTriggeredAt": 1790197252656,
+          "lastTriggeredAt": 1790197252656,
+          "resolvedAt": 1790197318251,
+          "cooldownUntil": 1790199052656,
           "resolutionNote": "Problema normalizado automaticamente pelo sistema"
         }
       ]
     ],
     [
-      "tenant-cool-1790195999384",
+      "tenant-cool-1790197385275",
       [
         {
-          "id": "alt_q800ei61",
-          "tenantId": "tenant-cool-1790195999384",
+          "id": "alt_4mhz5bij",
+          "tenantId": "tenant-cool-1790197385275",
           "tenantName": "Loja Cooldown Teste",
           "operationMode": "ECOMMERCE",
           "alertKey": "PICO_RECUSA_CARTAO",
@@ -3358,19 +2557,19 @@
           "entityName": "Cartão de Crédito",
           "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
           "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
-          "firstTriggeredAt": 1790195999393,
-          "lastTriggeredAt": 1790195999393,
+          "firstTriggeredAt": 1790197385297,
+          "lastTriggeredAt": 1790197385297,
           "resolvedAt": null,
-          "cooldownUntil": 1790197799393
+          "cooldownUntil": 1790199185297
         }
       ]
     ],
     [
-      "tenant-heal-1790196000291",
+      "tenant-heal-1790197386302",
       [
         {
-          "id": "alt_bhw5jp2r",
-          "tenantId": "tenant-heal-1790196000291",
+          "id": "alt_aj4nzdbc",
+          "tenantId": "tenant-heal-1790197386302",
           "tenantName": "Loja Auto-Cura Teste",
           "operationMode": "ECOMMERCE",
           "alertKey": "PICO_RECUSA_CARTAO",
@@ -3390,366 +2589,10 @@
           "entityName": "Cartão de Crédito",
           "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Auto-Cura Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
           "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
-          "firstTriggeredAt": 1790196000299,
-          "lastTriggeredAt": 1790196000299,
-          "resolvedAt": 1790196000578,
-          "cooldownUntil": 1790197800299,
-          "resolutionNote": "Problema normalizado automaticamente pelo sistema"
-        }
-      ]
-    ],
-    [
-      "clinica-demo",
-      [
-        {
-          "id": "alt_aolrzuia",
-          "tenantId": "clinica-demo",
-          "tenantName": "Clínica Odonto & Estética Sorriso",
-          "operationMode": "LEADS",
-          "alertKey": "CAMPANHA_ALTO_GASTO_BAIXO_RETORNO",
-          "title": "Campanha Deficitária: Campanha CPL Alto",
-          "severity": "CRITICAL",
-          "status": "OPEN",
-          "currentValue": 0,
-          "expectedValue": 950,
-          "metricUnit": "R$",
-          "anomalyDetails": {
-            "campaignId": "camp-cpl-explodiu",
-            "campaignName": "Campanha CPL Alto",
-            "investimento": 380,
-            "retornoGerado": 0,
-            "prejuizo": 380
-          },
-          "entityType": "campaign",
-          "entityId": "camp-cpl-explodiu",
-          "entityName": "Campanha CPL Alto",
-          "whatsappMessage": "💸 *[AUDITOR SILENCIOSO] CAMPANHA COM ALTO GASTO E BAIXO RETORNO!*\n\nA campanha *\"Campanha CPL Alto\"* está consumindo verba com resultado deficitário na empresa *Clínica Odonto & Estética Sorriso*:\n\n📉 *Investimento Total:* R$ 380.00\n💰 *Retorno em Vendas:* R$ 0.00\n🛑 *Resultado:* Prejuízo de -R$ 380.00\n\n👉 *Ação Recomendada:* Realoque o orçamento desta campanha para os públicos que trazem faturamento real!",
-          "recommendedAction": "Reduza o orçamento ou pause a campanha \"Campanha CPL Alto\" para estancar o prejuízo operacional.",
-          "firstTriggeredAt": 1790196377945,
-          "lastTriggeredAt": 1790196377945,
-          "resolvedAt": null,
-          "cooldownUntil": 1790198177945
-        },
-        {
-          "id": "alt_npintb07",
-          "tenantId": "clinica-demo",
-          "tenantName": "Clínica Odonto & Estética Sorriso",
-          "operationMode": "LEADS",
-          "alertKey": "LEADS_PARADOS_FUNIL",
-          "title": "4 Leads Estagnados na Etapa: qualified",
-          "severity": "WARNING",
-          "status": "OPEN",
-          "currentValue": 4,
-          "expectedValue": 0,
-          "metricUnit": "leads",
-          "anomalyDetails": {
-            "etapa": "qualified",
-            "quantidadeParados": 4,
-            "horasEstagnados": 24
-          },
-          "entityType": "funnel_stage",
-          "entityId": "qualified",
-          "entityName": "Etapa: qualified",
-          "whatsappMessage": "⚠️ *[AUDITOR SILENCIOSO] LEADS PARADOS NO FUNIL*\n\nExistem *4 leads estagnados* na etapa *\"qualified\"* há mais de 24h na empresa *Clínica Odonto & Estética Sorriso*.\n\n📋 *Etapa:* qualified\n👥 *Leads Afetados:* Marcos Vinicius, Paciente 14, Paciente 16 e outros\n\n👉 *Ação Recomendada:* Faça um disparo de follow-up para reengajar esses clientes antes que esfriem totalmente!",
-          "recommendedAction": "Realize uma rodada de follow-up com os 4 leads parados na etapa \"qualified\".",
-          "firstTriggeredAt": 1790196377945,
-          "lastTriggeredAt": 1790196377945,
-          "resolvedAt": null,
-          "cooldownUntil": 1790198177945
-        },
-        {
-          "id": "alt_wzrhpu32",
-          "tenantId": "clinica-demo",
-          "tenantName": "Clínica Odonto & Estética Sorriso",
-          "operationMode": "LEADS",
-          "alertKey": "LEAD_SEM_ATENDIMENTO",
-          "title": "Lead Aguardando Atendimento há 29 minutos",
-          "severity": "CRITICAL",
-          "status": "OPEN",
-          "currentValue": 29,
-          "expectedValue": 10,
-          "metricUnit": "min",
-          "anomalyDetails": {
-            "leadId": "lead_2",
-            "leadName": "Roberto Silveira",
-            "leadPhone": "11977772222",
-            "campanha": "Implantes & Facetas SP",
-            "tempoEsperaMin": 29,
-            "metaEsperaMin": 10
-          },
-          "entityType": "lead",
-          "entityId": "lead_2",
-          "entityName": "Roberto Silveira",
-          "whatsappMessage": "⏱️ *[AUDITOR SILENCIOSO] LEAD AGUARDANDO ATENDIMENTO!*\n\nO lead *Roberto Silveira* está aguardando contato na empresa *Clínica Odonto & Estética Sorriso*:\n\n⏳ *Tempo de Espera:* 29 minutos (Meta: até 10 min)\n📱 *WhatsApp do Lead:* 11977772222\n📢 *Origem:* Implantes & Facetas SP\n\n👉 *Ação Recomendada:* Chame o cliente no WhatsApp imediatamente para não perder a oportunidade quente!",
-          "recommendedAction": "Chame o lead Roberto Silveira (11977772222) no WhatsApp agora. Cada minuto de atraso reduz em 50% a chance de conversão.",
-          "firstTriggeredAt": 1790196377945,
-          "lastTriggeredAt": 1790196377945,
-          "resolvedAt": null,
-          "cooldownUntil": 1790198177945
-        },
-        {
-          "id": "alt_92yucwnk",
-          "tenantId": "clinica-demo",
-          "tenantName": "Clínica Odonto & Estética Sorriso",
-          "operationMode": "LEADS",
-          "alertKey": "CAMPANHA_SEM_LEADS",
-          "title": "Campanha Consumindo Orçamento sem Leads: Clareamento Dental",
-          "severity": "CRITICAL",
-          "status": "OPEN",
-          "currentValue": 180,
-          "expectedValue": 0,
-          "metricUnit": "R$",
-          "anomalyDetails": {
-            "campaignId": "google-clareamento",
-            "campaignName": "Clareamento Dental",
-            "gastoSemLeads": 180,
-            "cliques": 85
-          },
-          "entityType": "campaign",
-          "entityId": "google-clareamento",
-          "entityName": "Clareamento Dental",
-          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] CAMPANHA GASTANDO SEM GERAR LEADS!*\n\nA campanha *Clareamento Dental* já consumiu verba relevante sem nenhum resultado:\n\n💸 *Gasto Acumulado:* R$ 180.00\n👥 *Cliques:* 85\n❌ *Leads Gerados:* 0 leads\n\n👉 *Ação Recomendada:* Pause ou ajuste o link da campanha \"Clareamento Dental\" agora mesmo!",
-          "recommendedAction": "Pause a campanha \"Clareamento Dental\" temporariamente para estancar o gasto sem resultado.",
-          "firstTriggeredAt": 1790196377945,
-          "lastTriggeredAt": 1790196377945,
-          "resolvedAt": null,
-          "cooldownUntil": 1790198177945
-        },
-        {
-          "id": "alt_1p5s4qqz",
-          "tenantId": "clinica-demo",
-          "tenantName": "Clínica Odonto & Estética Sorriso",
-          "operationMode": "LEADS",
-          "alertKey": "CPL_ANORMAL",
-          "title": "Custo por Lead (CPL) Acima do Padrão",
-          "severity": "CRITICAL",
-          "status": "OPEN",
-          "currentValue": 89.09,
-          "expectedValue": 18.5,
-          "metricUnit": "R$",
-          "anomalyDetails": {
-            "gastoTotal": 980,
-            "leadsRecebidos": 11,
-            "cplAtual": 89.0909090909091,
-            "cplNormal": 18.5,
-            "limiteAlerta": 30
-          },
-          "entityType": "campaign",
-          "entityId": "general_cpl",
-          "entityName": "CPL Geral das Campanhas",
-          "whatsappMessage": "⚠️ *[AUDITOR SILENCIOSO] CUSTO POR LEAD (CPL) ELEVADO!*\n\nO custo por lead está fora do padrão na empresa *Clínica Odonto & Estética Sorriso*:\n\n💰 *CPL Atual:* R$ 89.09 por lead\n🎯 *CPL Normal:* R$ 18.50 (Meta Limite: R$ 30.00)\n💸 *Gasto:* R$ 980.00 para 11 leads\n\n👉 *Ação Recomendada:* Verifique seus criativos no Meta/Google e a taxa de conversão da página de captura!",
-          "recommendedAction": "Pause anúncios com CTR baixo ou revise o público-alvo para evitar queima acelerada de verba.",
-          "firstTriggeredAt": 1790196377945,
-          "lastTriggeredAt": 1790196377945,
-          "resolvedAt": null,
-          "cooldownUntil": 1790198177945
-        },
-        {
-          "id": "alt_c0sjr20v",
-          "tenantId": "clinica-demo",
-          "tenantName": "Clínica Odonto & Estética Sorriso",
-          "operationMode": "LEADS",
-          "alertKey": "CAMPANHA_ALTO_GASTO_BAIXO_RETORNO",
-          "title": "Campanha Deficitária: Campanha CPL Alto",
-          "severity": "CRITICAL",
-          "status": "OPEN",
-          "currentValue": 0,
-          "expectedValue": 950,
-          "metricUnit": "R$",
-          "anomalyDetails": {
-            "campaignId": "camp-cpl-explodiu",
-            "campaignName": "Campanha CPL Alto",
-            "investimento": 380,
-            "retornoGerado": 0,
-            "prejuizo": 380
-          },
-          "entityType": "campaign",
-          "entityId": "camp-cpl-explodiu",
-          "entityName": "Campanha CPL Alto",
-          "whatsappMessage": "💸 *[AUDITOR SILENCIOSO] CAMPANHA COM ALTO GASTO E BAIXO RETORNO!*\n\nA campanha *\"Campanha CPL Alto\"* está consumindo verba com resultado deficitário na empresa *Clínica Odonto & Estética Sorriso*:\n\n📉 *Investimento Total:* R$ 380.00\n💰 *Retorno em Vendas:* R$ 0.00\n🛑 *Resultado:* Prejuízo de -R$ 380.00\n\n👉 *Ação Recomendada:* Realoque o orçamento desta campanha para os públicos que trazem faturamento real!",
-          "recommendedAction": "Reduza o orçamento ou pause a campanha \"Campanha CPL Alto\" para estancar o prejuízo operacional.",
-          "firstTriggeredAt": 1790196366287,
-          "lastTriggeredAt": 1790196366287,
-          "resolvedAt": null,
-          "cooldownUntil": 1790198166287
-        },
-        {
-          "id": "alt_7ocm5oii",
-          "tenantId": "clinica-demo",
-          "tenantName": "Clínica Odonto & Estética Sorriso",
-          "operationMode": "LEADS",
-          "alertKey": "LEADS_PARADOS_FUNIL",
-          "title": "4 Leads Estagnados na Etapa: qualified",
-          "severity": "WARNING",
-          "status": "OPEN",
-          "currentValue": 4,
-          "expectedValue": 0,
-          "metricUnit": "leads",
-          "anomalyDetails": {
-            "etapa": "qualified",
-            "quantidadeParados": 4,
-            "horasEstagnados": 24
-          },
-          "entityType": "funnel_stage",
-          "entityId": "qualified",
-          "entityName": "Etapa: qualified",
-          "whatsappMessage": "⚠️ *[AUDITOR SILENCIOSO] LEADS PARADOS NO FUNIL*\n\nExistem *4 leads estagnados* na etapa *\"qualified\"* há mais de 24h na empresa *Clínica Odonto & Estética Sorriso*.\n\n📋 *Etapa:* qualified\n👥 *Leads Afetados:* Marcos Vinicius, Paciente 14, Paciente 16 e outros\n\n👉 *Ação Recomendada:* Faça um disparo de follow-up para reengajar esses clientes antes que esfriem totalmente!",
-          "recommendedAction": "Realize uma rodada de follow-up com os 4 leads parados na etapa \"qualified\".",
-          "firstTriggeredAt": 1790196346099,
-          "lastTriggeredAt": 1790196346099,
-          "resolvedAt": null,
-          "cooldownUntil": 1790198146099
-        },
-        {
-          "id": "alt_t826zsjc",
-          "tenantId": "clinica-demo",
-          "tenantName": "Clínica Odonto & Estética Sorriso",
-          "operationMode": "LEADS",
-          "alertKey": "LEAD_SEM_ATENDIMENTO",
-          "title": "Lead Aguardando Atendimento há 29 minutos",
-          "severity": "CRITICAL",
-          "status": "OPEN",
-          "currentValue": 29,
-          "expectedValue": 10,
-          "metricUnit": "min",
-          "anomalyDetails": {
-            "leadId": "lead_2",
-            "leadName": "Roberto Silveira",
-            "leadPhone": "11977772222",
-            "campanha": "Implantes & Facetas SP",
-            "tempoEsperaMin": 29,
-            "metaEsperaMin": 10
-          },
-          "entityType": "lead",
-          "entityId": "lead_2",
-          "entityName": "Roberto Silveira",
-          "whatsappMessage": "⏱️ *[AUDITOR SILENCIOSO] LEAD AGUARDANDO ATENDIMENTO!*\n\nO lead *Roberto Silveira* está aguardando contato na empresa *Clínica Odonto & Estética Sorriso*:\n\n⏳ *Tempo de Espera:* 29 minutos (Meta: até 10 min)\n📱 *WhatsApp do Lead:* 11977772222\n📢 *Origem:* Implantes & Facetas SP\n\n👉 *Ação Recomendada:* Chame o cliente no WhatsApp imediatamente para não perder a oportunidade quente!",
-          "recommendedAction": "Chame o lead Roberto Silveira (11977772222) no WhatsApp agora. Cada minuto de atraso reduz em 50% a chance de conversão.",
-          "firstTriggeredAt": 1790196346099,
-          "lastTriggeredAt": 1790196346099,
-          "resolvedAt": null,
-          "cooldownUntil": 1790198146099
-        },
-        {
-          "id": "alt_y9kbeew8",
-          "tenantId": "clinica-demo",
-          "tenantName": "Clínica Odonto & Estética Sorriso",
-          "operationMode": "LEADS",
-          "alertKey": "CAMPANHA_SEM_LEADS",
-          "title": "Campanha Consumindo Orçamento sem Leads: Clareamento Dental",
-          "severity": "CRITICAL",
-          "status": "OPEN",
-          "currentValue": 180,
-          "expectedValue": 0,
-          "metricUnit": "R$",
-          "anomalyDetails": {
-            "campaignId": "google-clareamento",
-            "campaignName": "Clareamento Dental",
-            "gastoSemLeads": 180,
-            "cliques": 85
-          },
-          "entityType": "campaign",
-          "entityId": "google-clareamento",
-          "entityName": "Clareamento Dental",
-          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] CAMPANHA GASTANDO SEM GERAR LEADS!*\n\nA campanha *Clareamento Dental* já consumiu verba relevante sem nenhum resultado:\n\n💸 *Gasto Acumulado:* R$ 180.00\n👥 *Cliques:* 85\n❌ *Leads Gerados:* 0 leads\n\n👉 *Ação Recomendada:* Pause ou ajuste o link da campanha \"Clareamento Dental\" agora mesmo!",
-          "recommendedAction": "Pause a campanha \"Clareamento Dental\" temporariamente para estancar o gasto sem resultado.",
-          "firstTriggeredAt": 1790196346099,
-          "lastTriggeredAt": 1790196346099,
-          "resolvedAt": null,
-          "cooldownUntil": 1790198146099
-        },
-        {
-          "id": "alt_ww208wfj",
-          "tenantId": "clinica-demo",
-          "tenantName": "Clínica Odonto & Estética Sorriso",
-          "operationMode": "LEADS",
-          "alertKey": "CPL_ANORMAL",
-          "title": "Custo por Lead (CPL) Acima do Padrão",
-          "severity": "CRITICAL",
-          "status": "OPEN",
-          "currentValue": 89.09,
-          "expectedValue": 18.5,
-          "metricUnit": "R$",
-          "anomalyDetails": {
-            "gastoTotal": 600,
-            "leadsRecebidos": 10,
-            "cplAtual": 60,
-            "cplNormal": 18.5,
-            "limiteAlerta": 30
-          },
-          "entityType": "campaign",
-          "entityId": "general_cpl",
-          "entityName": "CPL Geral das Campanhas",
-          "whatsappMessage": "⚠️ *[AUDITOR SILENCIOSO] CUSTO POR LEAD (CPL) ELEVADO!*\n\nO custo por lead está fora do padrão na empresa *Clínica Odonto & Estética Sorriso*:\n\n💰 *CPL Atual:* R$ 60.00 por lead\n🎯 *CPL Normal:* R$ 18.50 (Meta Limite: R$ 30.00)\n💸 *Gasto:* R$ 600.00 para 10 leads\n\n👉 *Ação Recomendada:* Verifique seus criativos no Meta/Google e a taxa de conversão da página de captura!",
-          "recommendedAction": "Pause anúncios com CTR baixo ou revise o público-alvo para evitar queima acelerada de verba.",
-          "firstTriggeredAt": 1790196346099,
-          "lastTriggeredAt": 1790196346099,
-          "resolvedAt": null,
-          "cooldownUntil": 1790198146099
-        }
-      ]
-    ],
-    [
-      "tenant-cool-1790196712835",
-      [
-        {
-          "id": "alt_dlgkmz6a",
-          "tenantId": "tenant-cool-1790196712835",
-          "tenantName": "Loja Cooldown Teste",
-          "operationMode": "ECOMMERCE",
-          "alertKey": "PICO_RECUSA_CARTAO",
-          "title": "Pico de Recusa de Cartão Detectado",
-          "severity": "CRITICAL",
-          "status": "OPEN",
-          "currentValue": 100,
-          "expectedValue": 10,
-          "metricUnit": "%",
-          "anomalyDetails": {
-            "totalTentativas": 4,
-            "recusas": 4,
-            "limiteSeguranca": 25
-          },
-          "entityType": "payment_method",
-          "entityId": "credit_card",
-          "entityName": "Cartão de Crédito",
-          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
-          "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
-          "firstTriggeredAt": 1790196712854,
-          "lastTriggeredAt": 1790196712854,
-          "resolvedAt": null,
-          "cooldownUntil": 1790198512854
-        }
-      ]
-    ],
-    [
-      "tenant-heal-1790196713596",
-      [
-        {
-          "id": "alt_yddfsfum",
-          "tenantId": "tenant-heal-1790196713596",
-          "tenantName": "Loja Auto-Cura Teste",
-          "operationMode": "ECOMMERCE",
-          "alertKey": "PICO_RECUSA_CARTAO",
-          "title": "Pico de Recusa de Cartão Detectado",
-          "severity": "CRITICAL",
-          "status": "RESOLVED",
-          "currentValue": 100,
-          "expectedValue": 10,
-          "metricUnit": "%",
-          "anomalyDetails": {
-            "totalTentativas": 4,
-            "recusas": 4,
-            "limiteSeguranca": 25
-          },
-          "entityType": "payment_method",
-          "entityId": "credit_card",
-          "entityName": "Cartão de Crédito",
-          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Auto-Cura Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
-          "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
-          "firstTriggeredAt": 1790196713613,
-          "lastTriggeredAt": 1790196713613,
-          "resolvedAt": 1790196713928,
-          "cooldownUntil": 1790198513613,
+          "firstTriggeredAt": 1790197386319,
+          "lastTriggeredAt": 1790197386319,
+          "resolvedAt": 1790197386608,
+          "cooldownUntil": 1790199186319,
           "resolutionNote": "Problema normalizado automaticamente pelo sistema"
         }
       ]
@@ -3773,6 +2616,16 @@
         "historicalQualificationRate": 48,
         "historicalScheduleRate": 52,
         "historicalShowRate": 82
+      }
+    ],
+    [
+      "drophub",
+      {
+        "historicalCpl": 15.2,
+        "historicalDailyLeads": 18,
+        "historicalQualificationRate": 40,
+        "historicalScheduleRate": 45,
+        "historicalShowRate": 80
       }
     ]
   ]

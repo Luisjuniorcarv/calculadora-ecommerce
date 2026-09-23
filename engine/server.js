@@ -91,11 +91,16 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
-    // Webhook de Leads & CRM (/api/webhooks/leads)
-    if (pathname === '/api/webhooks/leads' && method === 'POST') {
+    // Webhook de Leads, Instagram & CRM (/webhook/instagram, /webhook/meta-ads, /webhook/crm-lead, /api/webhooks/leads)
+    if ((pathname === '/api/webhooks/leads' || pathname === '/webhook/leads' || pathname === '/webhook/instagram' || pathname === '/webhook/meta-ads' || pathname === '/webhook/crm-lead') && method === 'POST') {
       const body = await parseRequestBody(req);
       const query = parsedUrl.query;
-      const tenantId = query.tenantId || body.tenantId || 'clinica-demo';
+      const tenantId = query.tenantId || body.tenantId || (pathname.includes('instagram') ? 'drophub' : 'drophub');
+
+      // Se veio pelo endpoint do Instagram, marca a origem se não vier especificada
+      if (pathname.includes('instagram') && !body.source && !body.origem) {
+        body.source = 'instagram';
+      }
 
       const lead = normalizer.normalizeLeadWebhook({ body, query }, tenantId);
       storage.addLead(lead);
@@ -105,17 +110,20 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, 200, {
         success: true,
         message: 'Lead recebido e normalizado no funil',
+        tenantId,
         leadId: lead.id,
+        leadName: lead.name,
+        source: lead.source,
         currentStage: lead.currentStage,
         auditResult
       });
     }
 
-    // Webhook de Tráfego Pago (/api/webhooks/traffic)
-    if (pathname === '/api/webhooks/traffic' && method === 'POST') {
+    // Webhook de Tráfego Pago & Meta Ads (/webhook/traffic, /webhook/meta-traffic, /api/webhooks/traffic)
+    if ((pathname === '/api/webhooks/traffic' || pathname === '/webhook/traffic' || pathname === '/webhook/meta-traffic') && method === 'POST') {
       const body = await parseRequestBody(req);
       const query = parsedUrl.query;
-      const tenantId = query.tenantId || body.tenantId || 'clinica-demo';
+      const tenantId = query.tenantId || body.tenantId || (pathname.includes('meta') ? 'drophub' : 'drophub');
 
       const trafficRecord = normalizer.normalizeTrafficReport({ body, query }, tenantId);
       storage.addTraffic(trafficRecord);
@@ -125,6 +133,7 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, 200, {
         success: true,
         message: 'Métricas de tráfego registradas',
+        tenantId,
         trafficId: trafficRecord.id,
         auditResult
       });
@@ -441,6 +450,48 @@ const server = http.createServer(async (req, res) => {
             clicks: 160,
             sessions: 155,
             timestamp: now
+          });
+          break;
+
+        case 'instagram_lead_urgente':
+          storage.addLead({
+            id: 'sim_ig_urgente_' + Date.now(),
+            tenantId,
+            name: 'Camila Fernandes (Direct Instagram)',
+            phone: '11988887766',
+            email: 'camila.fernandes@gmail.com',
+            source: 'instagram',
+            campaignId: 'camp-ig-stories-bio',
+            campaignName: 'Stories Instagram - Link Bio',
+            currentStage: 'lead',
+            status: 'active',
+            firstContactAt: null,
+            createdAt: now - (26 * 60 * 1000) // 26 minutos esperando atendimento
+          });
+          break;
+
+        case 'instagram_cpl_alto':
+          storage.addTraffic({
+            id: 'sim_trf_ig_cpl_' + Date.now(),
+            tenantId,
+            source: 'instagram',
+            campaignId: 'camp-ig-reels-lucro',
+            campaignName: 'Instagram Reels - Calculadora & Ferramentas',
+            spend: 490.00,
+            clicks: 140,
+            sessions: 125,
+            timestamp: now
+          });
+          storage.addLead({
+            id: 'sim_ig_lead_single_' + Date.now(),
+            tenantId,
+            name: 'Lead Caro Instagram',
+            phone: '11977770000',
+            source: 'instagram',
+            campaignId: 'camp-ig-reels-lucro',
+            campaignName: 'Instagram Reels - Calculadora & Ferramentas',
+            currentStage: 'lead',
+            createdAt: now
           });
           break;
 

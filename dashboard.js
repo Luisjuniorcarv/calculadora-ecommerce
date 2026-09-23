@@ -73,6 +73,14 @@ function setupFallbackTenants() {
       segment: 'Clínica Odontológica & Estética',
       whatsappDestination: '5511988888888',
       leadsSettings: { maxCpl: 30.00, maxFirstResponseMinutes: 10, maxStageStagnationHours: 24 }
+    },
+    {
+      id: 'drophub',
+      name: 'DropHub (Leads Instagram)',
+      operationMode: 'LEADS',
+      segment: 'DropHub Store & Instagram Ads',
+      whatsappDestination: '5511999999999',
+      leadsSettings: { maxCpl: 25.00, maxFirstResponseMinutes: 15, maxStageStagnationHours: 24 }
     }
   ];
 }
