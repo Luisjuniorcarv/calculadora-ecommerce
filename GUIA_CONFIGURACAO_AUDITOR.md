@@ -6,9 +6,9 @@ Este guia detalha o passo a passo exato para você colocar o **Auditor Silencios
 
 ## ☕ Destaque de Conversão: R$ 3,23 por dia
 
-Nas páginas [`index.html`](file:///c:/Users/plini/.gemini/antigravity-ide/scratch/calculadora-ecommerce/index.html) e [`auditor.html`](file:///c:/Users/plini/.gemini/antigravity-ide/scratch/calculadora-ecommerce/auditor.html), deixamos evidente o preço fracionado:
+Nas páginas [`index.html`](file:///c:/Users/plini/.gemini/antigravity-ide/scratch/calculadora-ecommerce/index.html), [`auditor.html`](file:///c:/Users/plini/.gemini/antigravity-ide/scratch/calculadora-ecommerce/auditor.html) e no novo [`dashboard.html`](file:///c:/Users/plini/.gemini/antigravity-ide/scratch/calculadora-ecommerce/dashboard.html), deixamos evidente o preço fracionado:
 > **"Por apenas R$ 3,23 por dia (R$ 97,00/mês)"**  
-> *"Menos que 1 cafezinho de padaria para proteger dezenas de milhares de reais em vendas contra checkouts travados e recusas de cartão."*
+> *"Menos que 1 cafezinho de padaria para proteger dezenas de milhares de reais em vendas ou geração de leads contra falhas e gargalos operacionais."*
 
 ---
 
@@ -35,7 +35,7 @@ Usamos o **Asaas** porque ele **não cobra mensalidade nem taxa de adesão**, ac
      - Valor: `R$ 97,00`
      - Periodicidade: `Mensal`
      - Formas de pagamento: `Cartão de Crédito e PIX`
-     - Descrição: `Auditor Silencioso 24/7 - Sentinela de Checkout`
+     - Descrição: `Auditor Silencioso 24/7 - Sentinela de Checkout e Leads`
 5. **Conectar o Webhook no n8n:**
    - Vá em **Integrações > Webhooks**.
    - Em **URL do Webhook**, cole:
@@ -84,29 +84,55 @@ O arquivo com o fluxo completo e testado está pronto em:
 
 ---
 
-## 🚀 4. Como Funciona a Operação no Dia a Dia
+## 🚀 4. Como Funciona a Operação nos Dois Modos
+
+O **Auditor Silencioso SaaS** atende tanto lojas virtuais (E-commerce) quanto empresas de serviços que geram leads com tráfego pago:
 
 ```
-1. O Lojista acessa a Calculadora de Lucro ou a página auditor.html
-                               │
-                               ▼
-2. Vê a oferta destacada: "Apenas R$ 3,23 por dia (R$ 97/mês)"
-                               │
-                               ▼
-3. Preenche os dados e assina via Cartão ou PIX
-                               │
-                               ▼
-4. O Asaas confirma o pagamento:
-   ├─► Repassa automaticamente para sua conta no Banco do Brasil
-   └─► Dispara o Webhook para o n8n
-                               │
-                               ▼
-5. O n8n envia a mensagem no WhatsApp do Lojista:
-   "🎉 Bem-vindo! Cole esta URL única no webhook da sua loja: https://..."
-                               │
-                               ▼
-6. Quando a loja do cliente tem um pico de cartão recusado (> 25%) ou checkout fora do ar:
-   └─► O Auditor Silencioso apita no WhatsApp do lojista no mesmo minuto!
+                      AUDITOR SILENCIOSO SAAS
+                                 │
+         ┌───────────────────────┴───────────────────────┐
+         ▼                                               ▼
+[MODO 1: E-COMMERCE]                            [MODO 2: LEADS / SERVIÇOS]
+Tráfego → Loja → Carrinho → Checkout            Tráfego → Visita → Lead → Contato →
+→ Pagamento → Venda → Estoque                   Qualificação → Agendamento → Venda
+
+8 Alertas Específicos:                          14 Alertas Específicos:
+• 1. Pico de Recusa de Cartão                   • 1. Queda Anormal de Leads
+• 2. Checkout Travado / Queda Súbita            • 2. Tráfego sem Geração de Leads
+• 3. Margem Negativa / Preço Errado             • 3. CPL Anormal (Acima da Meta)
+• 4. Abandono de Carrinho Anormal               • 4. Investimento sem Leads (Campanha)
+• 5. Falha Concentrada (PIX/Gateway)            • 5. Lead sem Atendimento (> 15 min)
+• 6. Estoque Crítico por Velocidade             • 6. Tempo de Resposta Elevado
+• 7. Pico de Cancelamentos/Reembolsos           • 7. Leads Parados no Funil (> 24h)
+• 8. Tráfego sem Crescimento de Vendas          • 8. Queda na Taxa de Qualificação
+                                                • 9. Queda na Taxa de Agendamento
+                                                • 10. Queda no Comparecimento (No-Show)
+                                                • 11. Leads Sobem, mas Vendas Não
+                                                • 12. Campanha com Volume Desqualificado
+                                                • 13. Queda de Conversão entre Etapas
+                                                • 14. Campanha com Alto Gasto e Baixo ROI
 ```
 
-Toda a infraestrutura foi desenvolvida para rodar no piloto automático, sem custos de mensalidade de terceiros e depositando as receitas no seu Banco do Brasil!
+---
+
+## 💻 5. Dashboard SaaS & Motor Local
+
+Além do n8n, a plataforma possui um **Motor Node.js autônomo** e um **Dashboard Web completo**:
+
+- **Acessar o Painel SaaS:** Abra o arquivo [`dashboard.html`](file:///c:/Users/plini/.gemini/antigravity-ide/scratch/calculadora-ecommerce/dashboard.html) diretamente no seu navegador ou via servidor local.
+- **Iniciar o Servidor de Webhooks & API:**
+  ```powershell
+  cd C:\Users\plini\.gemini\antigravity-ide\scratch\calculadora-ecommerce
+  node engine/server.js
+  ```
+  O servidor iniciará em `http://localhost:3333` com suporte a:
+  - `POST /webhook/auditor-checkout`: Webhook de pedidos para lojas Shopify, Nuvemshop, Yampi e Appmax.
+  - `POST /api/webhooks/leads`: Webhook de leads para CRM (RD Station, HubSpot), Meta Ads e formulários de site.
+  - `POST /api/webhooks/traffic`: Webhook de métricas de tráfego pago (Meta Ads e Google Ads).
+  - `GET /api/dashboard/:tenantId`: Consolidação de métricas, saúde da operação e feed de alertas.
+
+- **Executar os Testes Automatizados (27 Testes):**
+  ```powershell
+  node tests/run-all-tests.js
+  ```

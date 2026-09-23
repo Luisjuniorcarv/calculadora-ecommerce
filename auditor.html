@@ -443,6 +443,7 @@
 
       <nav class="header-nav">
         <a href="index.html" class="nav-link">← Calculadora de Lucro</a>
+        <a href="dashboard.html" class="nav-link" style="color: #A5B4FC; font-weight: 700;">📊 Dashboard SaaS</a>
         <a href="#como-funciona" class="nav-link">Como Funciona</a>
         <a href="#checkout-area" class="btn btn-primary-sm">Ativar Sentinela</a>
       </nav>
@@ -549,6 +550,26 @@
               <strong style="color: #10B981; display: block; margin-bottom: 0.25rem;">4. Relatório de Fechamento Diário (23h59)</strong>
               <span style="font-size: 0.88rem; color: var(--text-muted);">
                 Receba um resumo limpo do faturamento líquido, taxa de aprovação do dia e saúde geral do checkout antes de dormir.
+              </span>
+            </div>
+          </button>
+
+          <button class="alert-selector-btn" onclick="switchAlert('cpl')">
+            <div class="selector-icon">🎯</div>
+            <div>
+              <strong style="color: #6366F1; display: block; margin-bottom: 0.25rem;">5. CPL Anormal & Tráfego sem Leads (Serviços)</strong>
+              <span style="font-size: 0.88rem; color: var(--text-muted);">
+                Alerta quando campanhas no Meta ou Google Ads disparam o custo por contato ou queimam orçamento sem retorno.
+              </span>
+            </div>
+          </button>
+
+          <button class="alert-selector-btn" onclick="switchAlert('atendimento')">
+            <div class="selector-icon">⏱️</div>
+            <div>
+              <strong style="color: #38BDF8; display: block; margin-bottom: 0.25rem;">6. Lead sem Atendimento Comercial (Serviços)</strong>
+              <span style="font-size: 0.88rem; color: var(--text-muted);">
+                Apita no WhatsApp quando um novo cliente entra pelo site e fica mais de 15 minutos aguardando primeiro contato.
               </span>
             </div>
           </button>
@@ -844,6 +865,27 @@
           💵 <strong>Lucro Líquido Estimado:</strong> R$ 1.630,00<br><br>
           Seu sentinela continuará vigiando durante a madrugada! 😴💤
           <div class="chat-time">23:59 ✓✓</div>
+        </div>
+      `,
+      cpl: `
+        <div class="chat-bubble urgent">
+          <strong style="color: #6366F1;">🚨 [AUDITOR SILENCIOSO] CUSTO POR LEAD (CPL) ELEVADO!</strong><br><br>
+          Atenção Dr. Fernando! A campanha <strong>Implantes & Facetas SP</strong> está com custo por contato anormal:<br><br>
+          💰 <strong>CPL Atual:</strong> <span style="color:#F43F5E; font-weight:bold;">R$ 48,50 / lead</span> (Normal: ~R$ 18,00)<br>
+          💸 <strong>Gasto no Período:</strong> R$ 388,00 para 8 leads recebidos<br>
+          💡 <strong>Ação Recomendada:</strong> Verifique se a verba não está sendo consumida por público desqualificado ou se o formulário está com atrito!
+          <div class="chat-time">14:18 ✓✓</div>
+        </div>
+      `,
+      atendimento: `
+        <div class="chat-bubble warning">
+          <strong style="color: #38BDF8;">⏱️ [AUDITOR SILENCIOSO] LEAD AGUARDANDO ATENDIMENTO!</strong><br><br>
+          O lead <strong>Juliana Alencar</strong> acabou de solicitar contato pelo site e está aguardando:<br><br>
+          ⏳ <strong>Tempo de Espera:</strong> <span style="color:#F59E0B; font-weight:bold;">22 minutos</span> (Meta da clínica: 10 min)<br>
+          📱 <strong>WhatsApp:</strong> (11) 98765-4321<br>
+          📢 <strong>Origem:</strong> Anúncio Google Clareamento<br><br>
+          👉 <strong>Ação Recomendada:</strong> Chame o paciente no WhatsApp agora para garantir o agendamento!
+          <div class="chat-time">11:32 ✓✓</div>
         </div>
       `
     };

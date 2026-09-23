@@ -341,6 +341,96 @@
         1080
       ],
       "id": "node-send-lead-wa"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "auditor-leads",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "name": "Webhook Auditor Leads",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        1360
+      ],
+      "id": "node-webhook-leads"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Motor Sentinela de Leads & Serviços (n8n Engine)\nconst query = $json.query || {};\nconst body = $json.body || {};\n\nconst tenantId = query.loja || query.tenantId || body.tenantId || \"empresa-servicos\";\nconst whatsappDestino = query.wa || \"5511999999999\";\nconst now = Date.now();\n\nconst staticData = $getWorkflowStaticData(\"global\");\nstaticData.historicoLeads = staticData.historicoLeads || {};\nstaticData.historicoLeads[tenantId] = staticData.historicoLeads[tenantId] || { leads: [], ultimoAlerta: 0 };\n\nconst dados = staticData.historicoLeads[tenantId];\nconst leadName = body.name || body.nome || \"Lead\";\nconst leadPhone = body.phone || body.telefone || \"\";\nconst stage = (body.stage || body.etapa || \"lead\").toLowerCase();\nconst cplAtual = Number(body.cpl || query.cpl || 0);\n\ndados.leads.unshift({ timestamp: now, name: leadName, phone: leadPhone, stage });\ndados.leads = dados.leads.filter(l => now - l.timestamp <= 24 * 60 * 60 * 1000).slice(0, 50);\n\nlet temAlerta = false;\nlet tipoAlerta = \"\";\nlet mensagemAlerta = \"\";\n\n// 1. CPL Anormal\nif (cplAtual >= 40 && (now - dados.ultimoAlerta > 25 * 60 * 1000)) {\n  temAlerta = true;\n  tipoAlerta = \"CPL_ANORMAL\";\n  dados.ultimoAlerta = now;\n  mensagemAlerta = \"🚨 *[AUDITOR SILENCIOSO] CUSTO POR LEAD (CPL) ELEVADO!*\\n\\n\" +\n    \"Atenção! O custo por lead atingiu *R$ \" + cplAtual.toFixed(2) + \"* na sua operação.\\n\" +\n    \"📊 *Meta Máxima:* R$ 30,00\\n\\n\" +\n    \"💡 *Ação Recomendada:* Verifique seus criativos no Meta/Google e a taxa de conversão da Landing Page!\";\n}\n\nreturn [{ json: { tenantId, whatsappDestino, temAlerta, tipoAlerta, mensagemAlerta, leadName, stage } }];"
+      },
+      "name": "Motor Sentinela de Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        1360
+      ],
+      "id": "node-code-sentinela-leads"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.temAlerta }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "Disparar Alerta WhatsApp Leads?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        720,
+        1360
+      ],
+      "id": "node-if-alerta-leads"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://drophub-evolution-wa.dvzzxm.easypanel.host/message/sendText/auditor",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "429683C4C977415CAAFCCE10F7D57E11"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "number",
+              "value": "={{ $json.whatsappDestino }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.mensagemAlerta }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Evolution API: Enviar Alerta Leads",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        960,
+        1360
+      ],
+      "id": "node-send-alerta-leads-wa"
     }
   ],
   "connections": {
@@ -470,6 +560,39 @@
         [
           {
             "node": "Evolution API: Enviar Relatório Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Auditor Leads": {
+      "main": [
+        [
+          {
+            "node": "Motor Sentinela de Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Motor Sentinela de Leads": {
+      "main": [
+        [
+          {
+            "node": "Disparar Alerta WhatsApp Leads?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Disparar Alerta WhatsApp Leads?": {
+      "main": [
+        [
+          {
+            "node": "Evolution API: Enviar Alerta Leads",
             "type": "main",
             "index": 0
           }

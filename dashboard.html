@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditor Silencioso | Painel de Monitoramento & Alertas 24/7</title>
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS do Dashboard -->
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Topbar Superior -->
+    <header class="topbar">
+      <!-- Marca -->
+      <a href="auditor.html" class="brand-wrapper" title="Ir para a página inicial do Auditor Silencioso">
+        <div class="brand-logo-icon">🛡️</div>
+        <div>
+          <div class="brand-title">Auditor Silencioso</div>
+        </div>
+        <span class="brand-badge">SaaS 2.0</span>
+      </a>
+
+      <!-- Seletor de Modo Operacional -->
+      <div class="topbar-center">
+        <div class="mode-toggle-group">
+          <button type="button" class="mode-btn active" id="btn-mode-ecommerce" onclick="switchOperationMode('ECOMMERCE')">
+            <span>🛒</span> Modo E-commerce
+          </button>
+          <button type="button" class="mode-btn" id="btn-mode-leads" onclick="switchOperationMode('LEADS')">
+            <span>🎯</span> Modo Leads / Serviços
+          </button>
+        </div>
+
+        <!-- Seletor Multiempresa -->
+        <div class="tenant-selector-wrapper">
+          <span class="tenant-icon">🏢</span>
+          <select class="tenant-select" id="tenant-select" onchange="onTenantChanged(this.value)">
+            <!-- Opções inseridas dinamicamente via JS -->
+          </select>
+        </div>
+      </div>
+
+      <!-- Ações do Topo -->
+      <div class="topbar-actions">
+        <a href="index.html" class="btn-action" title="Abrir Calculadora de Lucro" style="text-decoration: none;">
+          <span>🧮</span> Calculadora
+        </a>
+        <button type="button" class="btn-action btn-simulate" onclick="openModal('modal-simulate')">
+          <span>🧪</span> Simular Alertas
+        </button>
+        <button type="button" class="btn-action" onclick="openModal('modal-settings')">
+          <span>⚙️</span> Configurações
+        </button>
+        <button type="button" class="btn-action" onclick="runManualAudit()" title="Auditar Agora">
+          <span id="audit-spin-icon">🔄</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+      
+      <!-- 1. CARD SAÚDE DA OPERAÇÃO -->
+      <section class="health-hero-card healthy" id="health-card">
+        <div class="health-info-left">
+          <div class="health-indicator-disc" id="health-disc">🟢</div>
+          <div class="health-title-group">
+            <h2 id="health-title">Operação Normal</h2>
+            <p id="health-desc">Todos os indicadores de checkout, tráfego e conversão estão operando dentro da normalidade.</p>
+          </div>
+        </div>
+
+        <div class="health-stats-right">
+          <div class="health-stat-pill">
+            <div class="stat-label">Alertas Ativos</div>
+            <div class="stat-val" id="stat-active-count" style="color: #10B981;">0</div>
+          </div>
+          <div class="health-stat-pill">
+            <div class="stat-label">Segmento</div>
+            <div class="stat-val" id="stat-tenant-segment" style="font-size: 1rem; color: #CBD5E1;">Varejo</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. GRADE DE MÉTRICAS KPIS (Dinâmica conforme Modo) -->
+      <section class="kpi-grid" id="kpi-container">
+        <!-- Renderizado dinamicamente via JS -->
+      </section>
+
+      <!-- 3. FUNIL DE LEADS (Visível exclusivamente no Modo Leads) -->
+      <section class="funnel-section" id="funnel-section" style="display: none;">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h3><span>📊</span> Funil de Leads & Eficiência de Conversão</h3>
+            <p>Acompanhamento ponta a ponta do tráfego até o fechamento para identificar gargalos operacionais.</p>
+          </div>
+          <button type="button" class="btn-action" onclick="openModal('modal-settings')" style="font-size: 0.78rem;">
+            Personalizar Etapas do Funil
+          </button>
+        </div>
+
+        <div class="funnel-pipeline" id="funnel-pipeline-container">
+          <!-- Renderizado dinamicamente via JS -->
+        </div>
+      </section>
+
+      <!-- 4. FEED DE ALERTAS ATIVOS & PREVIEW DO WHATSAPP -->
+      <section class="alerts-grid">
+        
+        <!-- Feed de Alertas Ativos -->
+        <div class="alerts-feed-card">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <h3><span>🚨</span> Alertas em Tempo Real (Acionáveis)</h3>
+              <p>O que aconteceu, onde aconteceu e qual a ação imediata recomendada.</p>
+            </div>
+            <span class="brand-badge" id="active-alerts-badge">0 Ativos</span>
+          </div>
+
+          <div id="alerts-list-container">
+            <!-- Cards de alertas inseridos dinamicamente -->
+          </div>
+        </div>
+
+        <!-- Preview do Celular WhatsApp -->
+        <div class="phone-preview-card">
+          <div class="section-header" style="margin-bottom: 1rem;">
+            <div class="section-title-wrap">
+              <h3><span>📱</span> Mensagens no WhatsApp</h3>
+              <p style="font-size: 0.78rem;">Como o dono da empresa recebe os alertas.</p>
+            </div>
+            <span style="font-size: 0.75rem; color: #10B981; font-weight: 700;">Evolution API</span>
+          </div>
+
+          <div class="phone-mockup">
+            <div class="phone-header">
+              <div class="phone-avatar">🛡️</div>
+              <div>
+                <div class="phone-user-name">Auditor Silencioso 🤖</div>
+                <div class="phone-user-status">online • sentinela 24/7</div>
+              </div>
+            </div>
+
+            <div class="phone-chat-body" id="whatsapp-chat-container">
+              <!-- Mensagens formatadas -->
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 5. HISTÓRICO DE ALERTAS & AUDITORIA -->
+      <section class="history-section">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h3><span>📜</span> Histórico Completo de Auditoria</h3>
+            <p>Registro imutável de todas as anomalias detectadas, valores apurados e resolução.</p>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Data / Hora</th>
+                <th>Alerta</th>
+                <th>Severidade</th>
+                <th>Entidade / Local</th>
+                <th>Valor Apurado</th>
+                <th>Normal Esperado</th>
+                <th>Status</th>
+                <th>Resolução</th>
+              </tr>
+            </thead>
+            <tbody id="history-table-body">
+              <!-- Linhas da tabela inseridas via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL: CONFIGURAÇÕES DA EMPRESA -->
+  <div class="modal-overlay" id="modal-settings">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Configurações do Auditor</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('modal-settings')">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tipo de Operação</label>
+            <select class="form-select" id="cfg-mode" onchange="onConfigModeChange(this.value)">
+              <option value="ECOMMERCE">E-commerce / Loja Virtual</option>
+              <option value="LEADS">Serviços / Geração de Leads</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Segmento de Atuação</label>
+            <input type="text" class="form-input" id="cfg-segment" placeholder="Ex: Clínica, Advocacia, Imobiliária, Varejo">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Nome da Empresa / Loja</label>
+          <input type="text" class="form-input" id="cfg-name" placeholder="Nome Fantasia">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>WhatsApp de Destino dos Alertas</label>
+            <input type="text" class="form-input" id="cfg-whatsapp" placeholder="Ex: 5511999999999">
+          </div>
+
+          <div class="form-group">
+            <label>Notificar no WhatsApp?</label>
+            <select class="form-select" id="cfg-notify-wa">
+              <option value="true">Sim, enviar alertas críticos</option>
+              <option value="false">Não, apenas no painel</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Configurações Modo Leads -->
+        <div id="cfg-leads-block" style="display: none; border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+          <h4 style="font-size: 0.95rem; font-weight: 800; margin-bottom: 0.75rem; color: #A5B4FC;">Metas do Funil de Leads</h4>
+          <div class="form-row">
+            <div class="form-group">
+              <label>CPL Máximo Tolerado (R$)</label>
+              <input type="number" class="form-input" id="cfg-max-cpl" step="0.5" value="35.00">
+            </div>
+            <div class="form-group">
+              <label>Tempo Máximo 1º Atendimento</label>
+              <select class="form-select" id="cfg-max-resp">
+                <option value="5">5 minutos</option>
+                <option value="10">10 minutos</option>
+                <option value="15" selected>15 minutos</option>
+                <option value="30">30 minutos</option>
+                <option value="60">1 hora</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Tempo Máximo Parado por Etapa</label>
+              <select class="form-select" id="cfg-max-stagnant">
+                <option value="12">12 horas</option>
+                <option value="24" selected>24 horas</option>
+                <option value="48">48 horas</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Taxa Mínima de Qualificação (%)</label>
+              <input type="number" class="form-input" id="cfg-min-qual" value="30">
+            </div>
+          </div>
+        </div>
+
+        <!-- Configurações Modo E-commerce -->
+        <div id="cfg-ecom-block" style="border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+          <h4 style="font-size: 0.95rem; font-weight: 800; margin-bottom: 0.75rem; color: #10B981;">Limiares de E-commerce</h4>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Taxa Máxima de Recusa (%)</label>
+              <input type="number" class="form-input" id="cfg-max-refusal" value="25">
+            </div>
+            <div class="form-group">
+              <label>Alerta sem Vendas em Horário Comercial</label>
+              <select class="form-select" id="cfg-max-nosale">
+                <option value="60">1 hora</option>
+                <option value="120" selected>2 horas</option>
+                <option value="180">3 horas</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-action" onclick="closeModal('modal-settings')">Cancelar</button>
+        <button type="button" class="btn-primary" onclick="saveSettings()">Salvar Alterações</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SIMULADOR DE ALERTAS EM 1-CLIQUE -->
+  <div class="modal-overlay" id="modal-simulate">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>🧪 Simulador de Incidentes em 1-Clique</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('modal-simulate')">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+          Selecione qualquer cenário abaixo para injetar um evento de teste na operação. O Auditor Silencioso analisará a anomalia em tempo real e disparará o alerta correspondente no Dashboard e no WhatsApp.
+        </p>
+
+        <!-- Cenários E-commerce -->
+        <div style="margin-bottom: 1rem;">
+          <h4 style="font-size: 0.85rem; text-transform: uppercase; color: #10B981; font-weight: 800; margin-bottom: 0.5rem;">
+            🛒 Cenários de E-commerce
+          </h4>
+          <div class="simulator-btn-grid">
+            <button type="button" class="sim-trigger-btn" onclick="triggerSimulation('pico_recusa')">
+              ⚡ Pico de Recusa de Cartão
+              <span>4 cartões recusados consecutivos</span>
+            </button>
+            <button type="button" class="sim-trigger-btn" onclick="triggerSimulation('checkout_travado')">
+              🛑 Checkout Travado
+              <span>Loja há mais de 3h sem vendas</span>
+            </button>
+            <button type="button" class="sim-trigger-btn" onclick="triggerSimulation('margem_negativa')">
+              📉 Margem Negativa / Preço Errado
+              <span>Venda com prejuízo por cupom</span>
+            </button>
+            <button type="button" class="sim-trigger-btn" onclick="triggerSimulation('abandono_anormal')">
+              🛒 Abandono de Carrinho Alto
+              <span>12 carrinhos abandonados seguidos</span>
+            </button>
+            <button type="button" class="sim-trigger-btn" onclick="triggerSimulation('falha_pix')">
+              ⚡ Falha Concentrada no PIX
+              <span>QR Codes com 5 falhas no gateway</span>
+            </button>
+            <button type="button" class="sim-trigger-btn" onclick="triggerSimulation('estoque_critico')">
+              📦 Estoque Crítico por Velocidade
+              <span>Estoque restante para < 1 dia</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cenários Leads -->
+        <div style="margin-bottom: 1rem;">
+          <h4 style="font-size: 0.85rem; text-transform: uppercase; color: #A5B4FC; font-weight: 800; margin-bottom: 0.5rem;">
+            🎯 Cenários de Serviços & Leads
+          </h4>
+          <div class="simulator-btn-grid">
+            <button type="button" class="sim-trigger-btn" onclick="triggerSimulation('cpl_anormal')">
+              💰 Custo por Lead (CPL) Explodiu
+              <span>CPL salta de R$ 18 para R$ 140</span>
+            </button>
+            <button type="button" class="sim-trigger-btn" onclick="triggerSimulation('lead_sem_atendimento')">
+              ⏱️ Lead sem Atendimento
+              <span>Lead aguardando há 28 min</span>
+            </button>
+            <button type="button" class="sim-trigger-btn" onclick="triggerSimulation('trafege_sem_leads')">
+              💸 Tráfego sem Leads
+              <span>R$ 210 gastos e zero contatos</span>
+            </button>
+            <button type="button" class="sim-trigger-btn" onclick="triggerSimulation('normalizar_tudo')">
+              ✅ Auto-Cura / Normalizar Tudo
+              <span>Resolve os alertas ativos</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-action" onclick="closeModal('modal-simulate')">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script do Controlador do Dashboard -->
+  <script src="dashboard.js"></script>
+
+</body>
+</html>
