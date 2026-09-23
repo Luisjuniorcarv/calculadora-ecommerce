@@ -181,7 +181,7 @@
         "operationMode": "LEADS",
         "segment": "DropHub Store & Instagram Ads",
         "webhookToken": "sec_keeqirtf83",
-        "whatsappDestination": "5511999999999",
+        "whatsappDestination": "12992310222",
         "notifyWhatsapp": true,
         "notifyWebhook": null,
         "allowedSeverities": [
@@ -255,7 +255,7 @@
           "maxRefundRatePercent": 5
         },
         "createdAt": 1790197198431,
-        "updatedAt": 1790197198431
+        "updatedAt": 1790198585432
       }
     ]
   ],
@@ -634,6 +634,20 @@
     [
       "drophub",
       [
+        {
+          "id": "sim_ig_urgente_1790198444097",
+          "tenantId": "drophub",
+          "name": "Camila Fernandes (Direct Instagram)",
+          "phone": "11988887766",
+          "email": "camila.fernandes@gmail.com",
+          "source": "instagram",
+          "campaignId": "camp-ig-stories-bio",
+          "campaignName": "Stories Instagram - Link Bio",
+          "currentStage": "lead",
+          "status": "active",
+          "firstContactAt": null,
+          "createdAt": 1790196884097
+        },
         {
           "id": "sim_ig_urgente_1790197317677",
           "tenantId": "drophub",
@@ -1246,6 +1260,61 @@
           "timestamp": 1790185373814
         }
       ]
+    ],
+    [
+      "drophub",
+      [
+        {
+          "id": "sim_ref_4",
+          "tenantId": "drophub",
+          "amount": 199,
+          "cost": 80,
+          "paymentMethod": "credit_card",
+          "gateway": "mercadopago",
+          "status": "refused",
+          "timestamp": 1790198059185
+        },
+        {
+          "id": "sim_ref_3",
+          "tenantId": "drophub",
+          "amount": 199,
+          "cost": 80,
+          "paymentMethod": "credit_card",
+          "gateway": "mercadopago",
+          "status": "refused",
+          "timestamp": 1790198179185
+        },
+        {
+          "id": "sim_ref_2",
+          "tenantId": "drophub",
+          "amount": 199,
+          "cost": 80,
+          "paymentMethod": "credit_card",
+          "gateway": "mercadopago",
+          "status": "refused",
+          "timestamp": 1790198299185
+        },
+        {
+          "id": "sim_ref_1",
+          "tenantId": "drophub",
+          "amount": 199,
+          "cost": 80,
+          "paymentMethod": "credit_card",
+          "gateway": "mercadopago",
+          "status": "refused",
+          "timestamp": 1790198419185
+        },
+        {
+          "id": "sim_ref_0",
+          "tenantId": "drophub",
+          "amount": 199,
+          "cost": 80,
+          "paymentMethod": "credit_card",
+          "gateway": "mercadopago",
+          "status": "refused",
+          "timestamp": 1790198539185
+        }
+      ]
     ]
   ],
   "carts": [
@@ -1641,6 +1710,18 @@
           "dailySalesVelocity": 3
         }
       ]
+    ],
+    [
+      "drophub",
+      [
+        {
+          "id": "sim_p1",
+          "sku": "ALERTA-01",
+          "name": "Tênis Esportivo Ultra",
+          "currentStock": 3,
+          "dailySalesVelocity": 4
+        }
+      ]
     ]
   ],
   "traffic": [
@@ -1714,7 +1795,7 @@
             "title": "Custo por Lead (CPL) Acima do Padrão",
             "severity": "CRITICAL",
             "status": "OPEN",
-            "currentValue": 37,
+            "currentValue": 33.64,
             "expectedValue": 15.2,
             "metricUnit": "R$",
             "anomalyDetails": {
@@ -1766,9 +1847,9 @@
           }
         ],
         [
-          "LEAD_SEM_ATENDIMENTO_sim_ig_urgente_1790197317677",
+          "LEAD_SEM_ATENDIMENTO_sim_ig_urgente_1790198444097",
           {
-            "id": "alt_w5mwjfxv",
+            "id": "alt_nqywzrci",
             "tenantId": "drophub",
             "tenantName": "DropHub (Leads Instagram)",
             "operationMode": "LEADS",
@@ -1776,11 +1857,11 @@
             "title": "Lead Aguardando Atendimento há 26 minutos",
             "severity": "WARNING",
             "status": "OPEN",
-            "currentValue": 26,
+            "currentValue": 28,
             "expectedValue": 15,
             "metricUnit": "min",
             "anomalyDetails": {
-              "leadId": "sim_ig_urgente_1790197317677",
+              "leadId": "sim_ig_urgente_1790198444097",
               "leadName": "Camila Fernandes (Direct Instagram)",
               "leadPhone": "11988887766",
               "campanha": "Stories Instagram - Link Bio",
@@ -1788,14 +1869,14 @@
               "metaEsperaMin": 15
             },
             "entityType": "lead",
-            "entityId": "sim_ig_urgente_1790197317677",
+            "entityId": "sim_ig_urgente_1790198444097",
             "entityName": "Camila Fernandes (Direct Instagram)",
             "whatsappMessage": "⏱️ *[AUDITOR SILENCIOSO] LEAD AGUARDANDO ATENDIMENTO!*\n\nO lead *Camila Fernandes (Direct Instagram)* está aguardando contato na empresa *DropHub (Leads Instagram)*:\n\n⏳ *Tempo de Espera:* 26 minutos (Meta: até 15 min)\n📱 *WhatsApp do Lead:* 11988887766\n📢 *Origem:* Stories Instagram - Link Bio\n\n👉 *Ação Recomendada:* Chame o cliente no WhatsApp imediatamente para não perder a oportunidade quente!",
             "recommendedAction": "Chame o lead Camila Fernandes (Direct Instagram) (11988887766) no WhatsApp agora. Cada minuto de atraso reduz em 50% a chance de conversão.",
-            "firstTriggeredAt": 1790197317680,
-            "lastTriggeredAt": 1790197317680,
+            "firstTriggeredAt": 1790198444112,
+            "lastTriggeredAt": 1790198444112,
             "resolvedAt": null,
-            "cooldownUntil": 1790199117680
+            "cooldownUntil": 1790200244112
           }
         ]
       ]
@@ -1846,7 +1927,7 @@
             "title": "Checkout Travado ou Queda Súbita de Vendas",
             "severity": "CRITICAL",
             "status": "OPEN",
-            "currentValue": 210,
+            "currentValue": 217,
             "expectedValue": 60,
             "metricUnit": "min",
             "anomalyDetails": {
@@ -1943,7 +2024,7 @@
             "title": "Lead Aguardando Atendimento há 35 minutos",
             "severity": "CRITICAL",
             "status": "OPEN",
-            "currentValue": 35,
+            "currentValue": 41,
             "expectedValue": 10,
             "metricUnit": "min",
             "anomalyDetails": {
@@ -2003,7 +2084,7 @@
       "drophub",
       [
         {
-          "id": "alt_w5mwjfxv",
+          "id": "alt_nqywzrci",
           "tenantId": "drophub",
           "tenantName": "DropHub (Leads Instagram)",
           "operationMode": "LEADS",
@@ -2011,7 +2092,37 @@
           "title": "Lead Aguardando Atendimento há 26 minutos",
           "severity": "WARNING",
           "status": "OPEN",
-          "currentValue": 26,
+          "currentValue": 28,
+          "expectedValue": 15,
+          "metricUnit": "min",
+          "anomalyDetails": {
+            "leadId": "sim_ig_urgente_1790198444097",
+            "leadName": "Camila Fernandes (Direct Instagram)",
+            "leadPhone": "11988887766",
+            "campanha": "Stories Instagram - Link Bio",
+            "tempoEsperaMin": 26,
+            "metaEsperaMin": 15
+          },
+          "entityType": "lead",
+          "entityId": "sim_ig_urgente_1790198444097",
+          "entityName": "Camila Fernandes (Direct Instagram)",
+          "whatsappMessage": "⏱️ *[AUDITOR SILENCIOSO] LEAD AGUARDANDO ATENDIMENTO!*\n\nO lead *Camila Fernandes (Direct Instagram)* está aguardando contato na empresa *DropHub (Leads Instagram)*:\n\n⏳ *Tempo de Espera:* 26 minutos (Meta: até 15 min)\n📱 *WhatsApp do Lead:* 11988887766\n📢 *Origem:* Stories Instagram - Link Bio\n\n👉 *Ação Recomendada:* Chame o cliente no WhatsApp imediatamente para não perder a oportunidade quente!",
+          "recommendedAction": "Chame o lead Camila Fernandes (Direct Instagram) (11988887766) no WhatsApp agora. Cada minuto de atraso reduz em 50% a chance de conversão.",
+          "firstTriggeredAt": 1790198444112,
+          "lastTriggeredAt": 1790198444112,
+          "resolvedAt": null,
+          "cooldownUntil": 1790200244112
+        },
+        {
+          "id": "alt_w5mwjfxv",
+          "tenantId": "drophub",
+          "tenantName": "DropHub (Leads Instagram)",
+          "operationMode": "LEADS",
+          "alertKey": "LEAD_SEM_ATENDIMENTO",
+          "title": "Lead Aguardando Atendimento há 26 minutos",
+          "severity": "WARNING",
+          "status": "RESOLVED",
+          "currentValue": 44,
           "expectedValue": 15,
           "metricUnit": "min",
           "anomalyDetails": {
@@ -2029,8 +2140,9 @@
           "recommendedAction": "Chame o lead Camila Fernandes (Direct Instagram) (11988887766) no WhatsApp agora. Cada minuto de atraso reduz em 50% a chance de conversão.",
           "firstTriggeredAt": 1790197317680,
           "lastTriggeredAt": 1790197317680,
-          "resolvedAt": null,
-          "cooldownUntil": 1790199117680
+          "resolvedAt": 1790198444704,
+          "cooldownUntil": 1790199117680,
+          "resolutionNote": "Problema normalizado automaticamente pelo sistema"
         },
         {
           "id": "alt_oe6r19s2",
@@ -2068,7 +2180,7 @@
           "title": "Custo por Lead (CPL) Acima do Padrão",
           "severity": "CRITICAL",
           "status": "OPEN",
-          "currentValue": 37,
+          "currentValue": 33.64,
           "expectedValue": 15.2,
           "metricUnit": "R$",
           "anomalyDetails": {
@@ -2130,7 +2242,7 @@
           "title": "Checkout Travado ou Queda Súbita de Vendas",
           "severity": "CRITICAL",
           "status": "OPEN",
-          "currentValue": 210,
+          "currentValue": 217,
           "expectedValue": 60,
           "metricUnit": "min",
           "anomalyDetails": {
@@ -2217,7 +2329,7 @@
           "title": "Lead Aguardando Atendimento há 35 minutos",
           "severity": "CRITICAL",
           "status": "OPEN",
-          "currentValue": 35,
+          "currentValue": 41,
           "expectedValue": 10,
           "metricUnit": "min",
           "anomalyDetails": {
