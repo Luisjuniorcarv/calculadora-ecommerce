@@ -518,6 +518,14 @@ document.addEventListener('DOMContentLoaded', () => {
       leadFeedback.className = 'lead-feedback success';
       leadFeedback.innerHTML = `✅ <strong>Perfeito, ${name}!</strong> Seu relatório detalhado foi enviado com sucesso para o WhatsApp <strong>${whatsapp}</strong>. Confira agora no seu celular!`;
       leadFeedback.classList.remove('hidden');
+
+      // Dispara evento de conversão para o Google Analytics 4
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          event_category: 'Conversao',
+          event_label: 'Relatorio Calculadora WhatsApp'
+        });
+      }
       leadForm.reset();
       showToast('Relatório enviado para o seu WhatsApp!');
 
