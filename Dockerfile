@@ -7,6 +7,11 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY index.html /usr/share/nginx/html/
 COPY style.css /usr/share/nginx/html/
 COPY app.js /usr/share/nginx/html/
+COPY auditor.html /usr/share/nginx/html/
+COPY video.html /usr/share/nginx/html/
+COPY story-sentinela.jpg /usr/share/nginx/html/
+COPY sitemap.xml /usr/share/nginx/html/
+COPY robots.txt /usr/share/nginx/html/
 COPY google*.html /usr/share/nginx/html/
 
 EXPOSE 80
