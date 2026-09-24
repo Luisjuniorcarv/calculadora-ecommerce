@@ -99,10 +99,13 @@ const server = http.createServer(async (req, res) => {
       const eventType = String(body.eventType || body.type || '').toUpperCase();
 
       // Tratamento de PING de teste de conectividade
-      if (eventType === 'TEST_PING' || body.message?.includes('Ping')) {
+      if (eventType === 'TEST_PING' || body.message?.includes('Ping') || body.event === 'ping') {
+        const tenant = storage.getTenant(tenantId) || { id: tenantId, name: 'DropHub', whatsappDestination: '12992310222', notifyWhatsapp: true };
+        const dispatchResult = await notificationDispatcher.sendTestPingNotification(tenant);
         return sendJson(res, 200, {
           success: true,
-          message: 'Ping de conectividade DropHub verificado com sucesso pelo Auditor Silencioso.',
+          message: 'Ping de conectividade DropHub verificado com sucesso pelo Auditor Silencioso e notificação enviada no WhatsApp.',
+          whatsappStatus: dispatchResult.status,
           timestamp: new Date().toISOString()
         });
       }
@@ -118,6 +121,11 @@ const server = http.createServer(async (req, res) => {
           lead.currentStage = 'won';
           lead.status = 'won';
           storage.addLead(lead);
+
+          const tenant = storage.getTenant(tenantId) || { id: tenantId, name: 'DropHub', whatsappDestination: '12992310222', notifyWhatsapp: true };
+          if (tenant && tenant.notifyWhatsapp) {
+            notificationDispatcher.sendNewSaleNotification(tenant, transaction).catch(e => console.error('Erro zap venda:', e));
+          }
         }
 
         const auditResult = await alertManager.runAudit(tenantId);
@@ -151,6 +159,11 @@ const server = http.createServer(async (req, res) => {
       const lead = normalizer.normalizeLeadWebhook({ body, query }, tenantId);
       storage.addLead(lead);
 
+      const tenant = storage.getTenant(tenantId) || { id: tenantId, name: 'DropHub', whatsappDestination: '12992310222', notifyWhatsapp: true };
+      if (tenant && tenant.notifyWhatsapp) {
+        notificationDispatcher.sendNewLeadNotification(tenant, lead).catch(e => console.error('Erro zap lead:', e));
+      }
+
       const auditResult = await alertManager.runAudit(tenantId);
       return sendJson(res, 200, {
         success: true,
@@ -176,6 +189,11 @@ const server = http.createServer(async (req, res) => {
 
       const lead = normalizer.normalizeLeadWebhook({ body, query }, tenantId);
       storage.addLead(lead);
+
+      const tenant = storage.getTenant(tenantId) || { id: tenantId, name: 'DropHub', whatsappDestination: '12992310222', notifyWhatsapp: true };
+      if (tenant && tenant.notifyWhatsapp) {
+        notificationDispatcher.sendNewLeadNotification(tenant, lead).catch(e => console.error('Erro zap lead:', e));
+      }
 
       const auditResult = await alertManager.runAudit(tenantId);
 

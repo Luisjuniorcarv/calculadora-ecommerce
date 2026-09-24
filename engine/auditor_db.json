@@ -945,6 +945,350 @@
         "createdAt": 1790270738415,
         "updatedAt": 1790270738415
       }
+    ],
+    [
+      "tenant-iso-a-1790277139530",
+      {
+        "id": "tenant-iso-a-1790277139530",
+        "name": "Empresa A",
+        "slug": "minha-operacao",
+        "operationMode": "ECOMMERCE",
+        "segment": "Dropshipping / Varejo",
+        "webhookToken": "sec_frtymx98wo",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790277139531,
+        "updatedAt": 1790277139531
+      }
+    ],
+    [
+      "tenant-iso-b-1790277139530",
+      {
+        "id": "tenant-iso-b-1790277139530",
+        "name": "Empresa B",
+        "slug": "minha-operacao",
+        "operationMode": "LEADS",
+        "segment": "Clínica / Serviços",
+        "webhookToken": "sec_empai7qtyu",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790277139531,
+        "updatedAt": 1790277139541
+      }
+    ],
+    [
+      "tenant-cool-1790277139565",
+      {
+        "id": "tenant-cool-1790277139565",
+        "name": "Loja Cooldown Teste",
+        "slug": "minha-operacao",
+        "operationMode": "ECOMMERCE",
+        "segment": "Dropshipping / Varejo",
+        "webhookToken": "sec_m4v5pdrwqah",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790277139565,
+        "updatedAt": 1790277139565
+      }
+    ],
+    [
+      "tenant-heal-1790277140417",
+      {
+        "id": "tenant-heal-1790277140417",
+        "name": "Loja Auto-Cura Teste",
+        "slug": "minha-operacao",
+        "operationMode": "ECOMMERCE",
+        "segment": "Dropshipping / Varejo",
+        "webhookToken": "sec_qnsxljqjjki",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790277140417,
+        "updatedAt": 1790277140417
+      }
     ]
   ],
   "leads": [
@@ -1336,6 +1680,17 @@
         {
           "id": "lead_b",
           "tenantId": "tenant-iso-b-1790270737773",
+          "name": "Lead B",
+          "currentStage": "lead"
+        }
+      ]
+    ],
+    [
+      "tenant-iso-b-1790277139530",
+      [
+        {
+          "id": "lead_b",
+          "tenantId": "tenant-iso-b-1790277139530",
           "name": "Lead B",
           "currentStage": "lead"
         }
@@ -2037,6 +2392,223 @@
       ]
     ],
     [
+      "tenant-iso-a-1790277139530",
+      [
+        {
+          "id": "tx_a",
+          "tenantId": "tenant-iso-a-1790277139530",
+          "amount": 100,
+          "status": "approved"
+        }
+      ]
+    ],
+    [
+      "tenant-cool-1790277139565",
+      [
+        {
+          "id": "tx_cool_3",
+          "tenantId": "tenant-cool-1790277139565",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277138569
+        },
+        {
+          "id": "tx_cool_2",
+          "tenantId": "tenant-cool-1790277139565",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277138569
+        },
+        {
+          "id": "tx_cool_1",
+          "tenantId": "tenant-cool-1790277139565",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277138569
+        },
+        {
+          "id": "tx_cool_0",
+          "tenantId": "tenant-cool-1790277139565",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277138569
+        }
+      ]
+    ],
+    [
+      "tenant-heal-1790277140417",
+      [
+        {
+          "id": "tx_heal_19",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277138521
+        },
+        {
+          "id": "tx_heal_18",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277138621
+        },
+        {
+          "id": "tx_heal_17",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277138721
+        },
+        {
+          "id": "tx_heal_16",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277138821
+        },
+        {
+          "id": "tx_heal_15",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277138921
+        },
+        {
+          "id": "tx_heal_14",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139021
+        },
+        {
+          "id": "tx_heal_13",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139121
+        },
+        {
+          "id": "tx_heal_12",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139221
+        },
+        {
+          "id": "tx_heal_11",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139321
+        },
+        {
+          "id": "tx_heal_10",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139421
+        },
+        {
+          "id": "tx_heal_9",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139521
+        },
+        {
+          "id": "tx_heal_8",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139621
+        },
+        {
+          "id": "tx_heal_7",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139721
+        },
+        {
+          "id": "tx_heal_6",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139821
+        },
+        {
+          "id": "tx_heal_5",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139921
+        },
+        {
+          "id": "tx_heal_4",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277140021
+        },
+        {
+          "id": "tx_heal_3",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277140121
+        },
+        {
+          "id": "tx_heal_2",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277140221
+        },
+        {
+          "id": "tx_heal_1",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277140321
+        },
+        {
+          "id": "tx_heal_0",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277140421
+        },
+        {
+          "id": "tx_sick_3",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139421
+        },
+        {
+          "id": "tx_sick_2",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139421
+        },
+        {
+          "id": "tx_sick_1",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139421
+        },
+        {
+          "id": "tx_sick_0",
+          "tenantId": "tenant-heal-1790277140417",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790277139421
+        }
+      ]
+    ],
+    [
       "drophub",
       []
     ]
@@ -2493,7 +3065,7 @@
           "impressions": 0,
           "clicks": 0,
           "sessions": 0,
-          "timestamp": 1790273019880
+          "timestamp": 1790277164792
         }
       ]
     ]
@@ -2775,39 +3347,47 @@
       []
     ],
     [
-      "drophub",
+      "tenant-cool-1790277139565",
       [
         [
-          "QUEDA_LEADS_leads_volume",
+          "PICO_RECUSA_CARTAO_credit_card",
           {
-            "id": "alt_dgq3l70j",
-            "tenantId": "drophub",
-            "tenantName": "DropHub (Leads Instagram)",
-            "operationMode": "LEADS",
-            "alertKey": "QUEDA_LEADS",
-            "title": "Queda Anormal na Geração de Leads",
+            "id": "alt_sgqpxzii",
+            "tenantId": "tenant-cool-1790277139565",
+            "tenantName": "Loja Cooldown Teste",
+            "operationMode": "ECOMMERCE",
+            "alertKey": "PICO_RECUSA_CARTAO",
+            "title": "Pico de Recusa de Cartão Detectado",
             "severity": "CRITICAL",
             "status": "OPEN",
-            "currentValue": 0,
-            "expectedValue": 18,
-            "metricUnit": "leads/dia",
+            "currentValue": 100,
+            "expectedValue": 10,
+            "metricUnit": "%",
             "anomalyDetails": {
-              "leadsHoje": 0,
-              "mediaNormal": 18,
-              "quedaPercentual": 100
+              "totalTentativas": 4,
+              "recusas": 4,
+              "limiteSeguranca": 25
             },
-            "entityType": "funnel",
-            "entityId": "leads_volume",
-            "entityName": "Volume Geral de Leads",
-            "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: QUEDA DE LEADS!*\n\nQueda acentuada na entrada de leads na empresa *DropHub (Leads Instagram)*:\n\n📉 *Hoje:* 0 leads (Média Normal: ~18 leads/dia)\n📊 *Variação:* -100%\n\n👉 *Ação Recomendada:* Verifique se suas campanhas de anúncios estão ativas e se a página de captura está funcionando!",
-            "recommendedAction": "Verifique se os anúncios no Meta/Google foram pausados, se o saldo da conta acabou ou se a Landing Page está fora do ar.",
-            "firstTriggeredAt": 1790273115447,
-            "lastTriggeredAt": 1790273115447,
+            "entityType": "payment_method",
+            "entityId": "credit_card",
+            "entityName": "Cartão de Crédito",
+            "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
+            "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
+            "firstTriggeredAt": 1790277139677,
+            "lastTriggeredAt": 1790277139677,
             "resolvedAt": null,
-            "cooldownUntil": 1790274915447
+            "cooldownUntil": 1790278939677
           }
         ]
       ]
+    ],
+    [
+      "tenant-heal-1790277140417",
+      []
+    ],
+    [
+      "drophub",
+      []
     ]
   ],
   "alertHistory": [
@@ -3121,36 +3701,73 @@
       ]
     ],
     [
-      "drophub",
+      "tenant-cool-1790277139565",
       [
         {
-          "id": "alt_dgq3l70j",
-          "tenantId": "drophub",
-          "tenantName": "DropHub (Leads Instagram)",
-          "operationMode": "LEADS",
-          "alertKey": "QUEDA_LEADS",
-          "title": "Queda Anormal na Geração de Leads",
+          "id": "alt_sgqpxzii",
+          "tenantId": "tenant-cool-1790277139565",
+          "tenantName": "Loja Cooldown Teste",
+          "operationMode": "ECOMMERCE",
+          "alertKey": "PICO_RECUSA_CARTAO",
+          "title": "Pico de Recusa de Cartão Detectado",
           "severity": "CRITICAL",
           "status": "OPEN",
-          "currentValue": 0,
-          "expectedValue": 18,
-          "metricUnit": "leads/dia",
+          "currentValue": 100,
+          "expectedValue": 10,
+          "metricUnit": "%",
           "anomalyDetails": {
-            "leadsHoje": 0,
-            "mediaNormal": 18,
-            "quedaPercentual": 100
+            "totalTentativas": 4,
+            "recusas": 4,
+            "limiteSeguranca": 25
           },
-          "entityType": "funnel",
-          "entityId": "leads_volume",
-          "entityName": "Volume Geral de Leads",
-          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: QUEDA DE LEADS!*\n\nQueda acentuada na entrada de leads na empresa *DropHub (Leads Instagram)*:\n\n📉 *Hoje:* 0 leads (Média Normal: ~18 leads/dia)\n📊 *Variação:* -100%\n\n👉 *Ação Recomendada:* Verifique se suas campanhas de anúncios estão ativas e se a página de captura está funcionando!",
-          "recommendedAction": "Verifique se os anúncios no Meta/Google foram pausados, se o saldo da conta acabou ou se a Landing Page está fora do ar.",
-          "firstTriggeredAt": 1790273115447,
-          "lastTriggeredAt": 1790273115447,
+          "entityType": "payment_method",
+          "entityId": "credit_card",
+          "entityName": "Cartão de Crédito",
+          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
+          "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
+          "firstTriggeredAt": 1790277139677,
+          "lastTriggeredAt": 1790277139677,
           "resolvedAt": null,
-          "cooldownUntil": 1790274915447
+          "cooldownUntil": 1790278939677
         }
       ]
+    ],
+    [
+      "tenant-heal-1790277140417",
+      [
+        {
+          "id": "alt_9mtqpar7",
+          "tenantId": "tenant-heal-1790277140417",
+          "tenantName": "Loja Auto-Cura Teste",
+          "operationMode": "ECOMMERCE",
+          "alertKey": "PICO_RECUSA_CARTAO",
+          "title": "Pico de Recusa de Cartão Detectado",
+          "severity": "CRITICAL",
+          "status": "RESOLVED",
+          "currentValue": 100,
+          "expectedValue": 10,
+          "metricUnit": "%",
+          "anomalyDetails": {
+            "totalTentativas": 4,
+            "recusas": 4,
+            "limiteSeguranca": 25
+          },
+          "entityType": "payment_method",
+          "entityId": "credit_card",
+          "entityName": "Cartão de Crédito",
+          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Auto-Cura Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
+          "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
+          "firstTriggeredAt": 1790277140437,
+          "lastTriggeredAt": 1790277140437,
+          "resolvedAt": 1790277140708,
+          "cooldownUntil": 1790278940437,
+          "resolutionNote": "Problema normalizado automaticamente pelo sistema"
+        }
+      ]
+    ],
+    [
+      "drophub",
+      []
     ]
   ],
   "baselines": [

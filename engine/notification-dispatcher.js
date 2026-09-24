@@ -82,6 +82,93 @@ class NotificationDispatcher {
   }
 
   /**
+   * Envio direto de mensagem para um número
+   */
+  async sendDirectMessage(phone, text, context = 'DIRECT') {
+    if (!phone) return { error: 'Telefone não fornecido' };
+    const cleanPhone = String(phone).replace(/\D/g, '');
+    const formattedNumber = cleanPhone.startsWith('55') ? cleanPhone : ('55' + cleanPhone);
+
+    const dispatchEntry = {
+      timestamp: Date.now(),
+      phone: formattedNumber,
+      context,
+      messageText: text
+    };
+    this.sentLog.unshift(dispatchEntry);
+    if (this.sentLog.length > 100) this.sentLog.pop();
+
+    try {
+      await this.postToEvolutionApi(formattedNumber, text);
+      dispatchEntry.status = 'SENT';
+    } catch (err) {
+      dispatchEntry.status = 'MOCKED_OR_FAILED';
+      dispatchEntry.error = err.message;
+    }
+    return dispatchEntry;
+  }
+
+  /**
+   * Notificação de teste de ping de conexão com o DropHub
+   */
+  async sendTestPingNotification(tenant) {
+    const phone = tenant?.whatsappDestination || '12992310222';
+    const msg =
+      `🟢 *[DROPHUB & AUDITOR SILENCIOSO]*\n\n` +
+      `✅ *Conexão Verificada com Sucesso!*\n\n` +
+      `O webhook da sua loja DropHub está oficialmente conectado e conversando com o Auditor Silencioso 24/7.\n\n` +
+      `🛡️ *Status:* Monitoramento Ativo\n` +
+      `💰 *Orçamento Diário:* R$ 30,00/dia\n` +
+      `📊 *Painel ao Vivo:* https://calculadoradoecommerce.com.br/dashboard.html\n\n` +
+      `A partir de agora, qualquer novo lead, pedido ou anomalia será auditado e você receberá as notificações aqui! 🚀`;
+    return this.sendDirectMessage(phone, msg, 'PING_TEST');
+  }
+
+  /**
+   * Notificação de novo lead registrado na loja
+   */
+  async sendNewLeadNotification(tenant, lead) {
+    const phone = tenant?.whatsappDestination || '12992310222';
+    const name = lead.name && lead.name !== 'Lead sem nome' ? lead.name : 'Novo Visitante/Cliente';
+    const userPhone = lead.phone ? lead.phone : 'Não informado';
+    const email = lead.email ? lead.email : 'Não informado';
+    const source = lead.source || 'Instagram Ads';
+
+    const msg =
+      `👤 *[NOVO LEAD - DROPHUB]*\n\n` +
+      `🎉 Um novo visitante cadastrou-se na sua loja!\n\n` +
+      `📛 *Nome:* ${name}\n` +
+      `📱 *WhatsApp:* ${userPhone}\n` +
+      `📧 *Email:* ${email}\n` +
+      `📢 *Origem:* ${source}\n` +
+      `⏱️ *Hora:* ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}\n\n` +
+      `👉 Veja no painel: https://calculadoradoecommerce.com.br/dashboard.html`;
+    return this.sendDirectMessage(phone, msg, 'NEW_LEAD');
+  }
+
+  /**
+   * Notificação de nova venda aprovada na loja
+   */
+  async sendNewSaleNotification(tenant, transaction) {
+    const phone = tenant?.whatsappDestination || '12992310222';
+    const amount = Number(transaction.amount || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const method = transaction.paymentMethod || 'Cartão/Pix';
+    const orderId = transaction.orderId || transaction.id || 'N/A';
+    const customer = transaction.customerName || 'Cliente';
+
+    const msg =
+      `💰 *[VENDA APROVADA - DROPHUB]*\n\n` +
+      `🎉 Parabéns! Venda confirmada na loja:\n\n` +
+      `💵 *Valor:* ${amount}\n` +
+      `💳 *Pagamento:* ${method}\n` +
+      `🛍️ *Pedido:* #${orderId}\n` +
+      `👤 *Cliente:* ${customer}\n\n` +
+      `🚀 Métricas atualizadas no painel:\n` +
+      `👉 https://calculadoradoecommerce.com.br/dashboard.html`;
+    return this.sendDirectMessage(phone, msg, 'NEW_SALE');
+  }
+
+  /**
    * Chamada HTTP para a Evolution API v2
    */
   postToEvolutionApi(number, text) {
