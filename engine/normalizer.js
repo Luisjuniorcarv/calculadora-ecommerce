@@ -21,24 +21,28 @@ class Normalizer {
     const body = payload.body || payload;
     const query = payload.query || {};
 
-    const resolvedTenant = tenantId || query.tenantId || body.tenantId || query.loja || body.store_id || 'tenant-padrao';
+    const resolvedTenant = tenantId || query.tenantId || body.tenantId || (body.data && body.data.tenantId) || query.loja || body.store_id || 'tenant-padrao';
     const now = Date.now();
+    const data = body.data || body;
 
     // Mapeamento flexível de campos de nomes e contatos
-    const name = body.name || body.nome || body.full_name || body.first_name || 'Lead sem nome';
-    const phone = String(body.phone || body.telefone || body.whatsapp || body.celular || query.wa || '').replace(/\D/g, '');
-    const email = body.email || body.mail || '';
+    const name = data.name || data.customerName || data.nome || body.name || body.nome || body.full_name || body.first_name || 'Lead sem nome';
+    const phone = String(data.phone || data.telefone || data.whatsapp || data.celular || body.phone || body.telefone || query.wa || '').replace(/\D/g, '');
+    const email = data.email || data.customerEmail || data.mail || body.email || body.mail || '';
     
     // Origem e campanha
-    const source = (body.source || body.origem || body.utm_source || 'webhook').toLowerCase();
-    const campaignId = body.campaignId || body.campaign_id || body.utm_campaign || 'campanha-geral';
-    const campaignName = body.campaignName || body.campaign_name || body.utm_campaign || 'Campanha Principal';
+    const source = (data.source || body.source || body.origem || body.utm_source || (body.source === 'drophub' ? 'drophub' : 'webhook')).toLowerCase();
+    const campaignId = data.campaignId || data.campaign_id || body.campaignId || body.campaign_id || body.utm_campaign || 'campanha-geral';
+    const campaignName = data.campaignName || data.campaign_name || body.campaignName || body.campaign_name || body.utm_campaign || 'Campanha Principal';
 
     // Etapa inicial ou transição
-    const eventType = String(body.event || body.type || body.action || query.event || '').toLowerCase();
-    let stage = (body.stage || body.etapa || 'lead').toLowerCase();
+    const eventType = String(body.eventType || body.type || body.event || body.action || query.event || '').toLowerCase();
+    let stage = (data.stage || body.stage || body.etapa || 'lead').toLowerCase();
 
     // Inferência inteligente por tipo de evento
+    if (eventType.includes('customer_created')) stage = 'lead';
+    if (eventType.includes('order_created')) stage = 'opportunity';
+    if (eventType.includes('order_paid') || eventType.includes('payment_approved')) stage = 'won';
     if (eventType.includes('contact') || eventType.includes('atend')) stage = 'contacted';
     if (eventType.includes('qualif')) stage = 'qualified';
     if (eventType.includes('agend') || eventType.includes('schedul')) stage = 'scheduled';
@@ -46,8 +50,8 @@ class Normalizer {
     if (eventType.includes('propost') || eventType.includes('opportun')) stage = 'opportunity';
     if (eventType.includes('venda') || eventType.includes('won') || eventType.includes('fech')) stage = 'won';
 
-    const leadId = body.leadId || body.lead_id || body.id || ('lead_' + Math.random().toString(36).substring(2, 9));
-    const dealValue = Number(body.dealValue || body.deal_value || body.valor || body.amount || 0);
+    const leadId = data.id || data.leadId || data.customerId || body.leadId || body.lead_id || body.id || ('lead_' + Math.random().toString(36).substring(2, 9));
+    const dealValue = Number(data.dealValue || data.totalAmount || data.amount || body.dealValue || body.deal_value || body.valor || body.amount || 0);
 
     return createNormalizedLead({
       id: leadId,
@@ -139,9 +143,10 @@ class Normalizer {
   normalizeEcommerceTransaction(payload, tenantId) {
     const body = payload.body || payload;
     const query = payload.query || {};
+    const data = body.data || body;
 
-    const resolvedTenant = tenantId || query.loja || query.tenantId || body.store_id || body.loja || 'loja-padrao';
-    const rawStatus = String(body.status || body.event || body.financial_status || '').toLowerCase();
+    const resolvedTenant = tenantId || query.loja || query.tenantId || (data && data.tenantId) || body.store_id || body.loja || 'loja-padrao';
+    const rawStatus = String(data.status || body.status || body.event || body.eventType || body.financial_status || '').toLowerCase();
 
     let status = 'approved';
     if (rawStatus.includes('refus') || rawStatus.includes('recus') || rawStatus.includes('fail') || rawStatus.includes('denied')) {
@@ -156,21 +161,21 @@ class Normalizer {
 
     // Identificação de Meio de Pagamento
     let paymentMethod = 'credit_card';
-    const rawMethod = String(body.payment_method || body.gateway || (body.payment && body.payment.method) || '').toLowerCase();
+    const rawMethod = String(data.paymentMethod || data.method || body.payment_method || body.gateway || (body.payment && body.payment.method) || '').toLowerCase();
     if (rawMethod.includes('pix')) paymentMethod = 'pix';
     else if (rawMethod.includes('boleto')) paymentMethod = 'boleto';
     else if (rawMethod.includes('cart') || rawMethod.includes('credit')) paymentMethod = 'credit_card';
 
     // Gateway
-    let gateway = String(body.gateway || body.acquirer || 'mercadopago').toLowerCase();
+    let gateway = String(data.gateway || body.gateway || body.acquirer || 'mercadopago').toLowerCase();
 
     // Valores
-    const amount = Number(body.total || body.amount || body.transaction_amount || (body.order && body.order.total) || 0);
-    const cost = Number(body.cost || (amount * 0.45)); // Fallback aproximado se não fornecido
-    const discountAmount = Number(body.discount || body.discount_amount || 0);
+    const amount = Number(data.totalAmount || data.amount || body.total || body.amount || body.transaction_amount || (body.order && body.order.total) || 0);
+    const cost = Number(data.cost || body.cost || (amount * 0.45)); // Fallback aproximado se não fornecido
+    const discountAmount = Number(data.discount || body.discount || body.discount_amount || 0);
 
     return createNormalizedTransaction({
-      id: body.id || body.order_id || ('ord_' + Math.random().toString(36).substring(2, 9)),
+      id: data.orderId || data.paymentId || body.id || body.order_id || ('ord_' + Math.random().toString(36).substring(2, 9)),
       tenantId: resolvedTenant,
       amount,
       cost,
@@ -180,9 +185,9 @@ class Normalizer {
       paymentMethod,
       gateway,
       status,
-      failureReason: body.failure_reason || body.status_detail || null,
-      customerName: body.customer?.name || body.payer?.first_name || 'Cliente',
-      customerPhone: body.customer?.phone || query.wa || '',
+      failureReason: data.failureReason || body.failure_reason || body.status_detail || null,
+      customerName: data.customerName || body.customer?.name || body.payer?.first_name || 'Cliente',
+      customerPhone: data.customerPhone || body.customer?.phone || query.wa || '',
       timestamp: Date.now()
     });
   }

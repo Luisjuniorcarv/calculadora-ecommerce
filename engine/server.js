@@ -91,6 +91,78 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
+    // Webhook Especializado DropHub (Fila Outbox & Disparador de Domínio)
+    if ((pathname === '/api/webhooks/drophub' || pathname === '/webhook/drophub') && method === 'POST') {
+      const body = await parseRequestBody(req);
+      const query = parsedUrl.query;
+      const tenantId = query.tenantId || body.tenantId || (body.data && body.data.tenantId) || 'drophub';
+      const eventType = String(body.eventType || body.type || '').toUpperCase();
+
+      // Tratamento de PING de teste de conectividade
+      if (eventType === 'TEST_PING' || body.message?.includes('Ping')) {
+        return sendJson(res, 200, {
+          success: true,
+          message: 'Ping de conectividade DropHub verificado com sucesso pelo Auditor Silencioso.',
+          timestamp: new Date().toISOString()
+        });
+      }
+
+      // Se for pagamento aprovado ou falho
+      if (eventType.includes('PAYMENT_') || eventType === 'ORDER_PAID') {
+        const transaction = normalizer.normalizeEcommerceTransaction({ body, query }, tenantId);
+        storage.addTransaction(transaction);
+
+        if (eventType === 'ORDER_PAID' || eventType === 'PAYMENT_APPROVED') {
+          // Atualiza também no funil de leads como 'won' (Venda Fechada)
+          const lead = normalizer.normalizeLeadWebhook({ body, query }, tenantId);
+          lead.currentStage = 'won';
+          lead.status = 'won';
+          storage.addLead(lead);
+        }
+
+        const auditResult = await alertManager.runAudit(tenantId);
+        return sendJson(res, 200, {
+          success: true,
+          message: `Evento financeiro ${eventType} processado pelo Auditor Silencioso`,
+          transactionId: transaction.id,
+          auditResult
+        });
+      }
+
+      // Se for criação de pedido (Checkout iniciado / Oportunidade)
+      if (eventType === 'ORDER_CREATED') {
+        const lead = normalizer.normalizeLeadWebhook({ body, query }, tenantId);
+        lead.currentStage = 'opportunity';
+        storage.addLead(lead);
+
+        const transaction = normalizer.normalizeEcommerceTransaction({ body, query }, tenantId);
+        storage.addTransaction(transaction);
+
+        const auditResult = await alertManager.runAudit(tenantId);
+        return sendJson(res, 200, {
+          success: true,
+          message: 'Pedido/Checkout registrado no funil do Auditor Silencioso',
+          leadId: lead.id,
+          auditResult
+        });
+      }
+
+      // Padrão: Lead / Cliente (CUSTOMER_CREATED ou genérico)
+      const lead = normalizer.normalizeLeadWebhook({ body, query }, tenantId);
+      storage.addLead(lead);
+
+      const auditResult = await alertManager.runAudit(tenantId);
+      return sendJson(res, 200, {
+        success: true,
+        message: `Evento de lead/domínio ${eventType || 'LEAD'} recebido pelo Auditor Silencioso`,
+        tenantId,
+        leadId: lead.id,
+        leadName: lead.name,
+        currentStage: lead.currentStage,
+        auditResult
+      });
+    }
+
     // Webhook de Leads, Instagram & CRM (/webhook/instagram, /webhook/meta-ads, /webhook/crm-lead, /api/webhooks/leads)
     if ((pathname === '/api/webhooks/leads' || pathname === '/webhook/leads' || pathname === '/webhook/instagram' || pathname === '/webhook/meta-ads' || pathname === '/webhook/crm-lead') && method === 'POST') {
       const body = await parseRequestBody(req);
