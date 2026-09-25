@@ -304,7 +304,11 @@ document.addEventListener('DOMContentLoaded', () => {
       diagnosticBox.classList.add('danger');
       diagIcon.textContent = '🚨';
       diagTitle.textContent = 'Alerta de Sangria Financeira';
-      diagDesc.innerHTML = `Você está <strong>perdendo ${formatBRL(Math.abs(data.netProfit))}</strong> a cada venda desse produto! As taxas e custos somam mais de 100% do preço. Suba o preço de venda para pelo menos ${formatBRL(data.totalDeductions * 1.25)} ou renegocie o custo do fornecedor.`;
+      diagDesc.innerHTML = `Você está <strong>perdendo ${formatBRL(Math.abs(data.netProfit))}</strong> a cada venda desse produto! As taxas e custos somam mais de 100% do preço. Suba o preço de venda para pelo menos ${formatBRL(data.totalDeductions * 1.25)} ou renegocie o custo do fornecedor.
+      <div class="diag-cta-box" style="margin-top:0.75rem; padding-top:0.65rem; border-top:1px dashed rgba(244,63,94,0.3); font-size:0.85rem; line-height:1.4;">
+        🛡️ <strong>Sentinela de Prejuízo:</strong> O Auditor Silencioso vigia sua loja 24/7 e avisa no WhatsApp se qualquer cupom ou campanha deixar seu caixa no vermelho.
+        <a href="auditor.html#checkout-area" style="display:inline-block; margin-top:0.35rem; color:#F43F5E; font-weight:700; text-decoration:underline;">Ativar Sentinela por R$ 3,23/dia &rarr;</a>
+      </div>`;
       return;
     }
 
@@ -312,7 +316,11 @@ document.addEventListener('DOMContentLoaded', () => {
       diagnosticBox.classList.add('warning');
       diagIcon.textContent = '⚠️';
       diagTitle.textContent = 'Vilão da Antecipação Detectado';
-      diagDesc.innerHTML = `A antecipação de parcelas está devorando <strong>${formatBRL(data.anticipationFee)}</strong> (${((data.anticipationFee / data.price) * 100).toFixed(1)}% do pedido). Ao ativar o repasse de juros ao cliente ou incentivar o PIX, seu lucro salta de ${formatBRL(data.netProfit)} para ${formatBRL(data.netProfit + data.anticipationFee)} (+${(((data.anticipationFee) / data.netProfit) * 100).toFixed(0)}%).`;
+      diagDesc.innerHTML = `A antecipação de parcelas está devorando <strong>${formatBRL(data.anticipationFee)}</strong> (${((data.anticipationFee / data.price) * 100).toFixed(1)}% do pedido). Ao ativar o repasse de juros ao cliente ou incentivar o PIX, seu lucro salta de ${formatBRL(data.netProfit)} para ${formatBRL(data.netProfit + data.anticipationFee)} (+${(((data.anticipationFee) / data.netProfit) * 100).toFixed(0)}%).
+      <div class="diag-cta-box" style="margin-top:0.75rem; padding-top:0.65rem; border-top:1px dashed rgba(245,158,11,0.3); font-size:0.85rem; line-height:1.4;">
+        🛡️ <strong>Evite perdas invisíveis:</strong> Monitore taxas e anomalias de pagamento em tempo real direto no seu WhatsApp.
+        <a href="auditor.html#checkout-area" style="display:inline-block; margin-top:0.35rem; color:#F59E0B; font-weight:700; text-decoration:underline;">Conhecer Sentinela por R$ 3,23/dia &rarr;</a>
+      </div>`;
       return;
     }
 
@@ -320,14 +328,22 @@ document.addEventListener('DOMContentLoaded', () => {
       diagnosticBox.classList.add('warning');
       diagIcon.textContent = '💡';
       diagTitle.textContent = 'Margem Apertada para Escala';
-      diagDesc.innerHTML = `Sua margem de ${data.netMargin.toFixed(1)}% deixa pouco espaço para anúncios (tráfego pago) ou devoluções. Se você receber via <strong>PIX</strong>, economiza taxas e sua margem sobe para cerca de ${((data.netProfit + (data.totalGatewayFee * 0.7)) / data.price * 100).toFixed(1)}%.`;
+      diagDesc.innerHTML = `Sua margem de ${data.netMargin.toFixed(1)}% deixa pouco espaço para anúncios (tráfego pago) ou devoluções. Se você receber via <strong>PIX</strong>, economiza taxas e sua margem sobe para cerca de ${((data.netProfit + (data.totalGatewayFee * 0.7)) / data.price * 100).toFixed(1)}%.
+      <div class="diag-cta-box" style="margin-top:0.75rem; padding-top:0.65rem; border-top:1px dashed rgba(245,158,11,0.3); font-size:0.85rem; line-height:1.4;">
+        🛡️ <strong>Alerta para Tráfego Pago:</strong> Com margem apertada, qualquer pico de recusa de cartão queima seu lucro de anúncios.
+        <a href="auditor.html#checkout-area" style="display:inline-block; margin-top:0.35rem; color:#F59E0B; font-weight:700; text-decoration:underline;">Ativar Sentinela 24/7 por R$ 3,23/dia &rarr;</a>
+      </div>`;
       return;
     }
 
     // Caso Saudável
     diagIcon.textContent = '✨';
     diagTitle.textContent = 'Operação Altamente Lucrativa';
-    diagDesc.innerHTML = `Excelente precificação! Sua margem líquida de <strong>${data.netMargin.toFixed(1)}%</strong> é superior à média do mercado (15%). Sobram ${formatBRL(data.netProfit)} limpos em caixa por pedido para reinvestir em crescimento.`;
+    diagDesc.innerHTML = `Excelente precificação! Sua margem líquida de <strong>${data.netMargin.toFixed(1)}%</strong> é superior à média do mercado (15%). Sobram ${formatBRL(data.netProfit)} limpos em caixa por pedido para reinvestir em crescimento.
+    <div class="diag-cta-box" style="margin-top:0.75rem; padding-top:0.65rem; border-top:1px dashed rgba(16,185,129,0.3); font-size:0.85rem; line-height:1.4;">
+      🛡️ <strong>Proteja esse faturamento:</strong> Não deixe quedas repentinas de gateway ou checkout travado estancarem seu caixa.
+      <a href="auditor.html#checkout-area" style="display:inline-block; margin-top:0.35rem; color:#10B981; font-weight:700; text-decoration:underline;">Proteger Loja por R$ 3,23/dia &rarr;</a>
+    </div>`;
   };
 
   // ==========================================
