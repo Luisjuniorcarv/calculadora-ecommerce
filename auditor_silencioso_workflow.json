@@ -4,6 +4,68 @@
     {
       "parameters": {
         "httpMethod": "POST",
+        "path": "gerar-checkout-auditor",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook Gerar Checkout",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        -160
+      ],
+      "id": "node-webhook-gerar-checkout"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mercadopago.com/checkout/preferences",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.MP_ACCESS_TOKEN || 'SEU_MERCADO_PAGO_ACCESS_TOKEN' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"items\": [\n    {\n      \"title\": \"Auditor Silencioso 24/7 - Sentinela de Checkout (R$ 3,23/dia)\",\n      \"description\": \"Monitoramento 24h contra picos de recusa de cartão e checkout travado\",\n      \"quantity\": 1,\n      \"unit_price\": 97,\n      \"currency_id\": \"BRL\"\n    }\n  ],\n  \"payer\": {\n    \"name\": \"{{ $json.body.name }}\",\n    \"email\": \"{{ $json.body.email || 'cliente@loja.com.br' }}\",\n    \"phone\": { \"number\": \"{{ String($json.body.whatsapp || '').replace(/\\D/g, '') }}\" }\n  },\n  \"metadata\": {\n    \"client_name\": \"{{ $json.body.name }}\",\n    \"whatsapp\": \"{{ $json.body.whatsapp }}\",\n    \"platform\": \"{{ $json.body.platform }}\"\n  },\n  \"back_urls\": {\n    \"success\": \"https://calculadoradoecommerce.com.br/auditor.html?status=approved\",\n    \"failure\": \"https://calculadoradoecommerce.com.br/auditor.html?status=failure\",\n    \"pending\": \"https://calculadoradoecommerce.com.br/auditor.html?status=pending\"\n  },\n  \"auto_return\": \"approved\"\n}",
+        "options": {}
+      },
+      "name": "Criar Preferencia MP",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        480,
+        -160
+      ],
+      "id": "node-criar-preferencia-mp"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"init_point\": \"{{ $json.init_point }}\"\n}",
+        "options": {}
+      },
+      "name": "Responder com Link Checkout",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        720,
+        -160
+      ],
+      "id": "node-respond-checkout-link"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
         "path": "mercadopago-auditor",
         "responseMode": "onReceived",
         "options": {}
@@ -59,7 +121,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer APP_USR-3996837279794288-091918-04713fcfe6fac28f3c48b2c7dc6ddca4-294009773"
+              "value": "=Bearer {{ $env.MP_ACCESS_TOKEN || 'SEU_MERCADO_PAGO_ACCESS_TOKEN' }}"
             }
           ]
         },
@@ -593,6 +655,28 @@
         [
           {
             "node": "Evolution API: Enviar Alerta Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Gerar Checkout": {
+      "main": [
+        [
+          {
+            "node": "Criar Preferencia MP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Preferencia MP": {
+      "main": [
+        [
+          {
+            "node": "Responder com Link Checkout",
             "type": "main",
             "index": 0
           }
