@@ -594,6 +594,26 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => toast.classList.remove('show'), 3500);
   };
 
+  // FAQ Accordion Interativo
+  document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.closest('.accordion-item');
+      const body = item.querySelector('.accordion-body');
+      const isActive = item.classList.contains('active');
+
+      document.querySelectorAll('.accordion-item').forEach(other => {
+        other.classList.remove('active');
+        const otherBody = other.querySelector('.accordion-body');
+        if (otherBody) otherBody.style.maxHeight = null;
+      });
+
+      if (!isActive) {
+        item.classList.add('active');
+        body.style.maxHeight = (body.scrollHeight + 30) + 'px';
+      }
+    });
+  });
+
   // Inicializar Primeiro Cálculo
   calculate();
 
