@@ -37,11 +37,11 @@ class Storage {
       // 1. Tenant E-commerce
       const ecomTenant = createTenantConfig({
         id: 'loja-demo',
-        name: 'Moda Prime Brasil',
+        name: 'Feltrices de Mamães',
         slug: 'loja-demo',
         operationMode: OPERATION_MODES.ECOMMERCE,
-        segment: 'Moda e Acessórios / Dropshipping',
-        whatsappDestination: '5511999999999',
+        segment: 'Artesanato & Maternidade / Shopee',
+        whatsappDestination: '5512992310222',
         notifyWhatsapp: true
       });
       this.saveTenant(ecomTenant);
@@ -101,51 +101,16 @@ class Storage {
     const oneHour = 60 * 60 * 1000;
     const oneDay = 24 * oneHour;
 
-    // --- Dados da Loja E-commerce ---
+    // --- Dados da Loja E-commerce (Feltrices de Mamães - Loja Real Zerada) ---
     const ecomId = 'loja-demo';
-    
-    // Estoque
-    this.inventory.set(ecomId, [
-      { id: 'p1', sku: 'VEST-VERAO-01', name: 'Vestido Linho Floral', currentStock: 14, dailySalesVelocity: 6 }, // 2.3 dias (crítico)
-      { id: 'p2', sku: 'CALCA-JEANS-02', name: 'Calça Jeans Premium', currentStock: 120, dailySalesVelocity: 8 }, // 15 dias (seguro)
-      { id: 'p3', sku: 'JAQUETA-COURO-03', name: 'Jaqueta Biker Street', currentStock: 4, dailySalesVelocity: 3 } // 1.3 dias (crítico)
-    ]);
-
-    // Transações normais e algumas recentes
-    const txList = [];
-    for (let i = 0; i < 25; i++) {
-      txList.push({
-        id: 'tx_seed_' + i,
-        tenantId: ecomId,
-        amount: 149.90,
-        cost: 65.00,
-        paymentMethod: i % 4 === 0 ? 'pix' : 'credit_card',
-        gateway: 'mercadopago',
-        status: i === 0 || i === 2 ? 'refused' : 'approved',
-        timestamp: now - (i * 20 * 60 * 1000)
-      });
-    }
-    this.transactions.set(ecomId, txList);
-
-    // Carrinhos
-    const cartList = [];
-    for (let i = 0; i < 30; i++) {
-      cartList.push({
-        id: 'cart_' + i,
-        items: [{ title: 'Vestido Linho', price: 149.90 }],
-        total: 149.90,
-        abandoned: i < 18, // 60% de abandono normal histórico
-        timestamp: now - (i * 45 * 60 * 1000)
-      });
-    }
-    this.carts.set(ecomId, cartList);
-
-    // Baseline E-commerce
+    this.inventory.set(ecomId, []);
+    this.transactions.set(ecomId, []);
+    this.carts.set(ecomId, []);
     this.baselines.set(ecomId, {
-      historicalRefusalRate: 9.5, // 9.5% normal
-      historicalAbandonmentRate: 62.0, // 62% normal
-      historicalDailyRevenue: 3450.00,
-      historicalPixFailRate: 4.0
+      historicalRefusalRate: 0,
+      historicalAbandonmentRate: 0,
+      historicalDailyRevenue: 0,
+      historicalPixFailRate: 0
     });
 
     // --- Dados da Empresa de Leads ---
@@ -568,6 +533,25 @@ class Storage {
     this.baselines.set(tenantId, { ...current, ...baselineUpdates });
     this.saveToDisk();
     return this.baselines.get(tenantId);
+  }
+
+  // --- Reset Completo dos Dados de um Tenant (Para lojas reais zeradas) ---
+  clearTenantData(tenantId) {
+    this.transactions.set(tenantId, []);
+    this.carts.set(tenantId, []);
+    this.inventory.set(tenantId, []);
+    this.leads.set(tenantId, []);
+    this.traffic.set(tenantId, []);
+    this.activeAlerts.set(tenantId, new Map());
+    this.alertHistory.set(tenantId, []);
+    this.baselines.set(tenantId, {
+      historicalRefusalRate: 0,
+      historicalAbandonmentRate: 0,
+      historicalDailyRevenue: 0,
+      historicalPixFailRate: 0
+    });
+    this.saveToDisk();
+    return true;
   }
 
   // --- Persistência em Disco ---

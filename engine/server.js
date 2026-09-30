@@ -404,6 +404,22 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, 200, { success: true, result, health });
     }
 
+    // Resetar / Zerar todos os dados e alertas do Tenant (Para lojas reais zeradas)
+    if (pathname.startsWith('/api/tenants/') && pathname.endsWith('/reset') && method === 'POST') {
+      const parts = pathname.split('/');
+      const tenantId = parts[3];
+      const tenant = storage.getTenant(tenantId);
+      if (!tenant) return sendJson(res, 404, { success: false, error: 'Tenant não encontrado' });
+
+      storage.clearTenantData(tenantId);
+      const health = alertManager.getOperationHealth(tenantId);
+      return sendJson(res, 200, {
+        success: true,
+        message: `Métricas e alertas de ${tenant.name} foram zerados com sucesso.`,
+        health
+      });
+    }
+
     // ========================================================
     // 3. SIMULADOR DE EVENTOS DE TESTE (1-CLIQUE NO DASHBOARD)
     // ========================================================

@@ -60,10 +60,10 @@ function setupFallbackTenants() {
   appState.tenants = [
     {
       id: 'loja-demo',
-      name: 'Moda Prime Brasil',
+      name: 'Feltrices de Mamães',
       operationMode: 'ECOMMERCE',
-      segment: 'Moda & Acessórios / Dropshipping',
-      whatsappDestination: '5511999999999',
+      segment: 'Artesanato & Maternidade / Shopee',
+      whatsappDestination: '5512992310222',
       ecommerceSettings: { maxRefusalRatePercent: 25, maxNoSaleMinutesBusinessHours: 120 }
     },
     {
@@ -583,6 +583,7 @@ async function saveSettings() {
  * Fallback Offline para quando a API não estiver rodando
  */
 function renderFallbackDashboard() {
+  const currentTenant = appState.tenants.find(t => t.id === appState.currentTenantId);
   const isEcom = appState.currentMode === 'ECOMMERCE';
 
   const mockHealth = {
@@ -594,40 +595,70 @@ function renderFallbackDashboard() {
   };
 
   const mockMetrics = isEcom ? {
-    totalRevenue: 3450.00,
-    netProfit: 1420.00,
-    refusalRate: '9.2',
-    refusedOrdersCount: 2,
-    approvedOrdersCount: 22,
-    abandonmentRate: '61.4',
-    abandonedCartsCount: 18,
-    cartsCount: 29,
-    inventoryCriticalCount: 1
+    totalRevenue: 0.00,
+    netProfit: 0.00,
+    refusalRate: '0.0',
+    refusedOrdersCount: 0,
+    approvedOrdersCount: 0,
+    abandonmentRate: '0.0',
+    abandonedCartsCount: 0,
+    cartsCount: 0,
+    inventoryCriticalCount: 0
   } : {
-    totalSpend: 600.00,
-    totalClicks: 295,
-    totalLeads: 20,
-    cpl: '30.00',
-    totalRevenue: 6400.00,
-    qualifiedCount: 10,
-    wonCount: 2,
+    totalSpend: 0.00,
+    totalClicks: 0,
+    totalLeads: 0,
+    cpl: '0.00',
+    totalRevenue: 0.00,
+    qualifiedCount: 0,
+    wonCount: 0,
     funnel: [
-      { id: 'traffic', label: 'Tráfego (Cliques)', count: 295 },
-      { id: 'visit', label: 'Visitas', count: 271 },
-      { id: 'lead', label: 'Leads', count: 20 },
-      { id: 'contacted', label: 'Contatados', count: 18 },
-      { id: 'qualified', label: 'Qualificados', count: 10 },
-      { id: 'scheduled', label: 'Agendados', count: 6 },
-      { id: 'attended', label: 'Compareceram', count: 5 },
-      { id: 'opportunity', label: 'Propostas', count: 3 },
-      { id: 'won', label: 'Vendas Fechadas', count: 2 }
+      { id: 'traffic', label: 'Tráfego (Cliques)', count: 0 },
+      { id: 'visit', label: 'Visitas', count: 0 },
+      { id: 'lead', label: 'Leads', count: 0 },
+      { id: 'contacted', label: 'Contatados', count: 0 },
+      { id: 'qualified', label: 'Qualificados', count: 0 },
+      { id: 'scheduled', label: 'Agendados', count: 0 },
+      { id: 'attended', label: 'Compareceram', count: 0 },
+      { id: 'opportunity', label: 'Propostas', count: 0 },
+      { id: 'won', label: 'Vendas Fechadas', count: 0 }
     ]
   };
 
-  renderHealthCard(mockHealth, { segment: isEcom ? 'Moda e Dropshipping' : 'Clínica Odontológica' });
+  renderHealthCard(mockHealth, currentTenant || { segment: isEcom ? 'Artesanato & Maternidade / Shopee' : 'Clínica Odontológica' });
   renderKpis(mockMetrics, appState.currentMode);
   if (!isEcom) renderFunnel(mockMetrics.funnel);
   renderActiveAlerts([]);
   renderWhatsappChat([], []);
   renderHistoryTable([]);
+}
+
+/**
+ * Zera todas as métricas e alertas da loja atual (ideal para lojas reais prontas para operar)
+ */
+async function resetTenantData() {
+  const currentTenant = appState.tenants.find(t => t.id === appState.currentTenantId);
+  const tenantName = currentTenant ? currentTenant.name : 'empresa selecionada';
+
+  if (!confirm(`Deseja realmente zerar todos os dados e alertas da loja "${tenantName}"? O painel começará limpo para registrar as vendas reais.`)) {
+    return;
+  }
+
+  try {
+    if (appState.isApiOnline) {
+      await fetch(`${API_BASE}/api/tenants/${appState.currentTenantId}/reset`, {
+        method: 'POST'
+      });
+    }
+    await refreshDashboardData();
+    closeModal('modal-settings');
+    closeModal('modal-simulate');
+    alert(`Painel de "${tenantName}" zerado com sucesso! Pronto para receber dados reais.`);
+  } catch (err) {
+    console.error('Erro ao zerar dados:', err);
+    renderFallbackDashboard();
+    closeModal('modal-settings');
+    closeModal('modal-simulate');
+    alert('Painel atualizado em modo limpo (zerado).');
+  }
 }

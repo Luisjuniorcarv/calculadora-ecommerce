@@ -352,7 +352,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const body = $json.body || {};\nconst lead = body.lead || {};\nconst sim = body.simulation || {};\n\nconst name = lead.name || \"Lojista\";\nconst rawPhone = String(lead.whatsapp || \"5511999999999\").replace(/\\D/g, \"\");\nconst fullPhone = rawPhone.startsWith(\"55\") ? rawPhone : \"55\" + rawPhone;\n\nconst price = Number(sim.price || 0).toFixed(2);\nconst profit = Number(sim.netProfit || 0).toFixed(2);\nconst margin = Number(sim.netMargin || 0).toFixed(1);\nconst gateway = sim.gatewayName || \"Mercado Pago\";\nconst platform = sim.platformName || \"E-commerce\";\n\nconst reportMsg = \"*[DROPHUB TOOLS] SEU RELATÓRIO DE LUCRO REAL*\\n\\n\" +\n  \"Olá *\" + name + \"*! Aqui está o resumo da sua simulação na Calculadora:\\n\\n\" +\n  \"🏷️ *Preço de Venda:* R$ \" + price + \"\\n\" +\n  \"💳 *Gateway:* \" + gateway + \" | *Plataforma:* \" + platform + \"\\n\" +\n  \"💰 *LUCRO LÍQUIDO REAL:* R$ \" + profit + \" (\" + margin + \"% de margem)\\n\\n\" +\n  \"💡 *Diagnóstico de Otimização:*\\n\" +\n  \"Você sabia que checkouts travados e recusas de cartão comem até 30% do faturamento da sua loja em silêncio?\\n\\n\" +\n  \"🛡️ *Conheça o Auditor Silencioso por apenas R$ 3,23 por dia (R$ 97/mês):*\\n\" +\n  \"https://calculadoradoecommerce.com.br/auditor.html\";\n\nreturn [{ json: { fullPhone, reportMsg } }];"
+        "jsCode": "const body = $json.body || {};\nconst lead = body.lead || {};\nconst sim = body.simulation || {};\n\nconst name = lead.name || \"Lojista\";\nconst rawPhone = String(lead.whatsapp || \"\").replace(/\\D/g, \"\");\nconst leadPhone = rawPhone.startsWith(\"55\") ? rawPhone : \"55\" + rawPhone;\n\nconst adminPhone = \"5512992310222\";\n\nconst price = Number(sim.price || 0).toFixed(2);\nconst profit = Number(sim.netProfit || 0).toFixed(2);\nconst margin = Number(sim.netMargin || 0).toFixed(1);\nconst gateway = sim.gatewayName || \"Mercado Pago\";\nconst platform = sim.platformName || \"E-commerce\";\n\nconst adminMsg = \"*\\uD83D\\uDC64 [NOVO LEAD NA CALCULADORA]*\\n\\n\" +\n  \"Um visitante acabou de calcular margem na DropHub Tools:\\n\\n\" +\n  \"\\uD83D\\uDC64 *Nome:* \" + name + \"\\n\" +\n  \"\\uD83D\\uDCF1 *WhatsApp:* https://wa.me/\" + leadPhone + \" (\" + leadPhone + \")\\n\" +\n  \"\\uD83C\\uDFF7\\uFE0F *Pre\\u00E7o Simulado:* R$ \" + price + \"\\n\" +\n  \"\\uD83D\\uDCB0 *Lucro L\\u00EDquido:* R$ \" + profit + \" (\" + margin + \"% margem)\\n\" +\n  \"\\uD83D\\uDCB3 *Gateway / Plataforma:* \" + gateway + \" | \" + platform + \"\\n\\n\" +\n  \"\\uD83D\\uDCA1 *A\\u00E7\\u00E3o:* Chame o lead para apresentar o Auditor Silencioso!\";\n\nreturn [{ json: { adminPhone, adminMsg } }];"
       },
       "name": "Formatar Relatório Lead",
       "type": "n8n-nodes-base.code",
@@ -376,7 +376,7 @@
             },
             {
               "name": "Content-Type",
-              "value": "application/json"
+              "value": "application/json; charset=utf-8"
             }
           ]
         },
@@ -385,11 +385,11 @@
           "parameters": [
             {
               "name": "number",
-              "value": "={{ $json.fullPhone }}"
+              "value": "={{ $json.adminPhone }}"
             },
             {
               "name": "text",
-              "value": "={{ $json.reportMsg }}"
+              "value": "={{ $json.adminMsg }}"
             }
           ]
         },

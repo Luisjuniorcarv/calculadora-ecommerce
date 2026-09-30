@@ -342,15 +342,15 @@
       <div class="scenes-list">
         <div class="panel-title" style="font-size: 14px; margin-bottom: 4px;">Cenas do Roteiro (18s):</div>
         <div class="scene-item" id="sceneItem1" onclick="jumpTo(0)">
-          <span>1. O Gancho (Alerta de Vendas Perdidas)</span>
+          <span>1. O Sentinela (Auditor Silencioso 24/7)</span>
           <span class="sec">0s - 3.5s</span>
         </div>
         <div class="scene-item" id="sceneItem2" onclick="jumpTo(3.5)">
-          <span>2. A Dor (Tráfego caro e recusa oculta)</span>
+          <span>2. Aplicação E-commerce (Checkout & Gateway)</span>
           <span class="sec">3.5s - 7.5s</span>
         </div>
         <div class="scene-item" id="sceneItem3" onclick="jumpTo(7.5)">
-          <span>3. A Solução (Sentinela + Alerta WhatsApp)</span>
+          <span>3. Aplicação Tráfego Pago (Leads sem Espera)</span>
           <span class="sec">7.5s - 11.5s</span>
         </div>
         <div class="scene-item" id="sceneItem4" onclick="jumpTo(11.5)">
@@ -496,25 +496,25 @@
     function drawScene1(t) {
       const progress = t / 3.5;
       
-      // Urgent top badge
+      // Top badge
       const pulse = 1 + Math.sin(t * 8) * 0.05;
       ctx.save();
       ctx.translate(360, 220);
       ctx.scale(pulse, pulse);
       
-      ctx.fillStyle = 'rgba(239, 68, 68, 0.2)';
-      ctx.strokeStyle = '#ef4444';
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.2)';
+      ctx.strokeStyle = '#10b981';
       ctx.lineWidth = 2;
-      roundRect(ctx, -160, -25, 320, 50, 25, true, true);
+      roundRect(ctx, -170, -25, 340, 50, 25, true, true);
 
-      ctx.fillStyle = '#fca5a5';
+      ctx.fillStyle = '#6ee7b7';
       ctx.font = '700 20px "Plus Jakarta Sans"';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('⚠️ ATENÇÃO E-COMMERCE', 0, 0);
+      ctx.fillText('🛡️ SENTINELA 24/7', 0, 0);
       ctx.restore();
 
-      // Big Warning Icon
+      // Big Shield Icon
       ctx.save();
       ctx.font = '100px sans-serif';
       ctx.textAlign = 'center';
@@ -522,108 +522,108 @@
       const iconPulse = 1 + Math.sin(t * 6) * 0.08;
       ctx.translate(360, 430);
       ctx.scale(iconPulse, iconPulse);
-      ctx.fillText('💳❌', 0, 0);
+      ctx.fillText('🛡️👁️', 0, 0);
       ctx.restore();
 
       // Headline
       ctx.fillStyle = '#ffffff';
-      ctx.font = '900 44px "Plus Jakarta Sans"';
+      ctx.font = '900 46px "Plus Jakarta Sans"';
       ctx.textAlign = 'center';
-      ctx.fillText('SEU CHECKOUT PODE', 360, 620);
+      ctx.fillText('AUDITOR SILENCIOSO', 360, 620);
       
-      ctx.fillStyle = '#ef4444';
-      ctx.font = '900 48px "Plus Jakarta Sans"';
-      ctx.fillText('ESTAR RECUSANDO', 360, 680);
-      ctx.fillText('VENDAS AGORA!', 360, 740);
+      ctx.fillStyle = '#10b981';
+      ctx.font = '800 36px "Plus Jakarta Sans"';
+      ctx.fillText('VIGIA SUA OPERAÇÃO 24H', 360, 680);
 
       // Subtitle
       ctx.fillStyle = '#94a3b8';
       ctx.font = '500 24px "Inter"';
-      ctx.fillText('E você nem fica sabendo...', 360, 830);
+      ctx.fillText('Você não pode vigiar sua tela o dia todo...', 360, 770);
     }
 
-    // Scene 2: 3.5s to 7.5s - The Problem
+    // Scene 2: 3.5s to 7.5s - Aplicação 1: E-commerce
     function drawScene2(t) {
       const sceneT = t - 3.5;
       
       // Top badge
-      ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
-      ctx.strokeStyle = '#f59e0b';
+      ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+      ctx.strokeStyle = '#ef4444';
       ctx.lineWidth = 2;
-      roundRect(ctx, 200, 180, 320, 46, 23, true, true);
-      ctx.fillStyle = '#fcd34d';
-      ctx.font = '700 18px "Plus Jakarta Sans"';
+      roundRect(ctx, 160, 180, 400, 46, 23, true, true);
+      ctx.fillStyle = '#fca5a5';
+      ctx.font = '800 18px "Plus Jakarta Sans"';
       ctx.textAlign = 'center';
-      ctx.fillText('O PROBLEMA SILENCIOSO', 360, 209);
+      ctx.fillText('🛒 APLICAÇÃO 1: NO E-COMMERCE', 360, 209);
 
-      // Card 1: Ads Investment
-      const card1Y = 320 + Math.min(sceneT * 60, 20);
+      // Card 1: Gateway Breakdown
+      const card1Y = 300 + Math.min(sceneT * 50, 15);
       ctx.fillStyle = '#0f172a';
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
       ctx.lineWidth = 1.5;
-      roundRect(ctx, 80, card1Y, 560, 130, 20, true, true);
+      roundRect(ctx, 70, card1Y, 580, 150, 20, true, true);
 
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = '600 20px "Plus Jakarta Sans"';
+      ctx.fillStyle = '#f87171';
+      ctx.font = '700 22px "Plus Jakarta Sans"';
       ctx.textAlign = 'left';
-      ctx.fillText('📢 Você gasta rios em Tráfego Pago:', 110, card1Y + 45);
+      ctx.fillText('⚠️ Gateway com Instabilidade Oculta', 105, card1Y + 50);
 
-      ctx.fillStyle = '#38bdf8';
-      ctx.font = '800 36px "Plus Jakarta Sans"';
-      ctx.fillText('R$ 5.480,00', 110, card1Y + 95);
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '500 18px "Inter"';
+      ctx.fillText('Cartões recusados e checkout travado', 105, card1Y + 90);
+      ctx.fillText('sem gerar vendas durante o dia.', 105, card1Y + 120);
 
-      // Card 2: Rejection Spike
-      const card2Y = card1Y + 160;
+      // Card 2: Queima de Tráfego
+      const card2Y = card1Y + 180;
       ctx.fillStyle = 'rgba(239, 68, 68, 0.1)';
       ctx.strokeStyle = '#ef4444';
       ctx.lineWidth = 2;
-      roundRect(ctx, 80, card2Y, 560, 170, 20, true, true);
+      roundRect(ctx, 70, card2Y, 580, 170, 20, true, true);
 
       ctx.fillStyle = '#fca5a5';
-      ctx.font = '700 22px "Plus Jakarta Sans"';
-      ctx.fillText('⚠️ Mas o Gateway entra em instabilidade...', 110, card2Y + 45);
+      ctx.font = '800 22px "Plus Jakarta Sans"';
+      ctx.fillText('🚨 O perigo real:', 105, card2Y + 45);
 
       ctx.fillStyle = '#ffffff';
       ctx.font = '600 20px "Inter"';
-      ctx.fillText('Taxa de recusa oculta no cartão:', 110, card2Y + 90);
+      ctx.fillText('Você continua queimando verba em anúncios', 105, card2Y + 90);
 
       ctx.fillStyle = '#ef4444';
-      ctx.font = '900 42px "Plus Jakarta Sans"';
-      ctx.fillText('42% DOS PAGAMENTOS BARRADOS', 110, card2Y + 140);
+      ctx.font = '900 36px "Plus Jakarta Sans"';
+      ctx.fillText('E AS VENDAS NÃO CAEM!', 105, card2Y + 140);
 
       // Bottom Callout
-      ctx.fillStyle = '#e2e8f0';
-      ctx.font = '600 26px "Plus Jakarta Sans"';
+      ctx.fillStyle = '#34d399';
+      ctx.font = '700 24px "Plus Jakarta Sans"';
       ctx.textAlign = 'center';
-      ctx.fillText('O cliente desiste e vai pro concorrente.', 360, 840);
+      ctx.fillText('O Auditor apita no WhatsApp na mesma hora!', 360, 830);
     }
 
-    // Scene 3: 7.5s to 11.5s - The Solution (Sentinela)
+    // Scene 3: 7.5s to 11.5s - Aplicação 2: Tráfego Pago & Leads
     function drawScene3(t) {
       const sceneT = t - 7.5;
       
-      // Badge Sentinela
-      ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
-      ctx.strokeStyle = '#10b981';
+      // Badge Tráfego Pago
+      ctx.fillStyle = 'rgba(56, 189, 248, 0.15)';
+      ctx.strokeStyle = '#38bdf8';
       ctx.lineWidth = 2;
-      roundRect(ctx, 220, 160, 280, 46, 23, true, true);
-      ctx.fillStyle = '#34d399';
+      roundRect(ctx, 150, 160, 420, 46, 23, true, true);
+      ctx.fillStyle = '#7dd3fc';
       ctx.font = '800 18px "Plus Jakarta Sans"';
       ctx.textAlign = 'center';
-      ctx.fillText('🛡️ A SOLUÇÃO DEFINITIVA', 360, 189);
+      ctx.fillText('📢 APLICAÇÃO 2: TRÁFEGO PAGO & LEADS', 360, 189);
 
       // Title
       ctx.fillStyle = '#ffffff';
-      ctx.font = '900 42px "Plus Jakarta Sans"';
-      ctx.fillText('AUDITOR SILENCIOSO', 360, 270);
+      ctx.font = '900 38px "Plus Jakarta Sans"';
+      ctx.fillText('ZERO DEMORA NO ATENDIMENTO', 360, 260);
       
-      ctx.fillStyle = '#10b981';
-      ctx.font = '700 22px "Plus Jakarta Sans"';
-      ctx.fillText('Monitoramento 24h em Tempo Real', 360, 310);
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '700 20px "Plus Jakarta Sans"';
+      ctx.fillText('Seu comercial atende ou o Auditor avisa!', 360, 300);
 
       // Realistic Phone Mockup / WhatsApp Notification Card
-      const notifY = 400;
-      const slide = Math.min(sceneT * 5, 1); // smooth slide-in
+      const notifY = 380;
+      const slide = Math.min(sceneT * 5, 1);
       ctx.save();
       ctx.translate(0, (1 - slide) * 80);
       ctx.globalAlpha = slide;
@@ -632,13 +632,13 @@
       ctx.fillStyle = '#111b21';
       ctx.strokeStyle = '#25d366';
       ctx.lineWidth = 2.5;
-      roundRect(ctx, 60, notifY, 600, 260, 24, true, true);
+      roundRect(ctx, 60, notifY, 600, 270, 24, true, true);
 
       // Notification Header
       ctx.fillStyle = '#25d366';
       ctx.font = '800 20px "Plus Jakarta Sans"';
       ctx.textAlign = 'left';
-      ctx.fillText('💬 WhatsApp • Sentinela 24h', 95, notifY + 45);
+      ctx.fillText('💬 WhatsApp • Sentinela de Leads', 95, notifY + 45);
 
       ctx.fillStyle = '#8696a0';
       ctx.font = '500 16px "Inter"';
@@ -646,20 +646,20 @@
       ctx.fillText('Agora mesmo', 630, notifY + 45);
 
       // Alert Title Inside WA
-      ctx.fillStyle = '#ef4444';
+      ctx.fillStyle = '#f59e0b';
       ctx.font = '800 22px "Plus Jakarta Sans"';
       ctx.textAlign = 'left';
-      ctx.fillText('🚨 [ALERTA SENTINELA] Taxa de Recusa!', 95, notifY + 95);
+      ctx.fillText('⏱️ [ALERTA LEADS] Demora no Atendimento!', 95, notifY + 95);
 
       // Message Body
       ctx.fillStyle = '#e9edef';
       ctx.font = '500 18px "Inter"';
-      ctx.fillText('Atenção: 4 tentativas seguidas de cartão', 95, notifY + 135);
-      ctx.fillText('foram recusadas nos últimos 10 minutos.', 95, notifY + 165);
+      ctx.fillText('Lead do anúncio do Instagram aguardando há', 95, notifY + 135);
+      ctx.fillText('mais de 18 minutos sem resposta comercial.', 95, notifY + 165);
 
       ctx.fillStyle = '#00a884';
       ctx.font = '700 18px "Plus Jakarta Sans"';
-      ctx.fillText('👉 Verifique sua adquirente antes de perder mais vendas!', 95, notifY + 215);
+      ctx.fillText('👉 Atenda agora antes que compre do concorrente!', 95, notifY + 220);
 
       ctx.restore();
 
@@ -667,7 +667,7 @@
       ctx.fillStyle = '#94a3b8';
       ctx.font = '600 22px "Plus Jakarta Sans"';
       ctx.textAlign = 'center';
-      ctx.fillText('⚡ Você é avisado no WhatsApp antes de ter prejuízo!', 360, 780);
+      ctx.fillText('⚡ Protege o ROI dos anúncios e blinda contratos!', 360, 780);
     }
 
     // Scene 4: 11.5s to 15.0s - The Price (R$ 3,23/dia)
@@ -683,34 +683,34 @@
       ctx.fillStyle = 'rgba(16, 185, 129, 0.12)';
       ctx.strokeStyle = '#10b981';
       ctx.lineWidth = 3;
-      roundRect(ctx, 80, 290, 560, 280, 28, true, true);
+      roundRect(ctx, 80, 280, 560, 290, 28, true, true);
 
       ctx.fillStyle = '#cbd5e1';
       ctx.font = '700 22px "Plus Jakarta Sans"';
-      ctx.fillText('MENOS QUE UM CAFÉ POR DIA', 360, 350);
+      ctx.fillText('MENOS QUE UM CAFÉ POR DIA', 360, 340);
 
       // Glowing Price
       ctx.fillStyle = '#34d399';
       ctx.font = '900 68px "Plus Jakarta Sans"';
-      ctx.fillText('R$ 3,23', 360, 440);
+      ctx.fillText('R$ 3,23', 360, 430);
 
       ctx.fillStyle = '#ffffff';
       ctx.font = '700 26px "Plus Jakarta Sans"';
-      ctx.fillText('POR DIA (R$ 97/mês)', 360, 510);
+      ctx.fillText('POR DIA (R$ 97/mês)', 360, 500);
 
       // Bullet points
       const bullets = [
-        '🛡️ Sentinela de Recusa no WhatsApp',
-        '📊 Resumo Diário Automático às 23:59',
-        '💳 Pagamento seguro no Pix ou Cartão',
-        '🚫 Sem fidelidade — cancele quando quiser'
+        '🛡️ Sentinela E-commerce & Leads 24/7',
+        '📲 Alertas imediatos direto no WhatsApp',
+        '🚫 Sem dashboards chatos ou planilhas',
+        '✅ Sem fidelidade — cancele quando quiser'
       ];
 
       ctx.textAlign = 'left';
       ctx.font = '600 22px "Inter"';
       ctx.fillStyle = '#f1f5f9';
       bullets.forEach((b, i) => {
-        ctx.fillText(b, 110, 660 + (i * 48));
+        ctx.fillText(b, 105, 650 + (i * 48));
       });
     }
 
@@ -737,17 +737,17 @@
       ctx.translate(360, 560);
       ctx.scale(pulse, pulse);
 
-      const btnGrad = ctx.createLinearGradient(-260, 0, 260, 0);
+      const btnGrad = ctx.createLinearGradient(-270, 0, 270, 0);
       btnGrad.addColorStop(0, '#10b981');
       btnGrad.addColorStop(1, '#059669');
       ctx.fillStyle = btnGrad;
-      roundRect(ctx, -260, -45, 520, 90, 45, true, false);
+      roundRect(ctx, -270, -45, 540, 90, 45, true, false);
 
       ctx.fillStyle = '#ffffff';
-      ctx.font = '900 28px "Plus Jakarta Sans"';
+      ctx.font = '800 22px "Plus Jakarta Sans"';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('👉 TOQUE NO LINK ABAIXO', 0, 0);
+      ctx.fillText('👉 calculadoradoecommerce.com.br', 0, 0);
       ctx.restore();
 
       // Footer prompt
@@ -758,7 +758,7 @@
 
       ctx.fillStyle = '#64748b';
       ctx.font = '500 18px "Inter"';
-      ctx.fillText('auditorsilencioso.com.br', 360, 810);
+      ctx.fillText('auditor.html • DropHub Tools', 360, 810);
     }
 
     // Utility: Rounded Rect
