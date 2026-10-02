@@ -363,108 +363,185 @@
         <!-- Result Column (Right) -->
         <div class="result-column">
           
-          <!-- Card de Lucro Principal -->
-          <div class="card result-card" id="result-box">
-            <div class="result-header">
-              <span class="result-label">Lucro Líquido no seu Bolso</span>
-              <span class="badge-status badge-healthy" id="badge-status">Margem Saudável</span>
+          <!-- Notificação de Desbloqueio e Cópia Enviada ao WhatsApp -->
+          <div id="unlocked-notification-bar" class="unlocked-alert-box hidden">
+            <div class="unlocked-alert-icon">✅</div>
+            <div class="unlocked-alert-text">
+              <strong id="unlocked-user-greeting">Demonstrativo liberado com sucesso!</strong>
+              <p id="unlocked-user-desc">Enviamos o resumo deste cálculo com o <strong>Voucher de 10 Dias Grátis do Auditor Silencioso</strong> para o seu WhatsApp.</p>
             </div>
-
-            <div class="result-highlight">
-              <div class="big-profit" id="val-net-profit">R$ 0,00</div>
-              <div class="profit-submetrics">
-                <div class="submetric">
-                  <span class="sub-label">Margem Líquida</span>
-                  <span class="sub-value" id="val-net-margin">0.0%</span>
-                </div>
-                <div class="submetric-divider"></div>
-                <div class="submetric">
-                  <span class="sub-label">Markup Efetivo</span>
-                  <span class="sub-value" id="val-markup">0.0x</span>
-                </div>
-                <div class="submetric-divider"></div>
-                <div class="submetric">
-                  <span class="sub-label">Total de Deduções</span>
-                  <span class="sub-value text-danger" id="val-total-fees">R$ 0,00</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Visual Breakdown Bar -->
-            <div class="breakdown-wrapper">
-              <div class="breakdown-labels">
-                <span>Composição do Faturamento</span>
-                <span id="breakdown-total-label">100%</span>
-              </div>
-              <div class="breakdown-bar">
-                <div class="bar-segment seg-cost" id="bar-cost" style="width: 35%;" title="Custo do Produto"></div>
-                <div class="bar-segment seg-gateway" id="bar-gateway" style="width: 15%;" title="Taxas Gateway e Antecipação"></div>
-                <div class="bar-segment seg-platform" id="bar-platform" style="width: 5%;" title="Taxa Plataforma"></div>
-                <div class="bar-segment seg-tax" id="bar-tax" style="width: 6%;" title="Imposto e Frete"></div>
-                <div class="bar-segment seg-profit" id="bar-profit" style="width: 39%;" title="Lucro Líquido"></div>
-              </div>
-              <div class="breakdown-legend">
-                <span class="legend-item"><i class="dot dot-cost"></i> Custo (CMV)</span>
-                <span class="legend-item"><i class="dot dot-gateway"></i> Gateway</span>
-                <span class="legend-item"><i class="dot dot-platform"></i> Plataforma</span>
-                <span class="legend-item"><i class="dot dot-tax"></i> Imposto/Frete</span>
-                <span class="legend-item"><i class="dot dot-profit"></i> Lucro Líquido</span>
-              </div>
-            </div>
-
-            <!-- DRE Detalhado do Pedido -->
-            <div class="dre-table-container">
-              <span class="dre-title">Demonstrativo Detalhado por Venda</span>
-              <table class="dre-table">
-                <tbody>
-                  <tr>
-                    <td>(+) Preço de Venda Bruto</td>
-                    <td class="text-right" id="dre-price">R$ 0,00</td>
-                  </tr>
-                  <tr>
-                    <td>(-) Custo da Mercadoria (CMV)</td>
-                    <td class="text-right text-muted" id="dre-cost">- R$ 0,00</td>
-                  </tr>
-                  <tr id="dre-row-shipping">
-                    <td>(-) Frete Pago pela Loja</td>
-                    <td class="text-right text-muted" id="dre-shipping">- R$ 0,00</td>
-                  </tr>
-                  <tr>
-                    <td>(-) Imposto / DAS Estimado</td>
-                    <td class="text-right text-muted" id="dre-tax">- R$ 0,00</td>
-                  </tr>
-                  <tr>
-                    <td>(-) Taxa da Plataforma</td>
-                    <td class="text-right text-muted" id="dre-platform">- R$ 0,00</td>
-                  </tr>
-                  <tr>
-                    <td>(-) Taxa do Gateway (Processamento)</td>
-                    <td class="text-right text-muted" id="dre-gateway-mdr">- R$ 0,00</td>
-                  </tr>
-                  <tr id="dre-row-anticipation">
-                    <td>(-) Taxa de Antecipação de Parcelas</td>
-                    <td class="text-right text-warning" id="dre-anticipation">- R$ 0,00</td>
-                  </tr>
-                  <tr class="dre-row-total">
-                    <td><strong>(=) Lucro Líquido em Caixa</strong></td>
-                    <td class="text-right text-success" id="dre-final-profit"><strong>R$ 0,00</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <!-- Alerta & Diagnóstico com IA/Algoritmo -->
-            <div class="diagnostic-box" id="diagnostic-box">
-              <div class="diag-icon" id="diag-icon">💡</div>
-              <div class="diag-text">
-                <strong id="diag-title">Diagnóstico Financeiro</strong>
-                <p id="diag-desc">Carregando análise...</p>
-              </div>
-            </div>
-
+            <button type="button" id="btn-resend-whatsapp" class="btn-resend-sm" title="Reenviar cálculo atualizado para o WhatsApp">
+              <span>📲 Reenviar Atualizado</span>
+            </button>
           </div>
 
-          <!-- Banner de Alta Conversão: Auditor Silencioso -->
+          <!-- Card de Lucro Principal com Proteção de Gate -->
+          <div class="card result-card" id="result-box">
+
+            <!-- GATE OBRIGATÓRIO: Desbloqueio por WhatsApp -->
+            <div id="calculator-gate" class="calculator-gate-overlay">
+              <div class="gate-card-inner">
+                <div class="gate-top-badge">
+                  <span class="gate-lock-icon">🔒</span>
+                  <span>Demonstrativo Financeiro Protegido</span>
+                </div>
+
+                <h3 class="gate-title">
+                  Desbloqueie o <span class="gradient-emerald">Lucro Real</span> & Análise de Taxas
+                </h3>
+
+                <p class="gate-desc">
+                  Mais de 68% dos lojistas perdem margem em taxas ocultas e juros de antecipação. Informe seu WhatsApp abaixo para <strong>liberar os números na tela</strong> e receber seu relatório detalhado:
+                </p>
+
+                <form id="gate-form" class="gate-form" onsubmit="return false;">
+                  <div class="gate-input-group">
+                    <label for="gate-name">Seu Nome ou Nome da Loja</label>
+                    <div class="gate-input-wrapper">
+                      <span class="gate-input-icon">👤</span>
+                      <input type="text" id="gate-name" placeholder="Ex: Carlos Silva ou Minha Loja" required>
+                    </div>
+                  </div>
+
+                  <div class="gate-input-group">
+                    <label for="gate-whatsapp">WhatsApp (com DDD)</label>
+                    <div class="gate-input-wrapper">
+                      <span class="gate-input-icon">📱</span>
+                      <input type="tel" id="gate-whatsapp" placeholder="(XX) 99999-9999" required maxlength="15">
+                    </div>
+                  </div>
+
+                  <!-- Bônus 10 Dias Grátis -->
+                  <div class="gate-bonus-box">
+                    <div class="gate-bonus-icon">🎁</div>
+                    <div class="gate-bonus-info">
+                      <strong>PRESENTE EXCLUSIVO INCLUSO:</strong>
+                      <span>Você ganha <strong>10 DIAS DE TESTE GRÁTIS</strong> do Auditor Silencioso 24/7 (Proteção de checkout e alertas no WhatsApp)!</span>
+                    </div>
+                  </div>
+
+                  <button type="submit" id="btn-unlock-calculator" class="btn-unlock-cta">
+                    <span>🔓 Desbloquear Lucro & Receber Análise Grátis</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </button>
+
+                  <div class="gate-trust-footer">
+                    <span>⚡ Desbloqueio imediato na tela</span>
+                    <span class="gate-sep">•</span>
+                    <span>🔒 Sem spam</span>
+                    <span class="gate-sep">•</span>
+                    <span>💳 Sem cartão de crédito</span>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Conteúdo Interno dos Resultados (Fica borrado antes de preencher o Gate) -->
+            <div id="result-inner-content" class="result-content-wrap is-locked-blurred">
+              <div class="result-header">
+                <span class="result-label">Lucro Líquido no seu Bolso</span>
+                <span class="badge-status badge-healthy" id="badge-status">Margem Saudável</span>
+              </div>
+
+              <div class="result-highlight">
+                <div class="big-profit" id="val-net-profit">R$ 0,00</div>
+                <div class="profit-submetrics">
+                  <div class="submetric">
+                    <span class="sub-label">Margem Líquida</span>
+                    <span class="sub-value" id="val-net-margin">0.0%</span>
+                  </div>
+                  <div class="submetric-divider"></div>
+                  <div class="submetric">
+                    <span class="sub-label">Markup Efetivo</span>
+                    <span class="sub-value" id="val-markup">0.0x</span>
+                  </div>
+                  <div class="submetric-divider"></div>
+                  <div class="submetric">
+                    <span class="sub-label">Total de Deduções</span>
+                    <span class="sub-value text-danger" id="val-total-fees">R$ 0,00</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Visual Breakdown Bar -->
+              <div class="breakdown-wrapper">
+                <div class="breakdown-labels">
+                  <span>Composição do Faturamento</span>
+                  <span id="breakdown-total-label">100%</span>
+                </div>
+                <div class="breakdown-bar">
+                  <div class="bar-segment seg-cost" id="bar-cost" style="width: 35%;" title="Custo do Produto"></div>
+                  <div class="bar-segment seg-gateway" id="bar-gateway" style="width: 15%;" title="Taxas Gateway e Antecipação"></div>
+                  <div class="bar-segment seg-platform" id="bar-platform" style="width: 5%;" title="Taxa Plataforma"></div>
+                  <div class="bar-segment seg-tax" id="bar-tax" style="width: 6%;" title="Imposto e Frete"></div>
+                  <div class="bar-segment seg-profit" id="bar-profit" style="width: 39%;" title="Lucro Líquido"></div>
+                </div>
+                <div class="breakdown-legend">
+                  <span class="legend-item"><i class="dot dot-cost"></i> Custo (CMV)</span>
+                  <span class="legend-item"><i class="dot dot-gateway"></i> Gateway</span>
+                  <span class="legend-item"><i class="dot dot-platform"></i> Plataforma</span>
+                  <span class="legend-item"><i class="dot dot-tax"></i> Imposto/Frete</span>
+                  <span class="legend-item"><i class="dot dot-profit"></i> Lucro Líquido</span>
+                </div>
+              </div>
+
+              <!-- DRE Detalhado do Pedido -->
+              <div class="dre-table-container">
+                <span class="dre-title">Demonstrativo Detalhado por Venda</span>
+                <table class="dre-table">
+                  <tbody>
+                    <tr>
+                      <td>(+) Preço de Venda Bruto</td>
+                      <td class="text-right" id="dre-price">R$ 0,00</td>
+                    </tr>
+                    <tr>
+                      <td>(-) Custo da Mercadoria (CMV)</td>
+                      <td class="text-right text-muted" id="dre-cost">- R$ 0,00</td>
+                    </tr>
+                    <tr id="dre-row-shipping">
+                      <td>(-) Frete Pago pela Loja</td>
+                      <td class="text-right text-muted" id="dre-shipping">- R$ 0,00</td>
+                    </tr>
+                    <tr>
+                      <td>(-) Imposto / DAS Estimado</td>
+                      <td class="text-right text-muted" id="dre-tax">- R$ 0,00</td>
+                    </tr>
+                    <tr>
+                      <td>(-) Taxa da Plataforma</td>
+                      <td class="text-right text-muted" id="dre-platform">- R$ 0,00</td>
+                    </tr>
+                    <tr>
+                      <td>(-) Taxa do Gateway (Processamento)</td>
+                      <td class="text-right text-muted" id="dre-gateway-mdr">- R$ 0,00</td>
+                    </tr>
+                    <tr id="dre-row-anticipation">
+                      <td>(-) Taxa de Antecipação de Parcelas</td>
+                      <td class="text-right text-warning" id="dre-anticipation">- R$ 0,00</td>
+                    </tr>
+                    <tr class="dre-row-total">
+                      <td><strong>(=) Lucro Líquido em Caixa</strong></td>
+                      <td class="text-right text-success" id="dre-final-profit"><strong>R$ 0,00</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Alerta & Diagnóstico com IA/Algoritmo -->
+              <div class="diagnostic-box" id="diagnostic-box">
+                <div class="diag-icon" id="diag-icon">💡</div>
+                <div class="diag-text">
+                  <strong id="diag-title">Diagnóstico Financeiro</strong>
+                  <p id="diag-desc">Carregando análise...</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Banner de Alta Conversão: Auditor Silencioso & Bônus de 10 Dias -->
           <div class="card auditor-banner-card" id="banner-auditor-silencioso">
             <div class="auditor-banner-glow"></div>
             
@@ -473,8 +550,8 @@
                 <span class="pulse-dot"></span>
                 Sentinela 24/7 no WhatsApp
               </span>
-              <span class="auditor-price-tag">
-                R$ 3,23<small>/dia</small>
+              <span class="auditor-price-tag" id="auditor-badge-trial-tag">
+                10 Dias Grátis<small> de Teste</small>
               </span>
             </div>
 
@@ -483,7 +560,7 @@
             </h3>
 
             <p class="auditor-banner-text">
-              Calcular o lucro teórico é o 1º passo. Mas quem te avisa quando o <strong>checkout trava</strong>, o gateway tem <strong>pico de recusa de cartão</strong> ou um cupom deixa seu caixa no vermelho?
+              Calcular o lucro teórico é o 1º passo. Mas quem te avisa quando o <strong>checkout trava</strong>, o gateway tem <strong>pico de recusa de cartão</strong> ou uma taxa abusiva come seu lucro?
             </p>
 
             <div class="auditor-banner-perks">
@@ -495,10 +572,14 @@
                 <span class="perk-icon">🛡️</span>
                 <span>Vigia anomalias 24 horas por dia sem precisar instalar nada pesado</span>
               </div>
+              <div class="perk-item">
+                <span class="perk-icon">🎁</span>
+                <span><strong>10 Dias Grátis:</strong> Teste sem custo e sem compromisso</span>
+              </div>
             </div>
 
-            <a href="auditor.html#checkout-area" class="btn-auditor-banner" id="cta-banner-auditor">
-              <span>Descobrir Se Estou Perdendo Dinheiro</span>
+            <a href="https://wa.me/5512992310222?text=Ol%C3%A1%2C%20fiz%20o%20c%C3%A1lculo%20na%20calculadora%20e%20quero%20ativar%20meus%2010%20dias%20gr%C3%A1tis%20do%20Auditor%20Silencioso!" target="_blank" class="btn-auditor-banner" id="cta-banner-auditor">
+              <span>🎁 Ativar Meus 10 Dias Grátis no WhatsApp</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -506,43 +587,15 @@
             </a>
 
             <div class="auditor-banner-trust">
-              <span>🔒 7 dias de garantia incondicional</span>
+              <span>🔒 Sem cadastro de cartão</span>
               <span class="sep">•</span>
-              <span>⚡ Ativação em menos de 3 minutos</span>
+              <span>⚡ Ativação em 1 minuto</span>
+              <span class="sep">•</span>
+              <span>📱 Direto no seu WhatsApp</span>
             </div>
           </div>
 
-          <!-- Card de Conversão & Envio do Relatório no WhatsApp (Ponte para o n8n) -->
-          <div class="card lead-card">
-            <div class="lead-header">
-              <div class="lead-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                  <polyline points="7 10 12 15 17 10"></polyline>
-                  <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-              </div>
-              <div>
-                <h3 class="lead-title">Receber Diagnóstico Completo em PDF</h3>
-                <p class="lead-subtitle">Enviamos a simulação detalhada com dicas de redução de taxas direto no seu WhatsApp.</p>
-              </div>
-            </div>
-
-            <form id="lead-form" class="lead-form">
-              <div class="lead-inputs">
-                <input type="text" id="lead-name" placeholder="Seu Nome ou Loja" required>
-                <input type="tel" id="lead-whatsapp" placeholder="WhatsApp: (XX) 99999-9999" required>
-              </div>
-              <button type="submit" class="btn btn-primary" id="btn-submit-lead">
-                <span>Receber Análise no WhatsApp</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </button>
-            </form>
-            <div id="lead-feedback" class="lead-feedback hidden"></div>
-          </div>
+        </div>
 
         </div>
 

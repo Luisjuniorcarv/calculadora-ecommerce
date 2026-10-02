@@ -172,6 +172,7 @@ async function refreshDashboardData() {
  */
 function renderDashboard(data) {
   renderHealthCard(data.health, data.tenant);
+  renderLicenseStatus(data.license, data.tenant);
   renderKpis(data.metrics, data.tenant.operationMode);
   if (data.tenant.operationMode === 'LEADS') {
     renderFunnel(data.metrics.funnel);
@@ -662,3 +663,314 @@ async function resetTenantData() {
     alert('Painel atualizado em modo limpo (zerado).');
   }
 }
+
+/**
+ * ==========================================================================
+ * SISTEMA AUTOMATIZADO DE LICENÇAS, BLOQUEIO & LEADS DA CALCULADORA
+ * ==========================================================================
+ */
+
+/**
+ * Renderiza o status da licença no topo do Dashboard
+ */
+function renderLicenseStatus(license, tenant) {
+  const statEl = document.getElementById('stat-license-status');
+  const bannerEl = document.getElementById('license-block-banner');
+  const bannerTitle = document.getElementById('block-banner-title');
+  const bannerDesc = document.getElementById('block-banner-desc');
+  const regularizeLink = document.getElementById('btn-regularize-link');
+
+  if (!license) return;
+
+  const isBlocked = license.isBlocked || license.status === 'BLOCKED';
+  const isTrial = license.planType === 'TRIAL';
+  const days = license.daysRemaining;
+
+  if (statEl) {
+    if (isBlocked) {
+      statEl.textContent = '🛑 Bloqueado';
+      statEl.style.color = '#EF4444';
+    } else if (license.status === 'EXPIRING_SOON' || days <= 1) {
+      statEl.textContent = '⚠️ Vence em < 24h';
+      statEl.style.color = '#F97316';
+    } else if (isTrial) {
+      statEl.textContent = `🟡 10d Teste (${days}d restam)`;
+      statEl.style.color = '#F59E0B';
+    } else {
+      statEl.textContent = `🟢 30d Ativo (${days}d restam)`;
+      statEl.style.color = '#10B981';
+    }
+  }
+
+  if (bannerEl) {
+    if (isBlocked) {
+      bannerEl.classList.remove('hidden');
+      if (bannerTitle) {
+        bannerTitle.textContent = `🛑 Monitoramento Suspenso: Período de "${tenant?.name || 'sua loja'}" Expirou`;
+      }
+      if (bannerDesc) {
+        bannerDesc.textContent = `O período de ${isTrial ? '10 dias de teste grátis' : 'assinatura'} encerrou. Os alertas no WhatsApp de recusa de cartão e checkout foram pausados até a liquidação no Asaas.`;
+      }
+      if (regularizeLink) {
+        regularizeLink.href = license.paymentLink || 'https://www.asaas.com/c/auditor-silencioso';
+      }
+    } else {
+      bannerEl.classList.add('hidden');
+    }
+  }
+}
+
+/**
+ * Abre o Modal de Gestão de Licenças e carrega dados
+ */
+async function openLicensesModal() {
+  openModal('modal-licenses');
+  await loadLicenses();
+}
+
+/**
+ * Carrega a lista de licenças da API
+ */
+async function loadLicenses() {
+  const tbody = document.getElementById('licenses-table-body');
+  if (!tbody) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/api/licenses`);
+    if (!res.ok) throw new Error('Falha ao carregar licenças');
+    const data = await res.json();
+    const licenses = data.licenses || [];
+
+    // Contadores
+    let totalActive = 0;
+    let totalTrial = 0;
+    let totalBlocked = 0;
+
+    licenses.forEach(l => {
+      const lic = l.license;
+      if (!lic) return;
+      if (lic.isBlocked) totalBlocked++;
+      else if (lic.planType === 'TRIAL') totalTrial++;
+      else totalActive++;
+    });
+
+    document.getElementById('lic-summary-total').textContent = licenses.length;
+    document.getElementById('lic-summary-active').textContent = totalActive;
+    document.getElementById('lic-summary-trial').textContent = totalTrial;
+    document.getElementById('lic-summary-blocked').textContent = totalBlocked;
+
+    if (licenses.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" style="padding:1.5rem; text-align:center; color:var(--text-dim);">Nenhum cliente cadastrado.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = licenses.map(item => {
+      const lic = item.license || {};
+      const isBlocked = lic.isBlocked;
+      const isTrial = lic.planType === 'TRIAL';
+      let badgeHtml = '';
+
+      if (isBlocked) {
+        badgeHtml = `<span class="badge-lic blocked">🛑 Bloqueado</span>`;
+      } else if (lic.status === 'EXPIRING_SOON' || lic.daysRemaining <= 1) {
+        badgeHtml = `<span class="badge-lic expiring">⚠️ Vence em < 24h</span>`;
+      } else if (isTrial) {
+        badgeHtml = `<span class="badge-lic trial">🟡 10 Dias Teste (${lic.daysRemaining}d)</span>`;
+      } else {
+        badgeHtml = `<span class="badge-lic active">🟢 30 Dias Ativo (${lic.daysRemaining}d)</span>`;
+      }
+
+      return `
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+          <td style="padding: 0.65rem; font-weight: 700; color: #F8FAFC;">${item.tenantName}</td>
+          <td style="padding: 0.65rem; color: #94A3B8;">${item.whatsappDestination || 'Não configurado'}</td>
+          <td style="padding: 0.65rem;">${isTrial ? 'Teste Grátis (10d)' : 'Assinatura (30d)'}</td>
+          <td style="padding: 0.65rem;">${badgeHtml}</td>
+          <td style="padding: 0.65rem; color: #CBD5E1;">${lic.expiresAtFormatted || 'N/A'}</td>
+          <td style="padding: 0.65rem; text-align: right; white-space: nowrap;">
+            <button type="button" class="btn-lic-action btn-trial" title="Ativar 10 Dias de Teste" onclick="activateTrial('${item.tenantId}', 10)">
+              +10d Teste
+            </button>
+            <button type="button" class="btn-lic-action btn-paid" title="Renovar +30 Dias (Confirmação Pagamento)" onclick="activatePaid('${item.tenantId}', 30)">
+              +30d Pago
+            </button>
+            <button type="button" class="btn-lic-action btn-block" title="Bloquear Acesso Imediatamente" onclick="blockLicense('${item.tenantId}')">
+              🔒 Bloquear
+            </button>
+            <button type="button" class="btn-lic-action" title="Disparar Aviso Prévio 1 Dia no WhatsApp" onclick="sendLicenseWarning('${item.tenantId}')">
+              📲 Avisar Zap
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+  } catch (err) {
+    console.error('Erro licenças:', err);
+    tbody.innerHTML = `<tr><td colspan="6" style="padding:1rem; text-align:center; color:#F87171;">Erro ao carregar licenças da API.</td></tr>`;
+  }
+}
+
+/**
+ * Ativa 10 dias de teste para um tenant
+ */
+async function activateTrial(tenantId, days = 10) {
+  if (!confirm(`Deseja ativar ${days} dias de teste gratuito para este cliente? Uma notificação será enviada ao WhatsApp dele.`)) return;
+  try {
+    const res = await fetch(`${API_BASE}/api/licenses/${tenantId}/activate-trial`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ days })
+    });
+    const data = await res.json();
+    if (data.success) {
+      alert(`✅ ${data.message}`);
+      await loadLicenses();
+      await refreshDashboardData();
+    } else {
+      alert(`Erro: ${data.error}`);
+    }
+  } catch (err) {
+    alert('Erro de comunicação com o servidor.');
+  }
+}
+
+/**
+ * Ativa 30 dias de assinatura paga para um tenant
+ */
+async function activatePaid(tenantId, days = 30) {
+  if (!confirm(`Deseja confirmar o pagamento e ativar ${days} dias de assinatura para este cliente? A mensagem de confirmação oficial será disparada no WhatsApp.`)) return;
+  try {
+    const res = await fetch(`${API_BASE}/api/licenses/${tenantId}/activate-paid`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ days, value: 97.00 })
+    });
+    const data = await res.json();
+    if (data.success) {
+      alert(`🎉 ${data.message}`);
+      await loadLicenses();
+      await refreshDashboardData();
+    } else {
+      alert(`Erro: ${data.error}`);
+    }
+  } catch (err) {
+    alert('Erro de comunicação com o servidor.');
+  }
+}
+
+/**
+ * Bloqueia o tenant imediatamente
+ */
+async function blockLicense(tenantId) {
+  if (!confirm('Deseja realmente BLOQUEAR o monitoramento deste cliente? O painel será bloqueado e o aviso de cobrança será enviado no WhatsApp.')) return;
+  try {
+    const res = await fetch(`${API_BASE}/api/licenses/${tenantId}/block`, {
+      method: 'POST'
+    });
+    const data = await res.json();
+    if (data.success) {
+      alert('🔒 Monitoramento bloqueado com sucesso!');
+      await loadLicenses();
+      await refreshDashboardData();
+    }
+  } catch (err) {
+    alert('Erro de comunicação com o servidor.');
+  }
+}
+
+/**
+ * Dispara aviso prévio de 1 dia manualmente
+ */
+async function sendLicenseWarning(tenantId) {
+  if (!confirm('Deseja disparar a mensagem de aviso prévio de vencimento (1 dia antes com link Asaas) no WhatsApp do cliente agora?')) return;
+  try {
+    const res = await fetch(`${API_BASE}/api/licenses/${tenantId}/send-warning`, {
+      method: 'POST'
+    });
+    const data = await res.json();
+    if (data.success) {
+      alert('📲 Mensagem de aviso prévio enviada no WhatsApp com sucesso!');
+      await loadLicenses();
+    }
+  } catch (err) {
+    alert('Erro ao disparar aviso no WhatsApp.');
+  }
+}
+
+/**
+ * Executa a rotina global de verificação de licenças e bloqueios
+ */
+async function runGlobalLicenseCheck() {
+  try {
+    const res = await fetch(`${API_BASE}/api/licenses/check-all`, { method: 'POST' });
+    const data = await res.json();
+    if (data.success) {
+      const cr = data.checkResults;
+      alert(`📋 Verificação concluída!\n\n• Ativos: ${cr.activeCount}\n• Avisos enviados (1 dia antes): ${cr.warningsSent.length}\n• Bloqueados por expiração: ${cr.blockedCount.length}`);
+      await loadLicenses();
+      await refreshDashboardData();
+    }
+  } catch (err) {
+    alert('Erro ao executar verificação de licenças.');
+  }
+}
+
+/**
+ * Abre o Modal de Leads da Calculadora e carrega lista
+ */
+async function openCalculatorLeadsModal() {
+  openModal('modal-calculator-leads');
+  await loadCalculatorLeads();
+}
+
+/**
+ * Carrega lista de leads capturados na calculadora
+ */
+async function loadCalculatorLeads() {
+  const tbody = document.getElementById('calculator-leads-table-body');
+  if (!tbody) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/api/leads/calculator`);
+    if (!res.ok) throw new Error('Falha ao buscar leads');
+    const data = await res.json();
+    const leads = data.leads || [];
+
+    if (leads.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="padding:1.5rem; text-align:center; color:var(--text-dim);">Nenhum lead capturado na calculadora ainda. Faça uma simulação na calculadora para testar!</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = leads.map(l => {
+      const dt = new Date(l.timestamp).toLocaleString('pt-BR');
+      const priceStr = Number(l.price || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const profitStr = Number(l.netProfit || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const marginStr = Number(l.netMargin || 0).toFixed(1) + '%';
+      const cleanPhone = String(l.whatsapp || '').replace(/\D/g, '');
+      const fullPhone = cleanPhone.startsWith('55') ? cleanPhone : ('55' + cleanPhone);
+      const textMsg = encodeURIComponent(`Olá ${l.name}! Vi que você calculou na nossa calculadora de e-commerce uma margem de ${marginStr} no ticket de ${priceStr}. Conseguiu ativar seus 10 dias grátis do Auditor Silencioso? Posso te ajudar a proteger seu checkout agora!`);
+
+      return `
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+          <td style="padding: 0.65rem; color: #94A3B8; font-size: 0.75rem;">${dt}</td>
+          <td style="padding: 0.65rem; font-weight: 700; color: #F8FAFC;">${l.name}</td>
+          <td style="padding: 0.65rem; color: #A7F3D0; font-family: monospace;">${l.rawWhatsapp || l.whatsapp}</td>
+          <td style="padding: 0.65rem; color: #CBD5E1;">${priceStr}</td>
+          <td style="padding: 0.65rem; color: #10B981; font-weight: 700;">${profitStr}</td>
+          <td style="padding: 0.65rem; color: #94A3B8;">${l.gatewayName} / ${l.platformName}</td>
+          <td style="padding: 0.65rem; text-align: right;">
+            <a href="https://wa.me/${fullPhone}?text=${textMsg}" target="_blank" class="btn-lic-action btn-paid" style="text-decoration:none; display:inline-block;">
+              💬 Chamar no Zap
+            </a>
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+  } catch (err) {
+    console.error('Erro leads calculadora:', err);
+    tbody.innerHTML = `<tr><td colspan="7" style="padding:1rem; text-align:center; color:#F87171;">Erro ao carregar leads da API.</td></tr>`;
+  }
+}
+

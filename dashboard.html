@@ -53,6 +53,12 @@
         <a href="index.html" class="btn-action" title="Abrir Calculadora de Lucro" style="text-decoration: none;">
           <span>🧮</span> Calculadora
         </a>
+        <button type="button" class="btn-action" onclick="openCalculatorLeadsModal()" title="Ver Lojistas que usaram a Calculadora">
+          <span>📋</span> Leads Calculadora
+        </button>
+        <button type="button" class="btn-action" onclick="openLicensesModal()" title="Gestão de Prazos, 10 Dias Teste e Bloqueio">
+          <span>🛡️</span> Licenças & Prazos
+        </button>
         <button type="button" class="btn-action btn-simulate" onclick="openModal('modal-simulate')">
           <span>🧪</span> Simular Alertas
         </button>
@@ -68,6 +74,20 @@
     <!-- Conteúdo Principal -->
     <main class="main-content">
       
+      <!-- Banner Crítico de Bloqueio por Expiração / Falta de Pagamento -->
+      <section class="license-block-banner hidden" id="license-block-banner">
+        <div class="block-banner-icon">🛑</div>
+        <div class="block-banner-info">
+          <strong id="block-banner-title">Monitoramento 24/7 Suspenso: Período Expirado</strong>
+          <p id="block-banner-desc">O período de teste gratuito ou assinatura encerrou. Os alertas em tempo real de recusas de cartão e checkout no WhatsApp estão pausados.</p>
+        </div>
+        <div class="block-banner-action">
+          <a href="https://www.asaas.com/c/auditor-silencioso" target="_blank" class="btn-regularize" id="btn-regularize-link">
+            <span>💳 Desbloquear por R$ 97,00 (Asaas)</span>
+          </a>
+        </div>
+      </section>
+
       <!-- 1. CARD SAÚDE DA OPERAÇÃO -->
       <section class="health-hero-card healthy" id="health-card">
         <div class="health-info-left">
@@ -84,8 +104,12 @@
             <div class="stat-val" id="stat-active-count" style="color: #10B981;">0</div>
           </div>
           <div class="health-stat-pill">
+            <div class="stat-label">Licença / Status</div>
+            <div class="stat-val" id="stat-license-status" style="font-size: 0.88rem; color: #10B981; font-weight: 700;">10 Dias Teste</div>
+          </div>
+          <div class="health-stat-pill">
             <div class="stat-label">Segmento</div>
-            <div class="stat-val" id="stat-tenant-segment" style="font-size: 1rem; color: #CBD5E1;">Varejo</div>
+            <div class="stat-val" id="stat-tenant-segment" style="font-size: 0.95rem; color: #CBD5E1;">Varejo</div>
           </div>
         </div>
       </section>
@@ -394,8 +418,124 @@
     </div>
   </div>
 
+  <!-- MODAL: GESTÃO DE LICENÇAS & MODO DE BLOQUEIO -->
+  <div class="modal-backdrop" id="modal-licenses" style="display: none;">
+    <div class="modal-card" style="max-width: 880px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-icon">🛡️</div>
+          <div>
+            <h3>Gestão de Licenças & Modo de Bloqueio</h3>
+            <p>Controle de 10 dias de teste grátis, assinaturas de 30 dias, avisos automáticos e bloqueios.</p>
+          </div>
+        </div>
+        <button type="button" class="btn-close-modal" onclick="closeModal('modal-licenses')">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Cards de Resumo -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; margin-bottom: 1.25rem;">
+          <div style="background: rgba(15, 23, 42, 0.6); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Total de Clientes</div>
+            <div id="lic-summary-total" style="font-size: 1.4rem; font-weight: 800; color: #F8FAFC;">0</div>
+          </div>
+          <div style="background: rgba(16, 185, 129, 0.1); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid rgba(16, 185, 129, 0.3);">
+            <div style="font-size: 0.75rem; color: #A7F3D0; text-transform: uppercase;">Ativos (30 Dias)</div>
+            <div id="lic-summary-active" style="font-size: 1.4rem; font-weight: 800; color: #10B981;">0</div>
+          </div>
+          <div style="background: rgba(245, 158, 11, 0.1); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid rgba(245, 158, 11, 0.3);">
+            <div style="font-size: 0.75rem; color: #FDE68A; text-transform: uppercase;">Em Teste (10 Dias)</div>
+            <div id="lic-summary-trial" style="font-size: 1.4rem; font-weight: 800; color: #F59E0B;">0</div>
+          </div>
+          <div style="background: rgba(244, 63, 94, 0.1); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid rgba(244, 63, 94, 0.3);">
+            <div style="font-size: 0.75rem; color: #FECDD3; text-transform: uppercase;">Bloqueados</div>
+            <div id="lic-summary-blocked" style="font-size: 1.4rem; font-weight: 800; color: #F43F5E;">0</div>
+          </div>
+        </div>
+
+        <!-- Tabela de Licenças -->
+        <div style="overflow-x: auto;">
+          <table class="history-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--text-dim); text-align: left;">
+                <th style="padding: 0.6rem;">Empresa</th>
+                <th style="padding: 0.6rem;">WhatsApp</th>
+                <th style="padding: 0.6rem;">Plano</th>
+                <th style="padding: 0.6rem;">Status</th>
+                <th style="padding: 0.6rem;">Vencimento</th>
+                <th style="padding: 0.6rem; text-align: right;">Ações de Controle</th>
+              </tr>
+            </thead>
+            <tbody id="licenses-table-body">
+              <tr>
+                <td colspan="6" style="padding: 1rem; text-align: center; color: var(--text-dim);">Carregando licenças...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between;">
+        <button type="button" class="btn-action" onclick="runGlobalLicenseCheck()" style="color: #10B981; border-color: rgba(16, 185, 129, 0.4);">
+          <span>🔄</span> Executar Verificação Agora
+        </button>
+        <button type="button" class="btn-action" onclick="closeModal('modal-licenses')">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: LEADS DA CALCULADORA DE TAXAS -->
+  <div class="modal-backdrop" id="modal-calculator-leads" style="display: none;">
+    <div class="modal-card" style="max-width: 960px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-icon">📋</div>
+          <div>
+            <h3>Leads da Calculadora de E-commerce</h3>
+            <p>Lojistas qualificados que simularam margem e receberam a proposta dos 10 dias grátis.</p>
+          </div>
+        </div>
+        <button type="button" class="btn-close-modal" onclick="closeModal('modal-calculator-leads')">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <div style="overflow-x: auto;">
+          <table class="history-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--text-dim); text-align: left;">
+                <th style="padding: 0.6rem;">Data/Hora</th>
+                <th style="padding: 0.6rem;">Nome / Loja</th>
+                <th style="padding: 0.6rem;">WhatsApp</th>
+                <th style="padding: 0.6rem;">Ticket Simulado</th>
+                <th style="padding: 0.6rem;">Lucro Estimado</th>
+                <th style="padding: 0.6rem;">Gateway / Plataforma</th>
+                <th style="padding: 0.6rem; text-align: right;">Abordagem</th>
+              </tr>
+            </thead>
+            <tbody id="calculator-leads-table-body">
+              <tr>
+                <td colspan="7" style="padding: 1rem; text-align: center; color: var(--text-dim);">Carregando leads da calculadora...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between;">
+        <button type="button" class="btn-action" onclick="loadCalculatorLeads()" style="color: #6366F1;">
+          <span>🔄</span> Atualizar Lista
+        </button>
+        <button type="button" class="btn-action" onclick="closeModal('modal-calculator-leads')">Fechar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Script do Controlador do Dashboard -->
-  <script src="dashboard.js?v=20260930"></script>
+  <script src="dashboard.js?v=20261002"></script>
 
 </body>
 </html>

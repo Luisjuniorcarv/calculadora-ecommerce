@@ -116,12 +116,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const diagDesc = document.getElementById('diag-desc');
   const diagIcon = document.getElementById('diag-icon');
 
-  // Lead Form & Webhook
-  const leadForm = document.getElementById('lead-form');
-  const leadName = document.getElementById('lead-name');
-  const leadWhatsapp = document.getElementById('lead-whatsapp');
-  const leadFeedback = document.getElementById('lead-feedback');
-  const btnSubmitLead = document.getElementById('btn-submit-lead');
+  // Calculator Lead Gate & Unlocked Elements
+  const calculatorGate = document.getElementById('calculator-gate');
+  const resultInnerContent = document.getElementById('result-inner-content');
+  const gateForm = document.getElementById('gate-form');
+  const gateName = document.getElementById('gate-name');
+  const gateWhatsapp = document.getElementById('gate-whatsapp');
+  const btnUnlockCalculator = document.getElementById('btn-unlock-calculator');
+  const unlockedNotificationBar = document.getElementById('unlocked-notification-bar');
+  const unlockedUserGreeting = document.getElementById('unlocked-user-greeting');
+  const unlockedUserDesc = document.getElementById('unlocked-user-desc');
+  const btnResendWhatsapp = document.getElementById('btn-resend-whatsapp');
 
   // Modal Webhook
   const btnConfigWebhook = document.getElementById('btn-config-webhook');
@@ -420,104 +425,95 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 8. Máscara de Telefone / WhatsApp
   // ==========================================
-  leadWhatsapp.addEventListener('input', (e) => {
-    let value = e.target.value.replace(/\D/g, '');
+  const applyPhoneMask = (input) => {
+    let value = input.value.replace(/\D/g, '');
     if (value.length > 11) value = value.slice(0, 11);
 
     if (value.length > 10) {
-      e.target.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+      input.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
     } else if (value.length > 6) {
-      e.target.value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+      input.value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
     } else if (value.length > 2) {
-      e.target.value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+      input.value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
     } else {
-      e.target.value = value;
+      input.value = value;
     }
-  });
+  };
+
+  if (gateWhatsapp) {
+    gateWhatsapp.addEventListener('input', (e) => applyPhoneMask(e.target));
+  }
 
   // ==========================================
-  // 9. Envio do Lead & Webhook do n8n
+  // 9. Gestão de Estado do Gate (Desbloqueio)
   // ==========================================
+  const STORAGE_USER_KEY = 'drophub_calc_user';
   const DEFAULT_WEBHOOK_KEY = 'drophub_tools_n8n_webhook';
-  
-  // URL Padrão do n8n do Easypanel do usuário
   let n8nWebhookUrl = 'https://drophub-n8n.dvzzxm.easypanel.host/webhook/lead-calculadora';
   localStorage.setItem(DEFAULT_WEBHOOK_KEY, n8nWebhookUrl);
 
-  leadForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const name = leadName.value.trim();
-    const whatsapp = leadWhatsapp.value.trim();
-
-    if (!name || whatsapp.length < 14) {
-      showToast('Por favor, informe seu nome e WhatsApp completo.');
-      return;
+  const checkGateState = () => {
+    try {
+      const savedUser = JSON.parse(localStorage.getItem(STORAGE_USER_KEY) || '{}');
+      if (savedUser && savedUser.unlocked && savedUser.name) {
+        // Usuário já desbloqueou nesta máquina
+        if (resultInnerContent) resultInnerContent.classList.remove('is-locked-blurred');
+        if (calculatorGate) calculatorGate.classList.add('hidden');
+        if (unlockedNotificationBar) {
+          unlockedNotificationBar.classList.remove('hidden');
+          unlockedUserGreeting.textContent = `Demonstrativo liberado para ${savedUser.name}!`;
+          unlockedUserDesc.innerHTML = `Cópia enviada para o WhatsApp <strong>${savedUser.whatsapp}</strong> com o <strong>Bônus de 10 Dias Grátis do Auditor Silencioso</strong>.`;
+        }
+        return true;
+      }
+    } catch (e) {
+      // Ignora erro
     }
+    return false;
+  };
 
-    btnSubmitLead.disabled = true;
-    btnSubmitLead.innerHTML = `<span>Enviando para o WhatsApp...</span>`;
-
-    const cleanPhone = whatsapp.replace(/\D/g, '');
-    const fullPhone = cleanPhone.startsWith('55') ? cleanPhone : '55' + cleanPhone;
-
-    const payload = {
-      lead: {
-        name,
-        whatsapp: fullPhone,
-        rawWhatsapp: whatsapp,
-        timestamp: new Date().toISOString(),
-        origin: 'Calculadora de Taxas & Lucro Real'
-      },
-      simulation: currentSimulationData
-    };
-
-    // Monta o relatório formatado
+  // Montador do texto detalhado de WhatsApp com a promoção de 10 dias grátis
+  const buildWhatsappReportMessage = (userName) => {
     const price = currentSimulationData ? Number(currentSimulationData.price || 0).toFixed(2) : '0.00';
+    const cost = currentSimulationData ? Number(currentSimulationData.cost || 0).toFixed(2) : '0.00';
     const profit = currentSimulationData ? Number(currentSimulationData.netProfit || 0).toFixed(2) : '0.00';
     const margin = currentSimulationData ? Number(currentSimulationData.netMargin || 0).toFixed(1) : '0.0';
+    const markup = currentSimulationData ? Number(currentSimulationData.effectiveMarkup || 0).toFixed(2) : '0.00';
+    const totalDeductions = currentSimulationData ? Number(currentSimulationData.totalDeductions || 0).toFixed(2) : '0.00';
     const gateway = currentSimulationData ? currentSimulationData.gatewayName : 'Mercado Pago';
     const platform = currentSimulationData ? currentSimulationData.platformName : 'Loja Virtual';
+    const method = currentSimulationData ? currentSimulationData.paymentMethod : 'Cartão';
 
-    const reportMsg = `📊 *[DROPHUB TOOLS] SEU RELATÓRIO DE LUCRO REAL*\n\n` +
-      `Olá *${name}*! Aqui está o resumo da sua simulação na Calculadora de E-commerce:\n\n` +
+    return (
+      `📊 *[DROPHUB TOOLS] SEU RELATÓRIO DE LUCRO REAL & TAXAS*\n\n` +
+      `Olá, *${userName}*! Aqui está o resumo financeiro detalhado da sua simulação:\n\n` +
       `🏷️ *Preço de Venda:* R$ ${price}\n` +
-      `💳 *Gateway:* ${gateway} | *Plataforma:* ${platform}\n` +
-      `💰 *LUCRO LÍQUIDO NO BOLSO:* R$ ${profit} (*${margin}% de margem*)\n\n` +
-      `💡 *Diagnóstico de Otimização:*\n` +
-      `Fazer contas pontuais é ótimo, mas você sabia que *checkouts travados e cartões recusados* comem até 30% do faturamento da sua loja em silêncio?\n\n` +
-      `🛡️ *Conheça o Auditor Silencioso:*\n` +
-      `Proteja seus pedidos 24h por dia por apenas *R$ 3,23 por dia* (R$ 97/mês):\n` +
-      `https://calculadoradoecommerce.com.br/auditor.html`;
+      `📦 *Custo do Produto (CMV):* R$ ${cost}\n` +
+      `💳 *Gateway / Meio:* ${gateway} (${method})\n` +
+      `🛒 *Plataforma:* ${platform}\n\n` +
+      `💰 *LUCRO LÍQUIDO NO BOLSO:* R$ ${profit} (*${margin}% de margem*)\n` +
+      `📉 *Total de Custos & Taxas:* R$ ${totalDeductions}\n` +
+      `📈 *Markup Efetivo:* ${markup}x\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━━\n` +
+      `🎁 *SEU PRESENTE EXCLUSIVO DESBLOQUEADO:*\n` +
+      `*10 DIAS GRÁTIS DO AUDITOR SILENCIOSO 24/7!*\n` +
+      `━━━━━━━━━━━━━━━━━━━━━\n\n` +
+      `Fazer contas no papel é o 1º passo. Mas sabia que *checkouts travados, picos de recusa de cartão e taxas ocultas* comem até 23% do faturamento de lojas online sem o lojista perceber?\n\n` +
+      `O **Auditor Silencioso** fica de guarda 24h por dia e apita imediatamente no seu WhatsApp se qualquer anomalia acontecer na sua loja.\n\n` +
+      `👉 *Para ativar seus 10 dias de teste grátis (sem cartão e sem compromisso):*\n` +
+      `Basta responder esta mensagem com:\n` +
+      `*QUERO ATIVAR 10 DIAS*\n\n` +
+      `Ou clique no link direto da nossa equipe:\n` +
+      `https://wa.me/5512992310222?text=Ol%C3%A1%2C%20fiz%20o%20c%C3%A1lculo%20na%20calculadora%20e%20quero%20ativar%20meus%2010%20dias%20gr%C3%A1tis%20do%20Auditor%20Silencioso!`
+    );
+  };
 
+  // Disparo pela Evolution API (Cliente + Admin)
+  const sendReportViaEvolution = async (name, whatsapp, fullPhone) => {
+    const reportMsg = buildWhatsappReportMessage(name);
+
+    // 1. Envio para o Cliente
     try {
-      // 1. Tenta disparar para o n8n
-      fetch(n8nWebhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(err => console.warn('n8n webhook:', err));
-
-      // 2. Resolução inteligente de número no WhatsApp (ajusta 8 ou 9 dígitos no Brasil)
-      let targetNumber = fullPhone;
-      try {
-        const checkRes = await fetch('https://drophub-evolution-wa.dvzzxm.easypanel.host/chat/whatsappNumbers/auditor', {
-          method: 'POST',
-          headers: {
-            'apikey': '429683C4C977415CAAFCCE10F7D57E11',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ numbers: [fullPhone] })
-        });
-        const checkData = await checkRes.json();
-        if (Array.isArray(checkData) && checkData.length > 0 && checkData[0].exists) {
-          targetNumber = checkData[0].number || checkData[0].jid || fullPhone;
-        }
-      } catch (checkErr) {
-        console.warn('Check number fallback:', checkErr);
-      }
-
-      // 3. Dispara diretamente pela Evolution API para garantir entrega instantânea!
       await fetch('https://drophub-evolution-wa.dvzzxm.easypanel.host/message/sendText/auditor', {
         method: 'POST',
         headers: {
@@ -525,44 +521,152 @@ document.addEventListener('DOMContentLoaded', () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          number: targetNumber,
+          number: fullPhone,
           text: reportMsg,
           options: { delay: 1000, presence: 'composing' }
         })
       });
+    } catch (e) {
+      console.warn('Erro zap cliente:', e);
+    }
 
-      leadFeedback.className = 'lead-feedback success';
-      leadFeedback.innerHTML = `✅ <strong>Perfeito, ${name}!</strong> Seu relatório detalhado foi enviado com sucesso para o WhatsApp <strong>${whatsapp}</strong>. Confira agora no seu celular!`;
-      leadFeedback.classList.remove('hidden');
+    // 2. Envio Quente para o Administrador (Plinio)
+    const adminPhone = '5512992310222';
+    const priceStr = currentSimulationData ? Number(currentSimulationData.price || 0).toFixed(2) : '0.00';
+    const profitStr = currentSimulationData ? Number(currentSimulationData.netProfit || 0).toFixed(2) : '0.00';
+    const marginStr = currentSimulationData ? Number(currentSimulationData.netMargin || 0).toFixed(1) : '0.0';
+    const gateway = currentSimulationData ? currentSimulationData.gatewayName : 'Mercado Pago';
+    const platform = currentSimulationData ? currentSimulationData.platformName : 'Nuvemshop';
 
-      // Dispara evento de conversão para o Google Analytics 4
+    const adminMsg =
+      `🔔 *[NOVO LEAD QUALIFICADO NA CALCULADORA!]*\n\n` +
+      `Um lojista acabou de desbloquear o cálculo e recebeu a oferta de 10 dias grátis:\n\n` +
+      `👤 *Nome:* ${name}\n` +
+      `📱 *WhatsApp:* ${whatsapp}\n` +
+      `🏷️ *Preço Simulado:* R$ ${priceStr}\n` +
+      `💰 *Lucro Calculado:* R$ ${profitStr} (${marginStr}% margem)\n` +
+      `💳 *Gateway:* ${gateway} | *Plataforma:* ${platform}\n` +
+      `⏱️ *Hora:* ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}\n\n` +
+      `🎁 *Status:* O relatório e o voucher de 10 dias foram enviados no zap dele!\n\n` +
+      `👉 *Chamar no WhatsApp para ativar o teste:* \n` +
+      `https://wa.me/${fullPhone}`;
+
+    try {
+      await fetch('https://drophub-evolution-wa.dvzzxm.easypanel.host/message/sendText/auditor', {
+        method: 'POST',
+        headers: {
+          'apikey': '429683C4C977415CAAFCCE10F7D57E11',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          number: adminPhone,
+          text: adminMsg,
+          options: { delay: 1200, presence: 'composing' }
+        })
+      });
+    } catch (e) {
+      console.warn('Erro zap admin:', e);
+    }
+  };
+
+  // Submissão do Gate Obrigatório
+  if (gateForm) {
+    gateForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = gateName.value.trim();
+      const whatsapp = gateWhatsapp.value.trim();
+      const cleanPhone = whatsapp.replace(/\D/g, '');
+
+      if (!name || cleanPhone.length < 10) {
+        showToast('Por favor, informe seu nome e WhatsApp com DDD.');
+        return;
+      }
+
+      btnUnlockCalculator.disabled = true;
+      btnUnlockCalculator.innerHTML = `<span>🔓 Desbloqueando & Enviando...</span>`;
+
+      const fullPhone = cleanPhone.startsWith('55') ? cleanPhone : '55' + cleanPhone;
+
+      // 1. Registra no backend local do Auditor Silencioso
+      fetch('/api/leads/calculator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          lead: { name, whatsapp: fullPhone, rawWhatsapp: whatsapp },
+          simulation: currentSimulationData
+        })
+      }).catch(err => console.warn('Erro api local lead:', err));
+
+      // 2. Dispara Webhook n8n (se disponível)
+      fetch(n8nWebhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          lead: { name, whatsapp: fullPhone, rawWhatsapp: whatsapp, timestamp: new Date().toISOString() },
+          simulation: currentSimulationData
+        })
+      }).catch(err => console.warn('Erro n8n lead:', err));
+
+      // 3. Dispara WhatsApp instantâneo Evolution API
+      await sendReportViaEvolution(name, whatsapp, fullPhone);
+
+      // 4. Salva no localStorage para manter a sessão desbloqueada
+      localStorage.setItem(STORAGE_USER_KEY, JSON.stringify({
+        name,
+        whatsapp,
+        fullPhone,
+        unlocked: true,
+        unlockedAt: Date.now()
+      }));
+
+      // 5. Desbloqueia na tela com animação
+      if (resultInnerContent) resultInnerContent.classList.remove('is-locked-blurred');
+      if (calculatorGate) calculatorGate.classList.add('hidden');
+      if (unlockedNotificationBar) {
+        unlockedNotificationBar.classList.remove('hidden');
+        unlockedUserGreeting.textContent = `Demonstrativo liberado para ${name}!`;
+        unlockedUserDesc.innerHTML = `Enviamos o demonstrativo para o WhatsApp <strong>${whatsapp}</strong> com o <strong>Voucher de 10 Dias Grátis do Auditor Silencioso</strong>.`;
+      }
+
+      // Evento GA4
       if (typeof gtag === 'function') {
         gtag('event', 'generate_lead', {
           event_category: 'Conversao',
-          event_label: 'Relatorio Calculadora WhatsApp'
+          event_label: 'Gate Calculadora Desbloqueado'
         });
       }
-      leadForm.reset();
-      showToast('Relatório enviado para o seu WhatsApp!');
 
-    } catch (err) {
-      console.warn('Erro ao disparar direto na Evolution:', err);
-      leadFeedback.className = 'lead-feedback success';
-      leadFeedback.innerHTML = `✅ <strong>Perfeito, ${name}!</strong> Sua solicitação foi registrada e enviada para o WhatsApp <strong>${whatsapp}</strong>.`;
-      leadFeedback.classList.remove('hidden');
-      leadForm.reset();
-      showToast('Relatório processado!');
-    } finally {
-      btnSubmitLead.disabled = false;
-      btnSubmitLead.innerHTML = `
-        <span>Receber Análise no WhatsApp</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-      `;
-    }
-  });
+      showToast('🎉 Cálculo desbloqueado! Relatório enviado ao seu WhatsApp.');
+      btnUnlockCalculator.disabled = false;
+      btnUnlockCalculator.innerHTML = `<span>🔓 Desbloquear Lucro & Receber Análise Grátis</span>`;
+    });
+  }
+
+  // Botão de Reenviar WhatsApp quando alterar valores
+  if (btnResendWhatsapp) {
+    btnResendWhatsapp.addEventListener('click', async () => {
+      try {
+        const savedUser = JSON.parse(localStorage.getItem(STORAGE_USER_KEY) || '{}');
+        if (!savedUser.name || !savedUser.fullPhone) {
+          showToast('Por favor, informe seu WhatsApp primeiro.');
+          return;
+        }
+
+        btnResendWhatsapp.disabled = true;
+        btnResendWhatsapp.textContent = 'Enviando...';
+
+        await sendReportViaEvolution(savedUser.name, savedUser.whatsapp, savedUser.fullPhone);
+
+        showToast('Simulação atualizada enviada para o seu WhatsApp!');
+      } catch (e) {
+        showToast('Erro ao reenviar mensagem.');
+      } finally {
+        btnResendWhatsapp.disabled = false;
+        btnResendWhatsapp.innerHTML = '<span>📲 Reenviar Atualizado</span>';
+      }
+    });
+  }
 
   // ==========================================
   // 10. Modal de Configuração do Webhook
@@ -614,7 +718,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Inicializar Primeiro Cálculo
+  // Inicializar Estado do Gate e Primeiro Cálculo
+  checkGateState();
   calculate();
 
 });

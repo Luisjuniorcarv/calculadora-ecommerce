@@ -12,6 +12,7 @@ const storage = require('./storage');
 const normalizer = require('./normalizer');
 const alertManager = require('./alert-manager');
 const notificationDispatcher = require('./notification-dispatcher');
+const licenseManager = require('./license-manager');
 const { createTenantConfig, OPERATION_MODES, ALERT_SEVERITIES } = require('./models');
 
 const PORT = process.env.ENGINE_PORT || (process.env.PORT && process.env.PORT !== '80' ? Number(process.env.PORT) : 3333);
@@ -258,6 +259,137 @@ const server = http.createServer(async (req, res) => {
     // 2. ENDPOINTS DA API REST DO SAAS (DASHBOARD & CONFIGS)
     // ========================================================
 
+    // Webhook Oficial Asaas (Confirmação de Pagamento & Desbloqueio Automático por 30 dias)
+    if ((pathname === '/webhook/asaas' || pathname === '/api/webhooks/asaas') && method === 'POST') {
+      const body = await parseRequestBody(req);
+      const result = await licenseManager.handleAsaasWebhook(body);
+      return sendJson(res, 200, { success: true, result });
+    }
+
+    // --- ENDPOINTS DE GESTÃO DE LICENÇAS & MODO DE BLOQUEIO ---
+
+    // Listar licenças com sumário em tempo real
+    if (pathname === '/api/licenses' && method === 'GET') {
+      const tenants = storage.getAllTenants();
+      const licenses = tenants.map(t => ({
+        tenantId: t.id,
+        tenantName: t.name,
+        operationMode: t.operationMode,
+        whatsappDestination: t.whatsappDestination,
+        license: licenseManager.getLicenseSummary(t)
+      }));
+      return sendJson(res, 200, { success: true, licenses });
+    }
+
+    // Ativar 10 dias de teste gratuito
+    if (pathname.match(/^\/api\/licenses\/([^/]+)\/activate-trial$/) && method === 'POST') {
+      const tenantId = pathname.split('/')[3];
+      const body = await parseRequestBody(req);
+      const days = Number(body.days || 10);
+      try {
+        const sub = await licenseManager.activateTrial(tenantId, days);
+        return sendJson(res, 200, { success: true, message: `Teste de ${days} dias ativado com sucesso!`, subscription: sub });
+      } catch (err) {
+        return sendJson(res, 400, { success: false, error: err.message });
+      }
+    }
+
+    // Ativar 30 dias de assinatura paga (R$ 97,00)
+    if (pathname.match(/^\/api\/licenses\/([^/]+)\/activate-paid$/) && method === 'POST') {
+      const tenantId = pathname.split('/')[3];
+      const body = await parseRequestBody(req);
+      const days = Number(body.days || 30);
+      try {
+        const sub = await licenseManager.activatePaid(tenantId, days, body);
+        return sendJson(res, 200, { success: true, message: `Assinatura de ${days} dias ativada com sucesso!`, subscription: sub });
+      } catch (err) {
+        return sendJson(res, 400, { success: false, error: err.message });
+      }
+    }
+
+    // Bloquear tenant manualmente
+    if (pathname.match(/^\/api\/licenses\/([^/]+)\/block$/) && method === 'POST') {
+      const tenantId = pathname.split('/')[3];
+      try {
+        const sub = await licenseManager.blockTenant(tenantId, 'manual_admin');
+        return sendJson(res, 200, { success: true, message: 'Monitoramento bloqueado com sucesso', subscription: sub });
+      } catch (err) {
+        return sendJson(res, 400, { success: false, error: err.message });
+      }
+    }
+
+    // Enviar aviso prévio de 1 dia manualmente
+    if (pathname.match(/^\/api\/licenses\/([^/]+)\/send-warning$/) && method === 'POST') {
+      const tenantId = pathname.split('/')[3];
+      const tenant = storage.getTenant(tenantId);
+      if (!tenant) return sendJson(res, 404, { success: false, error: 'Tenant não encontrado' });
+      await licenseManager.sendExpirationWarning(tenant, 24);
+      return sendJson(res, 200, { success: true, message: 'Aviso prévio disparado no WhatsApp com sucesso' });
+    }
+
+    // Executar verificação global de licenças imediatamente
+    if (pathname === '/api/licenses/check-all' && method === 'POST') {
+      const checkResults = await licenseManager.checkAllLicenses();
+      return sendJson(res, 200, { success: true, checkResults });
+    }
+
+    // --- ENDPOINTS DE LEADS DA CALCULADORA (GATE OBRIGATÓRIO) ---
+
+    // Registrar Lead da Calculadora e Notificar Administrador
+    if (pathname === '/api/leads/calculator' && method === 'POST') {
+      const body = await parseRequestBody(req);
+      const leadData = body.lead || body;
+      const simulation = body.simulation || {};
+
+      const savedLead = storage.addCalculatorLead({
+        name: leadData.name,
+        whatsapp: leadData.whatsapp,
+        rawWhatsapp: leadData.rawWhatsapp,
+        price: simulation.price,
+        cost: simulation.cost,
+        netProfit: simulation.netProfit,
+        netMargin: simulation.netMargin,
+        gatewayName: simulation.gatewayName,
+        platformName: simulation.platformName,
+        paymentMethod: simulation.paymentMethod,
+        timestamp: Date.now()
+      });
+
+      // Disparar Alerta Quente para o WhatsApp do Administrador
+      const adminPhone = process.env.ADMIN_WHATSAPP || '5512992310222';
+      const cleanPhone = String(leadData.whatsapp || '').replace(/\D/g, '');
+      const fullPhone = cleanPhone.startsWith('55') ? cleanPhone : ('55' + cleanPhone);
+      const formattedPrice = Number(simulation.price || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const formattedProfit = Number(simulation.netProfit || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const marginStr = Number(simulation.netMargin || 0).toFixed(1) + '%';
+
+      const adminMsg = 
+        `🔔 *[NOVO LEAD QUALIFICADO NA CALCULADORA!]*\n\n` +
+        `Um lojista acabou de desbloquear o cálculo e recebeu a oferta de 10 dias grátis:\n\n` +
+        `👤 *Nome:* ${leadData.name || 'Lojista'}\n` +
+        `📱 *WhatsApp:* ${leadData.rawWhatsapp || leadData.whatsapp}\n` +
+        `🏷️ *Preço Simulado:* ${formattedPrice}\n` +
+        `💰 *Lucro Calculado:* ${formattedProfit} (${marginStr} de margem)\n` +
+        `💳 *Gateway:* ${simulation.gatewayName || 'Mercado Pago'} | *Plataforma:* ${simulation.platformName || 'Nuvemshop'}\n` +
+        `⏱️ *Hora:* ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}\n\n` +
+        `👉 *Chamar no WhatsApp para Ativar os 10 Dias:* \n` +
+        `https://wa.me/${fullPhone}`;
+
+      notificationDispatcher.sendDirectMessage(adminPhone, adminMsg, 'CALCULATOR_LEAD_ADMIN').catch(e => console.error('Zap admin lead:', e));
+
+      return sendJson(res, 200, {
+        success: true,
+        message: 'Lead registrado com sucesso e administradores notificados',
+        lead: savedLead
+      });
+    }
+
+    // Listar todos os leads da calculadora
+    if (pathname === '/api/leads/calculator' && method === 'GET') {
+      const leads = storage.getCalculatorLeads();
+      return sendJson(res, 200, { success: true, leads });
+    }
+
     // Listar todos os Tenants (Empresas)
     if (pathname === '/api/tenants' && method === 'GET') {
       const tenants = storage.getAllTenants();
@@ -371,7 +503,8 @@ const server = http.createServer(async (req, res) => {
         activeAlerts,
         alertHistory: alertHistory.slice(0, 50),
         dispatchedNotifications: notificationDispatcher.getRecentDispatches(tenantId).slice(0, 10),
-        metrics: modeData
+        metrics: modeData,
+        license: licenseManager.getLicenseSummary(tenant)
       });
     }
 
@@ -660,6 +793,15 @@ const server = http.createServer(async (req, res) => {
 if (require.main === module) {
   server.listen(PORT, () => {
     console.log(`🛡️ Auditor Silencioso SaaS Engine rodando em: http://localhost:${PORT}`);
+    
+    // Executa verificação inicial de licenças e programa verificação periódica a cada 15 min
+    licenseManager.checkAllLicenses().then(res => {
+      console.log(`📋 [Licenças] Verificação de boot concluída: ${res.activeCount} ativas, ${res.warningsSent.length} avisos enviados, ${res.blockedCount.length} bloqueados.`);
+    }).catch(err => console.error('Erro ao verificar licenças no boot:', err));
+
+    setInterval(() => {
+      licenseManager.checkAllLicenses().catch(err => console.error('Erro na rotina periódica de licenças:', err));
+    }, 15 * 60 * 1000);
   });
 }
 

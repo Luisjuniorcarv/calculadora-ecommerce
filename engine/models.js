@@ -23,6 +23,19 @@ const ALERT_STATUS = {
   RESOLVED: 'RESOLVED'            // Resolvido (métrica voltou ao normal)
 };
 
+// Status de Licença & Assinatura (Modo de Bloqueio e Vencimento)
+const SUBSCRIPTION_STATUS = {
+  TRIAL: 'TRIAL',                 // Período de Teste Gratuito (10 dias)
+  ACTIVE: 'ACTIVE',               // Assinatura Ativa e Paga (30 dias)
+  EXPIRING_SOON: 'EXPIRING_SOON', // Vencimento próximo (1 dia antes)
+  BLOCKED: 'BLOCKED'              // Expirado / Bloqueado por falta de pagamento
+};
+
+const SUBSCRIPTION_PLANS = {
+  TRIAL: 'TRIAL',                 // 10 dias de teste
+  MONTHLY: 'MONTHLY'              // 30 dias recorrente (R$ 97/mês)
+};
+
 // Etapas Padrão do Funil de Leads (100% configurável por cliente)
 const DEFAULT_LEAD_FUNNEL_STAGES = [
   { id: 'traffic', label: 'Tráfego (Cliques)', isTraffic: true },
@@ -39,6 +52,8 @@ const DEFAULT_LEAD_FUNNEL_STAGES = [
 // Modelo de Configuração da Empresa (Tenant)
 function createTenantConfig(data = {}) {
   const mode = data.operationMode || OPERATION_MODES.ECOMMERCE;
+  const now = Date.now();
+  const defaultTrialDays = 10;
   
   return {
     id: data.id || 'empresa-' + Math.random().toString(36).substring(2, 9),
@@ -52,6 +67,21 @@ function createTenantConfig(data = {}) {
     notifyWebhook: data.notifyWebhook || null,
     allowedSeverities: data.allowedSeverities || [ALERT_SEVERITIES.CRITICAL, ALERT_SEVERITIES.WARNING],
     
+    // Controle Automatizado de Licença & Bloqueio (10 dias teste / 30 dias assinatura)
+    subscription: {
+      status: data.subscription?.status || SUBSCRIPTION_STATUS.TRIAL,
+      planType: data.subscription?.planType || SUBSCRIPTION_PLANS.TRIAL,
+      durationDays: Number(data.subscription?.durationDays || defaultTrialDays),
+      activatedAt: Number(data.subscription?.activatedAt || (data.createdAt || now)),
+      expiresAt: Number(data.subscription?.expiresAt || ((data.createdAt || now) + (defaultTrialDays * 24 * 60 * 60 * 1000))),
+      oneDayWarningSent: Boolean(data.subscription?.oneDayWarningSent || false),
+      blockedAt: data.subscription?.blockedAt || null,
+      lastPaymentConfirmedAt: data.subscription?.lastPaymentConfirmedAt || null,
+      asaasPaymentId: data.subscription?.asaasPaymentId || null,
+      monthlyFee: Number(data.subscription?.monthlyFee || 97.00),
+      paymentLink: data.subscription?.paymentLink || 'https://www.asaas.com/c/auditor-silencioso'
+    },
+
     // Metas e Limiares - Leads
     leadsSettings: {
       funnelStages: data.leadsSettings?.funnelStages || DEFAULT_LEAD_FUNNEL_STAGES,
@@ -76,8 +106,8 @@ function createTenantConfig(data = {}) {
       maxRefundRatePercent: Number(data.ecommerceSettings?.maxRefundRatePercent || 5) // 5%
     },
 
-    createdAt: data.createdAt || Date.now(),
-    updatedAt: Date.now()
+    createdAt: data.createdAt || now,
+    updatedAt: now
   };
 }
 
@@ -192,6 +222,8 @@ if (typeof module !== 'undefined' && module.exports) {
     OPERATION_MODES,
     ALERT_SEVERITIES,
     ALERT_STATUS,
+    SUBSCRIPTION_STATUS,
+    SUBSCRIPTION_PLANS,
     DEFAULT_LEAD_FUNNEL_STAGES,
     createTenantConfig,
     createNormalizedLead,

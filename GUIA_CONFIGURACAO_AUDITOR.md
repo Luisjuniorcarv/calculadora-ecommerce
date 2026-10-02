@@ -132,7 +132,74 @@ Além do n8n, a plataforma possui um **Motor Node.js autônomo** e um **Dashboar
   - `POST /api/webhooks/traffic`: Webhook de métricas de tráfego pago (Meta Ads e Google Ads).
   - `GET /api/dashboard/:tenantId`: Consolidação de métricas, saúde da operação e feed de alertas.
 
-- **Executar os Testes Automatizados (27 Testes):**
+- **Executar os Testes Automatizados (33 Testes):**
   ```powershell
   node tests/run-all-tests.js
   ```
+
+---
+
+## 🧮 6. Máquina de Vendas: Gate da Calculadora & Alerta Quente no WhatsApp
+
+Para converter o tráfego da calculadora em clientes do **Auditor Silencioso**, implementamos o **Gate Obrigatório por WhatsApp**:
+
+1. **Como funciona na prática:**
+   - O visitante preenche o preço de venda, custo, frete e gateway na calculadora.
+   - O resultado financeiro detalhado (Lucro Líquido, Margem Real e Tabela DRE) fica protegido por um **Gate com efeito de vidro fosco (blur)**.
+   - Para liberar o resultado na tela, o lojista é **obrigado a preencher Nome e WhatsApp**.
+
+2. **O que acontece ao clicar em "Desbloquear":**
+   - **Desbloqueio na Tela:** Os números e o demonstrativo são revelados imediatamente com animação.
+   - **WhatsApp do Lojista:** Dispara instantaneamente (via Evolution API) o relatório detalhado do cálculo + a **Oferta Exclusiva de 10 Dias de Teste Grátis do Auditor Silencioso 24/7**.
+   - **WhatsApp do Administrador (`5512992310222`):** Você recebe um alarme imediato informando:
+     - Nome e Telefone do Lojista.
+     - Ticket simulado, custo, gateway e margem real calculada.
+     - Link direto para clicar e abrir a conversa no WhatsApp para fechar a ativação do teste!
+   - **Armazenamento:** O lead é gravado no banco de dados e fica visível na aba **"📋 Leads Calculadora"** dentro do Dashboard SaaS.
+
+---
+
+## 🛡️ 7. Sistema Automatizado de Licenças, Prazos & Modo de Bloqueio
+
+Você não precisa controlar planilhas manuais. O motor Node.js gerencia as licenças 100% no piloto automático:
+
+1. **Teste Gratuito (10 Dias):**
+   - Conta 10 dias corridos a partir da data de ativação.
+   - Pode ser ativado com 1 clique no painel ou via API.
+
+2. **Assinatura Mensal (30 Dias):**
+   - Conta 30 dias corridos a partir da confirmação do pagamento.
+
+3. **Aviso Automático de 1 Dia Antes (Vencimento Próximo):**
+   - A cada 15 minutos, a rotina interna verifica todos os clientes.
+   - Se faltar menos de 24 horas para expirar (e o aviso ainda não foi enviado):
+     - Dispara mensagem amigável no WhatsApp do cliente informando que a proteção vence amanhã, com o link direto de pagamento Asaas (PIX/Cartão).
+     - Dispara aviso comercial no WhatsApp do administrador para acompanhamento.
+
+4. **Bloqueio Automático após Expiração:**
+   - Se o prazo de 10 ou 30 dias esgotar sem renovação:
+     - O status muda automaticamente para `BLOCKED`.
+     - O motor de auditoria pausa o envio de alertas para não consumir recursos.
+     - Se o lojista acessar o painel, um banner vermelho avisa que o monitoramento está suspenso e fornece o botão de pagamento.
+     - Dispara mensagem de bloqueio no WhatsApp do cliente com o link de regularização.
+     - Notifica você no WhatsApp que o cliente foi bloqueado para que você possa tentar recuperá-lo.
+
+---
+
+## ⚡ 8. Desbloqueio Instantâneo via Webhook do Asaas
+
+Quando o cliente pagar os R$ 97,00 no Cartão ou PIX pelo link do Asaas:
+
+1. Configure a URL de Webhook no Asaas:
+   - Em **Integrações > Webhooks** no painel do Asaas, cadastre a URL:
+     `https://seuservidor.com/webhook/asaas` (ou `/api/webhooks/asaas`)
+   - Em eventos, marque: `Pagamento Recebido (PAYMENT_RECEIVED)` e `Pagamento Confirmado (PAYMENT_CONFIRMED)`.
+
+2. **Fluxo 100% Automático:**
+   - O Asaas envia a confirmação para o motor Node.js.
+   - O sistema localiza o cliente pelo telefone ou ID externo.
+   - O status é atualizado para `ACTIVE` e a data de vencimento é estendida por **mais 30 dias a partir daquele momento**.
+   - O bloqueio é removido instantaneamente.
+   - O cliente recebe uma mensagem de comemoração e confirmação no WhatsApp.
+   - Você recebe uma notificação comemorativa no seu WhatsApp com o valor recebido!
+

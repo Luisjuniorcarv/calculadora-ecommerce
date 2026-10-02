@@ -23,6 +23,16 @@ class AlertManager {
     const tenant = storage.getTenant(tenantId);
     if (!tenant) return { error: 'Tenant não encontrado' };
 
+    // Se o cliente estiver bloqueado por expiração da licença, suspende a auditoria
+    if (tenant.subscription && tenant.subscription.status === 'BLOCKED') {
+      return {
+        tenantId: tenant.id,
+        tenantName: tenant.name,
+        blocked: true,
+        message: 'Monitoramento suspenso: licença de teste ou assinatura expirada. Regularize o pagamento para reativar.'
+      };
+    }
+
     let generatedAlerts = [];
 
     // Roteamento inteligente baseado no modo de operação do cliente

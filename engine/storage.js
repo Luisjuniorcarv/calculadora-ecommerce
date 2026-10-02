@@ -26,6 +26,7 @@ class Storage {
     this.activeAlerts = new Map();    // tenantId -> Map<alertDeduplicationKey, AlertRecord>
     this.alertHistory = new Map();    // tenantId -> Array<AlertRecord>
     this.baselines = new Map();       // tenantId -> Object (médias históricas calculadas)
+    this.calculatorLeads = [];        // Leads capturados no gate da calculadora
 
     this.loadFromDisk();
     this.ensureDefaultTenants();
@@ -554,6 +555,34 @@ class Storage {
     return true;
   }
 
+  // --- Operações de Leads da Calculadora (Gate de Entrada) ---
+  addCalculatorLead(lead) {
+    const item = {
+      id: lead.id || 'calc_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7),
+      name: lead.name || 'Lojista',
+      whatsapp: String(lead.whatsapp || '').replace(/\D/g, ''),
+      rawWhatsapp: lead.rawWhatsapp || lead.whatsapp || '',
+      price: Number(lead.price || 0),
+      cost: Number(lead.cost || 0),
+      netProfit: Number(lead.netProfit !== undefined ? lead.netProfit : (lead.profit || 0)),
+      netMargin: Number(lead.netMargin !== undefined ? lead.netMargin : (lead.margin || 0)),
+      gatewayName: lead.gatewayName || lead.gateway || 'Mercado Pago',
+      platformName: lead.platformName || lead.platform || 'Nuvemshop',
+      paymentMethod: lead.paymentMethod || 'Cartão de Crédito',
+      timestamp: Number(lead.timestamp || Date.now()),
+      bonusOfferSent: true,
+      status: 'novo'
+    };
+    this.calculatorLeads.unshift(item);
+    if (this.calculatorLeads.length > 500) this.calculatorLeads.pop();
+    this.saveToDisk();
+    return item;
+  }
+
+  getCalculatorLeads() {
+    return this.calculatorLeads || [];
+  }
+
   // --- Persistência em Disco ---
   saveToDisk() {
     try {
@@ -566,7 +595,8 @@ class Storage {
         traffic: Array.from(this.traffic.entries()),
         activeAlerts: Array.from(this.activeAlerts.entries()).map(([tId, map]) => [tId, Array.from(map.entries())]),
         alertHistory: Array.from(this.alertHistory.entries()),
-        baselines: Array.from(this.baselines.entries())
+        baselines: Array.from(this.baselines.entries()),
+        calculatorLeads: this.calculatorLeads || []
       };
       fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf8');
     } catch (err) {
@@ -579,7 +609,28 @@ class Storage {
       if (fs.existsSync(DATA_FILE)) {
         const raw = fs.readFileSync(DATA_FILE, 'utf8');
         const data = JSON.parse(raw);
-        if (data.tenants) this.tenants = new Map(data.tenants);
+        if (data.tenants) {
+          this.tenants = new Map(data.tenants);
+          // Assegura que todos os tenants tenham a estrutura de subscription
+          const now = Date.now();
+          for (const [id, tenant] of this.tenants.entries()) {
+            if (!tenant.subscription) {
+              tenant.subscription = {
+                status: 'TRIAL',
+                planType: 'TRIAL',
+                durationDays: 10,
+                activatedAt: tenant.createdAt || now,
+                expiresAt: (tenant.createdAt || now) + (10 * 24 * 60 * 60 * 1000),
+                oneDayWarningSent: false,
+                blockedAt: null,
+                lastPaymentConfirmedAt: null,
+                asaasPaymentId: null,
+                monthlyFee: 97.00,
+                paymentLink: 'https://www.asaas.com/c/auditor-silencioso'
+              };
+            }
+          }
+        }
         if (data.leads) this.leads = new Map(data.leads);
         if (data.transactions) this.transactions = new Map(data.transactions);
         if (data.carts) this.carts = new Map(data.carts);
@@ -590,6 +641,7 @@ class Storage {
         }
         if (data.alertHistory) this.alertHistory = new Map(data.alertHistory);
         if (data.baselines) this.baselines = new Map(data.baselines);
+        if (data.calculatorLeads) this.calculatorLeads = data.calculatorLeads;
       }
     } catch (err) {
       // Se houver falha de leitura, continua com dados em memória

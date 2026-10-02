@@ -950,3 +950,143 @@ body {
   color: var(--text-muted);
   font-weight: 400;
 }
+
+/* ==========================================================================
+   License Block Banner & Gestão de Licenças
+   ========================================================================== */
+.license-block-banner {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(185, 28, 28, 0.25) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2);
+  animation: pulseBlock 3s infinite alternate;
+}
+
+.license-block-banner.hidden {
+  display: none !important;
+}
+
+@keyframes pulseBlock {
+  0% { box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2); }
+  100% { box-shadow: 0 4px 30px rgba(239, 68, 68, 0.45); }
+}
+
+.block-banner-icon {
+  font-size: 2.2rem;
+  flex-shrink: 0;
+}
+
+.block-banner-info {
+  flex-grow: 1;
+}
+
+.block-banner-info strong {
+  display: block;
+  font-size: 1.1rem;
+  color: #FCA5A5;
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+}
+
+.block-banner-info p {
+  font-size: 0.85rem;
+  color: #E2E8F0;
+  line-height: 1.4;
+}
+
+.btn-regularize {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.5);
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.btn-regularize:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* Badges de Licença */
+.badge-lic {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.badge-lic.active {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.badge-lic.trial {
+  background: rgba(245, 158, 11, 0.15);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.badge-lic.expiring {
+  background: rgba(249, 115, 22, 0.15);
+  color: #FB923C;
+  border: 1px solid rgba(249, 115, 22, 0.35);
+}
+
+.badge-lic.blocked {
+  background: rgba(239, 68, 68, 0.15);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+/* Botões de Ação na Tabela de Licenças */
+.btn-lic-action {
+  background: #0B1120;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  margin-left: 0.3rem;
+  transition: all 0.2s;
+}
+
+.btn-lic-action:hover {
+  border-color: var(--accent-purple);
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.btn-lic-action.btn-trial:hover {
+  border-color: #F59E0B;
+  color: #FBBF24;
+}
+
+.btn-lic-action.btn-paid:hover {
+  border-color: #10B981;
+  color: #34D399;
+}
+
+.btn-lic-action.btn-block:hover {
+  border-color: #EF4444;
+  color: #F87171;
+}
+
