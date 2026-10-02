@@ -127,6 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const unlockedUserGreeting = document.getElementById('unlocked-user-greeting');
   const unlockedUserDesc = document.getElementById('unlocked-user-desc');
   const btnResendWhatsapp = document.getElementById('btn-resend-whatsapp');
+  const btnRelockCalculator = document.getElementById('btn-relock-calculator');
+
+  // Flag de controle de acesso ao resultado (estritamente condicionado ao WhatsApp)
+  let isCalculatorUnlocked = false;
 
   // Modal Webhook
   const btnConfigWebhook = document.getElementById('btn-config-webhook');
@@ -235,7 +239,41 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. Renderização na Interface
   // ==========================================
   const renderResults = (data) => {
-    // Lucro e Métricas Principais
+    // 🔒 Proteção Estrita: Se não preencheu Nome e WhatsApp, os números reais NUNCA aparecem na tela
+    if (!isCalculatorUnlocked) {
+      valNetProfit.innerHTML = '<span class="val-masked">R$ ••••••</span> <span class="badge-locked" style="font-size:0.75rem; padding:0.25rem 0.65rem; border-radius:999px; margin-left:0.5rem; vertical-align:middle; font-weight:700;">🔒 Bloqueado</span>';
+      valNetProfit.className = 'big-profit';
+      valNetMargin.textContent = '•••%';
+      valMarkup.textContent = '•••x';
+      valTotalFees.textContent = 'R$ ••••••';
+
+      badgeStatus.className = 'badge-status badge-locked';
+      badgeStatus.textContent = '🔒 Aguardando Desbloqueio';
+
+      barCost.style.width = '20%';
+      barGateway.style.width = '20%';
+      barPlatform.style.width = '20%';
+      barTax.style.width = '20%';
+      barProfit.style.width = '20%';
+
+      drePrice.textContent = 'R$ ••••••';
+      dreCost.textContent = '- R$ ••••••';
+      dreShipping.textContent = '- R$ ••••••';
+      dreTax.textContent = '- R$ ••••••';
+      drePlatform.textContent = '- R$ ••••••';
+      dreGatewayMdr.textContent = '- R$ ••••••';
+      if (dreRowAnticipation) dreRowAnticipation.style.display = 'none';
+      dreFinalProfit.innerHTML = '<strong class="val-masked">R$ ••••••</strong>';
+      dreFinalProfit.className = 'text-right text-muted';
+
+      diagnosticBox.className = 'diagnostic-box';
+      diagIcon.textContent = '🔒';
+      diagTitle.textContent = 'Demonstrativo e Dicas Bloqueados';
+      diagDesc.innerHTML = 'Preencha seu <strong>Nome e WhatsApp</strong> no formulário acima para liberar o Lucro Líquido Real deste produto, taxas detalhadas e ativar seu bônus de <strong>10 Dias Grátis do Auditor Silencioso</strong>.';
+      return;
+    }
+
+    // Lucro e Métricas Principais (quando liberado)
     valNetProfit.textContent = formatBRL(data.netProfit);
     if (data.netProfit < 0) {
       valNetProfit.classList.add('text-danger');
@@ -454,10 +492,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const checkGateState = () => {
     try {
-      const savedUser = JSON.parse(localStorage.getItem(STORAGE_USER_KEY) || '{}');
-      if (savedUser && savedUser.unlocked && savedUser.name) {
-        // Usuário já desbloqueou nesta máquina
-        if (resultInnerContent) resultInnerContent.classList.remove('is-locked-blurred');
+      // Verifica na sessão atual se já preencheu
+      const savedUser = JSON.parse(sessionStorage.getItem(STORAGE_USER_KEY) || localStorage.getItem(STORAGE_USER_KEY) || '{}');
+      if (savedUser && savedUser.unlocked && savedUser.name && savedUser.whatsapp) {
+        isCalculatorUnlocked = true;
         if (calculatorGate) calculatorGate.classList.add('hidden');
         if (unlockedNotificationBar) {
           unlockedNotificationBar.classList.remove('hidden');
@@ -469,6 +507,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
       // Ignora erro
     }
+    isCalculatorUnlocked = false;
+    if (calculatorGate) calculatorGate.classList.remove('hidden');
+    if (unlockedNotificationBar) unlockedNotificationBar.classList.add('hidden');
     return false;
   };
 
@@ -611,23 +652,28 @@ document.addEventListener('DOMContentLoaded', () => {
       // 3. Dispara WhatsApp instantâneo Evolution API
       await sendReportViaEvolution(name, whatsapp, fullPhone);
 
-      // 4. Salva no localStorage para manter a sessão desbloqueada
-      localStorage.setItem(STORAGE_USER_KEY, JSON.stringify({
+      // 4. Salva no sessionStorage e localStorage para manter a sessão desbloqueada
+      const userPayload = JSON.stringify({
         name,
         whatsapp,
         fullPhone,
         unlocked: true,
         unlockedAt: Date.now()
-      }));
+      });
+      sessionStorage.setItem(STORAGE_USER_KEY, userPayload);
+      localStorage.setItem(STORAGE_USER_KEY, userPayload);
 
-      // 5. Desbloqueia na tela com animação
-      if (resultInnerContent) resultInnerContent.classList.remove('is-locked-blurred');
+      // 5. Ativa flag de desbloqueio e atualiza a interface
+      isCalculatorUnlocked = true;
       if (calculatorGate) calculatorGate.classList.add('hidden');
       if (unlockedNotificationBar) {
         unlockedNotificationBar.classList.remove('hidden');
         unlockedUserGreeting.textContent = `Demonstrativo liberado para ${name}!`;
         unlockedUserDesc.innerHTML = `Enviamos o demonstrativo para o WhatsApp <strong>${whatsapp}</strong> com o <strong>Voucher de 10 Dias Grátis do Auditor Silencioso</strong>.`;
       }
+
+      // 6. Imediatamente calcula e revela todos os números reais na tela
+      calculate();
 
       // Evento GA4
       if (typeof gtag === 'function') {
@@ -637,9 +683,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      showToast('🎉 Cálculo desbloqueado! Relatório enviado ao seu WhatsApp.');
+      showToast('🎉 Cálculo desbloqueado com sucesso! Resumo enviado ao seu WhatsApp.');
       btnUnlockCalculator.disabled = false;
-      btnUnlockCalculator.innerHTML = `<span>🔓 Desbloquear Lucro & Receber Análise Grátis</span>`;
+      btnUnlockCalculator.innerHTML = `<span>🔓 DESBLOQUEAR RESULTADO + 10 DIAS GRÁTIS</span>`;
+    });
+  }
+
+  // Botão de Bloquear Novamente (Permite testar o bloqueio a qualquer momento)
+  if (btnRelockCalculator) {
+    btnRelockCalculator.addEventListener('click', () => {
+      isCalculatorUnlocked = false;
+      sessionStorage.removeItem(STORAGE_USER_KEY);
+      localStorage.removeItem(STORAGE_USER_KEY);
+      if (calculatorGate) calculatorGate.classList.remove('hidden');
+      if (unlockedNotificationBar) unlockedNotificationBar.classList.add('hidden');
+      calculate();
+      calculatorGate.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      showToast('🔒 Resultado bloqueado novamente!');
     });
   }
 

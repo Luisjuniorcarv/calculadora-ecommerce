@@ -3464,6 +3464,798 @@
         "createdAt": 1790938364459,
         "updatedAt": 1790938364459
       }
+    ],
+    [
+      "tenant-iso-a-1790939940998",
+      {
+        "id": "tenant-iso-a-1790939940998",
+        "name": "Empresa A",
+        "slug": "minha-operacao",
+        "operationMode": "ECOMMERCE",
+        "segment": "Dropshipping / Varejo",
+        "webhookToken": "sec_b16cy9udtl9",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "subscription": {
+          "status": "TRIAL",
+          "planType": "TRIAL",
+          "durationDays": 10,
+          "activatedAt": 1790939940998,
+          "expiresAt": 1791803940998,
+          "oneDayWarningSent": false,
+          "blockedAt": null,
+          "lastPaymentConfirmedAt": null,
+          "asaasPaymentId": null,
+          "monthlyFee": 97,
+          "paymentLink": "https://www.asaas.com/c/auditor-silencioso"
+        },
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790939940998,
+        "updatedAt": 1790939940998
+      }
+    ],
+    [
+      "tenant-iso-b-1790939940998",
+      {
+        "id": "tenant-iso-b-1790939940998",
+        "name": "Empresa B",
+        "slug": "minha-operacao",
+        "operationMode": "LEADS",
+        "segment": "Clínica / Serviços",
+        "webhookToken": "sec_z2m0w65bga",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "subscription": {
+          "status": "TRIAL",
+          "planType": "TRIAL",
+          "durationDays": 10,
+          "activatedAt": 1790939940998,
+          "expiresAt": 1791803940998,
+          "oneDayWarningSent": false,
+          "blockedAt": null,
+          "lastPaymentConfirmedAt": null,
+          "asaasPaymentId": null,
+          "monthlyFee": 97,
+          "paymentLink": "https://www.asaas.com/c/auditor-silencioso"
+        },
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790939940998,
+        "updatedAt": 1790939941014
+      }
+    ],
+    [
+      "tenant-cool-1790939941030",
+      {
+        "id": "tenant-cool-1790939941030",
+        "name": "Loja Cooldown Teste",
+        "slug": "minha-operacao",
+        "operationMode": "ECOMMERCE",
+        "segment": "Dropshipping / Varejo",
+        "webhookToken": "sec_a9eak38flin",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "subscription": {
+          "status": "TRIAL",
+          "planType": "TRIAL",
+          "durationDays": 10,
+          "activatedAt": 1790939941030,
+          "expiresAt": 1791803941030,
+          "oneDayWarningSent": false,
+          "blockedAt": null,
+          "lastPaymentConfirmedAt": null,
+          "asaasPaymentId": null,
+          "monthlyFee": 97,
+          "paymentLink": "https://www.asaas.com/c/auditor-silencioso"
+        },
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790939941030,
+        "updatedAt": 1790939941030
+      }
+    ],
+    [
+      "tenant-heal-1790939941904",
+      {
+        "id": "tenant-heal-1790939941904",
+        "name": "Loja Auto-Cura Teste",
+        "slug": "minha-operacao",
+        "operationMode": "ECOMMERCE",
+        "segment": "Dropshipping / Varejo",
+        "webhookToken": "sec_r8mbbhsad7",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "subscription": {
+          "status": "TRIAL",
+          "planType": "TRIAL",
+          "durationDays": 10,
+          "activatedAt": 1790939941904,
+          "expiresAt": 1791803941904,
+          "oneDayWarningSent": false,
+          "blockedAt": null,
+          "lastPaymentConfirmedAt": null,
+          "asaasPaymentId": null,
+          "monthlyFee": 97,
+          "paymentLink": "https://www.asaas.com/c/auditor-silencioso"
+        },
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790939941904,
+        "updatedAt": 1790939941904
+      }
+    ],
+    [
+      "tenant-iso-a-1790942807014",
+      {
+        "id": "tenant-iso-a-1790942807014",
+        "name": "Empresa A",
+        "slug": "minha-operacao",
+        "operationMode": "ECOMMERCE",
+        "segment": "Dropshipping / Varejo",
+        "webhookToken": "sec_x9452uq5lm",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "subscription": {
+          "status": "TRIAL",
+          "planType": "TRIAL",
+          "durationDays": 10,
+          "activatedAt": 1790942807014,
+          "expiresAt": 1791806807014,
+          "oneDayWarningSent": false,
+          "blockedAt": null,
+          "lastPaymentConfirmedAt": null,
+          "asaasPaymentId": null,
+          "monthlyFee": 97,
+          "paymentLink": "https://www.asaas.com/c/auditor-silencioso"
+        },
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790942807014,
+        "updatedAt": 1790942807015
+      }
+    ],
+    [
+      "tenant-iso-b-1790942807014",
+      {
+        "id": "tenant-iso-b-1790942807014",
+        "name": "Empresa B",
+        "slug": "minha-operacao",
+        "operationMode": "LEADS",
+        "segment": "Clínica / Serviços",
+        "webhookToken": "sec_1ilil52mov9",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "subscription": {
+          "status": "TRIAL",
+          "planType": "TRIAL",
+          "durationDays": 10,
+          "activatedAt": 1790942807014,
+          "expiresAt": 1791806807014,
+          "oneDayWarningSent": false,
+          "blockedAt": null,
+          "lastPaymentConfirmedAt": null,
+          "asaasPaymentId": null,
+          "monthlyFee": 97,
+          "paymentLink": "https://www.asaas.com/c/auditor-silencioso"
+        },
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790942807014,
+        "updatedAt": 1790942807019
+      }
+    ],
+    [
+      "tenant-cool-1790942807035",
+      {
+        "id": "tenant-cool-1790942807035",
+        "name": "Loja Cooldown Teste",
+        "slug": "minha-operacao",
+        "operationMode": "ECOMMERCE",
+        "segment": "Dropshipping / Varejo",
+        "webhookToken": "sec_rlwn1rd3nc",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "subscription": {
+          "status": "TRIAL",
+          "planType": "TRIAL",
+          "durationDays": 10,
+          "activatedAt": 1790942807035,
+          "expiresAt": 1791806807035,
+          "oneDayWarningSent": false,
+          "blockedAt": null,
+          "lastPaymentConfirmedAt": null,
+          "asaasPaymentId": null,
+          "monthlyFee": 97,
+          "paymentLink": "https://www.asaas.com/c/auditor-silencioso"
+        },
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790942807035,
+        "updatedAt": 1790942807036
+      }
+    ],
+    [
+      "tenant-heal-1790942807960",
+      {
+        "id": "tenant-heal-1790942807960",
+        "name": "Loja Auto-Cura Teste",
+        "slug": "minha-operacao",
+        "operationMode": "ECOMMERCE",
+        "segment": "Dropshipping / Varejo",
+        "webhookToken": "sec_3cirow5kmko",
+        "whatsappDestination": "5511999999999",
+        "notifyWhatsapp": true,
+        "notifyWebhook": null,
+        "allowedSeverities": [
+          "CRITICAL",
+          "WARNING"
+        ],
+        "subscription": {
+          "status": "TRIAL",
+          "planType": "TRIAL",
+          "durationDays": 10,
+          "activatedAt": 1790942807960,
+          "expiresAt": 1791806807960,
+          "oneDayWarningSent": false,
+          "blockedAt": null,
+          "lastPaymentConfirmedAt": null,
+          "asaasPaymentId": null,
+          "monthlyFee": 97,
+          "paymentLink": "https://www.asaas.com/c/auditor-silencioso"
+        },
+        "leadsSettings": {
+          "funnelStages": [
+            {
+              "id": "traffic",
+              "label": "Tráfego (Cliques)",
+              "isTraffic": true
+            },
+            {
+              "id": "visit",
+              "label": "Visitas na Página",
+              "isTraffic": true
+            },
+            {
+              "id": "lead",
+              "label": "Lead Criado",
+              "isLead": true
+            },
+            {
+              "id": "contacted",
+              "label": "Lead Contactado",
+              "isLead": true
+            },
+            {
+              "id": "qualified",
+              "label": "Lead Qualificado",
+              "isLead": true
+            },
+            {
+              "id": "scheduled",
+              "label": "Agendamento Realizado",
+              "isLead": true
+            },
+            {
+              "id": "attended",
+              "label": "Comparecimento / Reunião",
+              "isLead": true
+            },
+            {
+              "id": "opportunity",
+              "label": "Proposta / Oportunidade",
+              "isLead": true
+            },
+            {
+              "id": "won",
+              "label": "Venda / Contratação Fechada",
+              "isLead": true
+            }
+          ],
+          "maxCpl": 35,
+          "maxFirstResponseMinutes": 15,
+          "maxStageStagnationHours": 24,
+          "minQualificationRate": 30,
+          "minScheduleRate": 40,
+          "minShowRate": 75,
+          "dailyBudget": 300,
+          "minLeadVolumeForAlert": 5
+        },
+        "ecommerceSettings": {
+          "maxRefusalRatePercent": 25,
+          "minRefusalsCount": 3,
+          "maxNoSaleMinutesBusinessHours": 120,
+          "maxAbandonmentRatePercent": 75,
+          "minCartVolumeForAlert": 8,
+          "minStockDaysThreshold": 3,
+          "maxRefundRatePercent": 5
+        },
+        "createdAt": 1790942807960,
+        "updatedAt": 1790942807960
+      }
     ]
   ],
   "leads": [
@@ -3929,6 +4721,28 @@
         {
           "id": "lead_b",
           "tenantId": "tenant-iso-b-1790938363747",
+          "name": "Lead B",
+          "currentStage": "lead"
+        }
+      ]
+    ],
+    [
+      "tenant-iso-b-1790939940998",
+      [
+        {
+          "id": "lead_b",
+          "tenantId": "tenant-iso-b-1790939940998",
+          "name": "Lead B",
+          "currentStage": "lead"
+        }
+      ]
+    ],
+    [
+      "tenant-iso-b-1790942807014",
+      [
+        {
+          "id": "lead_b",
+          "tenantId": "tenant-iso-b-1790942807014",
           "name": "Lead B",
           "currentStage": "lead"
         }
@@ -5679,6 +6493,440 @@
           "timestamp": 1790938363466
         }
       ]
+    ],
+    [
+      "tenant-iso-a-1790939940998",
+      [
+        {
+          "id": "tx_a",
+          "tenantId": "tenant-iso-a-1790939940998",
+          "amount": 100,
+          "status": "approved"
+        }
+      ]
+    ],
+    [
+      "tenant-cool-1790939941030",
+      [
+        {
+          "id": "tx_cool_3",
+          "tenantId": "tenant-cool-1790939941030",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940058
+        },
+        {
+          "id": "tx_cool_2",
+          "tenantId": "tenant-cool-1790939941030",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940058
+        },
+        {
+          "id": "tx_cool_1",
+          "tenantId": "tenant-cool-1790939941030",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940058
+        },
+        {
+          "id": "tx_cool_0",
+          "tenantId": "tenant-cool-1790939941030",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940058
+        }
+      ]
+    ],
+    [
+      "tenant-heal-1790939941904",
+      [
+        {
+          "id": "tx_heal_19",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940010
+        },
+        {
+          "id": "tx_heal_18",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940110
+        },
+        {
+          "id": "tx_heal_17",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940210
+        },
+        {
+          "id": "tx_heal_16",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940310
+        },
+        {
+          "id": "tx_heal_15",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940410
+        },
+        {
+          "id": "tx_heal_14",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940510
+        },
+        {
+          "id": "tx_heal_13",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940610
+        },
+        {
+          "id": "tx_heal_12",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940710
+        },
+        {
+          "id": "tx_heal_11",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940810
+        },
+        {
+          "id": "tx_heal_10",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940910
+        },
+        {
+          "id": "tx_heal_9",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939941010
+        },
+        {
+          "id": "tx_heal_8",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939941110
+        },
+        {
+          "id": "tx_heal_7",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939941210
+        },
+        {
+          "id": "tx_heal_6",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939941310
+        },
+        {
+          "id": "tx_heal_5",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939941410
+        },
+        {
+          "id": "tx_heal_4",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939941510
+        },
+        {
+          "id": "tx_heal_3",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939941610
+        },
+        {
+          "id": "tx_heal_2",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939941710
+        },
+        {
+          "id": "tx_heal_1",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939941810
+        },
+        {
+          "id": "tx_heal_0",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939941910
+        },
+        {
+          "id": "tx_sick_3",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940910
+        },
+        {
+          "id": "tx_sick_2",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940910
+        },
+        {
+          "id": "tx_sick_1",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940910
+        },
+        {
+          "id": "tx_sick_0",
+          "tenantId": "tenant-heal-1790939941904",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790939940910
+        }
+      ]
+    ],
+    [
+      "tenant-iso-a-1790942807014",
+      [
+        {
+          "id": "tx_a",
+          "tenantId": "tenant-iso-a-1790942807014",
+          "amount": 100,
+          "status": "approved"
+        }
+      ]
+    ],
+    [
+      "tenant-cool-1790942807035",
+      [
+        {
+          "id": "tx_cool_3",
+          "tenantId": "tenant-cool-1790942807035",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806046
+        },
+        {
+          "id": "tx_cool_2",
+          "tenantId": "tenant-cool-1790942807035",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806046
+        },
+        {
+          "id": "tx_cool_1",
+          "tenantId": "tenant-cool-1790942807035",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806046
+        },
+        {
+          "id": "tx_cool_0",
+          "tenantId": "tenant-cool-1790942807035",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806046
+        }
+      ]
+    ],
+    [
+      "tenant-heal-1790942807960",
+      [
+        {
+          "id": "tx_heal_19",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806064
+        },
+        {
+          "id": "tx_heal_18",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806164
+        },
+        {
+          "id": "tx_heal_17",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806264
+        },
+        {
+          "id": "tx_heal_16",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806364
+        },
+        {
+          "id": "tx_heal_15",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806464
+        },
+        {
+          "id": "tx_heal_14",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806564
+        },
+        {
+          "id": "tx_heal_13",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806664
+        },
+        {
+          "id": "tx_heal_12",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806764
+        },
+        {
+          "id": "tx_heal_11",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806864
+        },
+        {
+          "id": "tx_heal_10",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806964
+        },
+        {
+          "id": "tx_heal_9",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942807064
+        },
+        {
+          "id": "tx_heal_8",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942807164
+        },
+        {
+          "id": "tx_heal_7",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942807264
+        },
+        {
+          "id": "tx_heal_6",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942807364
+        },
+        {
+          "id": "tx_heal_5",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942807464
+        },
+        {
+          "id": "tx_heal_4",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942807564
+        },
+        {
+          "id": "tx_heal_3",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942807664
+        },
+        {
+          "id": "tx_heal_2",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942807764
+        },
+        {
+          "id": "tx_heal_1",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942807864
+        },
+        {
+          "id": "tx_heal_0",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "approved",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942807964
+        },
+        {
+          "id": "tx_sick_3",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806964
+        },
+        {
+          "id": "tx_sick_2",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806964
+        },
+        {
+          "id": "tx_sick_1",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806964
+        },
+        {
+          "id": "tx_sick_0",
+          "tenantId": "tenant-heal-1790942807960",
+          "status": "refused",
+          "paymentMethod": "credit_card",
+          "timestamp": 1790942806964
+        }
+      ]
     ]
   ],
   "carts": [
@@ -6209,6 +7457,84 @@
     ],
     [
       "tenant-heal-1790938364459",
+      []
+    ],
+    [
+      "tenant-cool-1790939941030",
+      [
+        [
+          "PICO_RECUSA_CARTAO_credit_card",
+          {
+            "id": "alt_ef08ex9r",
+            "tenantId": "tenant-cool-1790939941030",
+            "tenantName": "Loja Cooldown Teste",
+            "operationMode": "ECOMMERCE",
+            "alertKey": "PICO_RECUSA_CARTAO",
+            "title": "Pico de Recusa de Cartão Detectado",
+            "severity": "CRITICAL",
+            "status": "OPEN",
+            "currentValue": 100,
+            "expectedValue": 10,
+            "metricUnit": "%",
+            "anomalyDetails": {
+              "totalTentativas": 4,
+              "recusas": 4,
+              "limiteSeguranca": 25
+            },
+            "entityType": "payment_method",
+            "entityId": "credit_card",
+            "entityName": "Cartão de Crédito",
+            "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
+            "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
+            "firstTriggeredAt": 1790939941101,
+            "lastTriggeredAt": 1790939941101,
+            "resolvedAt": null,
+            "cooldownUntil": 1790941741101
+          }
+        ]
+      ]
+    ],
+    [
+      "tenant-heal-1790939941904",
+      []
+    ],
+    [
+      "tenant-cool-1790942807035",
+      [
+        [
+          "PICO_RECUSA_CARTAO_credit_card",
+          {
+            "id": "alt_cuncl0js",
+            "tenantId": "tenant-cool-1790942807035",
+            "tenantName": "Loja Cooldown Teste",
+            "operationMode": "ECOMMERCE",
+            "alertKey": "PICO_RECUSA_CARTAO",
+            "title": "Pico de Recusa de Cartão Detectado",
+            "severity": "CRITICAL",
+            "status": "OPEN",
+            "currentValue": 100,
+            "expectedValue": 10,
+            "metricUnit": "%",
+            "anomalyDetails": {
+              "totalTentativas": 4,
+              "recusas": 4,
+              "limiteSeguranca": 25
+            },
+            "entityType": "payment_method",
+            "entityId": "credit_card",
+            "entityName": "Cartão de Crédito",
+            "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
+            "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
+            "firstTriggeredAt": 1790942807086,
+            "lastTriggeredAt": 1790942807086,
+            "resolvedAt": null,
+            "cooldownUntil": 1790944607086
+          }
+        ]
+      ]
+    ],
+    [
+      "tenant-heal-1790942807960",
       []
     ]
   ],
@@ -6856,6 +8182,136 @@
           "lastTriggeredAt": 1790938364490,
           "resolvedAt": 1790938364795,
           "cooldownUntil": 1790940164490,
+          "resolutionNote": "Problema normalizado automaticamente pelo sistema"
+        }
+      ]
+    ],
+    [
+      "tenant-cool-1790939941030",
+      [
+        {
+          "id": "alt_ef08ex9r",
+          "tenantId": "tenant-cool-1790939941030",
+          "tenantName": "Loja Cooldown Teste",
+          "operationMode": "ECOMMERCE",
+          "alertKey": "PICO_RECUSA_CARTAO",
+          "title": "Pico de Recusa de Cartão Detectado",
+          "severity": "CRITICAL",
+          "status": "OPEN",
+          "currentValue": 100,
+          "expectedValue": 10,
+          "metricUnit": "%",
+          "anomalyDetails": {
+            "totalTentativas": 4,
+            "recusas": 4,
+            "limiteSeguranca": 25
+          },
+          "entityType": "payment_method",
+          "entityId": "credit_card",
+          "entityName": "Cartão de Crédito",
+          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
+          "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
+          "firstTriggeredAt": 1790939941101,
+          "lastTriggeredAt": 1790939941101,
+          "resolvedAt": null,
+          "cooldownUntil": 1790941741101
+        }
+      ]
+    ],
+    [
+      "tenant-heal-1790939941904",
+      [
+        {
+          "id": "alt_3s5um08a",
+          "tenantId": "tenant-heal-1790939941904",
+          "tenantName": "Loja Auto-Cura Teste",
+          "operationMode": "ECOMMERCE",
+          "alertKey": "PICO_RECUSA_CARTAO",
+          "title": "Pico de Recusa de Cartão Detectado",
+          "severity": "CRITICAL",
+          "status": "RESOLVED",
+          "currentValue": 100,
+          "expectedValue": 10,
+          "metricUnit": "%",
+          "anomalyDetails": {
+            "totalTentativas": 4,
+            "recusas": 4,
+            "limiteSeguranca": 25
+          },
+          "entityType": "payment_method",
+          "entityId": "credit_card",
+          "entityName": "Cartão de Crédito",
+          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Auto-Cura Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
+          "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
+          "firstTriggeredAt": 1790939941936,
+          "lastTriggeredAt": 1790939941936,
+          "resolvedAt": 1790939942245,
+          "cooldownUntil": 1790941741936,
+          "resolutionNote": "Problema normalizado automaticamente pelo sistema"
+        }
+      ]
+    ],
+    [
+      "tenant-cool-1790942807035",
+      [
+        {
+          "id": "alt_cuncl0js",
+          "tenantId": "tenant-cool-1790942807035",
+          "tenantName": "Loja Cooldown Teste",
+          "operationMode": "ECOMMERCE",
+          "alertKey": "PICO_RECUSA_CARTAO",
+          "title": "Pico de Recusa de Cartão Detectado",
+          "severity": "CRITICAL",
+          "status": "OPEN",
+          "currentValue": 100,
+          "expectedValue": 10,
+          "metricUnit": "%",
+          "anomalyDetails": {
+            "totalTentativas": 4,
+            "recusas": 4,
+            "limiteSeguranca": 25
+          },
+          "entityType": "payment_method",
+          "entityId": "credit_card",
+          "entityName": "Cartão de Crédito",
+          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Cooldown Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
+          "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
+          "firstTriggeredAt": 1790942807086,
+          "lastTriggeredAt": 1790942807086,
+          "resolvedAt": null,
+          "cooldownUntil": 1790944607086
+        }
+      ]
+    ],
+    [
+      "tenant-heal-1790942807960",
+      [
+        {
+          "id": "alt_14gv3rdc",
+          "tenantId": "tenant-heal-1790942807960",
+          "tenantName": "Loja Auto-Cura Teste",
+          "operationMode": "ECOMMERCE",
+          "alertKey": "PICO_RECUSA_CARTAO",
+          "title": "Pico de Recusa de Cartão Detectado",
+          "severity": "CRITICAL",
+          "status": "RESOLVED",
+          "currentValue": 100,
+          "expectedValue": 10,
+          "metricUnit": "%",
+          "anomalyDetails": {
+            "totalTentativas": 4,
+            "recusas": 4,
+            "limiteSeguranca": 25
+          },
+          "entityType": "payment_method",
+          "entityId": "credit_card",
+          "entityName": "Cartão de Crédito",
+          "whatsappMessage": "🚨 *[AUDITOR SILENCIOSO] ALERTA CRÍTICO: PICO DE RECUSA DE CARTÃO*\n\nAtenção! Sua loja *Loja Auto-Cura Teste* registrou *4 de 4 cartões recusados* recentemente.\n\n📉 *Taxa de Recusa Atual:* 100.0% (Padrão Normal: ~10.0%)\n💳 *Meio:* Cartão de Crédito\n\n👉 *Ação Recomendada:* Verifique o status do gateway ou antifraude agora para não queimar verba de anúncios!",
+          "recommendedAction": "Acesse o painel do seu gateway/antifraude imediatamente para verificar instabilidade ou erro de credenciais.",
+          "firstTriggeredAt": 1790942807983,
+          "lastTriggeredAt": 1790942807983,
+          "resolvedAt": 1790942808351,
+          "cooldownUntil": 1790944607983,
           "resolutionNote": "Problema normalizado automaticamente pelo sistema"
         }
       ]

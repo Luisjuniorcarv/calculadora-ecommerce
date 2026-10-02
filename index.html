@@ -363,105 +363,112 @@
         <!-- Result Column (Right) -->
         <div class="result-column">
           
-          <!-- Notificação de Desbloqueio e Cópia Enviada ao WhatsApp -->
+          <!-- Notificação de Desbloqueio e Cópia Enviada ao WhatsApp (Aparece somente após liberar) -->
           <div id="unlocked-notification-bar" class="unlocked-alert-box hidden">
             <div class="unlocked-alert-icon">✅</div>
             <div class="unlocked-alert-text">
               <strong id="unlocked-user-greeting">Demonstrativo liberado com sucesso!</strong>
               <p id="unlocked-user-desc">Enviamos o resumo deste cálculo com o <strong>Voucher de 10 Dias Grátis do Auditor Silencioso</strong> para o seu WhatsApp.</p>
             </div>
-            <button type="button" id="btn-resend-whatsapp" class="btn-resend-sm" title="Reenviar cálculo atualizado para o WhatsApp">
-              <span>📲 Reenviar Atualizado</span>
-            </button>
+            <div class="unlocked-alert-actions">
+              <button type="button" id="btn-resend-whatsapp" class="btn-resend-sm" title="Reenviar cálculo atualizado para o WhatsApp">
+                <span>📲 Reenviar WhatsApp</span>
+              </button>
+              <button type="button" id="btn-relock-calculator" class="btn-relock-sm" title="Bloquear novamente para testar">
+                <span>🔒 Bloquear</span>
+              </button>
+            </div>
           </div>
 
-          <!-- Card de Lucro Principal com Proteção de Gate -->
-          <div class="card result-card" id="result-box">
+          <!-- GATE OBRIGATÓRIO: Desbloqueio por WhatsApp (Card em Destaque Máximo) -->
+          <div id="calculator-gate" class="card calculator-gate-card">
+            <div class="gate-top-badge">
+              <span class="gate-lock-icon">🔒</span>
+              <span>RESULTADO PROTEGIDO • DIGITE SEUS DADOS PARA LIBERAR</span>
+            </div>
 
-            <!-- GATE OBRIGATÓRIO: Desbloqueio por WhatsApp -->
-            <div id="calculator-gate" class="calculator-gate-overlay">
-              <div class="gate-card-inner">
-                <div class="gate-top-badge">
-                  <span class="gate-lock-icon">🔒</span>
-                  <span>Demonstrativo Financeiro Protegido</span>
-                </div>
+            <h3 class="gate-title">
+              Descubra seu <span class="gradient-emerald">Lucro Real</span> & Taxas Ocultas
+            </h3>
 
-                <h3 class="gate-title">
-                  Desbloqueie o <span class="gradient-emerald">Lucro Real</span> & Análise de Taxas
-                </h3>
+            <p class="gate-desc">
+              Mais de 68% dos lojistas perdem margem em taxas ocultas de gateway e juros de antecipação. Informe seu WhatsApp abaixo para <strong>liberar todos os números na tela</strong> e receber seu demonstrativo completo:
+            </p>
 
-                <p class="gate-desc">
-                  Mais de 68% dos lojistas perdem margem em taxas ocultas e juros de antecipação. Informe seu WhatsApp abaixo para <strong>liberar os números na tela</strong> e receber seu relatório detalhado:
-                </p>
-
-                <form id="gate-form" class="gate-form" onsubmit="return false;">
-                  <div class="gate-input-group">
-                    <label for="gate-name">Seu Nome ou Nome da Loja</label>
-                    <div class="gate-input-wrapper">
-                      <span class="gate-input-icon">👤</span>
-                      <input type="text" id="gate-name" placeholder="Ex: Carlos Silva ou Minha Loja" required>
-                    </div>
-                  </div>
-
-                  <div class="gate-input-group">
-                    <label for="gate-whatsapp">WhatsApp (com DDD)</label>
-                    <div class="gate-input-wrapper">
-                      <span class="gate-input-icon">📱</span>
-                      <input type="tel" id="gate-whatsapp" placeholder="(XX) 99999-9999" required maxlength="15">
-                    </div>
-                  </div>
-
-                  <!-- Bônus 10 Dias Grátis -->
-                  <div class="gate-bonus-box">
-                    <div class="gate-bonus-icon">🎁</div>
-                    <div class="gate-bonus-info">
-                      <strong>PRESENTE EXCLUSIVO INCLUSO:</strong>
-                      <span>Você ganha <strong>10 DIAS DE TESTE GRÁTIS</strong> do Auditor Silencioso 24/7 (Proteção de checkout e alertas no WhatsApp)!</span>
-                    </div>
-                  </div>
-
-                  <button type="submit" id="btn-unlock-calculator" class="btn-unlock-cta">
-                    <span>🔓 Desbloquear Lucro & Receber Análise Grátis</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </button>
-
-                  <div class="gate-trust-footer">
-                    <span>⚡ Desbloqueio imediato na tela</span>
-                    <span class="gate-sep">•</span>
-                    <span>🔒 Sem spam</span>
-                    <span class="gate-sep">•</span>
-                    <span>💳 Sem cartão de crédito</span>
-                  </div>
-                </form>
+            <!-- Box Destaque Máximo: 10 Dias Grátis -->
+            <div class="gate-bonus-box">
+              <div class="gate-bonus-glow"></div>
+              <div class="gate-bonus-icon">🎁</div>
+              <div class="gate-bonus-info">
+                <span class="gate-bonus-tag">PRESENTE EXCLUSIVO LIBERADO</span>
+                <strong>10 DIAS DE TESTE GRÁTIS DO AUDITOR SILENCIOSO</strong>
+                <p>Receba a auditoria deste cálculo no seu WhatsApp + 10 dias do robô sentinela vigiando sua loja 24h por dia contra checkout travado e taxas abusivas!</p>
               </div>
             </div>
 
-            <!-- Conteúdo Interno dos Resultados (Fica borrado antes de preencher o Gate) -->
-            <div id="result-inner-content" class="result-content-wrap is-locked-blurred">
+            <form id="gate-form" class="gate-form" onsubmit="return false;">
+              <div class="gate-input-group">
+                <label for="gate-name">Seu Nome ou Nome da Loja <span class="text-danger">*</span></label>
+                <div class="gate-input-wrapper">
+                  <span class="gate-input-icon">👤</span>
+                  <input type="text" id="gate-name" placeholder="Ex: Carlos Silva ou Minha Loja" required autocomplete="name">
+                </div>
+              </div>
+
+              <div class="gate-input-group">
+                <label for="gate-whatsapp">WhatsApp com DDD (para receber o cálculo) <span class="text-danger">*</span></label>
+                <div class="gate-input-wrapper">
+                  <span class="gate-input-icon">📱</span>
+                  <input type="tel" id="gate-whatsapp" placeholder="(XX) 99999-9999" required maxlength="15" autocomplete="tel">
+                </div>
+              </div>
+
+              <button type="submit" id="btn-unlock-calculator" class="btn-unlock-cta">
+                <span>🔓 DESBLOQUEAR RESULTADO + 10 DIAS GRÁTIS</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+
+              <div class="gate-trust-footer">
+                <span>⚡ Desbloqueio imediato na tela</span>
+                <span class="gate-sep">•</span>
+                <span>🔒 Sem spam</span>
+                <span class="gate-sep">•</span>
+                <span>💳 Sem cartão de crédito</span>
+              </div>
+            </form>
+          </div>
+
+          <!-- Card de Resultados (Condicionado ao Desbloqueio) -->
+          <div class="card result-card" id="result-box">
+
+            <!-- Conteúdo Interno dos Resultados -->
+            <div id="result-inner-content" class="result-content-wrap">
               <div class="result-header">
                 <span class="result-label">Lucro Líquido no seu Bolso</span>
-                <span class="badge-status badge-healthy" id="badge-status">Margem Saudável</span>
+                <span class="badge-status badge-locked" id="badge-status">🔒 Aguardando Desbloqueio</span>
               </div>
 
               <div class="result-highlight">
-                <div class="big-profit" id="val-net-profit">R$ 0,00</div>
+                <div class="big-profit" id="val-net-profit">
+                  <span class="val-masked">R$ ••••••</span>
+                </div>
                 <div class="profit-submetrics">
                   <div class="submetric">
                     <span class="sub-label">Margem Líquida</span>
-                    <span class="sub-value" id="val-net-margin">0.0%</span>
+                    <span class="sub-value" id="val-net-margin">•••%</span>
                   </div>
                   <div class="submetric-divider"></div>
                   <div class="submetric">
                     <span class="sub-label">Markup Efetivo</span>
-                    <span class="sub-value" id="val-markup">0.0x</span>
+                    <span class="sub-value" id="val-markup">•••x</span>
                   </div>
                   <div class="submetric-divider"></div>
                   <div class="submetric">
                     <span class="sub-label">Total de Deduções</span>
-                    <span class="sub-value text-danger" id="val-total-fees">R$ 0,00</span>
+                    <span class="sub-value text-danger" id="val-total-fees">R$ ••••••</span>
                   </div>
                 </div>
               </div>
