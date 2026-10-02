@@ -566,7 +566,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (tabGateMp) tabGateMp.addEventListener('click', () => setGatePaymentMethod('mp'));
   window.selectGateMethod = setGatePaymentMethod;
 
-  // Chave PIX Oficial do Beneficiário (CPF: 407.872.438-84)
+  // Payload PIX Oficial do Beneficiário (R$ 0,99)
   const PIX_CPF_PAYLOAD = '00020101021226330014br.gov.bcb.pix01114078724388452040000530398654040.995802BR5913DROPHUB TOOLS6009SAO PAULO62110507CALC0996304C908';
   if (pixCopyPasteInput) {
     pixCopyPasteInput.value = PIX_CPF_PAYLOAD;
