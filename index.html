@@ -461,41 +461,8 @@
                   <div class="pix-payment-box">
                     <div class="pix-qr-wrap">
                       <div class="pix-qr-code" id="pix-qr-container">
-                        <!-- QR Code Canvas / SVG -->
-                        <svg class="pix-qr-svg" viewBox="0 0 160 160" width="140" height="140">
-                          <rect width="160" height="160" fill="#0A1120" rx="8"/>
-                          <!-- QR code stylized pattern -->
-                          <rect x="14" y="14" width="38" height="38" fill="#10B981" rx="4"/>
-                          <rect x="22" y="22" width="22" height="22" fill="#0A1120"/>
-                          <rect x="26" y="26" width="14" height="14" fill="#10B981"/>
-
-                          <rect x="108" y="14" width="38" height="38" fill="#10B981" rx="4"/>
-                          <rect x="116" y="22" width="22" height="22" fill="#0A1120"/>
-                          <rect x="120" y="26" width="14" height="14" fill="#10B981"/>
-
-                          <rect x="14" y="108" width="38" height="38" fill="#10B981" rx="4"/>
-                          <rect x="22" y="116" width="22" height="22" fill="#0A1120"/>
-                          <rect x="26" y="120" width="14" height="14" fill="#10B981"/>
-
-                          <!-- Data blocks -->
-                          <rect x="62" y="20" width="12" height="12" fill="#34D399"/>
-                          <rect x="80" y="16" width="14" height="8" fill="#10B981"/>
-                          <rect x="64" y="40" width="8" height="16" fill="#34D399"/>
-                          <rect x="80" y="36" width="16" height="12" fill="#10B981"/>
-                          <rect x="20" y="64" width="16" height="8" fill="#34D399"/>
-                          <rect x="44" y="60" width="12" height="16" fill="#10B981"/>
-                          <rect x="66" y="64" width="28" height="28" fill="#10B981" rx="4"/>
-                          <rect x="74" y="72" width="12" height="12" fill="#0A1120"/>
-                          <rect x="104" y="62" width="16" height="12" fill="#34D399"/>
-                          <rect x="128" y="64" width="18" height="10" fill="#10B981"/>
-                          <rect x="60" y="102" width="14" height="14" fill="#10B981"/>
-                          <rect x="82" y="100" width="18" height="8" fill="#34D399"/>
-                          <rect x="108" y="96" width="14" height="16" fill="#10B981"/>
-                          <rect x="130" y="110" width="16" height="16" fill="#34D399"/>
-                          <rect x="64" y="126" width="16" height="18" fill="#34D399"/>
-                          <rect x="88" y="120" width="18" height="12" fill="#10B981"/>
-                          <rect x="114" y="124" width="18" height="20" fill="#10B981"/>
-                        </svg>
+                        <!-- QR Code Oficial e Escaneável por qualquer banco -->
+                        <img id="pix-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020101021226360014br.gov.bcb.pix0114%2B551299231022252040000530398654040.995802BR5913DROPHUB%20TOOLS6009SAO%20PAULO62110507CALC099630486A5" width="140" height="140" alt="QR Code PIX R$ 0,99" style="border-radius:6px; display:block;">
                       </div>
                       <div class="pix-qr-badge">
                         <span class="pix-logo-icon">💠</span>
@@ -508,7 +475,7 @@
                     </div>
 
                     <div class="pix-copy-wrap">
-                      <input type="text" id="pix-copy-paste-input" readonly value="00020126580014br.gov.bcb.pix01111299231022252040000530398654040.995802BR5913DROPHUB TOOLS6009SAO PAULO62180514CALCULADORA0996304C254" class="pix-copy-input">
+                      <input type="text" id="pix-copy-paste-input" readonly value="00020101021226360014br.gov.bcb.pix0114+551299231022252040000530398654040.995802BR5913DROPHUB TOOLS6009SAO PAULO62110507CALC099630486A5" class="pix-copy-input">
                       <button type="button" id="btn-copy-pix" class="btn-copy-pix" title="Clique para copiar o código PIX Copia e Cola">
                         <span id="btn-copy-pix-text">📋 Copiar Código PIX</span>
                       </button>
