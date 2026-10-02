@@ -345,6 +345,10 @@ const server = http.createServer(async (req, res) => {
         name: leadData.name,
         whatsapp: leadData.whatsapp,
         rawWhatsapp: leadData.rawWhatsapp,
+        email: leadData.email || '',
+        paid: leadData.paid !== undefined ? leadData.paid : true,
+        amount: leadData.amount !== undefined ? leadData.amount : 0.99,
+        plan: leadData.plan || 'TRIAL_3_DAYS',
         price: simulation.price,
         cost: simulation.cost,
         netProfit: simulation.netProfit,
@@ -364,22 +368,24 @@ const server = http.createServer(async (req, res) => {
       const marginStr = Number(simulation.netMargin || 0).toFixed(1) + '%';
 
       const adminMsg = 
-        `🔔 *[NOVO LEAD QUALIFICADO NA CALCULADORA!]*\n\n` +
-        `Um lojista acabou de desbloquear o cálculo e recebeu a oferta de 10 dias grátis:\n\n` +
+        `💰 *[NOVO CLIENTE COMPRADOR R$ 0,99 - CALCULADORA]*\n\n` +
+        `Um lojista acabou de PAGAR R$ 0,99 para liberar o cálculo e ativou 3 dias de Auditor Silencioso 24/7:\n\n` +
         `👤 *Nome:* ${leadData.name || 'Lojista'}\n` +
         `📱 *WhatsApp:* ${leadData.rawWhatsapp || leadData.whatsapp}\n` +
+        `📧 *E-mail:* ${leadData.email || 'Não informado'}\n` +
         `🏷️ *Preço Simulado:* ${formattedPrice}\n` +
         `💰 *Lucro Calculado:* ${formattedProfit} (${marginStr} de margem)\n` +
         `💳 *Gateway:* ${simulation.gatewayName || 'Mercado Pago'} | *Plataforma:* ${simulation.platformName || 'Nuvemshop'}\n` +
+        `🛡️ *Status:* 3 Dias de Sentinela Ativados (R$ 0,99 Liquidado)\n` +
         `⏱️ *Hora:* ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}\n\n` +
-        `👉 *Chamar no WhatsApp para Ativar os 10 Dias:* \n` +
+        `👉 *Chamar no WhatsApp para Acompanhar os 3 Dias e Fechar Assinatura (R$ 97/mês):* \n` +
         `https://wa.me/${fullPhone}`;
 
       notificationDispatcher.sendDirectMessage(adminPhone, adminMsg, 'CALCULATOR_LEAD_ADMIN').catch(e => console.error('Zap admin lead:', e));
 
       return sendJson(res, 200, {
         success: true,
-        message: 'Lead registrado com sucesso e administradores notificados',
+        message: 'Lead comprador registrado com sucesso e administradores notificados',
         lead: savedLead
       });
     }

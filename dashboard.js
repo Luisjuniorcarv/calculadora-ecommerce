@@ -949,7 +949,7 @@ async function loadCalculatorLeads() {
       const marginStr = Number(l.netMargin || 0).toFixed(1) + '%';
       const cleanPhone = String(l.whatsapp || '').replace(/\D/g, '');
       const fullPhone = cleanPhone.startsWith('55') ? cleanPhone : ('55' + cleanPhone);
-      const textMsg = encodeURIComponent(`Olá ${l.name}! Vi que você calculou na nossa calculadora de e-commerce uma margem de ${marginStr} no ticket de ${priceStr}. Conseguiu ativar seus 10 dias grátis do Auditor Silencioso? Posso te ajudar a proteger seu checkout agora!`);
+      const textMsg = encodeURIComponent(`Olá ${l.name}! Vi que você adquiriu o relatório da calculadora por R$ 0,99 (margem de ${marginStr} no ticket de ${priceStr}) com 3 dias de acesso ao Auditor Silencioso! Como estão os alertas da sua loja? Posso te ajudar a manter o sentinela ativo!`);
 
       return `
         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">

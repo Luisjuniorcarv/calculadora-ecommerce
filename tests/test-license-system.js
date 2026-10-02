@@ -99,17 +99,25 @@ async function runTests() {
   assert.strictEqual(updatedTenant4.subscription.durationDays, 10, 'Deveria ter 10 dias');
   console.log('  ✓ 6. Ativação de 10 dias de teste manual validada com sucesso');
 
+  // Teste 7: Ativação de 3 Dias de Acesso (Nova Estratégia Calculadora R$ 0,99)
+  await licenseManager.activateTrial(testTenantId, 3);
+  const updatedTenant5 = storage.getTenant(testTenantId);
+  assert.strictEqual(updatedTenant5.subscription.status, SUBSCRIPTION_STATUS.TRIAL, 'Deveria estar em TRIAL');
+  assert.strictEqual(updatedTenant5.subscription.planType, SUBSCRIPTION_PLANS.TRIAL_3_DAYS, 'Plano deve ser TRIAL_3_DAYS');
+  assert.strictEqual(updatedTenant5.subscription.durationDays, 3, 'Duração deve ser de 3 dias');
+  console.log('  ✓ 7. Ativação de 3 dias de acesso da calculadora R$ 0,99 validada com sucesso');
+
   // Limpa tenant de teste
   storage.tenants.delete(testTenantId);
   storage.saveToDisk();
 
-  console.log('Resultado Licenças: 6/6 testes passaram.\n');
-  return { passed: 6, total: 6 };
+  console.log('Resultado Licenças: 7/7 testes passaram.\n');
+  return { passed: 7, total: 7 };
 }
 
 if (require.main === module) {
   runTests().then(() => {
-    console.log('🎉 TODOS OS 6 TESTES DE LICENÇA E BLOQUEIO PASSARAM!');
+    console.log('🎉 TODOS OS 7 TESTES DE LICENÇA E BLOQUEIO PASSARAM!');
     process.exit(0);
   }).catch(err => {
     console.error('Falha nos testes de licença:', err);

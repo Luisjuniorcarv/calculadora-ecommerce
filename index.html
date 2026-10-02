@@ -131,8 +131,8 @@
   <aside class="announcement-bar">
     <div class="container announcement-content">
       <span class="badge-pulse"></span>
-      <span><strong>Atualizado 2026:</strong> Inclui taxas atualizadas de Mercado Pago, Nuvemshop, Shopify, Yampi e Asaas.</span>
-      <a href="auditor.html" class="announcement-link">Conhecer Monitoramento 24h &rarr;</a>
+      <span><strong>Nova Estratégia 2026:</strong> Desbloqueie o Lucro Real por apenas <strong>R$ 0,99</strong> e ganhe <strong>3 Dias de Acesso Total ao Auditor Silencioso 24/7</strong>!</span>
+      <a href="#simulador" class="announcement-link">Simular por R$ 0,99 &rarr;</a>
     </div>
   </aside>
 
@@ -363,14 +363,20 @@
         <!-- Result Column (Right) -->
         <div class="result-column">
           
-          <!-- Notificação de Desbloqueio e Cópia Enviada ao WhatsApp (Aparece somente após liberar) -->
+          <!-- Notificação de Desbloqueio e Acesso de 3 Dias Ativo -->
           <div id="unlocked-notification-bar" class="unlocked-alert-box hidden">
-            <div class="unlocked-alert-icon">✅</div>
+            <div class="unlocked-alert-icon">🎉</div>
             <div class="unlocked-alert-text">
-              <strong id="unlocked-user-greeting">Demonstrativo liberado com sucesso!</strong>
-              <p id="unlocked-user-desc">Enviamos o resumo deste cálculo com o <strong>Voucher de 10 Dias Grátis do Auditor Silencioso</strong> para o seu WhatsApp.</p>
+              <strong id="unlocked-user-greeting">Demonstrativo Liberado com Sucesso! (Pagamento R$ 0,99 Confirmado)</strong>
+              <p id="unlocked-user-desc">
+                Seu acesso de <strong>3 Dias ao Auditor Silencioso 24/7</strong> está ATIVO!
+                <span class="countdown-badge">⏳ Expira em: <strong id="auditor-countdown-timer">72h 00m</strong></span>
+              </p>
             </div>
             <div class="unlocked-alert-actions">
+              <button type="button" id="btn-open-auditor-onboarding" class="btn-onboarding-sm" title="Instruções para conectar sua loja ao Sentinela">
+                <span>🛡️ Conectar Loja</span>
+              </button>
               <button type="button" id="btn-resend-whatsapp" class="btn-resend-sm" title="Reenviar cálculo atualizado para o WhatsApp">
                 <span>📲 Reenviar WhatsApp</span>
               </button>
@@ -380,29 +386,29 @@
             </div>
           </div>
 
-          <!-- GATE OBRIGATÓRIO: Desbloqueio por WhatsApp (Card em Destaque Máximo) -->
+          <!-- GATE OBRIGATÓRIO: Micro-Checkout R$ 0,99 (Resultado + 3 Dias Auditor Silencioso) -->
           <div id="calculator-gate" class="card calculator-gate-card">
             <div class="gate-top-badge">
               <span class="gate-lock-icon">🔒</span>
-              <span>RESULTADO PROTEGIDO • DIGITE SEUS DADOS PARA LIBERAR</span>
+              <span>RESULTADO PROTEGIDO • APENAS R$ 0,99</span>
             </div>
 
             <h3 class="gate-title">
-              Descubra seu <span class="gradient-emerald">Lucro Real</span> & Taxas Ocultas
+              Descubra seu <span class="gradient-emerald">Lucro Real</span> por <span class="price-pill-highlight">R$ 0,99</span>
             </h3>
 
             <p class="gate-desc">
-              Mais de 68% dos lojistas perdem margem em taxas ocultas de gateway e juros de antecipação. Informe seu WhatsApp abaixo para <strong>liberar todos os números na tela</strong> e receber seu demonstrativo completo:
+              Por menos que uma bala (apenas <strong>R$ 0,99</strong>), você desbloqueia imediatamente na tela todos os custos ocultos, DRE, markup real e ganha de presente:
             </p>
 
-            <!-- Box Destaque Máximo: 10 Dias Grátis -->
+            <!-- Box Destaque Máximo: 3 Dias de Acesso ao Auditor Silencioso -->
             <div class="gate-bonus-box">
               <div class="gate-bonus-glow"></div>
-              <div class="gate-bonus-icon">🎁</div>
+              <div class="gate-bonus-icon">🛡️</div>
               <div class="gate-bonus-info">
-                <span class="gate-bonus-tag">PRESENTE EXCLUSIVO LIBERADO</span>
-                <strong>10 DIAS DE TESTE GRÁTIS DO AUDITOR SILENCIOSO</strong>
-                <p>Receba a auditoria deste cálculo no seu WhatsApp + 10 dias do robô sentinela vigiando sua loja 24h por dia contra checkout travado e taxas abusivas!</p>
+                <span class="gate-bonus-tag">🎁 BÔNUS EXCLUSIVO INCLUSO</span>
+                <strong>3 DIAS DE ACESSO TOTAL AO AUDITOR SILENCIOSO 24/7</strong>
+                <p>Receba este demonstrativo no WhatsApp + 3 dias do robô sentinela vigiando sua loja online 24h por dia contra checkout travado, picos de recusa de cartão e taxas indevidas!</p>
               </div>
             </div>
 
@@ -416,27 +422,136 @@
               </div>
 
               <div class="gate-input-group">
-                <label for="gate-whatsapp">WhatsApp com DDD (para receber o cálculo) <span class="text-danger">*</span></label>
+                <label for="gate-whatsapp">WhatsApp com DDD (para receber o cálculo e alertas) <span class="text-danger">*</span></label>
                 <div class="gate-input-wrapper">
                   <span class="gate-input-icon">📱</span>
                   <input type="tel" id="gate-whatsapp" placeholder="(XX) 99999-9999" required maxlength="15" autocomplete="tel">
                 </div>
               </div>
 
-              <button type="submit" id="btn-unlock-calculator" class="btn-unlock-cta">
-                <span>🔓 DESBLOQUEAR RESULTADO + 10 DIAS GRÁTIS</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </button>
+              <div class="gate-input-group">
+                <label for="gate-email">E-mail para Comprovante e Webhook <span class="text-muted">(opcional)</span></label>
+                <div class="gate-input-wrapper">
+                  <span class="gate-input-icon">✉️</span>
+                  <input type="email" id="gate-email" placeholder="loja@suaempresa.com.br" autocomplete="email">
+                </div>
+              </div>
+
+              <!-- Seletor de Pagamento R$ 0,99 -->
+              <div class="gate-payment-section">
+                <div class="gate-payment-header">
+                  <span class="gate-payment-label">Escolha como pagar R$ 0,99:</span>
+                  <span class="gate-badge-instant">⚡ Liberação Imediata</span>
+                </div>
+
+                <div class="gate-pay-tabs">
+                  <button type="button" class="gate-pay-tab active" id="tab-gate-pix">
+                    <span class="tab-icon">💠</span>
+                    <span>PIX Instantâneo</span>
+                    <span class="tab-chip">Mais Rápido</span>
+                  </button>
+                  <button type="button" class="gate-pay-tab" id="tab-gate-mp">
+                    <span class="tab-icon">💳</span>
+                    <span>Mercado Pago</span>
+                  </button>
+                </div>
+
+                <!-- Painel PIX -->
+                <div id="gate-panel-pix" class="gate-pay-panel active">
+                  <div class="pix-payment-box">
+                    <div class="pix-qr-wrap">
+                      <div class="pix-qr-code" id="pix-qr-container">
+                        <!-- QR Code Canvas / SVG -->
+                        <svg class="pix-qr-svg" viewBox="0 0 160 160" width="140" height="140">
+                          <rect width="160" height="160" fill="#0A1120" rx="8"/>
+                          <!-- QR code stylized pattern -->
+                          <rect x="14" y="14" width="38" height="38" fill="#10B981" rx="4"/>
+                          <rect x="22" y="22" width="22" height="22" fill="#0A1120"/>
+                          <rect x="26" y="26" width="14" height="14" fill="#10B981"/>
+
+                          <rect x="108" y="14" width="38" height="38" fill="#10B981" rx="4"/>
+                          <rect x="116" y="22" width="22" height="22" fill="#0A1120"/>
+                          <rect x="120" y="26" width="14" height="14" fill="#10B981"/>
+
+                          <rect x="14" y="108" width="38" height="38" fill="#10B981" rx="4"/>
+                          <rect x="22" y="116" width="22" height="22" fill="#0A1120"/>
+                          <rect x="26" y="120" width="14" height="14" fill="#10B981"/>
+
+                          <!-- Data blocks -->
+                          <rect x="62" y="20" width="12" height="12" fill="#34D399"/>
+                          <rect x="80" y="16" width="14" height="8" fill="#10B981"/>
+                          <rect x="64" y="40" width="8" height="16" fill="#34D399"/>
+                          <rect x="80" y="36" width="16" height="12" fill="#10B981"/>
+                          <rect x="20" y="64" width="16" height="8" fill="#34D399"/>
+                          <rect x="44" y="60" width="12" height="16" fill="#10B981"/>
+                          <rect x="66" y="64" width="28" height="28" fill="#10B981" rx="4"/>
+                          <rect x="74" y="72" width="12" height="12" fill="#0A1120"/>
+                          <rect x="104" y="62" width="16" height="12" fill="#34D399"/>
+                          <rect x="128" y="64" width="18" height="10" fill="#10B981"/>
+                          <rect x="60" y="102" width="14" height="14" fill="#10B981"/>
+                          <rect x="82" y="100" width="18" height="8" fill="#34D399"/>
+                          <rect x="108" y="96" width="14" height="16" fill="#10B981"/>
+                          <rect x="130" y="110" width="16" height="16" fill="#34D399"/>
+                          <rect x="64" y="126" width="16" height="18" fill="#34D399"/>
+                          <rect x="88" y="120" width="18" height="12" fill="#10B981"/>
+                          <rect x="114" y="124" width="18" height="20" fill="#10B981"/>
+                        </svg>
+                      </div>
+                      <div class="pix-qr-badge">
+                        <span class="pix-logo-icon">💠</span>
+                        <span>PIX Oficial • R$ 0,99</span>
+                      </div>
+                    </div>
+
+                    <div class="pix-amount-pill">
+                      <span>Valor Único:</span> <strong>R$ 0,99</strong> <small>(Sem mensalidade surpresa)</small>
+                    </div>
+
+                    <div class="pix-copy-wrap">
+                      <input type="text" id="pix-copy-paste-input" readonly value="00020126580014br.gov.bcb.pix01111299231022252040000530398654040.995802BR5913DROPHUB TOOLS6009SAO PAULO62180514CALCULADORA0996304C254" class="pix-copy-input">
+                      <button type="button" id="btn-copy-pix" class="btn-copy-pix" title="Clique para copiar o código PIX Copia e Cola">
+                        <span id="btn-copy-pix-text">📋 Copiar Código PIX</span>
+                      </button>
+                    </div>
+
+                    <p class="pix-instructions">
+                      Abra o app do seu banco > <strong>Área PIX > Copia e Cola</strong> > Pague <strong>R$ 0,99</strong> e clique abaixo para liberar na hora:
+                    </p>
+
+                    <button type="button" id="btn-confirm-pix-payment" class="btn-unlock-cta btn-pix-confirm">
+                      <span id="btn-confirm-pix-text">⚡ JÁ FIZ O PIX DE R$ 0,99 • LIBERAR RESULTADO AGORA</span>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Painel Mercado Pago -->
+                <div id="gate-panel-mp" class="gate-pay-panel" style="display: none;">
+                  <div class="mp-payment-box">
+                    <p class="mp-desc">
+                      Pague <strong>R$ 0,99</strong> com Cartão de Crédito ou Saldo no ambiente 100% criptografado do Mercado Pago.
+                    </p>
+                    <button type="button" id="btn-checkout-mp" class="btn-unlock-cta btn-mp-cta">
+                      <span id="btn-mp-text">💳 PAGAR R$ 0,99 NO MERCADO PAGO</span>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
 
               <div class="gate-trust-footer">
-                <span>⚡ Desbloqueio imediato na tela</span>
+                <span>🔒 Pagamento 100% Criptografado</span>
                 <span class="gate-sep">•</span>
-                <span>🔒 Sem spam</span>
+                <span>⚡ Liberação Imediata na Tela</span>
                 <span class="gate-sep">•</span>
-                <span>💳 Sem cartão de crédito</span>
+                <span>🛡️ 3 Dias de Sentinela Inclusos</span>
               </div>
             </form>
           </div>
@@ -548,7 +663,7 @@
             </div>
           </div>
 
-          <!-- Banner de Alta Conversão: Auditor Silencioso & Bônus de 10 Dias -->
+          <!-- Banner de Alta Conversão: Auditor Silencioso & Bônus de 3 Dias -->
           <div class="card auditor-banner-card" id="banner-auditor-silencioso">
             <div class="auditor-banner-glow"></div>
             
@@ -558,7 +673,7 @@
                 Sentinela 24/7 no WhatsApp
               </span>
               <span class="auditor-price-tag" id="auditor-badge-trial-tag">
-                10 Dias Grátis<small> de Teste</small>
+                3 Dias Inclusos<small> por R$ 0,99</small>
               </span>
             </div>
 
@@ -581,12 +696,12 @@
               </div>
               <div class="perk-item">
                 <span class="perk-icon">🎁</span>
-                <span><strong>10 Dias Grátis:</strong> Teste sem custo e sem compromisso</span>
+                <span><strong>3 Dias de Acesso:</strong> Teste real vigiando sua loja online</span>
               </div>
             </div>
 
-            <a href="https://wa.me/5512992310222?text=Ol%C3%A1%2C%20fiz%20o%20c%C3%A1lculo%20na%20calculadora%20e%20quero%20ativar%20meus%2010%20dias%20gr%C3%A1tis%20do%20Auditor%20Silencioso!" target="_blank" class="btn-auditor-banner" id="cta-banner-auditor">
-              <span>🎁 Ativar Meus 10 Dias Grátis no WhatsApp</span>
+            <a href="https://wa.me/5512992310222?text=Ol%C3%A1%2C%20fiz%20o%20c%C3%A1lculo%20por%20R%24%200%2C99%20e%20quero%20conectar%20meus%203%20dias%20de%20Auditor%20Silencioso!" target="_blank" class="btn-auditor-banner" id="cta-banner-auditor">
+              <span>🎁 Conectar Meus 3 Dias de Sentinela no WhatsApp</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -852,6 +967,54 @@
       <div class="modal-footer">
         <button class="btn btn-secondary-sm" id="btn-cancel-modal">Cancelar</button>
         <button class="btn btn-primary-sm" id="btn-save-webhook">Salvar Configuração</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Conexão do Sentinela (3 Dias de Auditor Ativo) -->
+  <div class="modal-overlay" id="modal-onboarding-auditor" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span style="font-size: 1.5rem;">🛡️</span>
+          <div>
+            <h3 style="margin: 0; font-size: 1.15rem;">Conectar Sentinela na sua Loja</h3>
+            <span style="font-size: 0.76rem; color: #10B981; font-weight: 700;">3 DIAS DE ACESSO ATIVO</span>
+          </div>
+        </div>
+        <button class="btn-close-modal" id="btn-close-onboarding-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-tip">Seu sentinela 24/7 já está monitorando. Para receber alertas de <strong>picos de recusa de cartão</strong> e <strong>checkout travado</strong>, conecte o Webhook oficial na sua plataforma:</p>
+        
+        <div style="margin: 1.25rem 0; background: rgba(10, 17, 32, 0.95); border: 1.5px dashed rgba(16, 185, 129, 0.5); border-radius: 8px; padding: 1rem;">
+          <label style="display: block; font-size: 0.75rem; text-transform: uppercase; color: #34D399; font-weight: 800; margin-bottom: 0.4rem;">Sua URL Exclusiva de Webhook:</label>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <input type="text" id="client-webhook-url" readonly value="https://drophub-n8n.dvzzxm.easypanel.host/webhook/auditor-checkout" style="flex: 1; background: #060B14; border: 1px solid rgba(255,255,255,0.15); color: #E2E8F0; padding: 0.65rem 0.8rem; border-radius: 6px; font-family: monospace; font-size: 0.82rem;">
+            <button type="button" id="btn-copy-webhook" class="btn-primary-sm" style="white-space: nowrap; padding: 0.65rem 1rem;">Copiar URL</button>
+          </div>
+        </div>
+
+        <div style="font-size: 0.84rem; line-height: 1.5; color: #CBD5E1; display: flex; flex-direction: column; gap: 0.65rem;">
+          <div style="display: flex; gap: 0.65rem; align-items: flex-start;">
+            <span style="background: rgba(16, 185, 129, 0.2); color: #10B981; font-weight: 800; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem;">1</span>
+            <span>No painel da sua loja (<strong>Shopify, Nuvemshop, Yampi ou Appmax</strong>), vá em <em>Configurações > Notificações ou Webhooks</em>.</span>
+          </div>
+          <div style="display: flex; gap: 0.65rem; align-items: flex-start;">
+            <span style="background: rgba(16, 185, 129, 0.2); color: #10B981; font-weight: 800; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem;">2</span>
+            <span>Adicione a URL acima selecionando os eventos de <strong>Pedidos Criados, Pagos e Recusados</strong>.</span>
+          </div>
+          <div style="display: flex; gap: 0.65rem; align-items: flex-start;">
+            <span style="background: rgba(16, 185, 129, 0.2); color: #10B981; font-weight: 800; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem;">3</span>
+            <span>Pronto! O Auditor Silencioso vigia cada transação em tempo real e avisa no seu WhatsApp no mesmo segundo se houver anomalias!</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+        <button class="btn btn-secondary-sm" id="btn-close-onboarding-bottom">Fechar Janela</button>
+        <a id="btn-onboarding-whatsapp-help" href="https://wa.me/5512992310222?text=Ol%C3%A1%2C%20acabei%20de%20ativar%20meus%203%20dias%20de%20Auditor%20Silencioso%20e%20gostaria%20de%20ajuda%20para%20conectar%20minha%20loja!" target="_blank" class="btn btn-primary-sm" style="display: inline-flex; align-items: center; gap: 0.4rem;">
+          <span>💬 Suporte no WhatsApp</span>
+        </a>
       </div>
     </div>
   </div>

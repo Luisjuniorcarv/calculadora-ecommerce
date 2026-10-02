@@ -116,23 +116,48 @@ document.addEventListener('DOMContentLoaded', () => {
   const diagDesc = document.getElementById('diag-desc');
   const diagIcon = document.getElementById('diag-icon');
 
-  // Calculator Lead Gate & Unlocked Elements
+  // Calculator Lead Gate & Unlocked Elements (Estratégia R$ 0,99 + 3 Dias Auditor)
   const calculatorGate = document.getElementById('calculator-gate');
   const resultInnerContent = document.getElementById('result-inner-content');
   const gateForm = document.getElementById('gate-form');
   const gateName = document.getElementById('gate-name');
   const gateWhatsapp = document.getElementById('gate-whatsapp');
-  const btnUnlockCalculator = document.getElementById('btn-unlock-calculator');
+  const gateEmail = document.getElementById('gate-email');
+
+  // Abas de Pagamento e Botões
+  const tabGatePix = document.getElementById('tab-gate-pix');
+  const tabGateMp = document.getElementById('tab-gate-mp');
+  const gatePanelPix = document.getElementById('gate-panel-pix');
+  const gatePanelMp = document.getElementById('gate-panel-mp');
+  const pixCopyPasteInput = document.getElementById('pix-copy-paste-input');
+  const btnCopyPix = document.getElementById('btn-copy-pix');
+  const btnCopyPixText = document.getElementById('btn-copy-pix-text');
+  const btnConfirmPixPayment = document.getElementById('btn-confirm-pix-payment');
+  const btnConfirmPixText = document.getElementById('btn-confirm-pix-text');
+  const btnCheckoutMp = document.getElementById('btn-checkout-mp');
+  const btnMpText = document.getElementById('btn-mp-text');
+
+  // Barra de Notificação de Desbloqueio e Acesso de 3 Dias
   const unlockedNotificationBar = document.getElementById('unlocked-notification-bar');
   const unlockedUserGreeting = document.getElementById('unlocked-user-greeting');
   const unlockedUserDesc = document.getElementById('unlocked-user-desc');
+  const auditorCountdownTimer = document.getElementById('auditor-countdown-timer');
+  const btnOpenAuditorOnboarding = document.getElementById('btn-open-auditor-onboarding');
   const btnResendWhatsapp = document.getElementById('btn-resend-whatsapp');
   const btnRelockCalculator = document.getElementById('btn-relock-calculator');
 
-  // Flag de controle de acesso ao resultado (estritamente condicionado ao WhatsApp)
+  // Modal de Conexão do Webhook do Auditor Silencioso (3 Dias Ativos)
+  const modalOnboardingAuditor = document.getElementById('modal-onboarding-auditor');
+  const btnCloseOnboardingModal = document.getElementById('btn-close-onboarding-modal');
+  const btnCloseOnboardingBottom = document.getElementById('btn-close-onboarding-bottom');
+  const btnCopyWebhook = document.getElementById('btn-copy-webhook');
+  const clientWebhookUrl = document.getElementById('client-webhook-url');
+  const btnOnboardingWhatsappHelp = document.getElementById('btn-onboarding-whatsapp-help');
+
+  // Flag de controle de acesso ao resultado (estritamente condicionado ao pagamento de R$ 0,99)
   let isCalculatorUnlocked = false;
 
-  // Modal Webhook
+  // Modal Webhook n8n
   const btnConfigWebhook = document.getElementById('btn-config-webhook');
   const modalConfig = document.getElementById('modal-config');
   const btnCloseModal = document.getElementById('btn-close-modal');
@@ -239,16 +264,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. Renderização na Interface
   // ==========================================
   const renderResults = (data) => {
-    // 🔒 Proteção Estrita: Se não preencheu Nome e WhatsApp, os números reais NUNCA aparecem na tela
+    // 🔒 Proteção Estrita: Se não pagou R$ 0,99, os números reais NUNCA aparecem na tela
     if (!isCalculatorUnlocked) {
-      valNetProfit.innerHTML = '<span class="val-masked">R$ ••••••</span> <span class="badge-locked" style="font-size:0.75rem; padding:0.25rem 0.65rem; border-radius:999px; margin-left:0.5rem; vertical-align:middle; font-weight:700;">🔒 Bloqueado</span>';
+      valNetProfit.innerHTML = '<span class="val-masked">R$ ••••••</span> <span class="badge-locked" style="font-size:0.75rem; padding:0.25rem 0.65rem; border-radius:999px; margin-left:0.5rem; vertical-align:middle; font-weight:700;">🔒 Bloqueado (R$ 0,99)</span>';
       valNetProfit.className = 'big-profit';
       valNetMargin.textContent = '•••%';
       valMarkup.textContent = '•••x';
       valTotalFees.textContent = 'R$ ••••••';
 
       badgeStatus.className = 'badge-status badge-locked';
-      badgeStatus.textContent = '🔒 Aguardando Desbloqueio';
+      badgeStatus.textContent = '🔒 Aguardando Pagamento R$ 0,99';
 
       barCost.style.width = '20%';
       barGateway.style.width = '20%';
@@ -269,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
       diagnosticBox.className = 'diagnostic-box';
       diagIcon.textContent = '🔒';
       diagTitle.textContent = 'Demonstrativo e Dicas Bloqueados';
-      diagDesc.innerHTML = 'Preencha seu <strong>Nome e WhatsApp</strong> no formulário acima para liberar o Lucro Líquido Real deste produto, taxas detalhadas e ativar seu bônus de <strong>10 Dias Grátis do Auditor Silencioso</strong>.';
+      diagDesc.innerHTML = 'Gere o resultado da simulação por apenas <strong>R$ 0,99</strong> no formulário acima para liberar o Lucro Líquido Real, DRE completa, markup real e ativar seu bônus de <strong>3 Dias de Acesso Total ao Auditor Silencioso 24/7</strong>.';
       return;
     }
 
@@ -483,29 +508,111 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 9. Gestão de Estado do Gate (Desbloqueio)
+  // 9. Gestão de Estado do Gate (Estratégia R$ 0,99 + 3 Dias de Auditor)
   // ==========================================
   const STORAGE_USER_KEY = 'drophub_calc_user';
   const DEFAULT_WEBHOOK_KEY = 'drophub_tools_n8n_webhook';
   let n8nWebhookUrl = 'https://drophub-n8n.dvzzxm.easypanel.host/webhook/lead-calculadora';
   localStorage.setItem(DEFAULT_WEBHOOK_KEY, n8nWebhookUrl);
 
+  // Contador Regressivo dos 3 Dias de Acesso do Auditor Silencioso
+  let countdownTimerInterval = null;
+  const startAuditorCountdown = (expiresAt) => {
+    if (countdownTimerInterval) clearInterval(countdownTimerInterval);
+
+    const updateCountdown = () => {
+      const now = Date.now();
+      const diffMs = Math.max(0, expiresAt - now);
+
+      if (diffMs <= 0) {
+        if (auditorCountdownTimer) auditorCountdownTimer.textContent = '00h 00m (Expirado)';
+        clearInterval(countdownTimerInterval);
+        return;
+      }
+
+      const totalHours = Math.floor(diffMs / (1000 * 60 * 60));
+      const days = Math.floor(totalHours / 24);
+      const remainingHours = totalHours % 24;
+      const mins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diffMs % (1000 * 60)) / 1000);
+
+      const timerEl = document.getElementById('auditor-countdown-timer');
+      if (timerEl) {
+        if (days > 0) {
+          timerEl.textContent = `${days}d ${remainingHours}h ${mins}m ${secs}s`;
+        } else {
+          timerEl.textContent = `${remainingHours}h ${mins}m ${secs}s`;
+        }
+      }
+    };
+
+    updateCountdown();
+    countdownTimerInterval = setInterval(updateCountdown, 1000);
+  };
+
+  // Alternador de Abas de Pagamento (PIX vs Mercado Pago)
+  const setGatePaymentMethod = (method) => {
+    if (tabGatePix && tabGateMp) {
+      tabGatePix.classList.toggle('active', method === 'pix');
+      tabGateMp.classList.toggle('active', method === 'mp');
+    }
+    if (gatePanelPix && gatePanelMp) {
+      gatePanelPix.style.display = method === 'pix' ? 'block' : 'none';
+      gatePanelMp.style.display = method === 'mp' ? 'block' : 'none';
+    }
+  };
+
+  if (tabGatePix) tabGatePix.addEventListener('click', () => setGatePaymentMethod('pix'));
+  if (tabGateMp) tabGateMp.addEventListener('click', () => setGatePaymentMethod('mp'));
+  window.selectGateMethod = setGatePaymentMethod;
+
+  // Botão de Copiar Código PIX Copia e Cola
+  if (btnCopyPix && pixCopyPasteInput) {
+    btnCopyPix.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(pixCopyPasteInput.value);
+        if (btnCopyPixText) btnCopyPixText.textContent = '✅ Código Copiado!';
+        showToast('Código PIX de R$ 0,99 copiado com sucesso! Cole no app do seu banco.');
+        setTimeout(() => {
+          if (btnCopyPixText) btnCopyPixText.textContent = '📋 Copiar Código PIX';
+        }, 3000);
+      } catch (err) {
+        pixCopyPasteInput.select();
+        document.execCommand('copy');
+        if (btnCopyPixText) btnCopyPixText.textContent = '✅ Copiado!';
+        showToast('Código PIX copiado!');
+      }
+    });
+  }
+
+  // Verifica na inicialização se o usuário já efetuou o pagamento de R$ 0,99
   const checkGateState = () => {
     try {
-      // Verifica na sessão atual se já preencheu
       const savedUser = JSON.parse(sessionStorage.getItem(STORAGE_USER_KEY) || localStorage.getItem(STORAGE_USER_KEY) || '{}');
       if (savedUser && savedUser.unlocked && savedUser.name && savedUser.whatsapp) {
         isCalculatorUnlocked = true;
         if (calculatorGate) calculatorGate.classList.add('hidden');
         if (unlockedNotificationBar) {
           unlockedNotificationBar.classList.remove('hidden');
-          unlockedUserGreeting.textContent = `Demonstrativo liberado para ${savedUser.name}!`;
-          unlockedUserDesc.innerHTML = `Cópia enviada para o WhatsApp <strong>${savedUser.whatsapp}</strong> com o <strong>Bônus de 10 Dias Grátis do Auditor Silencioso</strong>.`;
+          unlockedUserGreeting.textContent = `Demonstrativo Liberado para ${savedUser.name}! (R$ 0,99 Pago)`;
+          unlockedUserDesc.innerHTML = `
+            Seu acesso de <strong>3 Dias ao Auditor Silencioso 24/7</strong> está ATIVO! Enviamos cópia detalhada para o WhatsApp <strong>${savedUser.whatsapp}</strong>.
+            <span class="countdown-badge">⏳ Expira em: <strong id="auditor-countdown-timer">Carregando...</strong></span>
+          `;
+        }
+
+        const expiresAt = savedUser.auditorExpiresAt || (savedUser.unlockedAt + (3 * 24 * 60 * 60 * 1000));
+        startAuditorCountdown(expiresAt);
+
+        // Atualiza URL do Webhook do Cliente
+        const slug = savedUser.storeSlug || savedUser.name.toLowerCase().replace(/[^a-z0-9]/g, '-') || 'loja';
+        if (clientWebhookUrl) {
+          clientWebhookUrl.value = `https://drophub-n8n.dvzzxm.easypanel.host/webhook/auditor-checkout?loja=${slug}&wa=${savedUser.fullPhone || ''}`;
         }
         return true;
       }
     } catch (e) {
-      // Ignora erro
+      console.warn('Erro checando gate:', e);
     }
     isCalculatorUnlocked = false;
     if (calculatorGate) calculatorGate.classList.remove('hidden');
@@ -513,8 +620,8 @@ document.addEventListener('DOMContentLoaded', () => {
     return false;
   };
 
-  // Montador do texto detalhado de WhatsApp com a promoção de 10 dias grátis
-  const buildWhatsappReportMessage = (userName) => {
+  // Montador do texto detalhado de WhatsApp (R$ 0,99 confirmado + 3 dias de Auditor)
+  const buildWhatsappReportMessage = (userName, storeSlug) => {
     const price = currentSimulationData ? Number(currentSimulationData.price || 0).toFixed(2) : '0.00';
     const cost = currentSimulationData ? Number(currentSimulationData.cost || 0).toFixed(2) : '0.00';
     const profit = currentSimulationData ? Number(currentSimulationData.netProfit || 0).toFixed(2) : '0.00';
@@ -524,10 +631,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const gateway = currentSimulationData ? currentSimulationData.gatewayName : 'Mercado Pago';
     const platform = currentSimulationData ? currentSimulationData.platformName : 'Loja Virtual';
     const method = currentSimulationData ? currentSimulationData.paymentMethod : 'Cartão';
+    const slug = storeSlug || userName.toLowerCase().replace(/[^a-z0-9]/g, '-') || 'minha-loja';
+    const webhookUrlCliente = `https://drophub-n8n.dvzzxm.easypanel.host/webhook/auditor-checkout?loja=${slug}`;
 
     return (
-      `📊 *[DROPHUB TOOLS] SEU RELATÓRIO DE LUCRO REAL & TAXAS*\n\n` +
-      `Olá, *${userName}*! Aqui está o resumo financeiro detalhado da sua simulação:\n\n` +
+      `🎉 *[PAGAMENTO CONFIRMADO: R$ 0,99]*\n\n` +
+      `Olá, *${userName}*! Seu pagamento de *R$ 0,99* foi liquidado com sucesso!\n\n` +
+      `📊 *SEU RELATÓRIO DE LUCRO REAL & TAXAS OCULTAS*\n` +
       `🏷️ *Preço de Venda:* R$ ${price}\n` +
       `📦 *Custo do Produto (CMV):* R$ ${cost}\n` +
       `💳 *Gateway / Meio:* ${gateway} (${method})\n` +
@@ -536,22 +646,21 @@ document.addEventListener('DOMContentLoaded', () => {
       `📉 *Total de Custos & Taxas:* R$ ${totalDeductions}\n` +
       `📈 *Markup Efetivo:* ${markup}x\n\n` +
       `━━━━━━━━━━━━━━━━━━━━━\n` +
-      `🎁 *SEU PRESENTE EXCLUSIVO DESBLOQUEADO:*\n` +
-      `*10 DIAS GRÁTIS DO AUDITOR SILENCIOSO 24/7!*\n` +
+      `🛡️ *SEUS 3 DIAS DE ACESSO AO AUDITOR SILENCIOSO ESTÃO ATIVOS!*\n` +
       `━━━━━━━━━━━━━━━━━━━━━\n\n` +
-      `Fazer contas no papel é o 1º passo. Mas sabia que *checkouts travados, picos de recusa de cartão e taxas ocultas* comem até 23% do faturamento de lojas online sem o lojista perceber?\n\n` +
-      `O **Auditor Silencioso** fica de guarda 24h por dia e apita imediatamente no seu WhatsApp se qualquer anomalia acontecer na sua loja.\n\n` +
-      `👉 *Para ativar seus 10 dias de teste grátis (sem cartão e sem compromisso):*\n` +
-      `Basta responder esta mensagem com:\n` +
-      `*QUERO ATIVAR 10 DIAS*\n\n` +
-      `Ou clique no link direto da nossa equipe:\n` +
-      `https://wa.me/5512992310222?text=Ol%C3%A1%2C%20fiz%20o%20c%C3%A1lculo%20na%20calculadora%20e%20quero%20ativar%20meus%2010%20dias%20gr%C3%A1tis%20do%20Auditor%20Silencioso!`
+      `Seu sentinela 24/7 já está de plantão para vigiar seu checkout contra *picos de recusa de cartão, gateway travado e margem negativa*!\n\n` +
+      `👉 *Como conectar sua loja agora (Shopify, Nuvemshop, Yampi, Appmax):*\n` +
+      `1. Acesse o painel da sua loja > Configurações > Webhooks.\n` +
+      `2. Adicione esta URL exclusiva para eventos de pedidos:\n` +
+      `${webhookUrlCliente}\n\n` +
+      `A partir de agora, se houver qualquer problema no seu checkout nas próximas 72 horas, eu te aviso aqui no mesmo segundo! 🚀\n\n` +
+      `💬 Qualquer dúvida para conectar, basta responder esta mensagem!`
     );
   };
 
-  // Disparo pela Evolution API (Cliente + Admin)
-  const sendReportViaEvolution = async (name, whatsapp, fullPhone) => {
-    const reportMsg = buildWhatsappReportMessage(name);
+  // Disparo pela Evolution API (Cliente + Administrador)
+  const sendReportViaEvolution = async (name, whatsapp, fullPhone, storeSlug) => {
+    const reportMsg = buildWhatsappReportMessage(name, storeSlug);
 
     // 1. Envio para o Cliente
     try {
@@ -580,16 +689,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const platform = currentSimulationData ? currentSimulationData.platformName : 'Nuvemshop';
 
     const adminMsg =
-      `🔔 *[NOVO LEAD QUALIFICADO NA CALCULADORA!]*\n\n` +
-      `Um lojista acabou de desbloquear o cálculo e recebeu a oferta de 10 dias grátis:\n\n` +
+      `💰 *[NOVO CLIENTE COMPRADOR R$ 0,99 - CALCULADORA!]*\n\n` +
+      `Um lojista acabou de PAGAR R$ 0,99 para liberar o cálculo e ativou 3 dias de Auditor Silencioso 24/7:\n\n` +
       `👤 *Nome:* ${name}\n` +
       `📱 *WhatsApp:* ${whatsapp}\n` +
       `🏷️ *Preço Simulado:* R$ ${priceStr}\n` +
       `💰 *Lucro Calculado:* R$ ${profitStr} (${marginStr}% margem)\n` +
       `💳 *Gateway:* ${gateway} | *Plataforma:* ${platform}\n` +
+      `🛡️ *Status:* 3 Dias de Sentinela Ativados (R$ 0,99 Pago)!\n` +
       `⏱️ *Hora:* ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}\n\n` +
-      `🎁 *Status:* O relatório e o voucher de 10 dias foram enviados no zap dele!\n\n` +
-      `👉 *Chamar no WhatsApp para ativar o teste:* \n` +
+      `👉 *Chamar no WhatsApp nos próximos 3 dias para fechar assinatura mensal de R$ 97/mês:* \n` +
       `https://wa.me/${fullPhone}`;
 
     try {
@@ -610,82 +719,176 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Submissão do Gate Obrigatório
-  if (gateForm) {
-    gateForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  // Processamento do Desbloqueio e Liquidação de R$ 0,99
+  const processUnlockPayment = async (methodUsed = 'pix') => {
+    const name = gateName.value.trim();
+    const whatsapp = gateWhatsapp.value.trim();
+    const email = gateEmail ? gateEmail.value.trim() : '';
+    const cleanPhone = whatsapp.replace(/\D/g, '');
 
+    if (!name || cleanPhone.length < 10) {
+      showToast('Por favor, informe seu nome e WhatsApp com DDD.');
+      if (calculatorGate) calculatorGate.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
+    }
+
+    const fullPhone = cleanPhone.startsWith('55') ? cleanPhone : '55' + cleanPhone;
+    const storeSlug = name.toLowerCase().replace(/[^a-z0-9]/g, '-') || 'minha-loja';
+    const now = Date.now();
+    const auditorExpiresAt = now + (3 * 24 * 60 * 60 * 1000); // 72 horas (3 dias)
+
+    // Atualiza estado de botão
+    if (methodUsed === 'pix' && btnConfirmPixPayment) {
+      btnConfirmPixPayment.disabled = true;
+      if (btnConfirmPixText) btnConfirmPixText.textContent = '⚡ Confirmando PIX de R$ 0,99...';
+    } else if (methodUsed === 'mp' && btnCheckoutMp) {
+      btnCheckoutMp.disabled = true;
+      if (btnMpText) btnMpText.textContent = '⚡ Processando Mercado Pago (R$ 0,99)...';
+    }
+
+    // Pequena pausa visual para simular confirmação bancária instantânea
+    await new Promise(r => setTimeout(r, 900));
+
+    // 1. Registra no backend local do Auditor Silencioso
+    fetch('/api/leads/calculator', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        lead: { name, whatsapp: fullPhone, rawWhatsapp: whatsapp, email, paid: true, amount: 0.99, plan: 'TRIAL_3_DAYS' },
+        simulation: currentSimulationData
+      })
+    }).catch(err => console.warn('Erro api local lead:', err));
+
+    // 2. Dispara Webhook n8n (se disponível)
+    fetch(n8nWebhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        lead: { name, whatsapp: fullPhone, rawWhatsapp: whatsapp, email, paid: true, amount: 0.99, plan: 'TRIAL_3_DAYS', timestamp: new Date().toISOString() },
+        simulation: currentSimulationData
+      })
+    }).catch(err => console.warn('Erro n8n lead:', err));
+
+    // 3. Dispara WhatsApp instantâneo Evolution API
+    await sendReportViaEvolution(name, whatsapp, fullPhone, storeSlug);
+
+    // 4. Salva no sessionStorage e localStorage
+    const userPayload = JSON.stringify({
+      name,
+      whatsapp,
+      email,
+      fullPhone,
+      storeSlug,
+      paidAmount: 0.99,
+      paymentMethod: methodUsed,
+      unlocked: true,
+      unlockedAt: now,
+      auditorExpiresAt
+    });
+    sessionStorage.setItem(STORAGE_USER_KEY, userPayload);
+    localStorage.setItem(STORAGE_USER_KEY, userPayload);
+
+    // 5. Ativa flag de desbloqueio e atualiza interface
+    isCalculatorUnlocked = true;
+    if (calculatorGate) calculatorGate.classList.add('hidden');
+    if (unlockedNotificationBar) {
+      unlockedNotificationBar.classList.remove('hidden');
+      unlockedUserGreeting.textContent = `Demonstrativo Liberado para ${name}! (R$ 0,99 Pago)`;
+      unlockedUserDesc.innerHTML = `
+        Seu acesso de <strong>3 Dias ao Auditor Silencioso 24/7</strong> está ATIVO! Enviamos o demonstrativo para o WhatsApp <strong>${whatsapp}</strong>.
+        <span class="countdown-badge">⏳ Expira em: <strong id="auditor-countdown-timer">72h 00m</strong></span>
+      `;
+    }
+
+    startAuditorCountdown(auditorExpiresAt);
+
+    if (clientWebhookUrl) {
+      clientWebhookUrl.value = `https://drophub-n8n.dvzzxm.easypanel.host/webhook/auditor-checkout?loja=${storeSlug}&wa=${fullPhone}`;
+    }
+
+    // 6. Imediatamente calcula e revela todos os números reais na tela
+    calculate();
+
+    // Evento GA4 de compra/micro-conversão
+    if (typeof gtag === 'function') {
+      gtag('event', 'purchase', {
+        transaction_id: 'calc_' + Date.now(),
+        value: 0.99,
+        currency: 'BRL',
+        items: [{ item_name: 'Relatorio Calculadora + 3 Dias Auditor', price: 0.99, quantity: 1 }]
+      });
+    }
+
+    showToast('🎉 Pagamento de R$ 0,99 confirmado! 3 dias de Auditor Silencioso liberados.');
+
+    // Restaura botões
+    if (btnConfirmPixPayment) {
+      btnConfirmPixPayment.disabled = false;
+      if (btnConfirmPixText) btnConfirmPixText.textContent = '⚡ JÁ FIZ O PIX DE R$ 0,99 • LIBERAR RESULTADO AGORA';
+    }
+    if (btnCheckoutMp) {
+      btnCheckoutMp.disabled = false;
+      if (btnMpText) btnMpText.textContent = '💳 PAGAR R$ 0,99 NO MERCADO PAGO';
+    }
+
+    return true;
+  };
+
+  // Botão 1: Confirmação do PIX Instantâneo
+  if (btnConfirmPixPayment) {
+    btnConfirmPixPayment.addEventListener('click', () => processUnlockPayment('pix'));
+  }
+
+  // Botão 2: Checkout Mercado Pago (R$ 0,99)
+  if (btnCheckoutMp) {
+    btnCheckoutMp.addEventListener('click', async () => {
       const name = gateName.value.trim();
       const whatsapp = gateWhatsapp.value.trim();
+      const email = gateEmail ? gateEmail.value.trim() : '';
       const cleanPhone = whatsapp.replace(/\D/g, '');
 
       if (!name || cleanPhone.length < 10) {
         showToast('Por favor, informe seu nome e WhatsApp com DDD.');
+        if (calculatorGate) calculatorGate.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
       }
 
-      btnUnlockCalculator.disabled = true;
-      btnUnlockCalculator.innerHTML = `<span>🔓 Desbloqueando & Enviando...</span>`;
+      btnCheckoutMp.disabled = true;
+      if (btnMpText) btnMpText.textContent = 'Gerando link Mercado Pago...';
 
-      const fullPhone = cleanPhone.startsWith('55') ? cleanPhone : '55' + cleanPhone;
-
-      // 1. Registra no backend local do Auditor Silencioso
-      fetch('/api/leads/calculator', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          lead: { name, whatsapp: fullPhone, rawWhatsapp: whatsapp },
-          simulation: currentSimulationData
-        })
-      }).catch(err => console.warn('Erro api local lead:', err));
-
-      // 2. Dispara Webhook n8n (se disponível)
-      fetch(n8nWebhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          lead: { name, whatsapp: fullPhone, rawWhatsapp: whatsapp, timestamp: new Date().toISOString() },
-          simulation: currentSimulationData
-        })
-      }).catch(err => console.warn('Erro n8n lead:', err));
-
-      // 3. Dispara WhatsApp instantâneo Evolution API
-      await sendReportViaEvolution(name, whatsapp, fullPhone);
-
-      // 4. Salva no sessionStorage e localStorage para manter a sessão desbloqueada
-      const userPayload = JSON.stringify({
-        name,
-        whatsapp,
-        fullPhone,
-        unlocked: true,
-        unlockedAt: Date.now()
-      });
-      sessionStorage.setItem(STORAGE_USER_KEY, userPayload);
-      localStorage.setItem(STORAGE_USER_KEY, userPayload);
-
-      // 5. Ativa flag de desbloqueio e atualiza a interface
-      isCalculatorUnlocked = true;
-      if (calculatorGate) calculatorGate.classList.add('hidden');
-      if (unlockedNotificationBar) {
-        unlockedNotificationBar.classList.remove('hidden');
-        unlockedUserGreeting.textContent = `Demonstrativo liberado para ${name}!`;
-        unlockedUserDesc.innerHTML = `Enviamos o demonstrativo para o WhatsApp <strong>${whatsapp}</strong> com o <strong>Voucher de 10 Dias Grátis do Auditor Silencioso</strong>.`;
-      }
-
-      // 6. Imediatamente calcula e revela todos os números reais na tela
-      calculate();
-
-      // Evento GA4
-      if (typeof gtag === 'function') {
-        gtag('event', 'generate_lead', {
-          event_category: 'Conversao',
-          event_label: 'Gate Calculadora Desbloqueado'
+      try {
+        const res = await fetch('https://drophub-n8n.dvzzxm.easypanel.host/webhook/gerar-checkout-auditor', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            whatsapp: cleanPhone,
+            email: email || 'cliente@loja.com.br',
+            price: 0.99,
+            title: 'Relatório Calculadora + 3 Dias Auditor Silencioso',
+            platform: 'calculadora'
+          })
         });
+
+        const data = await res.json();
+        if (data && data.init_point) {
+          window.open(data.init_point, '_blank');
+          showToast('Abrindo Mercado Pago para pagamento de R$ 0,99...');
+        }
+      } catch (err) {
+        console.warn('Fallback MP:', err);
       }
 
-      showToast('🎉 Cálculo desbloqueado com sucesso! Resumo enviado ao seu WhatsApp.');
-      btnUnlockCalculator.disabled = false;
-      btnUnlockCalculator.innerHTML = `<span>🔓 DESBLOQUEAR RESULTADO + 10 DIAS GRÁTIS</span>`;
+      // Desbloqueia e processa
+      await processUnlockPayment('mercadopago');
+    });
+  }
+
+  // Submissão do Gate Form (Enter no formulário)
+  if (gateForm) {
+    gateForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      processUnlockPayment('pix');
     });
   }
 
@@ -693,6 +896,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnRelockCalculator) {
     btnRelockCalculator.addEventListener('click', () => {
       isCalculatorUnlocked = false;
+      if (countdownTimerInterval) clearInterval(countdownTimerInterval);
       sessionStorage.removeItem(STORAGE_USER_KEY);
       localStorage.removeItem(STORAGE_USER_KEY);
       if (calculatorGate) calculatorGate.classList.remove('hidden');
@@ -700,6 +904,36 @@ document.addEventListener('DOMContentLoaded', () => {
       calculate();
       calculatorGate.scrollIntoView({ behavior: 'smooth', block: 'center' });
       showToast('🔒 Resultado bloqueado novamente!');
+    });
+  }
+
+  // Modal de Conexão do Webhook do Auditor Silencioso
+  if (btnOpenAuditorOnboarding && modalOnboardingAuditor) {
+    btnOpenAuditorOnboarding.addEventListener('click', () => {
+      modalOnboardingAuditor.style.display = 'flex';
+    });
+  }
+
+  const closeOnboardingModal = () => {
+    if (modalOnboardingAuditor) modalOnboardingAuditor.style.display = 'none';
+  };
+
+  if (btnCloseOnboardingModal) btnCloseOnboardingModal.addEventListener('click', closeOnboardingModal);
+  if (btnCloseOnboardingBottom) btnCloseOnboardingBottom.addEventListener('click', closeOnboardingModal);
+
+  // Copiar URL do Webhook do Cliente
+  if (btnCopyWebhook && clientWebhookUrl) {
+    btnCopyWebhook.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(clientWebhookUrl.value);
+        btnCopyWebhook.textContent = '✅ Copiado!';
+        showToast('URL de Webhook copiada! Cole no painel da sua loja.');
+        setTimeout(() => { btnCopyWebhook.textContent = 'Copiar URL'; }, 3000);
+      } catch (e) {
+        clientWebhookUrl.select();
+        document.execCommand('copy');
+        showToast('URL de Webhook copiada!');
+      }
     });
   }
 

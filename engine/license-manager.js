@@ -84,8 +84,9 @@ class LicenseManager {
    * Dispara aviso no WhatsApp 1 dia antes do vencimento
    */
   async sendExpirationWarning(tenant, hoursRemaining) {
-    const isTrial = tenant.subscription.planType === SUBSCRIPTION_PLANS.TRIAL;
-    const planName = isTrial ? 'seu teste grátis de 10 dias' : 'sua assinatura de 30 dias';
+    const isTrial = tenant.subscription.planType === SUBSCRIPTION_PLANS.TRIAL || tenant.subscription.planType === SUBSCRIPTION_PLANS.TRIAL_3_DAYS;
+    const daysLabel = tenant.subscription.durationDays ? `${tenant.subscription.durationDays} dias` : 'seu período';
+    const planName = isTrial ? `seu acesso de ${daysLabel} de teste` : 'sua assinatura de 30 dias';
     const payUrl = tenant.subscription.paymentLink || this.defaultAsaasLink;
 
     const clientMsg =
@@ -108,7 +109,7 @@ class LicenseManager {
       `🔔 *[AVISO COMERCIAL] CLIENTE VENCE AMANHÃ!*\n\n` +
       `👤 *Cliente:* ${tenant.name}\n` +
       `📱 *WhatsApp:* ${tenant.whatsappDestination}\n` +
-      `📦 *Plano:* ${isTrial ? '10 Dias de Teste' : 'Assinatura Mensal'}\n` +
+      `📦 *Plano:* ${isTrial ? (tenant.subscription.durationDays + ' Dias de Acesso') : 'Assinatura Mensal'}\n` +
       `⏳ *Expira em:* Aproximadamente ${Math.max(1, Math.round(hoursRemaining))} horas.\n\n` +
       `O aviso automático com link de pagamento já foi enviado. Vale a pena mandar um olá no WhatsApp para tirar dúvidas e fechar a renovação!\n` +
       `👉 https://wa.me/${tenant.whatsappDestination}`;
@@ -120,7 +121,8 @@ class LicenseManager {
    * Bloqueia o tenant por expiração de prazo
    */
   async blockTenantForNonPayment(tenant) {
-    const isTrial = tenant.subscription.planType === SUBSCRIPTION_PLANS.TRIAL;
+    const isTrial = tenant.subscription.planType === SUBSCRIPTION_PLANS.TRIAL || tenant.subscription.planType === SUBSCRIPTION_PLANS.TRIAL_3_DAYS;
+    const daysLabel = tenant.subscription.durationDays ? `${tenant.subscription.durationDays} dias` : 'seu período';
     const payUrl = tenant.subscription.paymentLink || this.defaultAsaasLink;
 
     tenant.subscription.status = SUBSCRIPTION_STATUS.BLOCKED;
@@ -130,7 +132,7 @@ class LicenseManager {
     const clientMsg =
       `🔒 *[AUDITOR SILENCIOSO: ACESSO PAUSADO]*\n\n` +
       `Olá, *${tenant.name}*.\n\n` +
-      `Seu período de ${isTrial ? '10 dias de teste gratuito' : '30 dias de assinatura'} encerrou e o monitoramento em tempo real do seu checkout foi *SUSPENSO*.\n\n` +
+      `Seu período de ${isTrial ? `${daysLabel} de acesso promocional` : '30 dias de assinatura'} encerrou e o monitoramento em tempo real do seu checkout foi *SUSPENSO*.\n\n` +
       `⚠️ Enquanto estiver pausado, você *não receberá alertas* se sua loja perder vendas por instabilidade de gateway ou recusas.\n\n` +
       `💰 *Para reativar instantaneamente por R$ 3,23/dia (R$ 97,00/mês):*\n` +
       `👉 Acesse o link de regularização: \n` +
@@ -146,7 +148,7 @@ class LicenseManager {
       `🚨 *[CLIENTE BLOQUEADO - AUDITOR SILENCIOSO]*\n\n` +
       `👤 *Cliente:* ${tenant.name}\n` +
       `📱 *WhatsApp:* ${tenant.whatsappDestination}\n` +
-      `🛑 O prazo expirou e o monitoramento foi pausado automaticamente.\n\n` +
+      `🛑 O prazo de ${daysLabel} expirou e o monitoramento foi pausado automaticamente.\n\n` +
       `👉 Chame agora para fechar a renovação de R$ 97,00:\n` +
       `https://wa.me/${tenant.whatsappDestination}`;
 
@@ -154,17 +156,19 @@ class LicenseManager {
   }
 
   /**
-   * Ativa 10 Dias de Teste Gratuito para um Tenant
+   * Ativa Teste / Acesso Temporário (3 dias por padrão para a calculadora, ou configurável)
    */
-  async activateTrial(tenantId, days = 10) {
+  async activateTrial(tenantId, days = 3) {
     const tenant = storage.getTenant(tenantId);
     if (!tenant) throw new Error('Cliente/Tenant não encontrado');
 
     const now = Date.now();
+    const planType = days === 3 ? SUBSCRIPTION_PLANS.TRIAL_3_DAYS : SUBSCRIPTION_PLANS.TRIAL;
+
     tenant.subscription = {
       ...(tenant.subscription || {}),
       status: SUBSCRIPTION_STATUS.TRIAL,
-      planType: SUBSCRIPTION_PLANS.TRIAL,
+      planType,
       durationDays: days,
       activatedAt: now,
       expiresAt: now + (days * 24 * 60 * 60 * 1000),
@@ -176,8 +180,8 @@ class LicenseManager {
     storage.saveTenant(tenant);
 
     const clientMsg =
-      `🛡️ *[AUDITOR SILENCIOSO: 10 DIAS GRÁTIS ATIVADOS!]*\n\n` +
-      `Parabéns, *${tenant.name}*! Seus 10 dias de proteção inteligente 24/7 estão oficialmente *NO AR*.\n\n` +
+      `🛡️ *[AUDITOR SILENCIOSO: ${days} DIAS DE ACESSO ATIVADOS!]*\n\n` +
+      `Parabéns, *${tenant.name}*! Seus ${days} dias de proteção inteligente 24/7 estão oficialmente *NO AR*.\n\n` +
       `🚀 *O que seu Sentinela já está fazendo:*\n` +
       `• Vigia taxa de aprovação de cartão minuto a minuto.\n` +
       `• Monitora abandono e travamentos de checkout.\n` +
@@ -190,7 +194,7 @@ class LicenseManager {
     }
 
     // Notifica admin
-    const adminMsg = `✅ *[TRIAL ATIVADO]* Cliente *${tenant.name}* (${tenant.whatsappDestination}) ativado para 10 dias de teste grátis!`;
+    const adminMsg = `✅ *[ACESSO ${days} DIAS ATIVADO]* Cliente *${tenant.name}* (${tenant.whatsappDestination}) ativado para ${days} dias de Auditor Silencioso!`;
     await notificationDispatcher.sendDirectMessage(this.adminPhone, adminMsg, 'ADMIN_TRIAL_ACTIVATED');
 
     return tenant.subscription;

@@ -32,7 +32,8 @@ const SUBSCRIPTION_STATUS = {
 };
 
 const SUBSCRIPTION_PLANS = {
-  TRIAL: 'TRIAL',                 // 10 dias de teste
+  TRIAL: 'TRIAL',                 // Teste padrão
+  TRIAL_3_DAYS: 'TRIAL_3_DAYS',   // 3 dias de acesso (estratégia calculadora R$ 0,99)
   MONTHLY: 'MONTHLY'              // 30 dias recorrente (R$ 97/mês)
 };
 
