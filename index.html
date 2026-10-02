@@ -388,110 +388,114 @@
 
           <!-- GATE OBRIGATÓRIO: Micro-Checkout R$ 0,99 (Resultado + 3 Dias Auditor Silencioso) -->
           <div id="calculator-gate" class="card calculator-gate-card">
-            <div class="gate-top-badge">
-              <span class="gate-lock-icon">🔒</span>
-              <span>RESULTADO PROTEGIDO • APENAS R$ 0,99</span>
+            <!-- Header Minimalista com Foco no Preço e no Combo -->
+            <div class="gate-header-modern">
+              <div class="gate-badge-pill">
+                <span class="gate-badge-dot"></span>
+                <span>PAGAMENTO ÚNICO • R$ 0,99</span>
+              </div>
+              <h3 class="gate-title-modern">
+                Desbloqueie seu Resultado + 3 Dias de Auditor
+              </h3>
+              <p class="gate-subtitle-modern">
+                Por apenas <strong>R$ 0,99</strong>, você recebe a análise completa na tela e ativa o sentinela 24/7 na sua loja:
+              </p>
             </div>
 
-            <h3 class="gate-title">
-              Descubra seu <span class="gradient-emerald">Lucro Real</span> por <span class="price-pill-highlight">R$ 0,99</span>
-            </h3>
-
-            <p class="gate-desc">
-              Por menos que uma bala (apenas <strong>R$ 0,99</strong>), você desbloqueia imediatamente na tela todos os custos ocultos, DRE, markup real e ganha de presente:
-            </p>
-
-            <!-- Box Destaque Máximo: 3 Dias de Acesso ao Auditor Silencioso -->
-            <div class="gate-bonus-box">
-              <div class="gate-bonus-glow"></div>
-              <div class="gate-bonus-icon">🛡️</div>
-              <div class="gate-bonus-info">
-                <span class="gate-bonus-tag">🎁 BÔNUS EXCLUSIVO INCLUSO</span>
-                <strong>3 DIAS DE ACESSO TOTAL AO AUDITOR SILENCIOSO 24/7</strong>
-                <p>Receba este demonstrativo no WhatsApp + 3 dias do robô sentinela vigiando sua loja online 24h por dia contra checkout travado, picos de recusa de cartão e taxas indevidas!</p>
+            <!-- Os 2 Benefícios em Destaque Visual Direto e Leve -->
+            <div class="gate-benefits-grid">
+              <div class="gate-benefit-card">
+                <div class="benefit-card-icon">📊</div>
+                <div class="benefit-card-content">
+                  <h4>Cálculo Completo de Lucro</h4>
+                  <p>DRE real, custos ocultos, taxas de gateway, markup ideal e margem limpa no bolso.</p>
+                </div>
+              </div>
+              <div class="gate-benefit-card highlight">
+                <div class="benefit-card-icon">🛡️</div>
+                <div class="benefit-card-content">
+                  <div class="benefit-badge-mini">3 DIAS INCLUSOS</div>
+                  <h4>Auditor Silencioso 24/7</h4>
+                  <p>Robô vigiando sua loja online contra checkout travado, recusas de cartão e margem negativa.</p>
+                </div>
               </div>
             </div>
 
             <form id="gate-form" class="gate-form" onsubmit="return false;">
-              <div class="gate-input-group">
-                <label for="gate-name">Seu Nome ou Nome da Loja <span class="text-danger">*</span></label>
-                <div class="gate-input-wrapper">
-                  <span class="gate-input-icon">👤</span>
-                  <input type="text" id="gate-name" placeholder="Ex: Carlos Silva ou Minha Loja" required autocomplete="name">
+              <!-- Linha de Inputs Nome & WhatsApp -->
+              <div class="gate-inputs-row">
+                <div class="gate-input-group">
+                  <label for="gate-name">Seu Nome ou Nome da Loja <span class="text-danger">*</span></label>
+                  <div class="gate-input-wrapper">
+                    <span class="gate-input-icon">👤</span>
+                    <input type="text" id="gate-name" placeholder="Ex: Lucas / Minha Loja" required autocomplete="name">
+                  </div>
+                </div>
+
+                <div class="gate-input-group">
+                  <label for="gate-whatsapp">WhatsApp com DDD <span class="text-danger">*</span></label>
+                  <div class="gate-input-wrapper">
+                    <span class="gate-input-icon">📱</span>
+                    <input type="tel" id="gate-whatsapp" placeholder="(11) 99999-9999" required maxlength="15" autocomplete="tel">
+                  </div>
                 </div>
               </div>
 
-              <div class="gate-input-group">
-                <label for="gate-whatsapp">WhatsApp com DDD (para receber o cálculo e alertas) <span class="text-danger">*</span></label>
-                <div class="gate-input-wrapper">
-                  <span class="gate-input-icon">📱</span>
-                  <input type="tel" id="gate-whatsapp" placeholder="(XX) 99999-9999" required maxlength="15" autocomplete="tel">
-                </div>
-              </div>
-
-              <div class="gate-input-group">
-                <label for="gate-email">E-mail para Comprovante e Webhook <span class="text-muted">(opcional)</span></label>
+              <!-- Input Email Discreto -->
+              <div class="gate-input-group gate-input-email-compact">
+                <label for="gate-email">E-mail <span class="text-muted">(opcional, para receber comprovante)</span></label>
                 <div class="gate-input-wrapper">
                   <span class="gate-input-icon">✉️</span>
                   <input type="email" id="gate-email" placeholder="loja@suaempresa.com.br" autocomplete="email">
                 </div>
               </div>
 
-              <!-- Seletor de Pagamento R$ 0,99 -->
-              <div class="gate-payment-section">
-                <div class="gate-payment-header">
-                  <span class="gate-payment-label">Escolha como pagar R$ 0,99:</span>
-                  <span class="gate-badge-instant">⚡ Liberação Imediata</span>
-                </div>
-
+              <!-- Área de Pagamento Limpa -->
+              <div class="gate-payment-box-modern">
+                <!-- Abas PIX vs MP -->
                 <div class="gate-pay-tabs">
                   <button type="button" class="gate-pay-tab active" id="tab-gate-pix">
                     <span class="tab-icon">💠</span>
                     <span>PIX Instantâneo</span>
-                    <span class="tab-chip">Mais Rápido</span>
+                    <span class="tab-chip">R$ 0,99</span>
                   </button>
                   <button type="button" class="gate-pay-tab" id="tab-gate-mp">
                     <span class="tab-icon">💳</span>
-                    <span>Mercado Pago</span>
+                    <span>Cartão / Mercado Pago</span>
                   </button>
                 </div>
 
-                <!-- Painel PIX -->
+                <!-- Painel PIX Ultra-Clean -->
                 <div id="gate-panel-pix" class="gate-pay-panel active">
-                  <div class="pix-payment-box">
-                    <div class="pix-qr-wrap">
-                      <div class="pix-qr-code" id="pix-qr-container">
-                        <!-- QR Code Oficial e Escaneável por qualquer banco -->
-                        <img id="pix-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020101021226330014br.gov.bcb.pix01114078724388452040000530398654040.995802BR5913DROPHUB%20TOOLS6009SAO%20PAULO62110507CALC0996304C908" width="140" height="140" alt="QR Code PIX R$ 0,99" style="border-radius:6px; display:block;">
+                  <div class="pix-clean-grid">
+                    <!-- Coluna QR Code -->
+                    <div class="pix-clean-qr-side">
+                      <div class="pix-qr-frame">
+                        <img id="pix-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020101021226330014br.gov.bcb.pix01114078724388452040000530398654040.995802BR5913DROPHUB%20TOOLS6009SAO%20PAULO62110507CALC0996304C908" width="130" height="130" alt="QR Code PIX R$ 0,99">
                       </div>
-                      <div class="pix-qr-badge">
-                        <span class="pix-logo-icon">💠</span>
-                        <span>PIX Oficial • R$ 0,99</span>
-                      </div>
+                      <span class="pix-qr-caption">Aponte a câmera do banco</span>
                     </div>
 
-                    <div class="pix-amount-pill">
-                      <span>Valor Único:</span> <strong>R$ 0,99</strong> <small>(Sem mensalidade surpresa)</small>
-                    </div>
+                    <!-- Coluna Copia e Cola + CTA -->
+                    <div class="pix-clean-action-side">
+                      <div class="pix-copy-action-box">
+                        <span class="pix-copy-label">Ou copie o código PIX:</span>
+                        <div class="pix-copy-wrap">
+                          <input type="text" id="pix-copy-paste-input" readonly value="00020101021226330014br.gov.bcb.pix01114078724388452040000530398654040.995802BR5913DROPHUB TOOLS6009SAO PAULO62110507CALC0996304C908" class="pix-copy-input">
+                          <button type="button" id="btn-copy-pix" class="btn-copy-pix" title="Copiar código PIX">
+                            <span id="btn-copy-pix-text">📋 Copiar</span>
+                          </button>
+                        </div>
+                      </div>
 
-                    <div class="pix-copy-wrap">
-                      <input type="text" id="pix-copy-paste-input" readonly value="00020101021226330014br.gov.bcb.pix01114078724388452040000530398654040.995802BR5913DROPHUB TOOLS6009SAO PAULO62110507CALC0996304C908" class="pix-copy-input">
-                      <button type="button" id="btn-copy-pix" class="btn-copy-pix" title="Clique para copiar o código PIX Copia e Cola">
-                        <span id="btn-copy-pix-text">📋 Copiar Código PIX</span>
+                      <button type="button" id="btn-confirm-pix-payment" class="btn-unlock-cta btn-pix-confirm">
+                        <span id="btn-confirm-pix-text">⚡ Já fiz o PIX de R$ 0,99 • Liberar Resultado</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                          <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
                       </button>
                     </div>
-
-                    <p class="pix-instructions">
-                      Abra o app do seu banco > <strong>Área PIX > Copia e Cola ou QR Code</strong> > Pague <strong>R$ 0,99</strong> e clique abaixo para liberar na hora:
-                    </p>
-
-                    <button type="button" id="btn-confirm-pix-payment" class="btn-unlock-cta btn-pix-confirm">
-                      <span id="btn-confirm-pix-text">⚡ JÁ FIZ O PIX DE R$ 0,99 • LIBERAR RESULTADO AGORA</span>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                      </svg>
-                    </button>
                   </div>
                 </div>
 
@@ -499,24 +503,24 @@
                 <div id="gate-panel-mp" class="gate-pay-panel" style="display: none;">
                   <div class="mp-payment-box">
                     <p class="mp-desc">
-                      Pague <strong>R$ 0,99</strong> com Cartão de Crédito ou Saldo no ambiente 100% criptografado do Mercado Pago.
+                      Pague <strong>R$ 0,99</strong> via Cartão de Crédito ou Saldo no ambiente seguro do Mercado Pago.
                     </p>
                     <button type="button" id="btn-checkout-mp" class="btn-unlock-cta btn-mp-cta">
-                      <span id="btn-mp-text">💳 PAGAR R$ 0,99 NO MERCADO PAGO</span>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <span id="btn-mp-text">💳 Pagar R$ 0,99 no Mercado Pago</span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                       </svg>
                     </button>
                   </div>
                 </div>
-
               </div>
 
+              <!-- Micro Rodapé Discreto -->
               <div class="gate-trust-footer">
-                <span>🔒 Pagamento 100% Criptografado</span>
+                <span>🔒 Pagamento Seguro</span>
                 <span class="gate-sep">•</span>
-                <span>⚡ Liberação Imediata na Tela</span>
+                <span>⚡ Liberação Imediata</span>
                 <span class="gate-sep">•</span>
                 <span>🛡️ 3 Dias de Sentinela Inclusos</span>
               </div>
