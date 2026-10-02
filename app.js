@@ -566,11 +566,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (tabGateMp) tabGateMp.addEventListener('click', () => setGatePaymentMethod('mp'));
   window.selectGateMethod = setGatePaymentMethod;
 
+  // Chave PIX Oficial do Beneficiário (CPF: 407.872.438-84)
+  const PIX_CPF_PAYLOAD = '00020101021226330014br.gov.bcb.pix01114078724388452040000530398654040.995802BR5913DROPHUB TOOLS6009SAO PAULO62110507CALC0996304C908';
+  if (pixCopyPasteInput) {
+    pixCopyPasteInput.value = PIX_CPF_PAYLOAD;
+  }
+
   // Botão de Copiar Código PIX Copia e Cola
   if (btnCopyPix && pixCopyPasteInput) {
     btnCopyPix.addEventListener('click', async () => {
       try {
-        await navigator.clipboard.writeText(pixCopyPasteInput.value);
+        await navigator.clipboard.writeText(pixCopyPasteInput.value || PIX_CPF_PAYLOAD);
         if (btnCopyPixText) btnCopyPixText.textContent = '✅ Código Copiado!';
         showToast('Código PIX de R$ 0,99 copiado com sucesso! Cole no app do seu banco.');
         setTimeout(() => {
