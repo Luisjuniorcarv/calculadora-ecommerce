@@ -19,6 +19,8 @@ COPY story-sentinela.jpg /usr/share/nginx/html/
 COPY sitemap.xml /usr/share/nginx/html/
 COPY robots.txt /usr/share/nginx/html/
 COPY google*.html /usr/share/nginx/html/
+COPY verifyforzoho.html /usr/share/nginx/html/
+COPY zohoverify/ /usr/share/nginx/html/zohoverify/
 
 # Configura o diretório do motor Node.js
 WORKDIR /app
